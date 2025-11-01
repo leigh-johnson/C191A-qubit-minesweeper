@@ -24,3 +24,14 @@ $ poetry install
 1. Install LaTex. [MacTex](https://www.tug.org/mactex/mactex-download.html) is the recommended distribution for MacOs. 
 2. Install [Vscode](https://code.visualstudio.com/)
 3. Install [Latex Workshop Vscode Extension.](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop). Follow the [installation instructions](https://github.com/James-Yu/LaTeX-Workshop/wiki/Install) (setting PATH environment variable) to make sure the extension can find your LaTex installation.
+
+# Generate example circuis
+
+Correct up to 3 bits between code words:
+```
+stim --gen repetition_code --task memory --rounds 1000 --distance 3 --after_clifford_depolarization 0.001 --after_reset_flip_probability 0.001 --before_measure_flip_probability 0.002 --before_round_data_depolarization 0.005
+```
+Correct up to 5 bits between code words:
+```
+stim --gen repetition_code --task memory --rounds 1000 --distance 5 --after_clifford_depolarization 0.001 --after_reset_flip_probability 0.001 --before_measure_flip_probability 0.002 --before_round_data_depolarization 0.005
+```
