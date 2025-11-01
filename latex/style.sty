@@ -1,0 +1,38 @@
+
+\usepackage{hyperref} % hyperlink colors
+\usepackage{float} % here for H placement parameter
+\usepackage{array} % conditions
+\usepackage{amsmath} % dfrac
+\usepackage{braket} % dirac notation
+\usepackage{tikz}
+\usepackage{tabularx}
+\usepackage{caption} % declare a caption type for equations
+\usepackage{booktabs} % midrule, toprule
+\usepackage[version=4]{mhchem} % chem formulas
+
+% bibliography 
+\usepackage[
+    style=ieee,
+    backend=biber,
+    autocite=inline
+]{biblatex}
+
+% setup hyperlink colors
+\hypersetup{
+    colorlinks=true,
+    citecolor={blue},
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=cyan,
+    pdfpagemode=FullScreen,
+}
+
+% declare path to images (relative to this directory)
+\graphicspath{ {./images/} }
+
+% declare a caption type used for equations
+\DeclareCaptionType{equ}[Equation][]
+
+\addbibresource{bib/bibliography.bib}
+
+\usepackage[margin=0.5in]{geometry}
