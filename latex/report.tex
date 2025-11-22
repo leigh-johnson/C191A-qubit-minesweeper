@@ -1,4 +1,4 @@
-\documentclass[11pt, titlepage, letterpaper]{article}
+\documentclass[11pt, notitlepage, letterpaper]{article}
 \usepackage{style}
 
 \begin{document}
@@ -15,12 +15,28 @@
 }
 \date{Last revised:\\ \today}
 \maketitle
+
+\begin{abstract}
+    TODO
+
+    The abstract should summarize our main points: purpose, methods, results, and conclusions. Keep it short.
+\end{abstract}
+
+\newpage
 \tableofcontents
 
-
+\newpage
 \section{Introduction}
 
 Motivation \& research question
+
+Motivation: Fault-tolerate quantum computation at scale remains a formidable challenge, but we're excited about these recent major advancements:
+
+Decoding with erasure information dramatically increases the surface code error threshold from 0.937\% to 4.15\%, with an estimated 98\% of errors convertible into erasures. \cite{wu_erasure_2022-1}
+
+Machine-learned error decoding for quantum processors (surface code) by Bausch et al uses a transformer-based neutral network to decode error data with realistic noise models, including qubit cross-talk and state leakage.
+
+"Requires a system capable of dissipatively removing physical errors while simultaneously performing arbitrary coherent manipulation of the encoded logical qubits."  \cite{bluvstein_architectural_2025}
 
 Sub-questions \& hypotheses
 
@@ -29,48 +45,120 @@ Sub-questions \& hypotheses
 \subsection{Noise Models}
 \paragraphsc{Pauli Noise.}
 The simplest model used to evaluate Quantum Error Correction (QEC) assumes all physical qubit errors can be represented by uniformly random Pauli operators applied during circuit simulation. In our simulations we implement a \gls{depolarizing error channel} to represent \gls{Pauli noise}, which has the following effect on some quantum state $\rho$ with $p$ probability of becoming a maximally-mixed state and $(1-p)$ probability of remaining unechanged:
-
-\begin{align}
-    D(\rho, p) = (1-p)\rho + \dfrac{p}{3}(X\rho X + Y\rho Y + Z\rho Z) \quad \text{[Depolarizing channel]}
+\begin{align}E_{\text{pauli}}(\rho) & = (1-p)\rho + \dfrac{p}{3}(X\rho X + Y\rho Y + Z\rho Z) & \quad \text{[Depolarizing error channel]}
 \end{align}
 
 Unfortunately, error models based only on \gls{Pauli noise} are not robust enough to describe the real-world noise that must be corrected to realize fault-tolerant quantum computation. [CITATION NEEDED]
 
-\paragraphsc{Leakage}
-A \gls{leakage} ccurs when a qubit ``leaks'' out of the computational subspace (described by a two-dimensional Hilbert space) into a state that can only be described with a higher-order Hilbert space. If leakage goes undetected, the error compounds over time as it spreads through a multi-qubit interactions. Leakage-reduction units (LRUs) were proposed as a way to convert leakage errors into Pauli-type errors, based on a one-bit teleportation protocol \cite{suchara_leakage_2014}.
+\paragraphsc{Leakage.}
+A \gls{leakage} occurs when a qubit ``leaks'' out of the computational subspace (described by a two-dimensional Hilbert space) into a state that can only be described with a higher-order Hilbert space. If leakage goes undetected, the error compounds over time as it spreads through a multi-qubit interactions. Leakage can be stochastically modeled with a 3-level system (qutrit) with orthonormal basis: $\set{\ket{0}, \ket{1}, \ket{2}}$. Leakage events are assumed to be discrete and occur independently with probability $p_{\text{leak}}$ at each gate operation acting on the qutrit \cite{suchara_leakage_2014}. The leakage error $E_{E_{\uparrow}}$ on the $j$th qutrit in the system can then be understood as:
+\begin{align}E_{\text{leakage}}(\rho_j) & = (1-p_{\text{leak}})\rho_j + p_{\text{leak}}\ket{2}\bra{2} & \quad \text{[Leakage error channel \cite{suchara_leakage_2014}]}
+\end{align}
 
-All species of qubit experience leakage errors, but it's important to note the underlying \emph{physical} processes look and behave very differently despite sharing a common mathematical description.
+Leakage-reduction units (LRUs) were proposed as a way to convert leakage errors into Pauli-type errors, based on a one-bit teleportation protocol that effectively moves the logical state from the physical qubit in the leaked state to a freshly-prepared physical qubit \cite{suchara_leakage_2014}.
+
+All species of qubit experience leakage errors, but it's important to note the underlying \emph{physical} processes look and behave very differently despite sharing a common mathematical description. Neutral atoms (Rydberg atoms)
+
+
+Transmon leakage TODO \cite{chen_measuring_2016}
+
+Neutral atom / Rydberg leakage. Neutral atom entangling gates exploit Rydberg blockade, which is a quantum phenomenon that occurs when an atom is excited to a particular Rydberg energy level, which prevents nearby atoms from being excited to the same state. The excitation of the single valence electron in alkali metals like Cs, Rb results in a large effective atomic radius [CITATION NEEDED, but I think it's on the order of ~25E5], creating a large electric dipole moment.
+
+(one or more electrons in the case of alkaline earth metals or lanthanides like Yb)  TODO \cite{morgado_quantum_2021}
+
+
+\paragraphsc{Erasure.} An \gls{erasure} occurs when a qubit is longer detectable by the measurement device, so the quantum state information encoded by the qubit is effectively ``lost'' or ``erased''. Mathematically, we extend the qubit Hilbert space with some $\ket{e}$ that is orthogonal to the qubit state $\{\ket{0}, \ket{1}\}$. The erasure channel can be defined as:
+
+\begin{align}E_{\text{erase}}(\rho_j) & = (1-p_{\text{erase}})\rho_j + p_{\text{erase}}\ket{e}\bra{e} & \quad \text{[Erasure error channel \cite{suchara_leakage_2014}]}
+\end{align}
+
+Photon loss is the dominant form of error in photonic qubits [CITATION NEEDED].
 
 Leakage-detection units (LDUs) were developed to address leakage errors in superconducting qubits, by periodically coupling a data qubit to an acilla that flags when the data qubit leaves the computational subspace. The flagged data qubit can be reset/replaced during subsequent error-correction cycles, effectively treating the flagged qubit as an erasure error.
 
-\paragraphsc{Correlated Errors.} TODO
+Neutral atoms / Rydberg arrays, each atom is arranged into a known position using optical tweezers. Although the lattice/trap is situated inside a vacuum chamber, some nonzero amount of background gas collisions or thermal energy transfer from the environment can eject an atom from its lattice site.
+
+\paragraphsc{Correlated Errors.}
+
+TODO
+The most important thing to mention is that real-world errors are often correlated, so fault-tolerant QC requires correction of correlated noise.
 \cite{wilen_correlated_2021}
 
-\subsection{Erasure Qubit}
+Cross-talk might also be worth mentioning for completeness.
 
-\paragraph{Transmons}: the dominant noise source is a form of detectable  Leakage-detection units (LDUs) were developed to address leakage errors in superconducting qubits, by periodically coupling a data qubit to an acilla that flags when the data qubit leaves the computational subspace. The flagged data qubit can be reset/replaced during subsequent error-correction cycles, effectively treating the flagged qubit as an erasure error.
+\subsection{Erasure Qubits}
+
+A qubit engineered so the dominant source of errors is from erasures.
 
 A bias towards erasure-type errors occurs natively in some types of qubits (e.g. photons) or can be engineered by converting leakage errors to erasures (e.g. with LDUs in superconducting qubits).
 
-The multileveled nature of neutral atom platforms leads to a complex error model. Neutral atoms are excited into ``Rydberg leakage'' describes an error that primarily occurs in multi-qubit gates. For example in two-qubit gates, a quantum mechanical phenomenon called the Rydberg blockade is exploited when exciting one atom to a high-energy Rydberg state, where at least one valence electron . The excited atom  when two or more atoms are excited into a high-energy Rydberg state typically when the biased error model, where the dominant type of error uccuring in two-qubit interactions is a leakage outside the computational subspace.
+\subsubsection{Advantages, Challenges of Erasure Errors}
 
-\subsection{Advantages of Erasure Errors}
-
+\paragraphsc{Advantages.}
+From: "The benefits and costs of quantum error correction with erasure qubits" (QIP 2025)
 \begin{enumerate}
     \item Can theoretically correct more erasure errors than unknown Pauli errors.
           We can correct $d-1$ erasure errors compared to $\dfrac{d-1}{2}$ Pauli errors. As a result, we expect logical error rate $P_L$ on the order of $p^{d}$ where $p$ is the physical qubit error rate, compared to $p^{d/2}$ for unknown Pauli errors. \cite{gu_2023}
     \item Higher thresholds: surface code 50\% erasure noise vs. 19\% depolarizing noise.
-    \item Third item
+    \item Dominant noise source can be engineered
 \end{enumerate}
 
-
+TODO
 Figure: d=5 surface code with some unknown Pauli error spanning 3 qubits, with syndrome squares highlighted. If we apply the minimum-weight correction, this causes a logical error.
 
 Figure: d=5 surface code with erasure errors, exact locations known.
 
+\paragraphsc{Challenges.}
+Challenges from "The benefits and costs of quantum error correction with erasure qubits" (QIP 2025):
+\begin{enumerate}
+    \item More physical operations.
+    \item Erasure detection imperfect, introducing another dimension to error models.
+    \item Midcircuit erasure checks can create correlated noise for neighboring qubits
+    \item Tools to simulate and decode erasure circuits are active area of research.
+\end{enumerate}
 
+
+
+\paragraphsc{Erasure Conversion in Superconducting Qubits}
+
+\begin{enumerate}
+    \item Shouzhen Gu. "Fault-tolerant quantum architectures based on erasure qubits" and "Optimizing quantum error correction protocols with erasure qubits" \cite{gu_optimizing_2024}
+          \cite{gu_fault-tolerant_2025}
+\end{enumerate}
+
+
+\paragraphsc{Erasure Conversion in Neutral / Rydberg Atoms}
+
+\begin{enumerate}
+    \item Yue Wu, Shimon Kolkowitz, Shruti Puri, Jeff D Thompson. Erasure conversion for fault-tolerant quantum computing in alkaline earth {Rydberg} atom arrays \cite{thompson_erasure_2022}
+
+    \item Gefen Baranes, Madelyn Cain, J. Pablo Bonilla Ataides, Dolev Bluvstein, Josiah Sinclair, Vladan Vuletic, Hengyun Zhou, Mikhail D. Lukin
+          . Leveraging Atom Loss Errors in Fault Tolerant Quantum Algorithms \cite{baranes_leveraging_2025}
+
+
+\end{enumerate}
+
+
+
+
+
+\subsubsection{Formalism}
+define stabilizer ciruits with erasure channel: \cite{gu_fault-tolerant_2025}
+
+compare w/ surface code having only pauli error channel
 
 \section{Methods}
+
+\paragraphsc{Simulating Erasure Circuits}
+Describe Stim circuits. Link to Stim circuits / appendix figures of selected timeline-svg operations.
+\cite{gidney_stim_2021}
+
+\paragraphsc{Decoding}
+TODO
+
+Describe the decoding problem for Pauli error stabilizer circuits in the surface code. Explain how surface code error syndromes can be framed as a graph traversal problem with detection events as nodes and errors as the weighted edges. The minimum weight perfect matching (MWPM) algorithm can find the most probable set of errors that occurred. Explain why MWPW works for uniformly random Pauli errors, but why it experiences a sharp drop-off in performace for biased (non-identical) noise models.
+
+Describe the decoding problem when 100 of noise channels can be converted to erasure errors (conversion\_ratio=1 in our codebase).  Describe how the Hypergraph Minimum-Weight Parity Factor (MWPF). \cite{wu_minimum-weight_2025}
 
 \section{Metrics}
 
@@ -80,7 +168,10 @@ Figure: d=5 surface code with erasure errors, exact locations known.
 
 \section{Conclusion}
 
-\section{Acknowledgements}
+\paragraphsc{Acknowledgements}
+
+Shimon Kolkowitz, Harry Levine, Thiago Bergamaschi
+
 
 
 \newpage
