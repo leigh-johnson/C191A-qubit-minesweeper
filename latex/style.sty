@@ -9,6 +9,9 @@
 \usepackage{caption} % declare a caption type for equations
 \usepackage{booktabs} % midrule, toprule
 \usepackage[version=4]{mhchem} % chem formulas
+\usepackage{braket} % dirac notation
+% \usepackage{titling} % needed to typeset abstract on title page
+
 
 % bibliography 
 \usepackage[
@@ -33,6 +36,14 @@
 % declare a caption type used for equations
 \DeclareCaptionType{equ}[Equation][]
 
-\addbibresource{bib/bibliography.bib}
+\addbibresource{refs/bibliography.bib}
 
-\usepackage[margin=0.5in]{geometry}
+\usepackage[hyperfirst=true,nopostdot,toc,section,numberedsection=autolabel,style=list]{glossaries}
+\loadglsentries{refs/glossary}
+
+\usepackage[margin=1in]{geometry}
+
+% custom macros
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\newcommand{\paragraphsc}[1]{\paragraph{\scshape #1}}
