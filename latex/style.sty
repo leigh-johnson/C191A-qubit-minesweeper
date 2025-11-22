@@ -33,6 +33,14 @@
 % declare a caption type used for equations
 \DeclareCaptionType{equ}[Equation][]
 
-\addbibresource{bib/bibliography.bib}
+\addbibresource{refs/bibliography.bib}
+
+\usepackage[hyperfirst=true,nopostdot,toc,section,numberedsection=autolabel,style=list]{glossaries}
+\loadglsentries{refs/glossary}
 
 \usepackage[margin=0.5in]{geometry}
+
+% custom macros
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\newcommand{\paragraphsc}[1]{\paragraph{\scshape #1}}
