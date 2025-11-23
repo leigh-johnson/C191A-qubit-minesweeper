@@ -139,11 +139,26 @@ Challenges from "The benefits and costs of quantum error correction with erasure
 
 \end{enumerate}
 
+\subsection{Surface Code}
+Qauntum error correction (QEC) assumes a piece of quantum information is distributed between many entangled physical qubits, realizing a logical qubit with higher fidelity than its constiuent physical qubits. Any errors affecting individual physical qubits can be detected and corrected with an ensemble of stabilizing codes, based on the diagnostic syndrome of the stabilizer code.
 
+TODO surface code explainer
+TODO Surface code figures
 
+\paragraphsc{Thresholds.}
+If physical qubit error is below a critical noise threshold, the logical error rate should be supressed exponentially as the number of physical qubits per logical qubit is increased. In the surface code, the approximate relation between $d$ code distance corresponding to $2d^2 - 1$ physical qubits per logical qubit, the physical error rate $p$, logical error rate $E_d$, and error rate threshold $p_{thr}$  \cite{acharya_quantum_2025}.
 
+\begin{align}
+    E_d & \propto \dfrac{p}{p_{thr}}^{(d+1)/2} & \quad \text{[Logical error rate]}
+\end{align}
 
-\subsubsection{Formalism}
+Therefore when $p << p_{thr}$, the logical error rate is supressed exponentially with code distance. The exponential supression factor $\Lambda$ is approximately the linear relation between $p_{thr}$ and $p$: \cite{acharya_quantum_2025}.
+
+\begin{align}
+    \Lambda & = \dfrac{E_d}{E_{d+1}} \approx  \dfrac{p_{thr}}{p} & \quad \text{[Supression factor]}
+\end{align}
+
+\subsection{Formalism}
 define stabilizer ciruits with erasure channel: \cite{gu_fault-tolerant_2025}
 
 compare w/ surface code having only pauli error channel
