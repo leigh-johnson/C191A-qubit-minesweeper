@@ -1,22 +1,26 @@
 import stim
 from util.erasure_converter import (
-    TaskConfig,
     convert_circuit_errors_to_erasures,
     filter_convert_to_erasure_instructions,
 )
+from util.sinter_task import TaskMetadata, DecoderLib, TaskConfig
 
 
 def test_surface_code_layout_conversion_factor_equals_1():
     p = 0.01
     d = 3
+    r = d * 3
     conversion_factor = 1
     circuit = stim.Circuit.generated(
         "surface_code:rotated_memory_x",
-        rounds=d * 3,
+        rounds=r,
         distance=d,
         before_round_data_depolarization=p,
     )
-    task = TaskConfig(circuit=circuit, json_metadata={"p": p, "d": d})
+    metadata = TaskMetadata(
+        p=p, d=d, r=r, circuit="surface_code:rotated_memory_x", decoder=DecoderLib.MWPF
+    )
+    task = TaskConfig(circuit=circuit, json_metadata=metadata)
     result = convert_circuit_errors_to_erasures(
         task, conversion_factor=conversion_factor
     )

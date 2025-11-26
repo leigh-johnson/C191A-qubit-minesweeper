@@ -1,16 +1,13 @@
-import mwpf.ref_circuit
 from dataclasses import replace
-from dataclasses import dataclass, asdict
-import stim
 from typing import Iterable
 
+import stim
+import sinter
+import mwpf.ref_circuit
+
+from util.sinter_task import TaskConfig
+
 CONVERT_INSTRUCTIONS = ("DEPOLARIZE1", "DEPOLARIZE2")
-
-
-@dataclass
-class TaskConfig:
-    circuit: stim.Circuit
-    json_metadata: dict
 
 
 def filter_convert_to_erasure_instructions(
@@ -62,3 +59,11 @@ def convert_circuit_errors_to_erasures(
         json_metadata=converted_metadata,
     )
     return new_task_config
+
+
+def generate_erasure_task_config(
+    cfg: TaskConfig, conversion_factor: int
+) -> sinter.Task:
+    erasure_cfg = convert_circuit_errors_to_erasures(cfg, conversion_factor)
+    task = sinter.Task(**erasure_cfg, decoder=f"mwpf__{erasure_cfg.run_id}")
+    return task

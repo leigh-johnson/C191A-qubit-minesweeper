@@ -2,7 +2,12 @@ import click
 from dataclasses import dataclass
 from typing import Optional
 import os
-from util.sinter_task import CollectTasksConfig, collect_stats
+from util.sinter_task import (
+    CollectTasksConfig,
+    collect_stats,
+    MWPFSolverType,
+    DecoderLib,
+)
 
 
 @dataclass
@@ -124,7 +129,7 @@ def pymatching(ctx):
     cfg = CollectTasksConfig(
         circuit=common.circuit,
         save_resume_filepath=common.save_resume_filepath,
-        decoder="pymatching",
+        decoder=DecoderLib.PYMATCHING,
         max_shots=common.max_shots,
         max_errors=common.max_errors,
         num_workers=common.num_workers,
@@ -148,16 +153,30 @@ def pymatching(ctx):
     show_default=True,
     help="Convert % of Pauli errors to erasures. 0 implies no conversion (default), 1 implies 100% conversion.",
 )
+@click.option(
+    "--solver",
+    type=click.Choice(MWPFSolverType),
+    default=MWPFSolverType.SolverSerialJointSingleHair,
+    show_default=True,
+    help="See: https://github.com/yuewuo/mwpf/blob/main/src/mwpf_solver.rs",
+)
 @click.command()
 @click.pass_context
-def mwpf(ctx, folder, cluster_node_limit, erasure_conversion_factor):
+def mwpf(ctx, cluster_node_limit, erasure_conversion_factor):
     common: CommonOpts = ctx.obj["common"]
-    import pdb
-
-    pdb.set_trace()
-    # cfg = CollectStatsConfig(
-    #     circuit=common["circuit"]
-    # )
+    cfg = CollectTasksConfig(
+        circuit=common.circuit,
+        save_resume_filepath=common.save_resume_filepath,
+        decoder=DecoderLib.MWPF,
+        max_shots=common.max_shots,
+        max_errors=common.max_errors,
+        num_workers=common.num_workers,
+        noise=common.noise,
+        code_distance=common.code_distance,
+        cluster_node_limit=cluster_node_limit,
+        erasure_conversion_factor=erasure_conversion_factor,
+    )
+    collect_stats(cfg)
 
 
 cli.add_command(pymatching)

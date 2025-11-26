@@ -8,9 +8,31 @@ from typing import List, Optional, Dict
 from tqdm import tqdm
 from datetime import datetime, timezone, date
 from pathlib import Path
+from enum import StrEnum
 
 import sinter
 from mwpf import SinterMWPFDecoder
+
+
+class DecoderLib(StrEnum):
+    PYMATCHING = "pymatching"
+    MWPF = "mwpf"
+
+    def __str__(self):
+        return self.value
+
+
+class MWPFSolverType(StrEnum):
+    """
+    See: https://github.com/yuewuo/mwpf/blob/main/src/mwpf_solver.rs
+    """
+
+    SolverSerialJointSingleHair = "SolverSerialJointSingleHair"
+    SolverSerialSingleHair = "SolverSerialSingleHair"
+    SolverSerialUnionFind = "SolverSerialUnionFind"
+
+    def __str__(self):
+        return self.value
 
 
 @dataclass
@@ -19,8 +41,8 @@ class TaskMetadata:
     d: int
     r: int
     circuit: str
-    decoder: str  # e.g. mwpf or pymatching
-    decoder_type: Optional[str] = None
+    decoder: DecoderLib  # e.g. mwpf or pymatching
+    decoder_type: Optional[MWPFSolverType] = None
     run_id: str = ""
     cluster_node_limit: Optional[int] = None
 
@@ -40,44 +62,49 @@ class TaskConfig:
         self.run_id = hashlib.sha256(
             json.dumps(asdict(self.json_metadata)).encode("utf-8")
         ).hexdigest()
-        if self.json_metadata.decoder == "mwpf":
+        if self.json_metadata.decoder is DecoderLib.MWPF:
             self.custom_decoders = build_custom_decoders(self)
 
     def run_id(self):
         return self.json_metadata.run_id
 
     def to_task(self):
-        if self.json_metadata.decoder == "pymatching":
+        if self.json_metadata.decoder is DecoderLib.PYMATCHING:
             return sinter.Task(
                 circuit=self.circuit,
                 json_metadata=asdict(self.json_metadata),
             )
-        elif self.json_metadata.decoder == "mwpf":
+        elif self.json_metadata.decoder == DecoderLib.MWPF:
             return sinter.Task(
                 circuit=self.circuit,
                 json_metadata=asdict(self.json_metadata),
                 decoder=self.custom_decoders.keys()[0],
             )
+        else:
+            raise NotImplemented
 
 
 @dataclass
 class CollectTasksConfig:
     circuit: str  # circuit name, not instance
-    decoder: str  # decoder name, not instance
+    decoder: DecoderLib  # decoder name, not instance
     noise: tuple[float]
     code_distance: tuple[int]
     task_configs: List[TaskConfig] = field(default_factory=list)
     tasks: List[sinter.Task] = field(default_factory=list)
-    decoder_type: Optional[str] = None  # decoder subtype, only used for mwpf decoder
+    decoder_type: Optional[MWPFSolverType] = (
+        None  # decoder subtype, only used for mwpf decoder
+    )
     save_resume_filepath: str = "auto"
     quiet: bool = False
     max_shots: int = 100_000
     max_errors: int = 5_000
     num_workers: int = os.cpu_count() - 2
     erasure_conversion_factor: float = 0.0
+    cluster_node_limit: Optional[int] = None
 
     def __post_init__(self):
-        if self.decoder == "mwpf" and self.decoder_type is None:
+        if self.decoder is DecoderLib.MWPF and self.decoder_type is None:
             raise ValueError(
                 "Specify decoder_type corresponding to mwpf solver, e.g. SolverSerialJointSingleHair"
             )
@@ -133,9 +160,9 @@ def generate_save_resume_filepath(cfg: CollectTasksConfig):
     # Ilyes, if this happens to you on your Windows machine please open a pull request implementing cross-platform Path objects
     # See: https://docs.python.org/3/library/pathlib.html
     basedir = f"datasets/circuit={cfg.circuit}/decoder={cfg.decoder}"
-    if cfg.decoder == "pymatching":
+    if cfg.decoder == DecoderLib.PYMATCHING:
         return f"{basedir}/{iso_today}"
-    elif cfg.decoder == "mwpf":
+    elif cfg.decoder == DecoderLib.MWPF:
         return f"{basedir}/erasure={cfg.erasure_conversion_factor}/solver={cfg.decoder_type}/{iso_today}"
     else:
         raise NotImplemented(
@@ -152,7 +179,7 @@ def build_custom_decoders(cfg: TaskConfig):
     return {
         f"mwpf__{cfg.run_id}": SinterMWPFDecoder(
             decoder_type="SolverSerialJointSingleHair",
-            cluster_node_limit=cfg.json_metadata["cluster_node_limit"],
+            cluster_node_limit=cfg.json_metadata.cluster_node_limit,
             with_progress=True,
             timeout=10,
         ).with_circuit(cfg.circuit)
