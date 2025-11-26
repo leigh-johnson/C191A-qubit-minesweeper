@@ -4,7 +4,6 @@ from typing import Iterable
 import stim
 import sinter
 import mwpf.ref_circuit
-
 from util.sinter_task import TaskConfig
 
 CONVERT_INSTRUCTIONS = ("DEPOLARIZE1", "DEPOLARIZE2")
@@ -59,11 +58,3 @@ def convert_circuit_errors_to_erasures(
         quiet=task_config.quiet,
     )
     return new_task_config
-
-
-def generate_erasure_task_config(
-    cfg: TaskConfig, conversion_factor: int
-) -> sinter.Task:
-    erasure_cfg = convert_circuit_errors_to_erasures(cfg, conversion_factor)
-    task = sinter.Task(**erasure_cfg, decoder=f"mwpf__{erasure_cfg.run_id}")
-    return task

@@ -3,11 +3,10 @@ from dataclasses import dataclass
 from typing import Optional
 import os
 from util.sinter_task import (
-    CollectTasksConfig,
-    collect_stats,
     MWPFSolverType,
     DecoderLib,
 )
+from util.sinter_collect import CollectTasksConfig, collect_stats
 
 
 @dataclass
