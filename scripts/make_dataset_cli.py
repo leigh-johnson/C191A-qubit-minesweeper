@@ -1,24 +1,31 @@
 import click
-from datetime import datetime, timezone
 from dataclasses import dataclass
 from typing import Optional
-
-now_utc = datetime.now(timezone.utc)
-iso_now = now_utc.isoformat(timespec="hours")
+import os
+from util.sinter_task import CollectTasksConfig, collect_stats
 
 
 @dataclass
 class CommonOpts:
-    progress: bool
     circuit: str
     max_errors: int
     max_shots: int
     noise: tuple[float, ...]
     code_distance: tuple[int, ...]
-    out: Optional[str] = None
+    save_resume_filepath: str
+    quiet: bool = False
+    num_workers: int = os.cpu_count() - 2
 
 
 def common_options(f):
+    f = click.option(
+        "--num-workers",
+        "num_workers",
+        type=int,
+        default=os.cpu_count() - 2,
+        show_default=True,
+        help="Number of sinter (multiprocessing) workers. NOTE: sinter uses spawn (not fork) to create subprocesses, so each additional worker process adds cold start time sinter.collect() calls. Prefer a high number of worker processes with few (ideally one) call to sinter.collect().",
+    )(f)
     f = click.option(
         "--code-distance",
         "code_distance",
@@ -66,24 +73,47 @@ def common_options(f):
         default="surface_code:rotated_memory_x",
         show_default=True,
     )(f)
-    f = click.option("--progress", is_flag=True, help="Silence progress")(f)
+    f = click.option("--quiet", is_flag=True, default=False, help="Silence progress")(f)
 
-    f = click.option("--out", required=False)(f)
+    f = click.option(
+        "--save-resume-filepath",
+        default="auto",
+        help="Specify a save/resume filepath to pass to sinter.collect. If 'auto', a path will be generated from dataset parameters",
+    )(f)
+    # TODO
+    # f = click.option(
+    #     "--fanout",
+    #     is_flag=True,
+    #     default=False,
+    #     help="If true, fanout sinter.collect() and resulting dataset files (typically per unique pair of (d, p) parameters). Fanout is needed for mwpf w/ erasure enabled, so the save/resume checkpoints are more granular. For other decoders (pymatching), fanout is generally not needed and is slower, so specify only if you.  want to generate granular dataset files)",
+    # )(f)
     return f
 
 
 @click.group()
 @common_options
 @click.pass_context
-def cli(ctx, progress, circuit, max_errors, max_shots, noise, code_distance, out):
+def cli(
+    ctx,
+    num_workers,
+    circuit,
+    max_errors,
+    max_shots,
+    noise,
+    code_distance,
+    save_resume_filepath,
+    quiet,
+):
     ctx.ensure_object(dict)
     ctx.obj["common"] = CommonOpts(
-        progress=progress,
         circuit=circuit,
         max_errors=max_errors,
         max_shots=max_shots,
         noise=noise,
         code_distance=code_distance,
+        quiet=quiet,
+        save_resume_filepath=save_resume_filepath,
+        num_workers=num_workers,
     )
 
 
@@ -91,6 +121,19 @@ def cli(ctx, progress, circuit, max_errors, max_shots, noise, code_distance, out
 @click.pass_context
 def pymatching(ctx):
     common: CommonOpts = ctx.obj["common"]
+    cfg = CollectTasksConfig(
+        circuit=common.circuit,
+        save_resume_filepath=common.save_resume_filepath,
+        decoder="pymatching",
+        max_shots=common.max_shots,
+        max_errors=common.max_errors,
+        num_workers=common.num_workers,
+        erasure_conversion_factor=0.0,
+        noise=common.noise,
+        code_distance=common.code_distance,
+    )
+    collect_stats(cfg)
+    # TODO: write CollectTasksConfig (serialized to JSON) to {save_resume_filepath}vars.json"
 
 
 @click.option(
@@ -103,12 +146,18 @@ def pymatching(ctx):
     "--erasure-conversion-factor",
     default=0.0,
     show_default=True,
-    help="Convert \% of Pauli errors to erasures. 0 implies no conversion (default), 1 implies 100\% conversion.",
+    help="Convert % of Pauli errors to erasures. 0 implies no conversion (default), 1 implies 100% conversion.",
 )
 @click.command()
 @click.pass_context
 def mwpf(ctx, folder, cluster_node_limit, erasure_conversion_factor):
     common: CommonOpts = ctx.obj["common"]
+    import pdb
+
+    pdb.set_trace()
+    # cfg = CollectStatsConfig(
+    #     circuit=common["circuit"]
+    # )
 
 
 cli.add_command(pymatching)
