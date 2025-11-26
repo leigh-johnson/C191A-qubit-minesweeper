@@ -1,6 +1,7 @@
 import click
 from datetime import datetime, timezone
 from dataclasses import dataclass
+from typing import Optional
 
 now_utc = datetime.now(timezone.utc)
 iso_now = now_utc.isoformat(timespec="hours")
@@ -14,6 +15,7 @@ class CommonOpts:
     max_shots: int
     noise: tuple[float, ...]
     code_distance: tuple[int, ...]
+    out: Optional[str] = None
 
 
 def common_options(f):
@@ -60,18 +62,20 @@ def common_options(f):
     )(f)
     f = click.option(
         "--circuit",
-        type=click.Choice(["rotated_memory_x"]),
-        default="rotated_memory_x",
+        type=click.Choice(["surface_code:rotated_memory_x"]),
+        default="surface_code:rotated_memory_x",
         show_default=True,
     )(f)
     f = click.option("--progress", is_flag=True, help="Silence progress")(f)
+
+    f = click.option("--out", required=False)(f)
     return f
 
 
 @click.group()
 @common_options
 @click.pass_context
-def cli(ctx, progress, circuit, max_errors, max_shots, noise, code_distance):
+def cli(ctx, progress, circuit, max_errors, max_shots, noise, code_distance, out):
     ctx.ensure_object(dict)
     ctx.obj["common"] = CommonOpts(
         progress=progress,
@@ -83,14 +87,10 @@ def cli(ctx, progress, circuit, max_errors, max_shots, noise, code_distance):
     )
 
 
-@click.option(
-    "--folder",
-    show_default=True,
-    default=f"datasets/rotated_memory_x_pymatching/{iso_now}",
-)
 @click.command()
-def pymatching():
-    pass
+@click.pass_context
+def pymatching(ctx):
+    common: CommonOpts = ctx.obj["common"]
 
 
 @click.option(
@@ -100,37 +100,19 @@ def pymatching():
     help="Hyperblossom decomposes a hypergraph problem into smaller, localized clusters. c=0 implies the UnionFind strategy, while any c >=1 will use the SerialJointSingleHair strategy. See description of c= parameter in https://arxiv.org/pdf/2508.04969",
 )
 @click.option(
-    "--folder",
+    "--erasure-conversion-factor",
+    default=0.0,
     show_default=True,
-    default=f"datasets/rotated_memory_x_mwpf_SolverSerialJointSingleHair/{iso_now}",
+    help="Convert \% of Pauli errors to erasures. 0 implies no conversion (default), 1 implies 100\% conversion.",
 )
 @click.command()
-def mwpf(folder, cluster_node_limit):
-    pass
-
-
-@click.option(
-    "--cluster_node_limit",
-    default=50,
-    show_default=True,
-    help="Hyperblossom decomposes a hypergraph problem into smaller, \
-        localized clusters. c=0 implies the UnionFind strategy, \
-        while any c >=1 will use the SerialJointSingleHair strategy. \
-        See description of c= parameter in https://arxiv.org/pdf/2508.04969",
-)
-@click.option(
-    "--folder",
-    show_default=True,
-    default=f"datasets/rotated_memory_x_mwpf_SolverSerialJointSingleHair_erasure/{iso_now}",
-)
-@click.command()
-def mwpf_erasure():
-    pass
+@click.pass_context
+def mwpf(ctx, folder, cluster_node_limit, erasure_conversion_factor):
+    common: CommonOpts = ctx.obj["common"]
 
 
 cli.add_command(pymatching)
 cli.add_command(mwpf)
-cli.add_command(mwpf_erasure)
 
 
 if __name__ == "__main__":

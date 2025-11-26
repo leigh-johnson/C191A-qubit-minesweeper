@@ -1,0 +1,29 @@
+from util.sinter_task import generate_save_resume_filepath, CollectTasksConfig
+from datetime import date
+
+
+def test_generate_save_resume_filepath_pymatching():
+
+    cfg = CollectTasksConfig(
+        "surface_code:rotated_memory_x",
+        decoder="pymatching",
+    )
+    assert (
+        cfg.save_resume_filepath
+        == "datasets/circuit=surface_code:rotated_memory_x/decoder=pymatching/"
+        + date.today().isoformat()
+    )
+
+
+def test_generate_save_resume_filepath_mwpf():
+
+    cfg = CollectTasksConfig(
+        "surface_code:rotated_memory_x",
+        decoder="mwpf",
+        decoder_type="SolverSerialJointSingleHair",
+    )
+    assert (
+        cfg.save_resume_filepath
+        == "datasets/circuit=surface_code:rotated_memory_x/decoder=mwpf/erasure=0.0/solver=SolverSerialJointSingleHair/"
+        + date.today().isoformat()
+    )
