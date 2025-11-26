@@ -162,12 +162,13 @@ def pymatching(ctx):
 )
 @click.command()
 @click.pass_context
-def mwpf(ctx, cluster_node_limit, erasure_conversion_factor):
+def mwpf(ctx, cluster_node_limit, erasure_conversion_factor, solver):
     common: CommonOpts = ctx.obj["common"]
     cfg = CollectTasksConfig(
         circuit=common.circuit,
         save_resume_filepath=common.save_resume_filepath,
         decoder=DecoderLib.MWPF,
+        decoder_type=solver,
         max_shots=common.max_shots,
         max_errors=common.max_errors,
         num_workers=common.num_workers,

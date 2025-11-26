@@ -78,7 +78,7 @@ class TaskConfig:
             return sinter.Task(
                 circuit=self.circuit,
                 json_metadata=asdict(self.json_metadata),
-                decoder=self.custom_decoders.keys()[0],
+                decoder=list(self.custom_decoders)[0],
             )
         else:
             raise NotImplemented
@@ -125,7 +125,13 @@ class CollectTasksConfig:
         parameters = itertools.product(self.code_distance, self.noise)
         for d, p in tqdm(parameters, disable=self.quiet):
             json_metadata = TaskMetadata(
-                p=p, d=d, r=3 * d, circuit=self.circuit, decoder=self.decoder
+                p=p,
+                d=d,
+                r=3 * d,
+                circuit=self.circuit,
+                decoder=self.decoder,
+                decoder_type=self.decoder_type,
+                cluster_node_limit=self.cluster_node_limit,
             )
             circuit = stim.Circuit.generated(
                 self.circuit,
@@ -180,7 +186,7 @@ def build_custom_decoders(cfg: TaskConfig):
         f"mwpf__{cfg.run_id}": SinterMWPFDecoder(
             decoder_type="SolverSerialJointSingleHair",
             cluster_node_limit=cfg.json_metadata.cluster_node_limit,
-            with_progress=True,
+            with_progress=not cfg.quiet,
             timeout=10,
         ).with_circuit(cfg.circuit)
     }
