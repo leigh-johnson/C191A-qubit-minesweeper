@@ -145,8 +145,14 @@ Qauntum error correction (QEC) assumes a piece of quantum information is distrib
 TODO surface code explainer
 TODO Surface code figures
 
-\paragraphsc{Thresholds.}
+\cite{fowler_surface_2012}
+
+\paragraphsc{Circuit-level Noise Thresholds.}
 If physical qubit error is below a critical noise threshold, the logical error rate should be supressed exponentially as the number of physical qubits per logical qubit is increased. In the surface code, the approximate relation between $d$ code distance corresponding to $2d^2 - 1$ physical qubits per logical qubit, the physical error rate $p$, logical error rate $E_d$, and error rate threshold $p_{thr}$  \cite{acharya_quantum_2025}.
+
+\paragraph{Erasure Tolerance and Enhancements}
+
+TODO Thresholds for $p_erase << p$, also some useful background on erasure errors in general: (see: Previous Work on Erasure Errors) \cite{kobayashi_erasure-tolerance_2025}
 
 \begin{align}
     E_d & \propto \dfrac{p}{p_{thr}}^{(d+1)/2} & \quad \text{[Logical error rate]}
