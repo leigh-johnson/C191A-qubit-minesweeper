@@ -214,5 +214,5 @@ def collect_stats(cfg: CollectTasksConfig) -> List[sinter.TaskStats]:
         print_progress=not cfg.quiet,
         max_shots=cfg.max_shots,
         max_errors=cfg.max_errors,
-        save_resume_filepath=cfg.save_resume_filepath + ".csv",
+        save_resume_filepath=cfg.save_resume_filepath,
     )
