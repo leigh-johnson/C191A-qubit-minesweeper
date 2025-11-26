@@ -33,7 +33,7 @@ Motivation \& research question
 
 Motivation: Fault-tolerate quantum computation at scale remains a formidable challenge, but we're excited about these recent major advancements:
 
-Decoding with erasure information dramatically increases the surface code error threshold from 0.937\% to 4.15\%, with an estimated 98\% of errors convertible into erasures. \cite{wu_erasure_2022-1}
+Decoding with erasure information dramatically increases the surface code error threshold from 0.937\% to 4.15\%, with an estimated 98\% of errors convertible into erasures. \cite{wu_erasure_2022}
 
 Machine-learned error decoding for quantum processors (surface code) by Bausch et al uses a transformer-based neutral network to decode error data with realistic noise models, including qubit cross-talk and state leakage.
 
@@ -99,7 +99,7 @@ A bias towards erasure-type errors occurs natively in some types of qubits (e.g.
 From: "The benefits and costs of quantum error correction with erasure qubits" (QIP 2025)
 \begin{enumerate}
     \item Can theoretically correct more erasure errors than unknown Pauli errors.
-          We can correct $d-1$ erasure errors compared to $\dfrac{d-1}{2}$ Pauli errors. As a result, we expect logical error rate $P_L$ on the order of $p^{d}$ where $p$ is the physical qubit error rate, compared to $p^{d/2}$ for unknown Pauli errors. \cite{gu_2023}
+          We can correct $d-1$ erasure errors compared to $\dfrac{d-1}{2}$ Pauli errors. As a result, we expect logical error rate $P_L$ on the order of $p^{d}$ where $p$ is the physical qubit error rate, compared to $p^{d/2}$ for unknown Pauli errors. \cite{gu_fault-tolerant_2025}
     \item Higher thresholds: surface code 50\% erasure noise vs. 19\% depolarizing noise.
     \item Dominant noise source can be engineered
 \end{enumerate}
