@@ -50,13 +50,13 @@ def convert_circuit_errors_to_erasures(
                     )
         else:
             instructions.append(instruction)
-    converted_metadata = json_metadata.copy()
-    converted_metadata["p_erase"] = converted_metadata["p"]
+    json_metadata.p_erase = conversion_factor * p
     converted_circuit = mwpf.ref_circuit.RefCircuit.of(instructions).circuit()
 
     new_task_config = TaskConfig(
         circuit=converted_circuit,
-        json_metadata=converted_metadata,
+        json_metadata=json_metadata,
+        quiet=task_config.quiet,
     )
     return new_task_config
 

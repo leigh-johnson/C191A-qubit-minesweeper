@@ -4,7 +4,7 @@ import json
 import os
 import itertools
 from dataclasses import dataclass, field, asdict
-from typing import List, Optional, Dict
+from typing import List, Optional, Dict, Union
 from tqdm import tqdm
 from datetime import datetime, timezone, date
 from pathlib import Path
@@ -45,6 +45,7 @@ class TaskMetadata:
     decoder_type: Optional[MWPFSolverType] = None
     run_id: str = ""
     cluster_node_limit: Optional[int] = None
+    p_erase: float = 0.0
 
     def __post_init__(self):
         self.run_id = hashlib.sha256(
@@ -57,13 +58,16 @@ class TaskConfig:
     circuit: stim.Circuit
     json_metadata: TaskMetadata
     custom_decoders: Optional[Dict[str, SinterMWPFDecoder]] = None
+    quiet: bool = False
 
     def __post_init__(self):
         self.run_id = hashlib.sha256(
             json.dumps(asdict(self.json_metadata)).encode("utf-8")
         ).hexdigest()
         if self.json_metadata.decoder is DecoderLib.MWPF:
-            self.custom_decoders = build_custom_decoders(self)
+            self.custom_decoders = build_custom_decoders(
+                self, with_progress=not self.quiet
+            )
 
     def run_id(self):
         return self.json_metadata.run_id
@@ -95,7 +99,7 @@ class CollectTasksConfig:
     decoder_type: Optional[MWPFSolverType] = (
         None  # decoder subtype, only used for mwpf decoder
     )
-    save_resume_filepath: str = "auto"
+    save_resume_filepath: Union[str, Path] = "auto"
     quiet: bool = False
     max_shots: int = 100_000
     max_errors: int = 5_000
@@ -154,7 +158,9 @@ class CollectTasksConfig:
                 # Implement a noise model that (optionally) includes reset / state prep error
                 # after_reset_flip_probability=p,
             )
-            task_config = TaskConfig(circuit=circuit, json_metadata=json_metadata)
+            task_config = TaskConfig(
+                circuit=circuit, json_metadata=json_metadata, quiet=self.quiet
+            )
             task = task_config.to_task()
             self.task_configs.append(task_config)
             self.tasks.append(task)
@@ -162,14 +168,20 @@ class CollectTasksConfig:
 
 def generate_save_resume_filepath(cfg: CollectTasksConfig):
     iso_today = date.today().isoformat()
-    # TODO if you run this on a non-Unixlike system (E.g. windows) the path strings will explode
-    # Ilyes, if this happens to you on your Windows machine please open a pull request implementing cross-platform Path objects
-    # See: https://docs.python.org/3/library/pathlib.html
-    basedir = f"datasets/circuit={cfg.circuit}/decoder={cfg.decoder}"
+    basedir = os.path.join(
+        "datasets", f"circuit={cfg.circuit}", f"decoder={cfg.decoder}"
+    )
     if cfg.decoder == DecoderLib.PYMATCHING:
-        return f"{basedir}/{iso_today}"
+        return Path(os.path.join(basedir, f"{iso_today}.csv"))
     elif cfg.decoder == DecoderLib.MWPF:
-        return f"{basedir}/erasure={cfg.erasure_conversion_factor}/solver={cfg.decoder_type}/{iso_today}"
+        return Path(
+            os.path.join(
+                basedir,
+                f"erasure={cfg.erasure_conversion_factor}",
+                f"solver={cfg.decoder_type}",
+                f"{iso_today}.csv",
+            )
+        )
     else:
         raise NotImplemented(
             f"generate_save_resume_filepath not implemented for decoder {cfg.decoder}"
@@ -181,12 +193,12 @@ def generate_run_id(cfg: TaskConfig):
     return run_id
 
 
-def build_custom_decoders(cfg: TaskConfig):
+def build_custom_decoders(cfg: TaskConfig, with_progress: bool = True):
     return {
         f"mwpf__{cfg.run_id}": SinterMWPFDecoder(
             decoder_type="SolverSerialJointSingleHair",
             cluster_node_limit=cfg.json_metadata.cluster_node_limit,
-            with_progress=not cfg.quiet,
+            with_progress=with_progress,
             timeout=10,
         ).with_circuit(cfg.circuit)
     }
