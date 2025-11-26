@@ -12,6 +12,7 @@ from enum import StrEnum
 
 import sinter
 from mwpf import SinterMWPFDecoder
+from util.erasure_converter import convert_circuit_errors_to_erasures
 
 
 class DecoderLib(StrEnum):
@@ -161,6 +162,14 @@ class CollectTasksConfig:
             task_config = TaskConfig(
                 circuit=circuit, json_metadata=json_metadata, quiet=self.quiet
             )
+            if self.erasure_conversion_factor > 0:
+                if self.decoder is not DecoderLib.MWPF:
+                    raise NotImplemented(
+                        f"MWPF decoder is required for nonzero erasure_conversion_factor"
+                    )
+                task_config = convert_circuit_errors_to_erasures(
+                    task_config, self.erasure_conversion_factor
+                )
             task = task_config.to_task()
             self.task_configs.append(task_config)
             self.tasks.append(task)
