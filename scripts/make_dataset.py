@@ -20,6 +20,7 @@ class CommonOpts:
     quiet: bool = False
     num_workers: int = os.cpu_count() - 2
     num_rounds: Optional[int] = None
+    verbose: bool = False
 
 
 def common_options(f):
@@ -85,7 +86,9 @@ def common_options(f):
         show_default=True,
     )(f)
     f = click.option("--quiet", is_flag=True, default=False, help="Silence progress")(f)
-
+    f = click.option(
+        "--verbose", is_flag=True, default=False, help="Enable verbose logging"
+    )(f)
     f = click.option(
         "--save-resume-filepath",
         default="auto",
@@ -115,6 +118,7 @@ def cli(
     code_distance,
     save_resume_filepath,
     quiet,
+    verbose,
 ):
     ctx.ensure_object(dict)
     ctx.obj["common"] = CommonOpts(
@@ -127,6 +131,7 @@ def cli(
         save_resume_filepath=save_resume_filepath,
         num_workers=num_workers,
         num_rounds=num_rounds,
+        verbose=verbose,
     )
 
 
@@ -144,6 +149,8 @@ def pymatching(ctx):
         erasure_conversion_factor=0.0,
         noise=common.noise,
         code_distance=common.code_distance,
+        verbose=common.verbose,
+        num_rounds=common.num_rounds,
     )
     collect_stats(cfg)
     # TODO: write CollectTasksConfig (serialized to JSON) to {save_resume_filepath}vars.json"
@@ -184,6 +191,8 @@ def mwpf(ctx, cluster_node_limit, erasure_conversion_factor, solver):
         code_distance=common.code_distance,
         cluster_node_limit=cluster_node_limit,
         erasure_conversion_factor=erasure_conversion_factor,
+        verbose=common.verbose,
+        num_rounds=common.num_rounds,
     )
     collect_stats(cfg)
 
