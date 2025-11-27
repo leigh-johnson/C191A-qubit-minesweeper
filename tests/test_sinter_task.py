@@ -1,9 +1,8 @@
 from util.sinter_task import (
-    generate_save_resume_filepath,
-    CollectTasksConfig,
     DecoderLib,
     MWPFSolverType,
 )
+from util.sinter_collect import generate_save_resume_filepath, CollectTasksConfig
 from datetime import date
 from pathlib import Path
 
