@@ -36,3 +36,15 @@ def test_generate_save_resume_filepath_mwpf():
         + date.today().isoformat()
         + ".csv"
     )
+
+
+def test_generate_task_num_rounds():
+    cfg = CollectTasksConfig(
+        "surface_code:rotated_memory_x",
+        decoder=DecoderLib.PYMATCHING,
+        noise=[0.01],
+        code_distance=[3],
+        num_rounds=1,
+    )
+    for task in cfg.tasks:
+        assert task.json_metadata.get("r") == 1

@@ -11,13 +11,11 @@ import sinter
 import stim
 from tqdm import tqdm
 
-from mwpf import SinterMWPFDecoder
 from util.erasure_converter import convert_circuit_errors_to_erasures
 
 from util.sinter_task import (
     DecoderLib,
     MWPFSolverType,
-    SinterMWPFDecoder,
     TaskMetadata,
     TaskConfig,
 )
@@ -41,6 +39,8 @@ class CollectTasksConfig:
     num_workers: int = os.cpu_count() - 2
     erasure_conversion_factor: float = 0.0
     cluster_node_limit: Optional[int] = None
+    num_rounds: Optional[int] = None
+    num_rounds_factor: int = 3
 
     def __post_init__(self):
         if self.decoder is DecoderLib.MWPF and self.decoder_type is None:
@@ -63,10 +63,14 @@ class CollectTasksConfig:
         # cartesian product of our parameter sweeps
         parameters = itertools.product(self.code_distance, self.noise)
         for d, p in tqdm(parameters, disable=self.quiet):
+            if self.num_rounds is None:
+                num_rounds = int(d * self.num_rounds_factor)
+            else:
+                num_rounds = self.num_rounds
             json_metadata = TaskMetadata(
                 p=p,
                 d=d,
-                r=3 * d,
+                r=num_rounds,
                 circuit=self.circuit,
                 decoder=self.decoder,
                 decoder_type=self.decoder_type,
@@ -74,7 +78,7 @@ class CollectTasksConfig:
             )
             circuit = stim.Circuit.generated(
                 self.circuit,
-                rounds=3 * d,
+                rounds=num_rounds,
                 distance=d,
                 # TODO: We assume the same error rate (p) for
                 # 1. data qubit depolarization (before_round_data_depolarization)
