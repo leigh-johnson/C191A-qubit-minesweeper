@@ -35,9 +35,10 @@ def convert_circuit_errors_to_erasures(
     for instruction in ref_circuit:
         if instruction.name in convert_instructions:
             p = instruction.gate_args[0]
-            instructions.append(
-                replace(instruction, gate_args=[p * (1 - conversion_factor)])
-            )
+            if conversion_factor < 1:
+                instructions.append(
+                    replace(instruction, gate_args=[p * (1 - conversion_factor)])
+                )
             new_instruction = mwpf.ref_circuit.RefInstruction.new_heralded_erase(
                 instruction.targets, min(1, 4 / 3 * p * conversion_factor)
             )
