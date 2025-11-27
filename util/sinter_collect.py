@@ -41,6 +41,7 @@ class CollectTasksConfig:
     cluster_node_limit: Optional[int] = None
     num_rounds: Optional[int] = None
     num_rounds_factor: int = 3
+    verbose: bool = False
 
     def __post_init__(self):
         if self.decoder is DecoderLib.MWPF and self.decoder_type is None:
@@ -98,7 +99,10 @@ class CollectTasksConfig:
                 # after_reset_flip_probability=p,
             )
             task_config = TaskConfig(
-                circuit=circuit, json_metadata=json_metadata, quiet=self.quiet
+                circuit=circuit,
+                json_metadata=json_metadata,
+                quiet=self.quiet,
+                verbose=self.verbose,
             )
             if self.erasure_conversion_factor > 0:
                 if self.decoder is not DecoderLib.MWPF:
