@@ -35,7 +35,7 @@ def common_options(f):
         "--num-rounds",
         "num_rounds",
         type=int,
-        help="Number of sinter (multiprocessing) workers. NOTE: sinter uses spawn (not fork) to create subprocesses, so each additional worker process adds cold start time sinter.collect() calls. Prefer a high number of worker processes with few (ideally one) call to sinter.collect().",
+        help="Number of rounds per circuit. Repeated rounds are needed when measurement error is nonzero. Default: 3*d (code distance) to allow a majority-rules determination of stabilizer measurements.",
     )(f)
     f = click.option(
         "--code-distance",
