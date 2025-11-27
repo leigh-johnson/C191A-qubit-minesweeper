@@ -19,6 +19,7 @@ class CommonOpts:
     save_resume_filepath: str
     quiet: bool = False
     num_workers: int = os.cpu_count() - 2
+    num_rounds: Optional[int] = None
 
 
 def common_options(f):
@@ -28,6 +29,12 @@ def common_options(f):
         type=int,
         default=os.cpu_count() - 2,
         show_default=True,
+        help="Number of sinter (multiprocessing) workers. NOTE: sinter uses spawn (not fork) to create subprocesses, so each additional worker process adds cold start time sinter.collect() calls. Prefer a high number of worker processes with few (ideally one) call to sinter.collect().",
+    )(f)
+    f = click.option(
+        "--num-rounds",
+        "num_rounds",
+        type=int,
         help="Number of sinter (multiprocessing) workers. NOTE: sinter uses spawn (not fork) to create subprocesses, so each additional worker process adds cold start time sinter.collect() calls. Prefer a high number of worker processes with few (ideally one) call to sinter.collect().",
     )(f)
     f = click.option(
@@ -100,6 +107,7 @@ def common_options(f):
 def cli(
     ctx,
     num_workers,
+    num_rounds,
     circuit,
     max_errors,
     max_shots,
@@ -118,6 +126,7 @@ def cli(
         quiet=quiet,
         save_resume_filepath=save_resume_filepath,
         num_workers=num_workers,
+        num_rounds=num_rounds,
     )
 
 
