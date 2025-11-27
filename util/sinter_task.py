@@ -3,12 +3,10 @@ import hashlib
 import json
 from dataclasses import dataclass, asdict
 from typing import Optional, Dict
-from tqdm import tqdm
-from datetime import datetime, timezone, date
 from enum import StrEnum
 
 import sinter
-from mwpf import SinterMWPFDecoder
+from mwpf import SinterMWPFDecoder, PanicAction
 
 
 class DecoderLib(StrEnum):
@@ -56,6 +54,7 @@ class TaskConfig:
     json_metadata: TaskMetadata
     custom_decoders: Optional[Dict[str, SinterMWPFDecoder]] = None
     quiet: bool = False
+    verbose: bool = False
 
     def __post_init__(self):
         self.run_id = hashlib.sha256(
@@ -86,11 +85,15 @@ class TaskConfig:
 
 
 def build_custom_decoders(cfg: TaskConfig, with_progress: bool = True):
+    if cfg.verbose:
+        panic_action = PanicAction.RAISE
+    else:
+        panic_action = PanicAction.CATCH
     return {
         f"mwpf__{cfg.run_id}": SinterMWPFDecoder(
             decoder_type="SolverSerialJointSingleHair",
             cluster_node_limit=cfg.json_metadata.cluster_node_limit,
             with_progress=with_progress,
-            timeout=10,
+            panic_action=panic_action,
         ).with_circuit(cfg.circuit)
     }
