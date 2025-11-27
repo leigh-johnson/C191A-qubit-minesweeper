@@ -52,7 +52,7 @@ def common_options(f):
         type=float,
         multiple=True,
         default=(
-            0.001,
+            0.003,
             0.004,
             0.005,
             0.006,
@@ -62,7 +62,7 @@ def common_options(f):
             0.008,
             0.009,
             0.01,
-            0.011,
+            0.015,
         ),
         show_default=True,
         help="Repeatable. Example: --noise 0.01 --noise 0.02",
