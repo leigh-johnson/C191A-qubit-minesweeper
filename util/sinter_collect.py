@@ -40,7 +40,7 @@ class CollectTasksConfig:
     erasure_conversion_factor: float = 0.0
     cluster_node_limit: Optional[int] = None
     num_rounds: Optional[int] = None
-    num_rounds_factor: int = 3
+    num_rounds_factor: int = 1
     verbose: bool = False
 
     def __post_init__(self):

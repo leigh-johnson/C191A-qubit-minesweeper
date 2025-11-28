@@ -1,0 +1,8 @@
+axes.prop_cycle : color
+axes.prop_cycle: cycler('color', ['0072B2', 'D55E00', '009E73', 'CC79A7', 'F0E442', '56B4E9', 'E69F00'])
+axes.grid : True
+grid.color : 0.85
+grid.linewidth : 0.6
+grid.linestyle : -
+lines.linewidth : 1.0
+lines.markersize : 5
