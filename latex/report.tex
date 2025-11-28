@@ -225,7 +225,8 @@ Describe the decoding problem when 100 of noise channels can be converted to era
         \caption{}
         \label{fig:1f}
     \end{subfigure}
-    \caption{\textbf{Circuit-level error thresholds}. \textbf{(a)(b)} Scaling of logical error rate $P_L$ with physical qubit error rate $p$ with only depolarizing noise, decoded with the PyMatching implementation of Minimum Weight Pefect Matching. \textbf{(c)(d)} $P_L$ vs. $p$ with only depolarizing noise, decoded with Minimum Weight Parity Factor (MWPF) scheme. \textbf{(e)(f)}  $P_L$ vs. $p$ with 100\% of depolarizing noise converted to erasure errors. The error threshold regions $p_{thrs}$ are highlighted in gray, determined from the crossings of  }
+    \caption{\textbf{Circuit-level error thresholds}. Comparison of logical error rate $P_L$ with physical qubit error rate $p$, for various syndrome decoding schemes and noise regimes. The lower and upper bounds of the threshold region $p_{thrs}$ is estimated from the d=3,5 and d=9,11 crossings respectively.
+        \textbf{(a)(b)} Pure depolarizing noise, decoded with Minimum Weight Pefect Matching (PyMatching) with $p_{thrs}$ between $0.57\%$ and  $0.78\%$. \textbf{(c)(d)} Pure depolarizing noise, decoded with Minimum Weight Parity Factor, with with $p_{thrs}$ between $0.62\%$ and  $0.71\%$. \textbf{(e)(f)}100\% of depolarizing noise converted to erasure errors, with $p_{thrs}$ between $2.7\%$ and  $3.02\%$.}
     \label{fig:1_thresholds}
 \end{figure}
 
