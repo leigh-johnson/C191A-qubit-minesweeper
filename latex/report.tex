@@ -186,15 +186,49 @@ Describe the decoding problem when 100 of noise channels can be converted to era
 
 \section{Results}
 
-\begin{figure}
+\begin{figure}[t]
     \centering
-    \subfigure[]{\includegraphics[width=0.24\textwidth]{fig1_pymatching_threshold.png}} 
-    \subfigure[]{\includegraphics[width=0.24\textwidth]{monalisa.jpg}} 
-    \subfigure[]{\includegraphics[width=0.24\textwidth]{monalisa.jpg}}
-    \subfigure[]{\includegraphics[width=0.24\textwidth]{monalisa.jpg}}
-    \caption{(a) blah (b) blah (c) blah (d) blah}
-    \label{fig:foobar}
+    \begin{subfigure}[b]{0.49\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{fig1_pymatching_threshold.png}
+        \caption{}
+        \label{fig:1a}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.49\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{fig1_pymatching_threshold_zoomed.png}
+        \caption{}
+        \label{fig:1b}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.49\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{fig1_mwpf_threshold_erasure=0.png}
+        \caption{}
+        \label{fig:1c}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.49\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{fig1_mwpf_threshold_erasure=0_zoomed.png}
+        \caption{}
+        \label{fig:1d}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.49\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{fig1_mwpf_threshold_erasure=1.png}
+        \caption{}
+        \label{fig:1e}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.49\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{fig1_mwpf_threshold_erasure=1_zoomed.png}
+        \caption{}
+        \label{fig:1f}
+    \end{subfigure}
+    \caption{\textbf{Circuit-level error thresholds}. \textbf{(a)(b)} Scaling of logical error rate $P_L$ with physical qubit error rate $p$ with only depolarizing noise, decoded with the PyMatching implementation of Minimum Weight Pefect Matching. \textbf{(c)(d)} $P_L$ vs. $p$ with only depolarizing noise, decoded with Minimum Weight Parity Factor (MWPF) scheme. \textbf{(e)(f)}  $P_L$ vs. $p$ with 100\% of depolarizing noise converted to erasure errors. The error threshold regions $p_{thrs}$ are highlighted in gray, determined from the crossings of  }
+    \label{fig:1_thresholds}
 \end{figure}
+
 
 \section{Discussion}
 
