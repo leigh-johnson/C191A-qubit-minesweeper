@@ -1650,17 +1650,13 @@ test = ["Cython", "greenlet ; python_version < \"3.14\"", "ipython", "packaging"
 
 [[package]]
 name = "mwpf"
-version = "0.2.12"
+version = "0.2.12+fixmemleak1"
 description = "Minimum-Weight Parity Factor (MWPF) decoder for QEC"
 optional = false
 python-versions = ">=3.8"
 groups = ["main"]
 files = [
-    {file = "mwpf-0.2.12-cp38-abi3-macosx_10_12_universal2.whl", hash = "sha256:fbaacb8cbabf0125aedc4c244fc41f35b8e7086851f33fd83166d3b7ec1e0671"},
-    {file = "mwpf-0.2.12-cp38-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:8b0daf4a431f10aaacd675d6f2aff83ee6c1f648e3497e64645c79a80ac4cd3f"},
-    {file = "mwpf-0.2.12-cp38-abi3-musllinux_1_2_x86_64.whl", hash = "sha256:ebc5a94fe9420bcc8acbd7c260fcf0d6134f27b2f3997adc0598155165b38ad9"},
-    {file = "mwpf-0.2.12-cp38-abi3-win_amd64.whl", hash = "sha256:f9eb12a2067125bacd906d7067d4c054d92011aac706a9d99003672ff3b7906d"},
-    {file = "mwpf-0.2.12.tar.gz", hash = "sha256:d29ea17d2f81c3ce5f61953ba72b285a18bce17e06e5c1a00ed4e1d66205d01d"},
+    {file = "mwpf-0.2.12+fixmemleak1.tar.gz", hash = "sha256:1560aa23b1265c0c249c3b195a9ad167f5ef22dbb25fb1116709232a553d543a"},
 ]
 
 [package.dependencies]
@@ -1672,6 +1668,10 @@ stim = {version = ">=1.14.0", optional = true, markers = "extra == \"stim\""}
 
 [package.extras]
 stim = ["frozendict", "frozenlist", "numpy", "sinter (>=1.14.0)", "stim (>=1.14.0)"]
+
+[package.source]
+type = "file"
+url = "dist/mwpf-0.2.12+fixmemleak1.tar.gz"
 
 [[package]]
 name = "nest-asyncio"
@@ -3173,4 +3173,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.11,<4"
-content-hash = "79981f756c318bc0372dc95053d31a6f6017044ffda39e6e27b93da4a44e1647"
+content-hash = "8eea45d60f83056d5bdcab3b2f0182eec7f280d3b1b8ee89df75d59d5c5f2d00"
