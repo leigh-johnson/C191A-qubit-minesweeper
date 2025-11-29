@@ -33,7 +33,7 @@ Motivation \& research question
 
 Motivation: Fault-tolerate quantum computation at scale remains a formidable challenge, but we're excited about these recent major advancements:
 
-Decoding with erasure information dramatically increases the surface code error threshold from 0.937\% to 4.15\%, with an estimated 98\% of errors convertible into erasures. \cite{wu_erasure_2022-1}
+Decoding with erasure information dramatically increases the surface code error threshold from 0.937\% to 4.15\%, with an estimated 98\% of errors convertible into erasures. \cite{wu_erasure_2022}
 
 Machine-learned error decoding for quantum processors (surface code) by Bausch et al uses a transformer-based neutral network to decode error data with realistic noise models, including qubit cross-talk and state leakage.
 
@@ -99,7 +99,7 @@ A bias towards erasure-type errors occurs natively in some types of qubits (e.g.
 From: "The benefits and costs of quantum error correction with erasure qubits" (QIP 2025)
 \begin{enumerate}
     \item Can theoretically correct more erasure errors than unknown Pauli errors.
-          We can correct $d-1$ erasure errors compared to $\dfrac{d-1}{2}$ Pauli errors. As a result, we expect logical error rate $P_L$ on the order of $p^{d}$ where $p$ is the physical qubit error rate, compared to $p^{d/2}$ for unknown Pauli errors. \cite{gu_2023}
+          We can correct $d-1$ erasure errors compared to $\dfrac{d-1}{2}$ Pauli errors. As a result, we expect logical error rate $P_L$ on the order of $p^{d}$ where $p$ is the physical qubit error rate, compared to $p^{d/2}$ for unknown Pauli errors. \cite{gu_fault-tolerant_2025}
     \item Higher thresholds: surface code 50\% erasure noise vs. 19\% depolarizing noise.
     \item Dominant noise source can be engineered
 \end{enumerate}
@@ -139,11 +139,32 @@ Challenges from "The benefits and costs of quantum error correction with erasure
 
 \end{enumerate}
 
+\subsection{Surface Code}
+Qauntum error correction (QEC) assumes a piece of quantum information is distributed between many entangled physical qubits, realizing a logical qubit with higher fidelity than its constiuent physical qubits. Any errors affecting individual physical qubits can be detected and corrected with an ensemble of stabilizing codes, based on the diagnostic syndrome of the stabilizer code.
 
+TODO surface code explainer
+TODO Surface code figures
 
+\cite{fowler_surface_2012}
 
+\paragraphsc{Circuit-level Noise Thresholds.}
+If physical qubit error is below a critical noise threshold, the logical error rate should be supressed exponentially as the number of physical qubits per logical qubit is increased. In the surface code, the approximate relation between $d$ code distance corresponding to $2d^2 - 1$ physical qubits per logical qubit, the physical error rate $p$, logical error rate $E_d$, and error rate threshold $p_{thr}$  \cite{acharya_quantum_2025}.
 
-\subsubsection{Formalism}
+\paragraph{Erasure Tolerance and Enhancements}
+
+TODO Thresholds for $p_erase << p$, also some useful background on erasure errors in general: (see: Previous Work on Erasure Errors) \cite{kobayashi_erasure-tolerance_2025}
+
+\begin{align}
+    E_d & \propto \dfrac{p}{p_{thr}}^{(d+1)/2} & \quad \text{[Logical error rate]}
+\end{align}
+
+Therefore when $p << p_{thr}$, the logical error rate is supressed exponentially with code distance. The exponential supression factor $\Lambda$ is approximately the linear relation between $p_{thr}$ and $p$: \cite{acharya_quantum_2025}.
+
+\begin{align}
+    \Lambda & = \dfrac{E_d}{E_{d+1}} \approx  \dfrac{p_{thr}}{p} & \quad \text{[Supression factor]}
+\end{align}
+
+\subsection{Formalism}
 define stabilizer ciruits with erasure channel: \cite{gu_fault-tolerant_2025}
 
 compare w/ surface code having only pauli error channel

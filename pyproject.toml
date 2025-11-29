@@ -12,7 +12,10 @@ dependencies = [
     "pymatching (>=2.3.1,<3.0.0)",
     "sinter (==1.16.dev1761611832)",
     "numpy (==2.2.6)",
-    "mwpf[stim] (>=0.2.12,<0.3.0)",
+    "click (>=8.3.1,<9.0.0)",
+    "tqdm (>=4.67.1,<5.0.0)",
+    "ipywidgets (>=8.1.8,<9.0.0)",
+    "mwpf[stim] @ file:///home/leigh/projects/C191A-qubit-minesweeper/dist/mwpf-0.2.12%2Bfixmemleak1.tar.gz",
 ]
 
 
@@ -21,7 +24,12 @@ requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [dependency-groups]
-dev = ["ipykernel (>=7.0.1,<8.0.0)", "pytest (>=9.0.1,<10.0.0)"]
+dev = [
+    "ipykernel (>=7.0.1,<8.0.0)",
+    "pytest (>=9.0.1,<10.0.0)",
+    "py-spy (>=0.4.1,<0.5.0)",
+    "memray (>=1.19.1,<2.0.0)",
+]
 
 [tool.poetry]
-packages = [{ include = "src" }]
+packages = [{ include = "scripts" }, { include = "util" }]
