@@ -85,7 +85,17 @@ TODO
 The most important thing to mention is that real-world errors are often correlated, so fault-tolerant QC requires correction of correlated noise.
 \cite{wilen_correlated_2021}
 
+
 Cross-talk might also be worth mentioning for completeness.
+
+
+It is common and convenient to assume for general quantum error correcting codes that errors occur independently from each other. This assumption simplifies the decoding process but does not accurately reflect the behavior of the real world. In practice, quantum noise is often correlated. These correlated errors can cause effects not handled by independent-noise models and complicate the decoding process.
+
+	Particularly, in neutral atoms, there exists the chance of cross-talk between atoms when performing two qubit gates. Rydberg blockade is a necessary step to entangle two atoms, but applying the Rydberg excitation laser can unintentionally excite neighboring atoms
+    
+	Minimum Weight Perfect Matching (MWPM), which is traditionally used for surface codes, can only handle pairwise correlations. This means that the decoder fails when a single error involves more than 2 qubits. However, for MWPF, since it changes the MLE problem into an equivalent hypergraph problem, the hypergraph can capture multi-qubit errors through its hyperedges, and thus can effectively represent correlated errors on more than 2 qubits.
+    
+	The existence of correlated errors further motivates the use of MWPF over MWPM, as its hypergraph representation effectively captures correlated errors into its hyperedges, something which MWPM cannot do.
 
 \subsection{Erasure Qubits}
 
@@ -109,7 +119,7 @@ Figure: d=5 surface code with some unknown Pauli error spanning 3 qubits, with s
 
 Figure: d=5 surface code with erasure errors, exact locations known.
 
-\paragraphsc{Challenges.}
+\paragraphsc{Challenges.} (TODO: Add sources, possibly point 4?)
 Challenges from "The benefits and costs of quantum error correction with erasure qubits" (QIP 2025):
 \begin{enumerate}
     \item More physical operations.
@@ -117,6 +127,19 @@ Challenges from "The benefits and costs of quantum error correction with erasure
     \item Midcircuit erasure checks can create correlated noise for neighboring qubits
     \item Tools to simulate and decode erasure circuits are active area of research.
 \end{enumerate}
+
+In a neutral atom, erasure is a phenomenon that can occur due to atoms leaving their optical traps or when atoms enter an energy level that is known but outside of the computational subspace. Unlike Pauli errors, the locations of the erasure errors can be known, but cannot be solved by simply applying a few logic gates. Especially when the atom is lost.
+
+\bigskip
+While erasure errors have a myriad of benefits, they also prove to bring some challenges:
+
+\bigskip
+Erasure errors often require extra physical operations. Erasure checks consist of checking if a qubit is in a known, non-computational subspace, and if it is determined that the atom has experienced an erasure error, then erasure resets will bring qubits who are in a known, non-computational subspace back into a computational space. Whether the atom has been lost, or whether it has entered an invalid energy level will determine how the erasure reset mechanism functions.
+
+	Another difficulty that presents itself with erasure errors is that they can spread through entangling operations as Pauli errors. If a qubit has experienced an erasure error but it has not yet been detected by erasure checks, the error will propagate onto neighboring qubits. What makes this particularly difficult to deal with is this turns the errors from being a known erasure error into correlated unknown errors.
+    
+	In principle, one could perform erasure checks before every single gate operation to prevent the error spreading, but this method is far more expensive. Erasure checks are also prone to adding noise. It is thus necessary to achieve a balance between checking frequently enough to prevent the spread of errors, while also taking into account the cost of checking frequently and the risks it carries. 
+
 
 
 
@@ -160,6 +183,23 @@ TODO
 Describe the decoding problem for Pauli error stabilizer circuits in the surface code. Explain how surface code error syndromes can be framed as a graph traversal problem with detection events as nodes and errors as the weighted edges. The minimum weight perfect matching (MWPM) algorithm can find the most probable set of errors that occurred. Explain why MWPW works for uniformly random Pauli errors, but why it experiences a sharp drop-off in performace for biased (non-identical) noise models.
 
 Describe the decoding problem when 100 of noise channels can be converted to erasure errors (conversion\_ratio=1 in our codebase).  Describe how the Hypergraph Minimum-Weight Parity Factor (MWPF). \cite{wu_minimum-weight_2025}
+
+\bigskip
+
+Minimum Weight Parity Factor (MWPF) provides a hypergraph-based reformulation of the Most Likely Error (MLE) decoding problem. The purpose of MLE is to find the lowest-weight error configuration consistent with a given syndrome. However, the number of error configurations grows exponentially with the number of qubits, making MLE intractable; in fact, the problem is known to be NP-hard.
+
+MWPF maps the MLE problem into a general hypergraph problem, retaining its intractability and NP-hardness. Although the conversion does not solve the NP-hardness	of MLE, the hypergraph conversion allows us to employ methods to approximate a near optimal solution in approximately polynomial time. 
+To employ this conversion efficiently, MWPF uses Hyperblossom, a generalization of the blossom algorithm for Minimum Weight Perfect Matching (MWPM) to a hypergraph equivalent. Hyperblossom is constructed with a primal-dual linear programming (PDLP) framework, which introduces relaxation and transformations to the hypergraph.
+
+	PDLP offers two major advantages. It allows for a certifiable proximity bound, allowing us to quantify how close the approximate solution is to the true minimum-weight parity factor. Second, given certain simple hypergraphs, it can find the exact minimum-weight parity factor solution in polynomial time.
+    
+	Clustering and Relaxing are the methods used to approximate the NP-hardness of the MWPF into something that can be solved in approximately polynomial time. Clustering exploits the locality of the errors by breaking the hypergraph into subgraphs. Some subgraphs, called relaxers, can be solved exactly in polynomial time. The other subgraphs which are not exactly solvable are handled by Singlehair, which assigns edges/variables in a way that’s consistent with the syndrome. As such, combining all the local solutions into one global error estimate. This scales linearly with the number of qubits, so the entire process can be done in polynomial time in the average case.
+    
+	To address the NP-hardness of the hypergraph, MWPF incorporates two techniques: clustering, and relaxation. Clustering exploits the locality of the errors by breaking the hypergraph into smaller subgraphs. Certain subgraphs, called relaxers, can be solved in polynomial time through Hyperblossom due to their simplicity. Subgraphs which cannot be solved exactly are handled using SingleHair, a process which assigns variables and hyperedges in a syndrome consistent manner. Local solutions from each cluster are combined into one global error estimate. Because the process breaks the decoding task into subproblems that scale with the locality of the errors rather than the number of qubits, the overall algorithm scales linearly with the number of qubits and therefore achieves polynomial-time in the average case.
+    
+	MWPF stands out from the rest of the decoders. First, many of these decoders are limited to surface codes. Since we introduce erasure errors, our problem turns into a hypergraph problem which is perfect for MWPF but cannot be handled by other decoders. Second, thanks to PDLP, MWPF offers certifiable proximity bound. Its use of clusters and relaxers achieve an approximate polynomial-time solution to what would otherwise be a NP-hard problem. 
+
+
 
 \section{Metrics}
 
