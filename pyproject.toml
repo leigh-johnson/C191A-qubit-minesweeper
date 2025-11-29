@@ -15,7 +15,7 @@ dependencies = [
     "click (>=8.3.1,<9.0.0)",
     "tqdm (>=4.67.1,<5.0.0)",
     "ipywidgets (>=8.1.8,<9.0.0)",
-    "mwpf @ https://github.com/leigh-johnson/mwpf/releases/download/mwpf-0.2.12%2Bfixmemleak1/mwpf-0.2.12+fixmemleak1.tar.gz",
+    "mwpf[stim] @ https://github.com/leigh-johnson/mwpf/releases/download/mwpf-0.2.12%2Bfixmemleak1/mwpf-0.2.12+fixmemleak1.tar.gz",
 ]
 
 
