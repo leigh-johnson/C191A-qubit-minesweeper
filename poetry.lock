@@ -1670,8 +1670,8 @@ stim = {version = ">=1.14.0", optional = true, markers = "extra == \"stim\""}
 stim = ["frozendict", "frozenlist", "numpy", "sinter (>=1.14.0)", "stim (>=1.14.0)"]
 
 [package.source]
-type = "file"
-url = "dist/mwpf-0.2.12+fixmemleak1.tar.gz"
+type = "url"
+url = "https://github.com/leigh-johnson/mwpf/releases/download/mwpf-0.2.12%2Bfixmemleak1/mwpf-0.2.12+fixmemleak1.tar.gz"
 
 [[package]]
 name = "nest-asyncio"
@@ -3173,4 +3173,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.11,<4"
-content-hash = "8eea45d60f83056d5bdcab3b2f0182eec7f280d3b1b8ee89df75d59d5c5f2d00"
+content-hash = "e757635c28eb1ade656e0d2416d3a6de0c758bfee4cd495054c29f4752ad5b97"
