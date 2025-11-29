@@ -7,6 +7,7 @@
 \usepackage{tikz}
 \usepackage{tabularx}
 \usepackage{caption} % declare a caption type for equations
+\usepackage{subcaption} % For creating subfigures
 \usepackage{booktabs} % midrule, toprule
 \usepackage[version=4]{mhchem} % chem formulas
 \usepackage{braket} % dirac notation
@@ -41,9 +42,12 @@
 \usepackage[hyperfirst=true,nopostdot,toc,section,numberedsection=autolabel,style=list]{glossaries}
 \loadglsentries{refs/glossary}
 
-\usepackage[margin=1in]{geometry}
+\usepackage{multirow}
+
+\usepackage[margin=0.8in]{geometry}
 
 % custom macros
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \newcommand{\paragraphsc}[1]{\paragraph{\scshape #1}}
+
