@@ -6,7 +6,8 @@ from typing import Optional, Dict
 from enum import StrEnum
 
 import sinter
-from mwpf import SinterMWPFDecoder, PanicAction
+from pymatching import __version__ as pymatching_version
+from mwpf import SinterMWPFDecoder, PanicAction, __version__ as mwpf_version
 
 
 class DecoderLib(StrEnum):
@@ -38,14 +39,21 @@ class TaskMetadata:
     circuit: str
     decoder: DecoderLib  # e.g. mwpf or pymatching
     decoder_type: Optional[MWPFSolverType] = None
+    decoder_version: str = ""
     run_id: str = ""
     cluster_node_limit: Optional[int] = None
     p_erase: float = 0.0
+    stim_version: str = stim.__version__
+    sinter_version: str = sinter.__version__
 
     def __post_init__(self):
         self.run_id = hashlib.sha256(
             json.dumps(asdict(self)).encode("utf-8")
         ).hexdigest()
+        if self.decoder is DecoderLib.MWPF:
+            self.decoder_version = mwpf_version
+        elif self.decoder_type is DecoderLib.PYMATCHING:
+            self.decoder_version = pymatching_version
 
 
 @dataclass
