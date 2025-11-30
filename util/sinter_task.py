@@ -96,7 +96,7 @@ def build_custom_decoders(cfg: TaskConfig, with_progress: bool = True):
         panic_action = PanicAction.CATCH
     return {
         f"mwpf__{cfg.run_id}": SinterMWPFDecoder(
-            decoder_type="SolverSerialJointSingleHair",
+            decoder_type=cfg.json_metadata.decoder_type,
             cluster_node_limit=cfg.json_metadata.cluster_node_limit,
             with_progress=with_progress,
             panic_action=panic_action,
