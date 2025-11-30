@@ -87,6 +87,15 @@ The most important thing to mention is that real-world errors are often correlat
 
 Cross-talk might also be worth mentioning for completeness.
 
+\bigskip
+
+It is common and convenient to assume for general quantum error correcting codes that Pauli errors occur independently from each other. This assumption simplifies the decoding process, but does not accurately reflect the behavior of the real world. Experiments show that noise is often correlated through space or time. \cite{wilen_correlated_2021}
+
+\bigskip
+
+	In neutral atoms, there exists the chance of cross-talk between atoms when performing two qubit gates. Rydberg blockade is a necessary step to entangle two atoms, but applying the Rydberg excitation laser can unintentionally excite neighboring atoms. \textbf{CITATION NEEDED}
+
+
 \subsection{Erasure Qubits}
 
 A qubit engineered so the dominant source of errors is from erasures.
@@ -117,6 +126,12 @@ Challenges from "The benefits and costs of quantum error correction with erasure
     \item Midcircuit erasure checks can create correlated noise for neighboring qubits
     \item Tools to simulate and decode erasure circuits are active area of research.
 \end{enumerate}
+
+In a neutral atom, erasure is a phenomenon that can occur due to atoms leaving their optical traps or when atoms enter an energy level that is known but outside of the computational subspace. Unlike Pauli errors, the locations of the erasure errors can be known, but cannot be solved by simply applying a few logic gates. Especially when the atom is lost. \textbf{CITATION NEEDED}
+
+\bigskip
+
+ 	While erasure errors have a myriad of benefits, they also prove to bring some challenges: Erasure errors often require extra physical operations. Erasure checks consist of checking if a qubit is in a known, non-computational subspace, and if it is determined that the atom has experienced an erasure error, then erasure resets will bring qubits who are in a known, non-computational subspace back into a computational space. Whether the atom has been lost, or whether it has entered an invalid energy level will determine how the erasure reset mechanism functions. Another difficulty that presents itself with erasure errors is that they can spread through entangling operations as Pauli errors. If a qubit has experienced an erasure error but it has not yet been detected by erasure checks, the error will propagate onto neighboring qubits. \cite{qip2025_shouzhen_2025}
 
 
 
