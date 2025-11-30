@@ -57,9 +57,6 @@ class TaskConfig:
     verbose: bool = False
 
     def __post_init__(self):
-        self.run_id = hashlib.sha256(
-            json.dumps(asdict(self.json_metadata)).encode("utf-8")
-        ).hexdigest()
         if self.json_metadata.decoder is DecoderLib.MWPF:
             self.custom_decoders = build_custom_decoders(
                 self, with_progress=not self.quiet
@@ -74,7 +71,7 @@ class TaskConfig:
                 circuit=self.circuit,
                 json_metadata=asdict(self.json_metadata),
             )
-        elif self.json_metadata.decoder == DecoderLib.MWPF:
+        elif self.json_metadata.decoder is DecoderLib.MWPF:
             return sinter.Task(
                 circuit=self.circuit,
                 json_metadata=asdict(self.json_metadata),
