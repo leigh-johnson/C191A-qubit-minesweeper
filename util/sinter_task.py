@@ -1,8 +1,8 @@
 import stim
 import hashlib
 import json
-from dataclasses import dataclass, asdict
-from typing import Optional, Dict
+from dataclasses import dataclass, asdict, field
+from typing import Optional, Dict, List
 from enum import StrEnum
 
 import sinter
@@ -11,6 +11,7 @@ from mwpf import SinterMWPFDecoder, PanicAction, __version__ as mwpf_version
 
 
 class DecoderLib(StrEnum):
+    PYMATCHING_CORRELATED = "pymatching_correlated"
     PYMATCHING = "pymatching"
     MWPF = "mwpf"
 
@@ -63,6 +64,7 @@ class TaskConfig:
     custom_decoders: Optional[Dict[str, SinterMWPFDecoder]] = None
     quiet: bool = False
     verbose: bool = False
+    heralded_detector_indices: List[int] = field(default_factory=list)
 
     def __post_init__(self):
         if self.json_metadata.decoder is DecoderLib.MWPF:

@@ -146,24 +146,43 @@ def cli(
     )
 
 
+@click.option(
+    "--enable-correlations",
+    is_flag=True,
+    help="Use a custom PyMatching decoder capable of handling correlated events",
+)
 @click.command()
 @click.pass_context
-def pymatching(ctx):
+def pymatching(ctx, enable_correlations):
     common: CommonOpts = ctx.obj["common"]
-    cfg = CollectTasksConfig(
-        circuit=common.circuit,
-        save_resume_filepath=common.save_resume_filepath,
-        decoder=DecoderLib.PYMATCHING,
-        max_shots=common.max_shots,
-        max_errors=common.max_errors,
-        num_workers=common.num_workers,
-        erasure_conversion_factor=0.0,
-        noise=common.noise,
-        code_distance=common.code_distance,
-        verbose=common.verbose,
-        num_rounds=common.num_rounds,
-        max_batch_size=max_batch_size,
-    )
+    if enable_correlations is True:
+        cfg = CollectTasksConfig(
+            circuit=common.circuit,
+            save_resume_filepath=common.save_resume_filepath,
+            decoder=DecoderLib.PYMATCHING_CORRELATED,
+            max_shots=common.max_shots,
+            max_errors=common.max_errors,
+            num_workers=common.num_workers,
+            erasure_conversion_factor=0.0,
+            noise=common.noise,
+            code_distance=common.code_distance,
+            verbose=common.verbose,
+            num_rounds=common.num_rounds,
+        )
+    else:
+        cfg = CollectTasksConfig(
+            circuit=common.circuit,
+            save_resume_filepath=common.save_resume_filepath,
+            decoder=DecoderLib.PYMATCHING,
+            max_shots=common.max_shots,
+            max_errors=common.max_errors,
+            num_workers=common.num_workers,
+            erasure_conversion_factor=0.0,
+            noise=common.noise,
+            code_distance=common.code_distance,
+            verbose=common.verbose,
+            num_rounds=common.num_rounds,
+        )
     collect_stats(cfg)
     # TODO: write CollectTasksConfig (serialized to JSON) to {save_resume_filepath}vars.json"
 
