@@ -118,6 +118,38 @@ Figure: d=5 surface code with some unknown Pauli error spanning 3 qubits, with s
 
 Figure: d=5 surface code with erasure errors, exact locations known.
 
+\bigskip
+
+For Pauli errors, the decoder must infer where the error has occurred based on the specific stabilizers of the code. 
+For erasure errors however, they provide the advantage of knowing exactly where the error has occurred, 
+rather than guessing which qubit was affected.
+
+\medskip
+
+This small advantage allows the maximum number of errors that can be corrected to increase:
+\[
+\frac{d - 1}{2} \quad \text{(for surface codes with Pauli errors)}
+\qquad \longrightarrow \qquad
+d - 1 \quad \text{(for surface codes with erasure errors)}.
+\]
+
+\medskip
+
+As a result, we can expect the logical error rate for erasure errors to be improved, where the logical error rate 
+for Pauli errors is in the order of \(p^d\), and for erasure errors the logical error rate would be on the scale of \(p^{d/2}\).
+
+\medskip
+
+Another consequence of the higher correction rate is the noise thresholds. Surface codes can accept up to 19\% depolarizing noise. 
+With erasure errors, the threshold increases to 50\%.
+
+\medskip
+
+Most platforms (neutral atoms, trapped ions, NV centers, photonic qubits, etc.) can either naturally produce erasures 
+or can convert unknown errors into erasures through a platform-specific technique. Because many hardwares naturally exhibit erasures, 
+the higher erasure thresholds are practically relevant. \cite{gu_fault-tolerant_2025}
+
+
 \paragraphsc{Challenges.}
 Challenges from "The benefits and costs of quantum error correction with erasure qubits" (QIP 2025):
 \begin{enumerate}
@@ -127,7 +159,7 @@ Challenges from "The benefits and costs of quantum error correction with erasure
     \item Tools to simulate and decode erasure circuits are active area of research.
 \end{enumerate}
 
-In a neutral atom, erasure is a phenomenon that can occur due to atoms leaving their optical traps or when atoms enter an energy level that is known but outside of the computational subspace. Unlike Pauli errors, the locations of the erasure errors can be known, but cannot be solved by simply applying a few logic gates. Especially when the atom is lost. \textbf{CITATION NEEDED}
+In a neutral atom, leakage is a phenomenon that can occur due to atoms leaving their optical traps or when atoms enter an energy level that is known but outside of the computational subspace. If a system has a measurement method to detect whether a leakage happened and where, the leakage error becomes an erasure error. Unlike Pauli errors, the locations of the erasure errors can be known, but cannot be solved by simply applying a few logic gates. Especially when the atom is lost. \textbf{CITATION NEEDED}
 
 \bigskip
 
