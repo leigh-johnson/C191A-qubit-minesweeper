@@ -174,5 +174,5 @@ def collect_stats(cfg: CollectTasksConfig) -> List[sinter.TaskStats]:
         max_errors=cfg.max_errors,
         save_resume_filepath=cfg.save_resume_filepath,
         max_batch_size=cfg.max_batch_size,
-        start_batch_size=1,
+        max_batch_seconds=60,
     )
