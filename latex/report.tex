@@ -87,11 +87,31 @@ The most important thing to mention is that real-world errors are often correlat
 
 Cross-talk might also be worth mentioning for completeness.
 
+\bigskip
+
+It is common and convenient to assume for general quantum error correcting codes that Pauli errors occur independently from each other. This assumption simplifies the decoding process, but does not accurately reflect the behavior of the real world. Experiments show that noise is often correlated through space or time in every platform. Thus, the correction of correlated errors is necessary to achieve a fault-tolerant quantum computer. \cite{wilen_correlated_2021}
+
+\bigskip
+
+	In neutral atoms, there exists the chance of cross-talk between atoms when performing two qubit gates. Rydberg blockade is a necessary step to entangle two atoms, but applying the Rydberg excitation laser can unintentionally excite neighboring atoms. \textbf{CITATION NEEDED}
+
+    \bigskip
+
+    For superconducting transmon qubits, experiments have shown that the logical error rate can be reduced by increasing the code size of the surface code. This was done through the use of turnable couplers, which increase the fidelity of two qubit gates and prevent unwanted interaction. However, adding couplers introduces leakage errors. This is because during two qubit gates, couplers may gain extra population that stays there for a period of time. The extra population introduces time-corrolated errors, because it will affect the next gate operation. Furthermore, the extra population within the couplers may spread to other couplers, leading to space-corrolated errors. \cite{yang_coupler-assisted_2024}
+
+
 \subsection{Erasure Qubits}
 
 A qubit engineered so the dominant source of errors is from erasures.
 
 A bias towards erasure-type errors occurs natively in some types of qubits (e.g. photons) or can be engineered by converting leakage errors to erasures (e.g. with LDUs in superconducting qubits).
+
+\bigskip
+
+Erasure qubits are qubits that are engineered so that the dominant error channel is erased. This means that the system can detect when and where the error happened. Some platforms exhibit a natural bias towards erasure, such as photons, which makes it easier to create erasure qubits. Other platforms however do not have a native erasure bias, but can be engineered to create one. For instance, by converting leakage errors into erasure errors when an atom is lost. \textbf{CITATION NEEDED}
+
+For more information on how erasure conversion works for neutral atoms, refer to the following papers: \cite{thompson_erasure_2022} \cite{baranes_leveraging_2025} For superconducting qubits, refer to the following papers: \cite{gu_optimizing_2024} \cite{gu_fault-tolerant_2025}
+
 
 \subsubsection{Advantages, Challenges of Erasure Errors}
 
@@ -109,6 +129,38 @@ Figure: d=5 surface code with some unknown Pauli error spanning 3 qubits, with s
 
 Figure: d=5 surface code with erasure errors, exact locations known.
 
+\bigskip
+
+For Pauli errors, the decoder must infer where the error has occurred based on the specific stabilizers of the code. 
+For erasure errors however, they provide the advantage of knowing exactly where the error has occurred, 
+rather than guessing which qubit was affected.
+
+\medskip
+
+This small advantage allows the maximum number of errors that can be corrected to increase:
+\[
+\frac{d - 1}{2} \quad \text{(for surface codes with Pauli errors)}
+\qquad \longrightarrow \qquad
+d - 1 \quad \text{(for surface codes with erasure errors)}.
+\]
+
+\medskip
+
+As a result, we can expect the logical error rate for erasure errors to be improved, where the logical error rate 
+for Pauli errors is in the order of \(p^d\), and for erasure errors the logical error rate would be on the scale of \(p^{d/2}\).
+
+\medskip
+
+Another consequence of the higher correction rate is the noise thresholds. Surface codes can accept up to 19\% depolarizing noise. 
+With erasure errors, the threshold increases to 50\%.
+
+\medskip
+
+Most platforms (neutral atoms, trapped ions, NV centers, photonic qubits, etc.) can either naturally produce erasures 
+or can convert unknown errors into erasures through a platform-specific technique. Because many hardwares naturally exhibit erasures, 
+the higher erasure thresholds are practically relevant. \cite{gu_fault-tolerant_2025}
+
+
 \paragraphsc{Challenges.}
 Challenges from "The benefits and costs of quantum error correction with erasure qubits" (QIP 2025):
 \begin{enumerate}
@@ -117,6 +169,10 @@ Challenges from "The benefits and costs of quantum error correction with erasure
     \item Midcircuit erasure checks can create correlated noise for neighboring qubits
     \item Tools to simulate and decode erasure circuits are active area of research.
 \end{enumerate}
+
+\bigskip
+
+ 	While erasure errors have a myriad of benefits, they also prove to bring some challenges: Erasure errors often require extra physical operations. Erasure checks consist of checking if a qubit is in a known, non-computational subspace, and if it is determined that the atom has experienced an erasure error, then erasure resets will bring qubits who are in a known, non-computational subspace back into a computational space. Whether the atom has been lost, or whether it has entered an invalid energy level will determine how the erasure reset mechanism functions. Another difficulty that presents itself with erasure errors is that they can spread through entangling operations as Pauli errors. If a qubit has experienced an erasure error but it has not yet been detected by erasure checks, the error will propagate onto neighboring qubits. \cite{qip2025_shouzhen_2025}
 
 
 
@@ -179,6 +235,30 @@ TODO
 Describe the decoding problem for Pauli error stabilizer circuits in the surface code. Explain how surface code error syndromes can be framed as a graph traversal problem with detection events as nodes and errors as the weighted edges. The minimum weight perfect matching (MWPM) algorithm can find the most probable set of errors that occurred. Explain why MWPW works for uniformly random Pauli errors, but why it experiences a sharp drop-off in performace for biased (non-identical) noise models.
 
 Describe the decoding problem when 100 of noise channels can be converted to erasure errors (conversion\_ratio=1 in our codebase).  Describe how the Hypergraph Minimum-Weight Parity Factor (MWPF). \cite{wu_minimum-weight_2025}
+
+A hypergraph can be simplified to a normal graph if every hyperedge is connected to two vertices. In this particular case, the most likely error (MLE) problem can be reduced to a minimum-weight perfect matching (MWPM) problem. Through the blossom algorithm, the MWPM decode can solve the reformulation of MLE problems in polynomial time.
+
+The MWPM problem is a simple graph which is built using only the defect vertices, which correspond to qubits that flipped according to the syndrome. Every pair of defects is connected by an edge. Each of these edges are given a weight, which corresponds to the cost of the smallest error path that could connect the two defects connected to that edge. In this way, MWPM finds out which error was more likely to occur. \cite{wu_minimum-weight_2025}
+
+However, when we discard the assumption that uniform Pauli-errors occur, and instead the noise model used is biased towards a particular type of error, MWPM will experience a sharp drop-off in performance. MWPM does not account for bias by default. Since MWPJM pairs defects based on the shortest path / minimum weight, the most likely error in a biased noise model is not necessarily the shortest path. 
+
+As an example, if Z errors are 100x more likely to occur, and MWPM has the choice between two paths, one with five Z errors in a row, and one X error in the other, it will incorrectly pick the X error as the most likely error, since MWPM has no information about the error configuration.\textbf{Unsure whether to add citations to this}
+
+\bigskip
+
+
+Minimum Weight Parity Factor (MWPF) provides a hypergraph-based reformulation of the Most Likely Error (MLE) decoding problem. The purpose of MLE is to find the lowest-weight error configuration consistent with a given syndrome. However, the number of error configurations grows exponentially with the number of qubits, making MLE intractable; in fact, the problem is known to be NP-hard.
+
+MWPF maps the MLE problem into a general hypergraph problem, retaining its intractability and NP-hardness. Although the conversion does not solve the NP-hardness	of MLE, the hypergraph conversion allows us to employ methods to approximate a near optimal solution in approximately polynomial time. 
+
+To employ this conversion efficiently, MWPF uses Hyperblossom, a generalization of the blossom algorithm for Minimum Weight Perfect Matching (MWPM) to a hypergraph equivalent. Hyperblossom is constructed with a primal-dual linear programming (PDLP) framework, which introduces relaxation and transformations to the hypergraph.
+
+	PDLP offers two major advantages. It allows for a certifiable proximity bound, allowing one to quantify how close the approximate solution is to the true minimum-weight parity factor. Second, given certain simple hypergraphs, it can find the exact minimum-weight parity factor solution in polynomial time.
+    
+	To address the NP-hardness of the hypergraph, MWPF incorporates two techniques: clustering, and relaxation. Clustering exploits the locality of the errors by breaking the hypergraph into smaller subgraphs. Certain subgraphs, called relaxers, can be solved in polynomial time through Hyperblossom due to their simplicity. Subgraphs which cannot be solved exactly are handled using SingleHair, a process which assigns variables and hyperedges in a syndrome consistent manner. Local solutions from each cluster are combined into one global error estimate. Because the process breaks the decoding task into subproblems that scale with the locality of the errors rather than the number of qubits, the overall algorithm scales linearly with qubit number, achieving polynomial-time performance on average.\cite{wu_minimum-weight_2025}
+
+
+
 
 \section{Methods \& Results}
 
