@@ -320,6 +320,8 @@ def analyze_erasures(
 
 class HeraldedEraseDecoder(sinter.Decoder):
 
+    __version__ = "0.0.1-dev1"
+
     def __init__(self, circuit: stim.Circuit, *, enable_correlations: bool = True):
         self._circuit = circuit
         self._enable_correlations = enable_correlations

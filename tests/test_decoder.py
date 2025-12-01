@@ -23,7 +23,12 @@ def make_rotated_memory_task(d: int = 5, p: float = 0.01) -> TaskConfig:
         before_measure_flip_probability=p,
     )
     meta = SimpleNamespace(
-        d=d, p=p, label="rotated_memory_x", decoder=DecoderLib.PYMATCHING_CORRELATED
+        d=d,
+        p=p,
+        label="rotated_memory_x",
+        decoder=DecoderLib.PYMATCHING_CORRELATED,
+        decoder_type=None,
+        cluster_node_limit=None,
     )
     return TaskConfig(circuit=circuit, json_metadata=meta, quiet=False)
 

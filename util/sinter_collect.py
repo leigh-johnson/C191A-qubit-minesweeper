@@ -10,7 +10,6 @@ from datetime import date
 
 import sinter
 import stim
-from tqdm import tqdm
 from tqdm.contrib.concurrent import process_map
 
 from util.erasure_converter import (
@@ -127,13 +126,15 @@ def build_task_config(params: Tuple[int, int, CollectTasksConfig]):
         verbose=cfg.verbose,
     )
     if cfg.erasure_conversion_factor > 0:
-        if cfg.decoder is not DecoderLib.MWPF:
-            raise NotImplemented(
-                f"MWPF decoder is required for nonzero erasure_conversion_factor"
+        if cfg.erasure_conversion_factor > 0:
+            if cfg.decoder is DecoderLib.MWPF:
+                task_config = convert_circuit_errors_to_erasures_v1(
+                    task_config, cfg.erasure_conversion_factor
+                )
+        elif cfg.decoder is DecoderLib.PYMATCHING_CORRELATED:
+            task_config = convert_task_config_to_erasures(
+                task_config, cfg.erasure_conversion_factor
             )
-        task_config = convert_circuit_errors_to_erasures(
-            task_config, cfg.erasure_conversion_factor
-        )
     task = task_config.to_task()
     return (task_config, task)
 

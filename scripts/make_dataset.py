@@ -52,7 +52,7 @@ def common_options(f):
         "code_distance",
         type=int,
         multiple=True,
-        default=(3, 5, 7, 9, 11, 13, 15),
+        default=(3, 5, 7, 9, 11, 13),
         show_default=True,
         help="Repeatable. Example: --code-distance 3 --code-distance 5",
     )(f)
