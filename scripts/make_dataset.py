@@ -158,7 +158,7 @@ def pymatching(ctx, erasure_conversion_factor):
     common: CommonOpts = ctx.obj["common"]
     assert erasure_conversion_factor >= 0 and erasure_conversion_factor <= 1
     if erasure_conversion_factor != 0.0 and erasure_conversion_factor != 1.0:
-        raise NotImplemented
+        raise NotImplementedError
     if erasure_conversion_factor == 0:
         decoder = DecoderLib.PYMATCHING
     else:
@@ -204,8 +204,8 @@ def pymatching(ctx, erasure_conversion_factor):
 def mwpf(ctx, cluster_node_limit, erasure_conversion_factor, solver):
     common: CommonOpts = ctx.obj["common"]
     assert erasure_conversion_factor >= 0 and erasure_conversion_factor <= 1
-    if erasure_conversion_factor != 0 or erasure_conversion_factor != 1:
-        raise NotImplemented
+    if erasure_conversion_factor != 0 and erasure_conversion_factor != 1:
+        raise NotImplementedError
     cfg = CollectTasksConfig(
         circuit=common.circuit,
         save_resume_filepath=common.save_resume_filepath,
