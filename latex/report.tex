@@ -223,85 +223,161 @@ In the cases where $p_e$ is zero (no erasure conversion is performed), we decode
 TODO - additionally, we decode using MWPF when $p_e=0$ as an ablation study.
 
 In the cases where $p_e$ is nonzero, we TODO
-\begin{table}[ht]
-    \begin{tabularx}{\textwidth}{|X|l|l|l|l|}
-        \hline
-        \textbf{ECC}                                      & \textbf{Decoding Scheme} & \textbf{$p_{thr}$} & \textbf{$p_e$} & \textbf{Results}                   \\ \hline
-        \multirow{4}{20em}{Rotated surface code, X basis} & MWPM                     & 0.57 - 0.78        & 0              & \autoref{fig:1a}, \autoref{fig:1b} \\
-                                                          & MWPM                     & 0.57 - 0.78        & 0              & \autoref{fig:1a}, \autoref{fig:1b} \\
-                                                          & MWPF                     & 0.62 - 0.75       & 0              & \autoref{fig:1c}, \autoref{fig:1d} \\
-                                                          & Hypergraph MWPF          & 2.70 - 3.02        & 1              & \autoref{fig:1e}, \autoref{fig:1f} \\ \hline
 
+
+
+\subsection{Experiments}
+
+\paragraphsc{Experiment 1: Minimum-weight perfect matching baseline.} \label{para:experiment1}
+TODO
+
+\paragraphsc{Experiment 2: Minimum-weight parity factor baseline } \label{para:experiment2}
+TODO
+
+\paragraphsc{Experiment 3: Erasure-aware minimum-weight parity factor baseline } \label{para:experiment3}
+TODO
+
+\paragraphsc{Experiment 4: Minimum-weight perfect matching baseline } \label{para:experiment4}
+TODO
+
+
+\begin{table}[hb]
+    \hspace{-2em}
+    \begin{tabularx}{1.1\textwidth}{|l|X|p{9em}|p{2em}|l|}
+        \hline
+        \textbf{Decoding Scheme} & \textbf{Monte Carlo Experiment Description} & \textbf{Parameter Sweep}                                       & \textbf{$p_{thr}$} & \textbf{Results}                       \\ \hline
+        MWPM baseline            & \nameref{para:experiment1}                  & $d \in \set{3, 5, 7, 9, 11}$, $p \in [0.003, 0.02]$, $p_e=0.0$ & 0.57 - 0.78        & \autoref{fig:pymathing-pthresh}        \\ \hline
+        MWPF baseline            & \nameref{para:experiment2}                  & $d \in \set{3, 5, 7, 9, 11}$, $p \in [0.003, 0.02]$, $p_e=0.0$ & 0.62 - 0.75        & \autoref{fig:mwpf-pthresh}             \\ \hline
+        Hypergraph MWPF          & \nameref{para:experiment3}                  & $d \in \set{3, 5, 7, 9, 11}$, $p \in [0.003, 0.06]$, $p_e=1.0$ & 2.70 - 3.02        & \autoref{fig:mwpf-pthresh-erase}       \\ \hline
+        MWPM with re-weighting   & \nameref{para:experiment4}                  & $d \in \set{3, 5, 7, 9, 11}$, $p \in [0.003, 0.06]$, $p_e=1.0$ & 0.81 - 0.96        & \autoref{fig:pymatching-pthresh-erase} \\ \hline
     \end{tabularx}
-    \caption{Summary of error thresholds $p_{thr}$ for various error-correcting codes (ECC), syndrome decoding schemes, and erasure conversion factor $p_e$.}
+    \caption{Summary of experimental setups used to evaluate the impact of erasure conversion $p_e$ and correlated vs. uncorrelated decoding schemes on the surface code error threshold $p_{thr}$.}
     \label{tab:1}
 \end{table}
 
 % expand page geometry so figures take up most white space
 
 \newpage
-\newgeometry{left=1cm,bottom=2cm,right=1cm,top=1cm}
-\vspace{-30em} % fix caption cut-off
-\vspace{-30em} % fix caption cut-off
 \begin{figure}[H]
     \centering
     \begin{subfigure}[b]{\linewidth}
+        \centering
         \caption{}
-        \includegraphics[width=\linewidth, height=0.28\textheight, keepaspectratio]{fig1_pymatching_threshold.png}
-        \label{fig:1a}
+        \includegraphics[width=\linewidth, height=0.4\textheight, keepaspectratio]{fig1_pymatching_threshold.png}
+        \label{fig:pymatching-pthresh-a}
     \end{subfigure}
     \begin{subfigure}[b]{\linewidth}
+        \centering
         \caption{}
-        \includegraphics[width=\linewidth, height=0.28\textheight, keepaspectratio]{fig1_pymatching_threshold_zoomed.png}
-        \label{fig:1b}
+        \includegraphics[width=\linewidth, height=0.4\textheight, keepaspectratio]{fig1_pymatching_threshold_zoomed.png}
+        \label{fig:pymatching-pthresh-b}
     \end{subfigure}
-    \caption{\textbf{Circuit-level error thresholds}. Comparison of logical error rate $P_L$ with physical qubit error rate $p$, for various syndrome decoding schemes and noise regimes. The lower and upper bounds of the threshold region $p_{thrs}$ is estimated from the d=3,5 and d=9,11 crossings respectively.
-        \textbf{(a)(b)} Pure depolarizing noise, decoded with Minimum Weight Pefect Matching (PyMatching) with $p_{thrs}$ between $0.57\%$ and  $0.78\%$. \textbf{(c)(d)} Pure depolarizing noise, decoded with Minimum Weight Parity Factor, with with $p_{thrs}$ between $0.62\%$ and  $0.71\%$. \textbf{(e)(f)}100\% of depolarizing noise converted to erasure errors, with $p_{thrs}$ between $2.7\%$ and  $3.02\%$.}
-    \label{fig:1_thresholds}
+    \caption{\textbf{Baseline circuit-level error threshold: minimum-weight perfect matching}.Comparison of logical error rate $P_L$ with physical qubit error rate $p$ modeled by uniform Pauli noise. The lower and upper bounds of the threshold region $p_{thrs}$ between 0.57\% and 0.78\% is estimated from the d=3,5 and d=9,11 crossings. \\ See: \nameref{para:experiment1}.}
+    \label{fig:pymathing-pthresh}
+
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{\linewidth}
+        \centering
+        \caption{}
+        \includegraphics[width=\linewidth, height=0.4\textheight, keepaspectratio]{fig1_mwpf_threshold_erasure=0.png}
+        \label{fig:mwpf-pthresh-a}
+    \end{subfigure}
+    \begin{subfigure}[b]{\linewidth}
+        \centering
+        \caption{}
+        \includegraphics[width=\linewidth, height=0.4\textheight, keepaspectratio]{fig1_mwpf_threshold_erasure=0_zoomed.png}
+        \label{fig:mwpf-pthresh-b}
+    \end{subfigure}
+    \caption{\textbf{Baseline circuit-level error threshold: minimum-weight parity factor.} Comparison of logical error rate $P_L$ with physical qubit error rate $p$ modeled by uniform Pauli noise. The lower and upper bounds of the threshold region $p_{thrs}$ between 0.62\% and 0.75\% is estimated from the d=3,5 and d=9,11 crossings. \\ See: \nameref{para:experiment2}.}
+    \label{fig:mwpf-pthresh}
 \end{figure}
 
 
 \begin{figure}[H]
     \centering
-    \begin{subfigure}[b]{0.49\linewidth}
+    \begin{subfigure}[b]{\linewidth}
+        \centering
         \caption{}
-        \includegraphics[width=\linewidth, height=0.28\textheight, keepaspectratio]{fig1_pymatching_threshold.png}
-        \label{fig:1a}
+        \includegraphics[width=\linewidth, height=0.4\textheight, keepaspectratio]{fig1_mwpf_threshold_erasure=1.png}
+        \label{fig:mwpf-pthresh-erase-a}
     \end{subfigure}
-    \begin{subfigure}[b]{0.49\linewidth}
+    \begin{subfigure}[b]{\linewidth}
+        \centering
         \caption{}
-        \includegraphics[width=\linewidth, height=0.28\textheight, keepaspectratio]{fig1_pymatching_threshold_zoomed.png}
-        \label{fig:1b}
+        \includegraphics[width=\linewidth, height=0.4\textheight, keepaspectratio]{fig1_mwpf_threshold_erasure=1_zoomed.png}
+        \label{fig:mwpf-pthresh-erase-b}
     \end{subfigure}
-    \begin{subfigure}[b]{0.49\linewidth}
-        \caption{}
-        \includegraphics[width=\linewidth, height=0.28\textheight, keepaspectratio]{fig1_mwpf_threshold_erasure=0.png}
-        \label{fig:1c}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.49\linewidth}
-        \caption{}
-        \includegraphics[width=\linewidth, height=0.28\textheight, keepaspectratio]{fig1_mwpf_threshold_erasure=0_zoomed.png}
-        \label{fig:1d}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.49\linewidth}
-        \caption{}
-        \includegraphics[width=\linewidth, height=0.28\textheight, keepaspectratio]{fig1_mwpf_threshold_erasure=1.png}
-        \label{fig:1e}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.49\linewidth}
-        \caption{}
-        \includegraphics[width=\linewidth, height=0.28\textheight, keepaspectratio]{fig1_mwpf_threshold_erasure=1_zoomed.png}
-        \label{fig:1f}
-    \end{subfigure}
-    \caption{\textbf{Circuit-level error thresholds}. Comparison of logical error rate $P_L$ with physical qubit error rate $p$, for various syndrome decoding schemes and noise regimes. The lower and upper bounds of the threshold region $p_{thrs}$ is estimated from the d=3,5 and d=9,11 crossings respectively.
-        \textbf{(a)(b)} Pure depolarizing noise, decoded with Minimum Weight Pefect Matching (PyMatching) with $p_{thrs}$ between $0.57\%$ and  $0.78\%$. \textbf{(c)(d)} Pure depolarizing noise, decoded with Minimum Weight Parity Factor, with with $p_{thrs}$ between $0.62\%$ and  $0.71\%$. \textbf{(e)(f)}100\% of depolarizing noise converted to erasure errors, with $p_{thrs}$ between $2.7\%$ and  $3.02\%$.}
-    \label{fig:1_thresholds}
+    \caption{\textbf{Circuit-level error threshold: hypergraph minimum-weight parity factor decoding for errors correlated to erasure events $p_e$. } Comparison of logical error rate $P_L$ with physical qubit error rate $p$ converted to erasure errors. Following  The lower and upper bounds of the threshold region $p_{thrs}$ between 2.70\% and 3.02\% is estimated from the d=3,5 and d=9,11 crossings. \\ See: \nameref{para:experiment3}.}
+    \label{fig:mwpf-pthresh-erase}
 \end{figure}
 
 \begin{figure}[H]
-    \includegraphics[width=\linewidth,height=0.28\textheight, keepaspectratio]{fig2_survival_code_distance.png}
+    \centering
+    \begin{subfigure}[b]{\linewidth}
+        \centering
+        \caption{}
+        \includegraphics[width=\linewidth, height=0.4\textheight, keepaspectratio]{fig1_pymatching_custom_erasure=1.png}
+        \label{fig:mwpf-pymatching-erase-a}
+    \end{subfigure}
+    \begin{subfigure}[b]{\linewidth}
+        \centering
+        \caption{}
+        \includegraphics[width=\linewidth, height=0.4\textheight, keepaspectratio]{fig1_pymatching_custom_erasure=1_zoomed.png}
+        \label{fig:mwpf-pymatching-erase-b}
+    \end{subfigure}
+    \caption{\textbf{Circuit-level error threshold: minimum-weight perfect matching with edge re-weighting for errors correlated to erasure events $p_e$. } Comparison of logical error rate $P_L$ with physical qubit error rate $p$ converted to erasure errors. Following  The lower and upper bounds of the threshold region $p_{thrs}$ between 0.57\% and 0.78\% is estimated from the d=3,5 and d=9,11 crossings. \\ See: \nameref{para:experiment4}.}
+    \label{fig:pymatching-pthresh-erase}
+\end{figure}
+
+% \begin{figure}[H]
+%     \centering
+%     \begin{subfigure}[b]{0.49\linewidth}
+%         \caption{}
+%         \includegraphics[width=\linewidth, height=0.28\textheight, keepaspectratio]{fig1_pymatching_threshold.png}
+%         \label{fig:1a}
+%     \end{subfigure}
+%     \begin{subfigure}[b]{0.49\linewidth}
+%         \caption{}
+%         \includegraphics[width=\linewidth, height=0.28\textheight, keepaspectratio]{fig1_pymatching_threshold_zoomed.png}
+%         \label{fig:1b}
+%     \end{subfigure}
+%     \begin{subfigure}[b]{0.49\linewidth}
+%         \caption{}
+%         \includegraphics[width=\linewidth, height=0.28\textheight, keepaspectratio]{fig1_mwpf_threshold_erasure=0.png}
+%         \label{fig:1c}
+%     \end{subfigure}
+%     \begin{subfigure}[b]{0.49\linewidth}
+%         \caption{}
+%         \includegraphics[width=\linewidth, height=0.28\textheight, keepaspectratio]{fig1_mwpf_threshold_erasure=0_zoomed.png}
+%         \label{fig:1d}
+%     \end{subfigure}
+%     \begin{subfigure}[b]{0.49\linewidth}
+%         \caption{}
+%         \includegraphics[width=\linewidth, height=0.28\textheight, keepaspectratio]{fig1_mwpf_threshold_erasure=1.png}
+%         \label{fig:1e}
+%     \end{subfigure}
+%     \begin{subfigure}[b]{0.49\linewidth}
+%         \caption{}
+%         \includegraphics[width=\linewidth, height=0.28\textheight, keepaspectratio]{fig1_mwpf_threshold_erasure=1_zoomed.png}
+%         \label{fig:1f}
+%     \end{subfigure}
+%     \caption{\textbf{Circuit-level error thresholds}. Comparison of logical error rate $P_L$ with physical qubit error rate $p$, for various syndrome decoding schemes and noise regimes. The lower and upper bounds of the threshold region $p_{thrs}$ is estimated from the d=3,5 and d=9,11 crossings respectively.
+%         \textbf{(a)(b)} Pure depolarizing noise, decoded with Minimum Weight Pefect Matching (PyMatching) with $p_{thrs}$ between $0.57\%$ and  $0.78\%$. \textbf{(c)(d)} Pure depolarizing noise, decoded with Minimum Weight Parity Factor, with with $p_{thrs}$ between $0.62\%$ and  $0.71\%$. \textbf{(e)(f)}100\% of depolarizing noise converted to erasure errors, with $p_{thrs}$ between $2.7\%$ and  $3.02\%$.}
+%     \label{fig:1_thresholds}
+% \end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth,height=0.45\textheight, keepaspectratio]{fig2_survival_code_distance.png}
     \label{fig:2}
-    \caption{Among below-threshold ($p_{thr}=0.0075$) samples, the minimum code distance $d \approx 15$ is projected to survive one trillion rounds with full erasure conversion $(p_e=1)$, an 80\% decrease from $d \approx 75$ without erasurure conversion $(p_e=0)$.  }
+    \caption{Among below-threshold ($p_{thr}=0.01$) samples,
+        the minimum code distance $d \approx 17$ is projected to survive one trillion rounds with full erasure conversion $(p_e=1)$ and Hypergraph MWPF syndrome decoding (green),
+        and $\approx 72\%$ decrease from $d \approx 60$ with erasure-aware edge re-weighting with MWPM (orange),
+        and $\approx 83\%$ decrease  from $d \approx 100$ with MWPM in a pure Pauli noise regime with no erasures.
+    }
 \end{figure}
 
 
