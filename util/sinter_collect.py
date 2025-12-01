@@ -74,7 +74,7 @@ class CollectTasksConfig:
             packed_args,
             max_workers=self.num_workers,
             disable=self.quiet,
-            desc="Preparting sinter.Task array",
+            desc="Preparing sinter.Task array",
             total=len(parameters),
         )
         for result in results:
