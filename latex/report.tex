@@ -228,7 +228,7 @@ In the cases where $p_e$ is nonzero, we TODO
         \hline
         \textbf{ECC}                                      & \textbf{Decoding Scheme} & \textbf{$p_{thr}$} & \textbf{$p_e$} & \textbf{Results}                   \\ \hline
         \multirow{4}{20em}{Rotated surface code, X basis} & MWPM                     & 0.57 - 0.78        & 0              & \autoref{fig:1a}, \autoref{fig:1b} \\
-         & MWPM                     & 0.57 - 0.78        & 0              & \autoref{fig:1a}, \autoref{fig:1b} \\
+                                                          & MWPM                     & 0.57 - 0.78        & 0              & \autoref{fig:1a}, \autoref{fig:1b} \\
                                                           & MWPF                     & 0.62 - 0.75       & 0              & \autoref{fig:1c}, \autoref{fig:1d} \\
                                                           & Hypergraph MWPF          & 2.70 - 3.02        & 1              & \autoref{fig:1e}, \autoref{fig:1f} \\ \hline
 
@@ -238,9 +238,29 @@ In the cases where $p_e$ is nonzero, we TODO
 \end{table}
 
 % expand page geometry so figures take up most white space
+
 \newpage
 \newgeometry{left=1cm,bottom=2cm,right=1cm,top=1cm}
 \vspace{-30em} % fix caption cut-off
+\vspace{-30em} % fix caption cut-off
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{\linewidth}
+        \caption{}
+        \includegraphics[width=\linewidth, height=0.28\textheight, keepaspectratio]{fig1_pymatching_threshold.png}
+        \label{fig:1a}
+    \end{subfigure}
+    \begin{subfigure}[b]{\linewidth}
+        \caption{}
+        \includegraphics[width=\linewidth, height=0.28\textheight, keepaspectratio]{fig1_pymatching_threshold_zoomed.png}
+        \label{fig:1b}
+    \end{subfigure}
+    \caption{\textbf{Circuit-level error thresholds}. Comparison of logical error rate $P_L$ with physical qubit error rate $p$, for various syndrome decoding schemes and noise regimes. The lower and upper bounds of the threshold region $p_{thrs}$ is estimated from the d=3,5 and d=9,11 crossings respectively.
+        \textbf{(a)(b)} Pure depolarizing noise, decoded with Minimum Weight Pefect Matching (PyMatching) with $p_{thrs}$ between $0.57\%$ and  $0.78\%$. \textbf{(c)(d)} Pure depolarizing noise, decoded with Minimum Weight Parity Factor, with with $p_{thrs}$ between $0.62\%$ and  $0.71\%$. \textbf{(e)(f)}100\% of depolarizing noise converted to erasure errors, with $p_{thrs}$ between $2.7\%$ and  $3.02\%$.}
+    \label{fig:1_thresholds}
+\end{figure}
+
+
 \begin{figure}[H]
     \centering
     \begin{subfigure}[b]{0.49\linewidth}
