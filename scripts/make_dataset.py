@@ -21,9 +21,18 @@ class CommonOpts:
     num_workers: int = os.cpu_count() - 2
     num_rounds: Optional[int] = None
     verbose: bool = False
+    max_batch_size: int = 1024
 
 
 def common_options(f):
+    f = click.option(
+        "--max-batch-size",
+        "max_batch_size",
+        type=int,
+        default=1024,
+        show_default=True,
+        help="Max sinter batch size",
+    )(f)
     f = click.option(
         "--num-workers",
         "num_workers",
@@ -109,6 +118,7 @@ def common_options(f):
 @click.pass_context
 def cli(
     ctx,
+    max_batch_size,
     num_workers,
     num_rounds,
     circuit,
@@ -132,6 +142,7 @@ def cli(
         num_workers=num_workers,
         num_rounds=num_rounds,
         verbose=verbose,
+        max_batch_size=max_batch_size,
     )
 
 
@@ -151,13 +162,14 @@ def pymatching(ctx):
         code_distance=common.code_distance,
         verbose=common.verbose,
         num_rounds=common.num_rounds,
+        max_batch_size=max_batch_size,
     )
     collect_stats(cfg)
     # TODO: write CollectTasksConfig (serialized to JSON) to {save_resume_filepath}vars.json"
 
 
 @click.option(
-    "--cluster_node_limit",
+    "--cluster-node-limit",
     default=50,
     show_default=True,
     help="Hyperblossom decomposes a hypergraph problem into smaller, localized clusters. c=0 implies the UnionFind strategy, while any c >=1 will use the SerialJointSingleHair strategy. See description of c= parameter in https://arxiv.org/pdf/2508.04969",
