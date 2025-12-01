@@ -3,8 +3,22 @@ from util.sinter_task import (
     MWPFSolverType,
 )
 from util.sinter_collect import generate_save_resume_filepath, CollectTasksConfig
+from util.sinter_task import TaskMetadata, DecoderLib, MWPFSolverType
 from datetime import date
 from pathlib import Path
+from mwpf import SinterMWPFDecoder, PanicAction, __version__ as mwpf_version
+
+
+def test_sinter_metadata():
+    metadata = TaskMetadata(
+        p=0.01,
+        d=3,
+        r=3,
+        circuit="",
+        decoder=DecoderLib.MWPF,
+        decoder_type=MWPFSolverType.SolverSerialJointSingleHair,
+    )
+    assert metadata.decoder_version == mwpf_version
 
 
 def test_generate_save_resume_filepath_pymatching():
