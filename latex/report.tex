@@ -187,32 +187,36 @@ Describe the decoding problem when 100 of noise channels can be converted to era
 \paragraphsc{Circuit Simulation}
 We studied the performance of a rotated surface code under various noise and error syndrome decoding regimes (\autoref{tab:1}), to understand the impact of erasure conversion on the error threshold. We simulate a rotated surface code in Stim \cite{gidney_stim_2021}. We perform Monte Carlo simulations over a sweep of parameters: code distance $d \in \set{3, 5, 7, 9, 11}$, depolarizing error rate $p \in [0.001, 0.06]$, and erasure error rate $p_e \in [0, 1]$.
 
-We estimate the logical error rate $P_L$ after $d$ rounds of measurements. We assume perfect measurements. Before each round and after each Clifford gate, we model depolarizing noise with uniformly random Pauli errors from the set $\set{I, X, Y, Z}$
+We estimate the logical error rate $P_L$ after $d$ rounds of measurements. We assume perfect measurements. Before each round and after each Clifford gate, we model depolarizing noise with uniformly random Pauli errors from the set $\set{I, X, Y, Z}$.
 In the cases where $p_e$ is nonzero, we convert a percentage of depolarizing errors to erasure errors with a known location. After an erasure error is detected, the affected qubit is reset to a maximally mixed state $I/2$.
 
-The resulting syndrome measurements are decoded to determine whether the sample can be corrected or results in a logical error.
+The resulting syndrome measurements are decoded to determine whether the sample can be corrected or results in a logical error. We begin by estimating $p_{thr}$ under uniform Pauli noise channel in \nameref{para:experiment1} and \nameref{para:experiment2}.
 
+In \nameref{para:experiment3}, we explore the impact of converting a percentage $p_e$ of events in the Pauli noise channel to an erasure error channel. This conversion scheme reflects the interleaved erasure detection that occurs when applying a fast detection pulse during a Rydberg gate protocol. We do not select a particular Rydberg gate protocol, because our initial experiment setup assumes a 100\% error conversion rate that does not correspond to a physical system.
 
-
+In \nameref{para:experiment4}, we explore a method for re-weighting the edges of the bipartite graph representing a parity check matrix. We imagine the weight updates are informed by mid-circuit erasure check qubits with perfect measurements. This particular setup more closely describes a dual-rail transmon system, but similar to experiments 2-3 we do not assume a particular physical system.
 
 
 \paragraphsc{Syndrome decoding}
 The decoding process occurs in two phases:
 
 \begin{enumerate}
-    \item Offline phase (once per unique combination of swept parameters)
+    \item \textbf{Offline phase} (once per unique combination of swept parameters)
           TODO - explanation of Stim detector error model (DEM), figures generated from DEM.
           We build a binary parity check matrix $H$ which encodes which error mechanisms flip a particular detector. Each row in $H$ corresponds to a parity check and each column corresponds to some error mechanism. The element $H[i,j]$ is $1$ is parity check $i$ is flipped by the error mechanism in $j$, otherwise $H[i,j]$ is 0.
 
-          The check matrix $H$ can also be understood as a Tanner graph, expressing classical constraints for the error correcting code.
+          TODO
 
-          In the cases where we consider heralded erasure errors, we add a
+          %   The check matrix $H$ can also be understood as a Tanner graph, expressing classical constraints for the error correcting code.
 
-          Each edge in the graph is weighted by TODO
+          %   In the cases where we consider heralded erasure errors, we add a
+
+          %   Each edge in the graph is weighted by TODO
 
           TODO For MWPF the row/col representation has multiple incident entries. Cols of not-hyper incidence matrix have exactly two non-zero entries since each edge can only have two vertices (one at each end). The hypergraph representation can have multiple vertices per edge.
 
-    \item Online decoding (per shot in Monte Carlo simulation)
+    \item \textbf{Online decoding} (per shot in Monte Carlo simulation)
+
           Sample circuit, measure binary syndrome vector with one bit per detector.
           PyMatching: sparse blossom to find minimum-weight set of edges w/ incidence matching (exactly) the syndrome.
           MWPF:
@@ -228,30 +232,8 @@ In the cases where $p_e$ is nonzero, we TODO
 
 \subsection{Experiments}
 
-\paragraphsc{Experiment 1: Minimum-weight perfect matching baseline.} \label{para:experiment1}
-TODO
 
-\paragraphsc{Experiment 2: Minimum-weight parity factor baseline } \label{para:experiment2}
-TODO
-
-\paragraphsc{Experiment 3: Erasure-aware minimum-weight parity factor } \label{para:experiment3}
-TOOD
-
-\paragraphsc{Experiment 4: Erasure-aware minimum-weight perfect matching} \label{para:experiment4}
-\begin{figure}[H]
-    \hspace{-2em}
-    \includegraphics[width=1.5\linewidth, height=0.4\textheight, keepaspectratio]{fig_experiment4.png}
-    \caption{\textbf{Dual-rail rrasure-check qubits in superconducting transmons }.
-        \textbf{(a)} A set of errors occuring in the surface code. \textbf{(b)} Syndrome information available in a pure Pauli noise regime. \textbf{(c)} Decoder prediction that results in a logical Z error (orange path). \textbf{(d)} Syndrome information from parity-check ancilla qubits enriched with erasure checks. \textbf{(e)} A correlated erasure-aware error model weights the green path more heavily, avoiding the logical error in (b).
-        \cite{chadwick_erasure_2025}
-    }
-    \label{fig:experiment4-sampler}
-\end{figure}
-
-
-
-
-\begin{table}[hb]
+\begin{table}[ht]
     \hspace{-2em}
     \begin{tabularx}{1.1\textwidth}{|l|X|p{9em}|p{2em}|l|}
         \hline
@@ -265,7 +247,27 @@ TOOD
     \label{tab:1}
 \end{table}
 
-% expand page geometry so figures take up most white space
+\paragraphsc{Experiment 1: Minimum-weight perfect matching baseline.} \label{para:experiment1}
+TODO
+
+\paragraphsc{Experiment 2: Minimum-weight parity factor baseline } \label{para:experiment2}
+TODO
+
+\paragraphsc{Experiment 3: Erasure-aware minimum-weight parity factor } \label{para:experiment3}
+TOOD
+
+\newpage
+\paragraphsc{Experiment 4: Erasure-aware minimum-weight perfect matching} \label{para:experiment4}
+
+\begin{figure}[hb]
+    \hspace{-2em}
+    \includegraphics[width=1.5\linewidth, height=0.4\textheight, keepaspectratio]{fig_experiment4.png}
+    \caption{\textbf{Dual-rail rrasure-check qubits in superconducting transmons }.
+        \textbf{(a)} A set of errors occuring in the surface code. \textbf{(b)} Syndrome information available in a pure Pauli noise regime. \textbf{(c)} Decoder prediction that results in a logical Z error (orange path). \textbf{(d)} Syndrome information from parity-check ancilla qubits enriched with erasure checks. \textbf{(e)} A correlated erasure-aware error model weights the green path more heavily, avoiding the logical error in (b).
+        \cite{chadwick_erasure_2025}
+    }
+    \label{fig:experiment4-sampler}
+\end{figure}
 
 \newpage
 \begin{figure}[H]
