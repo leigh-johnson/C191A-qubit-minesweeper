@@ -164,7 +164,7 @@ def generate_save_resume_filepath(cfg: CollectTasksConfig):
             )
         )
     else:
-        raise NotImplemented(
+        raise NotImplementedError(
             f"generate_save_resume_filepath not implemented for decoder {cfg.decoder}"
         )
 
