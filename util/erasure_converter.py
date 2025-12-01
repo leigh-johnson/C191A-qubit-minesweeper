@@ -20,7 +20,7 @@ def filter_convert_to_erasure_instructions(
     return filter(lambda instruction: instruction.name in convert_instructions, circuit)
 
 
-def convert_circuit_errors_to_erasures(
+def convert_circuit_errors_to_erasures_v1(
     task_config: dict,
     conversion_factor: int = 1,
     add_detectors: bool = True,

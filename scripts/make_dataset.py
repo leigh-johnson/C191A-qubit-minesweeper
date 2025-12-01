@@ -147,42 +147,35 @@ def cli(
 
 
 @click.option(
-    "--enable-correlations",
-    is_flag=True,
-    help="Use a custom PyMatching decoder capable of handling correlated events",
+    "--erasure-conversion-factor",
+    default=0.0,
+    show_default=True,
+    help="Convert % of Pauli errors to erasures. 0 implies no conversion (default), 1 implies 100% conversion.",
 )
 @click.command()
 @click.pass_context
-def pymatching(ctx, enable_correlations):
+def pymatching(ctx, erasure_conversion_factor):
     common: CommonOpts = ctx.obj["common"]
-    if enable_correlations is True:
-        cfg = CollectTasksConfig(
-            circuit=common.circuit,
-            save_resume_filepath=common.save_resume_filepath,
-            decoder=DecoderLib.PYMATCHING_CORRELATED,
-            max_shots=common.max_shots,
-            max_errors=common.max_errors,
-            num_workers=common.num_workers,
-            erasure_conversion_factor=0.0,
-            noise=common.noise,
-            code_distance=common.code_distance,
-            verbose=common.verbose,
-            num_rounds=common.num_rounds,
-        )
+    assert erasure_conversion_factor >= 0 and erasure_conversion_factor <= 1
+    if erasure_conversion_factor != 0.0 and erasure_conversion_factor != 1.0:
+        raise NotImplemented
+    if erasure_conversion_factor == 0:
+        decoder = DecoderLib.PYMATCHING
     else:
-        cfg = CollectTasksConfig(
-            circuit=common.circuit,
-            save_resume_filepath=common.save_resume_filepath,
-            decoder=DecoderLib.PYMATCHING,
-            max_shots=common.max_shots,
-            max_errors=common.max_errors,
-            num_workers=common.num_workers,
-            erasure_conversion_factor=0.0,
-            noise=common.noise,
-            code_distance=common.code_distance,
-            verbose=common.verbose,
-            num_rounds=common.num_rounds,
-        )
+        decoder = DecoderLib.PYMATCHING_CORRELATED
+    cfg = CollectTasksConfig(
+        circuit=common.circuit,
+        save_resume_filepath=common.save_resume_filepath,
+        decoder=decoder,
+        max_shots=common.max_shots,
+        max_errors=common.max_errors,
+        num_workers=common.num_workers,
+        erasure_conversion_factor=erasure_conversion_factor,
+        noise=common.noise,
+        code_distance=common.code_distance,
+        verbose=common.verbose,
+        num_rounds=common.num_rounds,
+    )
     collect_stats(cfg)
     # TODO: write CollectTasksConfig (serialized to JSON) to {save_resume_filepath}vars.json"
 
@@ -210,6 +203,9 @@ def pymatching(ctx, enable_correlations):
 @click.pass_context
 def mwpf(ctx, cluster_node_limit, erasure_conversion_factor, solver):
     common: CommonOpts = ctx.obj["common"]
+    assert erasure_conversion_factor >= 0 and erasure_conversion_factor <= 1
+    if erasure_conversion_factor != 0 or erasure_conversion_factor != 1:
+        raise NotImplemented
     cfg = CollectTasksConfig(
         circuit=common.circuit,
         save_resume_filepath=common.save_resume_filepath,

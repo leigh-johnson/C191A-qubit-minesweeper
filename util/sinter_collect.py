@@ -13,7 +13,10 @@ import stim
 from tqdm import tqdm
 from tqdm.contrib.concurrent import process_map
 
-from util.erasure_converter import convert_circuit_errors_to_erasures
+from util.erasure_converter import (
+    convert_circuit_errors_to_erasures_v1,
+    convert_task_config_to_erasures,
+)
 
 from util.sinter_task import (
     DecoderLib,
@@ -140,9 +143,9 @@ def generate_save_resume_filepath(cfg: CollectTasksConfig):
     basedir = os.path.join(
         "datasets", f"circuit={cfg.circuit}", f"decoder={cfg.decoder}"
     )
-    if cfg.decoder == DecoderLib.PYMATCHING:
+    if cfg.decoder is DecoderLib.PYMATCHING:
         return Path(os.path.join(basedir, f"{iso_today}.csv"))
-    elif cfg.decoder == DecoderLib.MWPF:
+    elif cfg.decoder is DecoderLib.MWPF:
         return Path(
             os.path.join(
                 basedir,
@@ -151,15 +154,18 @@ def generate_save_resume_filepath(cfg: CollectTasksConfig):
                 f"{iso_today}.csv",
             )
         )
+    elif cfg.decoder is DecoderLib.PYMATCHING_CORRELATED:
+        return Path(
+            os.path.join(
+                basedir,
+                f"erasure={cfg.erasure_conversion_factor}",
+                f"{iso_today}.csv",
+            )
+        )
     else:
         raise NotImplemented(
             f"generate_save_resume_filepath not implemented for decoder {cfg.decoder}"
         )
-
-
-def generate_run_id(cfg: TaskConfig):
-    run_id = hashlib.sha256(json.dumps(cfg.json_metadata).encode("utf-8")).hexdigest()
-    return run_id
 
 
 def collect_stats(cfg: CollectTasksConfig) -> List[sinter.TaskStats]:
