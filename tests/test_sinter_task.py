@@ -6,7 +6,7 @@ from util.sinter_collect import generate_save_resume_filepath, CollectTasksConfi
 from util.sinter_task import TaskMetadata, DecoderLib, MWPFSolverType
 from datetime import date
 from pathlib import Path
-from mwpf import SinterMWPFDecoder, PanicAction, __version__ as mwpf_version
+from mwpf import __version__ as mwpf_version
 
 
 def test_sinter_metadata():
@@ -46,7 +46,7 @@ def test_generate_save_resume_filepath_mwpf():
         code_distance=[],
     )
     assert generate_save_resume_filepath(cfg) == Path(
-        "datasets/circuit=surface_code:rotated_memory_x/decoder=mwpf/erasure=0.0/solver=SolverSerialJointSingleHair/"
+        "datasets/circuit=surface_code:rotated_memory_x/decoder=SinterMWPFDecoder/erasure=0.0/solver=SolverSerialJointSingleHair/"
         + date.today().isoformat()
         + ".csv"
     )

@@ -52,7 +52,7 @@ def common_options(f):
         "code_distance",
         type=int,
         multiple=True,
-        default=(3, 5, 7, 9, 11, 13, 15),
+        default=(3, 5, 7, 9, 11, 13),
         show_default=True,
         help="Repeatable. Example: --code-distance 3 --code-distance 5",
     )(f)
@@ -146,23 +146,35 @@ def cli(
     )
 
 
+@click.option(
+    "--erasure-conversion-factor",
+    default=0.0,
+    show_default=True,
+    help="Convert % of Pauli errors to erasures. 0 implies no conversion (default), 1 implies 100% conversion.",
+)
 @click.command()
 @click.pass_context
-def pymatching(ctx):
+def pymatching(ctx, erasure_conversion_factor):
     common: CommonOpts = ctx.obj["common"]
+    assert erasure_conversion_factor >= 0 and erasure_conversion_factor <= 1
+    if erasure_conversion_factor != 0.0 and erasure_conversion_factor != 1.0:
+        raise NotImplemented
+    if erasure_conversion_factor == 0:
+        decoder = DecoderLib.PYMATCHING
+    else:
+        decoder = DecoderLib.PYMATCHING_CORRELATED
     cfg = CollectTasksConfig(
         circuit=common.circuit,
         save_resume_filepath=common.save_resume_filepath,
-        decoder=DecoderLib.PYMATCHING,
+        decoder=decoder,
         max_shots=common.max_shots,
         max_errors=common.max_errors,
         num_workers=common.num_workers,
-        erasure_conversion_factor=0.0,
+        erasure_conversion_factor=erasure_conversion_factor,
         noise=common.noise,
         code_distance=common.code_distance,
         verbose=common.verbose,
         num_rounds=common.num_rounds,
-        max_batch_size=max_batch_size,
     )
     collect_stats(cfg)
     # TODO: write CollectTasksConfig (serialized to JSON) to {save_resume_filepath}vars.json"
@@ -191,6 +203,9 @@ def pymatching(ctx):
 @click.pass_context
 def mwpf(ctx, cluster_node_limit, erasure_conversion_factor, solver):
     common: CommonOpts = ctx.obj["common"]
+    assert erasure_conversion_factor >= 0 and erasure_conversion_factor <= 1
+    if erasure_conversion_factor != 0 or erasure_conversion_factor != 1:
+        raise NotImplemented
     cfg = CollectTasksConfig(
         circuit=common.circuit,
         save_resume_filepath=common.save_resume_filepath,
