@@ -378,6 +378,33 @@ to Experiment1; only the decoding algorithm is changed.  Notably, we do not use 
               w_j \approx \log\!\left(\frac{1 - p_j}{p_j}\right),
           \end{align*}
 
+    \item {\textbf{Online phase:} syndrome measurement and minimum-weight parity factor decoding.}
+
+          During Monte Carlo simulation, each noisy circuit shot produces a binary syndrome vector
+          \begin{align*}
+              \mathbf{s} \in \{0,1\}^m,
+          \end{align*}
+          where $s_i$ is the outcome of detector $D_i$ for that shot. Again we define some unknown binary error vector $\mathbf{x} \in \{0,1\}^n$, with $x_j = 1$ indicating that error mechanism $E_j$ has occurred. The parity constraints imposed by the detectors can then be written as:
+          \begin{align*}
+              H^{(\mathrm{hyp})}\, \mathbf{x} = \mathbf{s} \pmod{2}.
+          \end{align*}
+          Given a measured syndrome $\mathbf{s}$, the MWPF decoder searches over subsets of hyperedges
+          (parity factors) to find a minimum-weight explanation of the syndrome. This corresponds to solving
+          \begin{align*}
+              \hat{\mathbf{x}}
+              =
+              \arg\min_{\mathbf{x} \in \{0,1\}^n}
+              \left\{
+              \sum_{j=1}^n w_j x_j
+              \;:\;
+              H^{(\mathrm{hyp})}\, \mathbf{x}
+              =
+              \mathbf{s}
+              \pmod{2}
+              \right\},
+          \end{align*}
+
+          Although the solution structure may look similar to Experiment1, the solution set $\mathbf{x}$ are now all the parity factors whose incident hyperedges correspond to the observed detector parities. In the pure Pauli-noise baseline ($R_e = 0$), we understand this methodology to approximate the MWPM
 
 
 \end{enumerate}
