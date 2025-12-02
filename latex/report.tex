@@ -270,13 +270,11 @@ PDLP offers two major advantages. It allows for a certifiable proximity bound, a
 To address the NP-hardness of the hypergraph, MWPF incorporates two techniques: clustering, and relaxation. Clustering exploits the locality of the errors by breaking the hypergraph into smaller subgraphs. Certain subgraphs, called relaxers, can be solved in polynomial time through Hyperblossom due to their simplicity. Subgraphs which cannot be solved exactly are handled using SingleHair, a process which assigns variables and hyperedges in a syndrome consistent manner. Local solutions from each cluster are combined into one global error estimate. Because the process breaks the decoding task into subproblems that scale with the locality of the errors rather than the number of qubits, the overall algorithm scales linearly with qubit number, achieving polynomial-time performance on average.\cite{wu_minimum-weight_2025}
 
 
+% \section{Methods \& Results}
 
+% Describe the decoding problem for Pauli error stabilizer circuits in the surface code. Explain how surface code error syndromes can be framed as a graph traversal problem with detection events as nodes and errors as the weighted edges. The minimum weight perfect matching (MWPM) algorithm can find the most probable set of errors that occurred. Explain why MWPM works for uniformly random Pauli errors, but why it experiences a sharp drop-off in performace for biased (non-identical) noise models.
 
-\section{Methods \& Results}
-
-Describe the decoding problem for Pauli error stabilizer circuits in the surface code. Explain how surface code error syndromes can be framed as a graph traversal problem with detection events as nodes and errors as the weighted edges. The minimum weight perfect matching (MWPM) algorithm can find the most probable set of errors that occurred. Explain why MWPM works for uniformly random Pauli errors, but why it experiences a sharp drop-off in performace for biased (non-identical) noise models.
-
-Describe the decoding problem when 100s of noise channels can be converted to erasure errors (conversion\_ratio=1 in our codebase).  Describe how the Hypergraph Minimum-Weight Parity Factor (MWPF). \cite{wu_minimum-weight_2025}
+% Describe the decoding problem when 100s of noise channels can be converted to erasure errors (conversion\_ratio=1 in our codebase).  Describe how the Hypergraph Minimum-Weight Parity Factor (MWPF). \cite{wu_minimum-weight_2025}
 
 \newpage
 \section{Results}\label{sec:results}
