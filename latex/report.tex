@@ -355,6 +355,12 @@ In the cases where $p_e$ is nonzero, we TODO
 \paragraphsc{Data.} \footnotesize \href{https://github.com/leigh-johnson/C191A-qubit-minesweeper/tree/main/datasets/circuit%3Dsurface_code%3Arotated_memory_x/decoder%3Dmwpf/erasure%3D0.0/solver%3DSolverSerialJointSingleHair}{datasets/circuit=surface\_code:rotated\_memory\_x/decoder=mwpf/erasure=0.0/solver=SolverSerialJointSingleHair}
 \normalsize
 
+In this experiment we study the performance of the minimum-weight parity factor (MWPF) decoder
+in the absence of erasure information, as an ablation against the MWPM baseline.
+We assume a uniform Pauli noise model with physical error rate $p$ on each qubit and set the
+erasure conversion rate to $p_e = 0$. The underlying Stim circuit and noise model are identical
+to Experiment1; only the decoding algorithm is changed.
+
 \subsection{Experiment 3: Erasure-aware Min-weight Parity Factor } \label{sec:experiment3}
 \paragraphsc{Additional Results.} See \autoref{appendix:experiment3}.
 \paragraphsc{Data.} \footnotesize \href{https://github.com/leigh-johnson/C191A-qubit-minesweeper/tree/main/datasets/circuit%3Dsurface_code%3Arotated_memory_x/decoder%3Dmwpf/erasure%3D1.0/solver%3DSolverSerialJointSingleHair}{datasets/circuit=surface\_code:rotated\_memory\_x/decoder=mwpf/erasure=1.0/solver=SolverSerialJointSingleHair}
@@ -396,6 +402,10 @@ We are also grateful for Craig Gidney's wonderfully illustrative posts on StackE
 \paragraphsc{Code \& Data Availability.}
 % TODO add license
 All contents of this report are freely available under the MIT license: \href{https://github.com/leigh-johnson/C191A-qubit-minesweeper}{https://github.com/leigh-johnson/C191A-qubit-minesweeper}
+
+\paragraphsc{Acknowledgements}
+
+TODO this is where we all brag about how proud we are of the sections we submitted.
 
 \newpage
 % cite all references
