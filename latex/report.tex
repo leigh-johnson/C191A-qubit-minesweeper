@@ -280,6 +280,7 @@ We use Stim to implement the surface code stabilizer circuit \cite{gidney_stim_2
 TODO briefly re-summarize the parameters swept: d, $R_e$, p, and decoding strategy.
 
 \subsection{Experiment 1: Min-weight Perfect Matching Baseline.} \label{sec:experiment1}
+\paragraphsc{Overview.} TODO re-summarize
 \paragraphsc{Additional Results.} See \autoref{appendix:experiment1}.
 \paragraphsc{Data.} \footnotesize \href{https://github.com/leigh-johnson/C191A-qubit-minesweeper/tree/main/datasets/circuit%3Dsurface_code%3Arotated_memory_x/decoder%3Dpymatching}{datasets/circuit=surface\_code:rotated\_memory\_x/decoder=pymatching}
 \normalsize
@@ -310,7 +311,7 @@ TODO briefly re-summarize the parameters swept: d, $R_e$, p, and decoding strate
 
           These data $(H, \{w_j\})$ are used to construct a \texttt{pymatching.Matching} object \cite{oscarhiggott_oscarhiggottpymatching_2025}.
 
-    \item \textbf{Online phase:} syndrome measurement and minimum-weight decodings
+    \item \textbf{Online phase:} syndrome measurement and minimum-weight decodings (per shot)
 
           During Monte Carlo simulation, each noisy circuit shot produces a binary syndrome vector:
           \begin{align*}
@@ -338,16 +339,48 @@ TODO briefly re-summarize the parameters swept: d, $R_e$, p, and decoding strate
           contributes to the logical error rate $P_L$.
 \end{enumerate}
 
+\newpage
 \subsection{Experiment 2: Min-weight Parity Factor Baseline } \label{sec:experiment2}
+\paragraphsc{Overview.} In this experiment we study the performance of the minimum-weight parity factor (MWPF) decoder
+in the absence of erasure information, as an ablation against the MWPM baseline.
+We assume a uniform Pauli noise model with physical error rate $p$ on each qubit and set the
+erasure conversion rate to $R_e = 0$. The underlying Stim circuit and noise model are identical
+to Experiment1; only the decoding algorithm is changed.  Notably, we do not use the version of the \verb|mwpf| decoder bundled with Stim in \verb|sinter\.decoders| and instead run our initial experiments with \verb|mwpf\[stim\]@0.2.12|.
+
 \paragraphsc{Additional Results.} See \autoref{appendix:experiment2}.
 \paragraphsc{Data.} \footnotesize \href{https://github.com/leigh-johnson/C191A-qubit-minesweeper/tree/main/datasets/circuit%3Dsurface_code%3Arotated_memory_x/decoder%3Dmwpf/erasure%3D0.0/solver%3DSolverSerialJointSingleHair}{datasets/circuit=surface\_code:rotated\_memory\_x/decoder=mwpf/erasure=0.0/solver=SolverSerialJointSingleHair}
 \normalsize
 
-\paragraphsc{Procedure.} In this experiment we study the performance of the minimum-weight parity factor (MWPF) decoder
-in the absence of erasure information, as an ablation against the MWPM baseline.
-We assume a uniform Pauli noise model with physical error rate $p$ on each qubit and set the
-erasure conversion rate to $p_e = 0$. The underlying Stim circuit and noise model are identical
-to Experiment1; only the decoding algorithm is changed.
+\paragraphsc{Procedure.}
+\begin{enumerate}
+    \item {\textbf{Offline phase:} hypergraph detector error model and incidence matrix.}
+
+          For each choice of code distance $d$, physical error rate $p$, and erasure conversion rate $p_e$,
+          we compile the Stim circuit. We pass the circuit reference to the MWPF library via \verb|SinterMWPFDecoder|, which constructs the DEM \cite{wu_yuewuomwpf_2025}\cite{gidney_stim_2021}.
+          The DEM again defines a set of binary detectors
+          $\{D_i\}_{i=1}^m$ and a set of error mechanisms $\{E_j\}_{j=1}^n$. Unlike the biparite graph constraint used
+          by \texttt{PyMatching}, the \texttt{MWPF} decoder allows each error mechanism $E_j$ to flip an \textit{arbitrary subset
+              of detectors}, which is interpreted as a hyperedge: $F_j \subseteq \{D_1,\dots,D_m\}$. This defines a hypergraph parity check matrix, which is structured like an incident matrix having columns that can have \textit{more than} 2 non-zero entries. We compare with the incident matrix in Experiment1, where the columns had \textit{at most} 2 non-zero entries.
+          \begin{align*}
+              H^{(\mathrm{hyp})} \in \{0,1\}^{m\times n}, \qquad
+              H^{(\mathrm{hyp})}_{ij} =
+              \begin{cases}
+                  1 & \text{if detector } D_i \text{ is incident on hyperedge } F_j, \\[4pt]
+                  0 & \text{otherwise}.
+              \end{cases}
+          \end{align*}
+          Each column of $H^{(\mathrm{hyp})}$ may have Hamming weight greater than 2, corresponding to
+          hyperedges that touch more than two detectors, but in this baseline experiment all noise is still
+          pure Pauli noise (no erasures), so many columns remain graphlike.
+
+          Each error mechanism $E_j$ has an associated error probability $p_j$ determined by the circuit-level noise model. Like in Experiment1, assign a log-likelihood weight to each edge and pass \cite{wu_yuewuomwpf_2025}:
+          \begin{align*}
+              w_j \approx \log\!\left(\frac{1 - p_j}{p_j}\right),
+          \end{align*}
+
+
+
+\end{enumerate}
 
 \paragraph{Offline phase: hypergraph detector error model and incidence matrix.}
 
@@ -369,7 +402,7 @@ TODO we assume perfect measurements, we perform $d$ rounds of syndrome measureme
 
 TODO our opinion of the hypergraph construction of this problem.
 
-In \nameref{sec:experiment3}, we explore the impact of converting a percentage $p_e$ of events in the Pauli noise channel to an erasure error channel. This conversion scheme reflects the interleaved erasure detection that occurs when applying a fast detection pulse during a Rydberg gate protocol. We do not select a particular Rydberg gate protocol, because our initial experiment setup assumes a 100\% error conversion rate that does not correspond to a physical system.
+In \nameref{sec:experiment3}, we explore the impact of converting a percentage $R_e$ of events in the Pauli noise channel to an erasure error channel. This conversion scheme reflects the interleaved erasure detection that occurs when applying a fast detection pulse during a Rydberg gate protocol. We do not select a particular Rydberg gate protocol, because our initial experiment setup assumes a 100\% error conversion rate that does not correspond to a physical system.
 
 In \nameref{sec:experiment4},
 
