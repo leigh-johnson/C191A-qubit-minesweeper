@@ -276,9 +276,73 @@ For each circuit and decoding method described in \autoref{tab:1}, we plot $P_L$
 \paragraphsc{Circuit Simulation}
 We use Stim to implement the surface code stabilizer circuit \cite{gidney_stim_2021}. Notably, we rely on the surface code circuit declarations produced by the \verb|stim.Circuit.generated| API, which are intended for demonstration purposes and \textbf{not} recommended for research.
 
-The syndrome decoding process occurs in two phases:
+
+In the cases where $p_e$ is zero (no erasure conversion is performed), we decode the measured error syndrome with a Minimum-Weight Perfect Matching decoder (PyMatching) \cite{oscarhiggott_oscarhiggottpymatching_2025}. TODO - explanation of Stim detector error model (DEM), figures generated from DEM. There is a one-to-one correspondence between each detector in the DEM and a node in the graph passed to PyMatching.
+
+TODO - additionally, we decode using MWPF when $p_e=0$ as an ablation study.
+
+In the cases where $p_e$ is nonzero, we TODO
+
+
+
+\subsection{Experiment 1: Min-weight Perfect Matching Baseline.} \label{sec:experiment1}
+We consider $R_e=0.0$ with a purely Pauli noise regime. We apply a minimum-weight perfect matching (PyMatching) decoder, with the syndrome decoding process split between two phases:
 \begin{enumerate}
     \item \textbf{Offline phase} (once per unique combination of swept parameters)
+
+          For each choice of code distance $d$, physical error rate $p$, and erasure conversion rate $p_e$,
+          we compile the Stim circuit into a \emph{detector error model} (DEM) \cite{gidney_stim_2021}.
+          The DEM defines a collection of binary detectors $\{D_i\}_{i=1}^m$ and a collection of
+          error mechanisms $\{E_j\}_{j=1}^n$. Each error mechanism $E_j$ is annotated with the subset of
+          detectors it flips. This defines a binary parity-check matrix: \footnote{We understand the binary parity-check matrix as a Tanner graph, a type of bipartite graph used in classical low-density parity-check error-correcting codes. \cite{noauthor_tanner_2025}}
+          \begin{align*}
+              H \in \{0,1\}^{m\times n}, \qquad
+              H_{ij} =
+              \begin{cases}
+                  1 & \text{if error mechanism } E_j \text{ flips detector } D_i, \\[4pt]
+                  0 & \text{otherwise}.
+              \end{cases}
+          \end{align*}
+
+          Each column of $H$ has Hamming weight 1 or~2, so we can represent the parity check matrix as a graph where column $j$ corresponds to either an edge between two detectors or a half-edge connecting a detector to a boundary node.
+          Each column $j$ is assigned an edge weight $w_j$ derived from the probability $p_j$ of the error
+          mechanism $E_j$: \cite{higgott_sparse_2025}
+          \begin{align*}
+              w_j \approx \log\!\left(\frac{1 - p_j}{p_j}\right).
+          \end{align*}
+
+          These data $(H, \{w_j\})$ are used to construct a \texttt{pymatching.Matching} object.
+
+          \subsection*{Online phase: syndrome measurement and minimum-weight decoding}
+
+          During Monte Carlo simulation, each noisy circuit shot produces a binary syndrome vector
+          \begin{align*}
+              \mathbf{s} \in \{0,1\}^m,
+          \end{align*}
+          where $s_i$ is the value of detector $D_i$ for that shot.
+          Let $\mathbf{x} \in \{0,1\}^n$ denote the (unknown) binary error vector, with $x_j = 1$ indicating
+          that error mechanism $E_j$ occurred.
+          The detector constraints satisfy the linear relation
+          \begin{align*}
+              H \mathbf{x} = \mathbf{s} \pmod{2}.
+          \end{align*}
+
+          Given $\mathbf{s}$, \texttt{PyMatching} solves the minimum-weight decoding problem
+          \begin{align*}
+              \hat{\mathbf{x}}
+              = \arg\min_{\mathbf{x} \in \{0,1\}^n}
+              \left\{
+              \sum_{j=1}^n w_j x_j
+              \;:\;
+              H \mathbf{x} = \mathbf{s} \pmod{2}
+              \right\},
+          \end{align*}
+          using a sparse-blossom minimum-weight perfect matching algorithm on the graph induced by $H$.
+          The result $\hat{\mathbf{x}}$ is mapped to a corresponding Pauli correction on the data qubits.
+          Comparing the corrected logical measurement to the ideal value determines whether the shot
+          contributes to the logical error rate $P_L$.
+
+
           TODO - explanation of Stim detector error model (DEM), figures generated from DEM.
           We build a binary parity check matrix $H$ which encodes which error mechanisms flip a particular detector. Each row in $H$ corresponds to a parity check and each column corresponds to some error mechanism. The element $H[i,j]$ is $1$ is parity check $i$ is flipped by the error mechanism in $j$, otherwise $H[i,j]$ is 0.
 
@@ -298,17 +362,6 @@ The syndrome decoding process occurs in two phases:
           PyMatching: sparse blossom to find minimum-weight set of edges w/ incidence matching (exactly) the syndrome.
           MWPF:
 \end{enumerate}
-
-In the cases where $p_e$ is zero (no erasure conversion is performed), we decode the measured error syndrome with a Minimum-Weight Perfect Matching decoder (PyMatching) \cite{oscarhiggott_oscarhiggottpymatching_2025}. TODO - explanation of Stim detector error model (DEM), figures generated from DEM. There is a one-to-one correspondence between each detector in the DEM and a node in the graph passed to PyMatching.
-
-TODO - additionally, we decode using MWPF when $p_e=0$ as an ablation study.
-
-In the cases where $p_e$ is nonzero, we TODO
-
-
-
-\subsection{Experiment 1: Min-weight Perfect Matching Baseline.} \label{sec:experiment1}
-TODO
 
 \subsection{Experiment 2: Min-weight Parity Factor Baseline } \label{sec:experiment2}
 TODO
@@ -476,6 +529,122 @@ All contents of this report are freely available under the MIT license: \href{ht
 %         \textbf{(a)(b)} Pure depolarizing noise, decoded with Minimum Weight Pefect Matching (PyMatching) with $p_{thrs}$ between $0.57\%$ and  $0.78\%$. \textbf{(c)(d)} Pure depolarizing noise, decoded with Minimum Weight Parity Factor, with with $p_{thrs}$ between $0.62\%$ and  $0.71\%$. \textbf{(e)(f)}100\% of depolarizing noise converted to erasure errors, with $p_{thrs}$ between $2.7\%$ and  $3.02\%$.}
 %     \label{fig:1_thresholds}
 % \end{figure}
+
+% \section{Appendix: Example Stim Circuit}
+
+% \footnotesize
+% \begin{verbatim}
+% stim gen \
+%     --code surface_code \
+%     --task rotated_memory_x \
+%     --distance 3 \
+%     --rounds 3 \
+%     --before_round_data_depolarization 0.001 \
+%     --after_clifford_depolarization 0.02
+% # Generated surface_code circuit.
+% # task: rotated_memory_x
+% # rounds: 3
+% # distance: 3
+% # before_round_data_depolarization: 0.001
+% # before_measure_flip_probability: 0
+% # after_reset_flip_probability: 0
+% # after_clifford_depolarization: 0.02
+% # layout:
+% #                 X25
+% #     L15     d17     d19
+% # Z14     X16     Z18
+% #     L8      d10     d12
+% #         Z9      X11     Z13
+% #     L1      d3      d5 
+% #         X2 
+% # Legend:
+% #     d# = data qubit
+% #     L# = data qubit with logical observable crossing
+% #     X# = measurement qubit (X stabilizer)
+% #     Z# = measurement qubit (Z stabilizer)
+% QUBIT_COORDS(1, 1) 1
+% QUBIT_COORDS(2, 0) 2
+% QUBIT_COORDS(3, 1) 3
+% QUBIT_COORDS(5, 1) 5
+% QUBIT_COORDS(1, 3) 8
+% QUBIT_COORDS(2, 2) 9
+% QUBIT_COORDS(3, 3) 10
+% QUBIT_COORDS(4, 2) 11
+% QUBIT_COORDS(5, 3) 12
+% QUBIT_COORDS(6, 2) 13
+% QUBIT_COORDS(0, 4) 14
+% QUBIT_COORDS(1, 5) 15
+% QUBIT_COORDS(2, 4) 16
+% QUBIT_COORDS(3, 5) 17
+% QUBIT_COORDS(4, 4) 18
+% QUBIT_COORDS(5, 5) 19
+% QUBIT_COORDS(4, 6) 25
+% RX 1 3 5 8 10 12 15 17 19
+% R 2 9 11 13 14 16 18 25
+% TICK
+% DEPOLARIZE1(0.001) 1 3 5 8 10 12 15 17 19
+% H 2 11 16 25
+% DEPOLARIZE1(0.02) 2 11 16 25
+% TICK
+% CX 2 3 16 17 11 12 15 14 10 9 19 18
+% DEPOLARIZE2(0.02) 2 3 16 17 11 12 15 14 10 9 19 18
+% TICK
+% CX 2 1 16 15 11 10 8 14 3 9 12 18
+% DEPOLARIZE2(0.02) 2 1 16 15 11 10 8 14 3 9 12 18
+% TICK
+% CX 16 10 11 5 25 19 8 9 17 18 12 13
+% DEPOLARIZE2(0.02) 16 10 11 5 25 19 8 9 17 18 12 13
+% TICK
+% CX 16 8 11 3 25 17 1 9 10 18 5 13
+% DEPOLARIZE2(0.02) 16 8 11 3 25 17 1 9 10 18 5 13
+% TICK
+% H 2 11 16 25
+% DEPOLARIZE1(0.02) 2 11 16 25
+% TICK
+% MR 2 9 11 13 14 16 18 25
+% DETECTOR(2, 0, 0) rec[-8]
+% DETECTOR(2, 4, 0) rec[-3]
+% DETECTOR(4, 2, 0) rec[-6]
+% DETECTOR(4, 6, 0) rec[-1]
+% REPEAT 2 {
+%     TICK
+%     DEPOLARIZE1(0.001) 1 3 5 8 10 12 15 17 19
+%     H 2 11 16 25
+%     DEPOLARIZE1(0.02) 2 11 16 25
+%     TICK
+%     CX 2 3 16 17 11 12 15 14 10 9 19 18
+%     DEPOLARIZE2(0.02) 2 3 16 17 11 12 15 14 10 9 19 18
+%     TICK
+%     CX 2 1 16 15 11 10 8 14 3 9 12 18
+%     DEPOLARIZE2(0.02) 2 1 16 15 11 10 8 14 3 9 12 18
+%     TICK
+%     CX 16 10 11 5 25 19 8 9 17 18 12 13
+%     DEPOLARIZE2(0.02) 16 10 11 5 25 19 8 9 17 18 12 13
+%     TICK
+%     CX 16 8 11 3 25 17 1 9 10 18 5 13
+%     DEPOLARIZE2(0.02) 16 8 11 3 25 17 1 9 10 18 5 13
+%     TICK
+%     H 2 11 16 25
+%     DEPOLARIZE1(0.02) 2 11 16 25
+%     TICK
+%     MR 2 9 11 13 14 16 18 25
+%     SHIFT_COORDS(0, 0, 1)
+%     DETECTOR(2, 0, 0) rec[-8] rec[-16]
+%     DETECTOR(2, 2, 0) rec[-7] rec[-15]
+%     DETECTOR(4, 2, 0) rec[-6] rec[-14]
+%     DETECTOR(6, 2, 0) rec[-5] rec[-13]
+%     DETECTOR(0, 4, 0) rec[-4] rec[-12]
+%     DETECTOR(2, 4, 0) rec[-3] rec[-11]
+%     DETECTOR(4, 4, 0) rec[-2] rec[-10]
+%     DETECTOR(4, 6, 0) rec[-1] rec[-9]
+% }
+% MX 1 3 5 8 10 12 15 17 19
+% DETECTOR(2, 0, 1) rec[-8] rec[-9] rec[-17]
+% DETECTOR(2, 4, 1) rec[-2] rec[-3] rec[-5] rec[-6] rec[-12]
+% DETECTOR(4, 2, 1) rec[-4] rec[-5] rec[-7] rec[-8] rec[-15]
+% DETECTOR(4, 6, 1) rec[-1] rec[-2] rec[-10]
+% OBSERVABLE_INCLUDE(0) rec[-3] rec[-6] rec[-9]
+% \end{verbatim}
 
 
 \section{Appendix: Syndrome of Loss Errors}
