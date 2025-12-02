@@ -247,7 +247,7 @@ We define $p_{thr}$ as the physical error rate $p$ where the logical error rate 
 \newpage
 \paragraphsc{Fault Tolerant Code Distance.} We plot logical error rate $P_L$ vs. code distance $d$ for below-threshold samples  ($p \le 0.01$) and fit a least-squares linear regression \autoref{fig:fault-tolerant-projection} and extrapolate the fit to $P_L \approx 10^{-12}$. The X-intercept of the fit line represents the minimum code distance $d$ needed for one logical bit to survive one trillion rounds, which is the current estimate of the number of rounds needed to run a useful quantum algorithm [CITATION NEEDED].
 
-For $R_e = 1.0$ and erasure-aware hypergraph MWPF decoding, \autoref{fig:fault-tolerant-projection} a logical qubit implemented with $d \approx 17$ (or $d^2 = 289$ physical qubits in the array) is projected to survive one trillion rounds. This result should be taken with a bucket of salt because we do not calculate residuals from the least-squares fit to quantify goodness of fit. The hypergraph MWPF dataset is extrapolated from a more limited range of code distances (green, $d<9$) compared to other noise regimes. Due to the computational expense of the hypergraph decoder, we could not sample as much below-threshold data in that particular noise regime. See: \nameref{sec:memleak-sidequest}.
+For $R_e = 1.0$ and erasure-aware hypergraph MWPF decoding, \autoref{fig:fault-tolerant-projection} a logical qubit implemented with $d \approx 17$ (or $2d^2 = 578$ physical qubits in the array) is projected to survive one trillion rounds. This result should be taken with a bucket of salt because we do not calculate residuals from the least-squares fit to quantify goodness of fit. The hypergraph MWPF dataset is extrapolated from a more limited range of code distances (green, $d<9$) compared to other noise regimes. Due to the computational expense of the hypergraph decoder, we could not sample as much below-threshold data in that particular noise regime. See: \nameref{sec:memleak-sidequest}.
 % TODO - this plot should say p \ltq 0.01, not p=0.01
 \begin{figure}
     \centering
@@ -286,7 +286,10 @@ In the cases where $p_e$ is nonzero, we TODO
 
 
 \subsection{Experiment 1: Min-weight Perfect Matching Baseline.} \label{sec:experiment1}
-See \autoref{appendix:experiment1} for experiment results. We consider $R_e=0.0$ with a purely Pauli noise regime. We apply a minimum-weight perfect matching (PyMatching) decoder, with the syndrome decoding process split between two phases:
+\paragraphsc{Additional Results.} See \autoref{appendix:experiment1}.
+\paragraphsc{Data.} \footnotesize \href{https://github.com/leigh-johnson/C191A-qubit-minesweeper/tree/main/datasets/circuit%3Dsurface_code%3Arotated_memory_x/decoder%3Dpymatching}{datasets/circuit=surface\_code:rotated\_memory\_x/decoder=pymatching}
+
+\paragraphsc{Procedure.} We consider $R_e=0.0$ with a purely Pauli noise regime. We apply a minimum-weight perfect matching (PyMatching) decoder, with the syndrome decoding process split between two phases:
 \begin{enumerate}
     \item \textbf{Offline phase} (once per unique combination of swept parameters)
 
@@ -314,8 +317,6 @@ See \autoref{appendix:experiment1} for experiment results. We consider $R_e=0.0$
           These data $(H, \{w_j\})$ are used to construct a \texttt{pymatching.Matching} object.
 
     \item \textbf{Online phase:} syndrome measurement and minimum-weight decodings
-
-          \subsection*{Online phase: syndrome measurement and minimum-weight decoding}
 
           During Monte Carlo simulation, each noisy circuit shot produces a binary syndrome vector:
           \begin{align*}
@@ -350,18 +351,24 @@ See \autoref{appendix:experiment1} for experiment results. We consider $R_e=0.0$
 \end{enumerate}
 
 \subsection{Experiment 2: Min-weight Parity Factor Baseline } \label{sec:experiment2}
-TODO
+\paragraphsc{Additional Results.} See \autoref{appendix:experiment2}.
+\paragraphsc{Data.} \footnotesize \href{https://github.com/leigh-johnson/C191A-qubit-minesweeper/tree/main/datasets/circuit%3Dsurface_code%3Arotated_memory_x/decoder%3Dmwpf/erasure%3D0.0/solver%3DSolverSerialJointSingleHair}{datasets/circuit=surface\_code:rotated\_memory\_x/decoder=mwpf/erasure=0.0/solver=SolverSerialJointSingleHair}
+\normalsize
 
 \subsection{Experiment 3: Erasure-aware Min-weight Parity Factor } \label{sec:experiment3}
-TOOD
+\paragraphsc{Additional Results.} See \autoref{appendix:experiment3}.
+\paragraphsc{Data.} \footnotesize \href{https://github.com/leigh-johnson/C191A-qubit-minesweeper/tree/main/datasets/circuit%3Dsurface_code%3Arotated_memory_x/decoder%3Dmwpf/erasure%3D1.0/solver%3DSolverSerialJointSingleHair}{datasets/circuit=surface\_code:rotated\_memory\_x/decoder=mwpf/erasure=1.0/solver=SolverSerialJointSingleHair}
 
-\newpage
 \subsection{Experiment 4: Erasure-aware Min-weight Perfect Matching} \label{sec:experiment4}
+\paragraphsc{Additional Results.} See \autoref{appendix:experiment4}.
+\paragraphsc{Data.} \footnotesize \href{https://github.com/leigh-johnson/C191A-qubit-minesweeper/tree/main/datasets/circuit%3Dsurface_code%3Arotated_memory_x/decoder%3Dmwpf/erasure%3D1.0/solver%3DSolverSerialJointSingleHair}{datasets/circuit=surface\_code:rotated\_memory\_x/decoder=mwpf/erasure=1.0/solver=SolverSerialJointSingleHair}
 
 
 
 
 \section{Discussion}
+
+TODO we assume perfect measurements, we perform $d$ rounds of syndrome measurements.
 
 TODO our opinion of the hypergraph construction of this problem.
 
@@ -382,7 +389,9 @@ Sketch a follow-up project w/ sweep across $R_e$.
 
 \paragraphsc{Acknowledgements}
 
-Shimon Kolkowitz, Harry Levine, Thiago Bergamaschi
+Special thanks to Shimon Kolkowitz and Harry Levine for their generous time contributions. This project would not have been possible without their week-to-week guidance and time investment. We also thank Thiago Bergamaschi and Thilo Scharnhorst for their patient pedagogy; just a few months ago, understanding the surface code felt like an insurmountable challenge. We also want to recognize Umesh Vazirani for his early steering and for hosting the lively office hours where we (the authors) met.
+
+We are also grateful for Craig Gidney's wonderfully illustrative posts on StackExchange and for his work maintaining Stim, which is a Herculean effort for a single tech lead. Thanks also to Yue Wu for developing MWPF in public; our ideas and feasibility estimates for this project were largely informed by his work and meticulous notes.
 
 \paragraphsc{Code \& Data Availability.}
 % TODO add license
