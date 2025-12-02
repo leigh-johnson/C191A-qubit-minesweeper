@@ -345,7 +345,7 @@ TODO briefly re-summarize the parameters swept: d, $R_e$, p, and decoding strate
 in the absence of erasure information, as an ablation against the MWPM baseline.
 We assume a uniform Pauli noise model with physical error rate $p$ on each qubit and set the
 erasure conversion rate to $R_e = 0$. The underlying Stim circuit and noise model are identical
-to Experiment1; only the decoding algorithm is changed.  Notably, we do not use the version of the \verb|mwpf| decoder bundled with Stim in \verb|sinter\.decoders| and instead run our initial experiments with \verb|mwpf\[stim\]@0.2.12|.
+to Experiment1; only the decoding algorithm is changed.  Notably, we do not use the version of the \verb|mwpf| decoder bundled with Stim in \verb|sinter\.decoders| and instead run our initial experiments with \verb|mwpf[stim]@0.2.12|. Later on, we incorporate alternative memory layouts in a fork of mwpf.
 
 \paragraphsc{Additional Results.} See \autoref{appendix:experiment2}.
 \paragraphsc{Data.} \footnotesize \href{https://github.com/leigh-johnson/C191A-qubit-minesweeper/tree/main/datasets/circuit%3Dsurface_code%3Arotated_memory_x/decoder%3Dmwpf/erasure%3D0.0/solver%3DSolverSerialJointSingleHair}{datasets/circuit=surface\_code:rotated\_memory\_x/decoder=mwpf/erasure=0.0/solver=SolverSerialJointSingleHair}
@@ -416,10 +416,12 @@ to Experiment1; only the decoding algorithm is changed.  Notably, we do not use 
 
 
 \subsection{Experiment 3: Erasure-aware Min-weight Parity Factor } \label{sec:experiment3}
+\paragraphsc{Overview} TODO: we repeat the procedure in Experiment2, but with $R_e=1.0$.
 \paragraphsc{Additional Results.} See \autoref{appendix:experiment3}.
 \paragraphsc{Data.} \footnotesize \href{https://github.com/leigh-johnson/C191A-qubit-minesweeper/tree/main/datasets/circuit%3Dsurface_code%3Arotated_memory_x/decoder%3Dmwpf/erasure%3D1.0/solver%3DSolverSerialJointSingleHair}{datasets/circuit=surface\_code:rotated\_memory\_x/decoder=mwpf/erasure=1.0/solver=SolverSerialJointSingleHair}
 
 \subsection{Experiment 4: Erasure-aware Min-weight Perfect Matching} \label{sec:experiment4}
+\paragraphsc{Overview} TODO: we modify the procedure in Experiment1, with $R_e=1.0$. We adapt the strategy described by Gu et al. \cite{gu_fault-tolerant_2025}.
 \paragraphsc{Additional Results.} See \autoref{appendix:experiment4}.
 \paragraphsc{Data.} \footnotesize \href{https://github.com/leigh-johnson/C191A-qubit-minesweeper/tree/main/datasets/circuit%3Dsurface_code%3Arotated_memory_x/decoder%3Dmwpf/erasure%3D1.0/solver%3DSolverSerialJointSingleHair}{datasets/circuit=surface\_code:rotated\_memory\_x/decoder=mwpf/erasure=1.0/solver=SolverSerialJointSingleHair}
 
