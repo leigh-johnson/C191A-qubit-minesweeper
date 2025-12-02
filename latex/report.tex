@@ -3,7 +3,7 @@
 \usepackage{physics}
 
 \begin{document}
-\title{\LARGE{Comparison of Erasure-Aware Error Correction Decoding \\ for Fault Tolerant Quantum Computing \\}
+\title{\LARGE{Comparison of Erasure-Aware Error Correction Decoding \\ for Fault-Tolerant Quantum Computing \\}
 
     % \LARGE{Erasure is All You Need}
 
@@ -180,47 +180,102 @@ Describe the decoding problem for Pauli error stabilizer circuits in the surface
 
 Describe the decoding problem when 100 of noise channels can be converted to erasure errors (conversion\_ratio=1 in our codebase).  Describe how the Hypergraph Minimum-Weight Parity Factor (MWPF). \cite{wu_minimum-weight_2025}
 
-\section{Methods \& Results}
+\newpage
+\section{Results}\label{sec:results}
+\paragraphsc{Surface code thresholds}
+We studied the performance of a rotated surface code under various noise and error syndrome decoding regimes (\autoref{tab:1}), with the goal of observing the impact of erasure conversion on our definition of the fault-tolerant error threshold $p_{thr}$.
 
-\subsection{Surface Code Thresholds}
+Using Stim \cite{gidney_stim_2021} to simulate the surface code stabilizer circuit, we perform Monte Carlo simulations of a $d \times d$ array of qubits representing an X-rotated surface stabilizer with code distance $d \in \set{3, 5, 7, 9, 11}$, physical error rate $p \in [0.001, 0.06]$, and erasure error conversion rate $R_e \in [0, 1]$.
+
+Noise channels are applied to individual qubits \textit{before} each round (state preparation) and \textit{after} each Clifford gate operation with $p$ probability. We prepare the state $\ket{+}$ and estimate the logical error rate $P_L$ after $d$ rounds of measurements in the X-basis, assuming perfect syndrome measurements ($p_{measure} = 0.0$).
+
+As a baseline, we model standard Pauli noise by sampling errors uniformly at random from the set $\set{I, X, Y, Z}$, corresponding to the \verb|DEPOLARIZE1| (single-qubit) and \verb|DEPOLARIZE2| (two-qubit) simulated error channels.
+
+To explore the impact of erasure error conversion, we implement the error model described in \cite{wu_erasure_2022} with some notable differences: each physical qubit experiences either a Pauli error occurring with probability $p_{pauli} = p(1-R_e)$ or an erasure with probability $p_e = pR_e$. Notably, we simulate $R_e=0$ and $R_e=1$, representing 0\% and 100\% erasure conversion respectively. We apply this noise model to \textit{all} Clifford gates (both one and two qubit gates). After an erasure error is detected, the affected qubit is reset to a maximally mixed state $I/2$. The resulting syndrome measurements are decoded to determine whether the shot can be corrected or results in a logical error.
+
+We compare four methods for decoding syndrome measurements, described in more detail in each experiment procedure section:
+
+\begin{itemize}
+    \small
+    \item \nameref{sec:experiment1}
+          We consider $R_e=0.0$ with a purely Pauli noise regime. We apply a minimum-weight perfect matching (PyMatching) decoder.
+    \item \nameref{sec:experiment4}
+
+          We consider $R_e=1.0$. We sample and decode heralded erasure events first, using a strategy adapted from \cite{gu_fault-tolerant_2025} to re-weight graph edges (representing error mechanisms) on a per-shot basis. Then, we decode any measurement syndromes resulting from the maximally mixed state with a minimum-weight perfect matching (PyMatching) decoder.
+
+    \item \nameref{sec:experiment3}
+
+          We consider $R_e=1.0$. We adopt the hypergraph minimum-weight parity factor (MWPF) decoder described in \cite{wu_minimum-weight_2025}, which frames the problem of decoding syndrome measurements and erasure error locations as a hypergraph matching problem.
+
+    \item \nameref{sec:experiment2}
+
+          As an ablation study, we consider $R_e=0.0$ with a purely Pauli noise regime and apply the hypergraph minimum-weight parity factor (MWPF) decoder.
+
+\end{itemize}
+
+
+% TODO - move to background
+% $p_e$ of events in the Pauli noise channel to an erasure error channel. This conversion scheme reflects the interleaved erasure detection that occurs when applying a fast detection pulse during a Rydberg gate protocol. We do not select a particular Rydberg gate protocol, because our initial experiment setup assumes a 100\% error conversion rate that does not correspond to a physical system.
+
+We define $p_{thr}$ as the physical error rate $p$ where the logical error rate $P_L$ decreases as a function of $d$. To estimate $p_{thr}$, we identify crossing points in \autoref{fig:best-threshold-comparison}, where the logical error rate decreases as code distance $d$ increases, with the d=3,5 and d=9,11 crossings representing the lower and upper bound of $p_{thr}$ respectively. The highest $p_{thr}$ was 3.02\% when $R_e=1.0$ using the erasure-aware hypergraph MWPF decoder, compared to a 0.75\% threshold using the MWPF decoder in a pure Pauli noise regime.
+
+% TODO - fix legend location in this plot, should be pinned to bottom-right whitespace
+\begin{figure}[H]
+    \hspace{-2em}
+    \includegraphics[width=1.5\linewidth, height=0.55\textheight, keepaspectratio]{fig1_summary}
+    \caption{\textbf{Physical error thresholds in our surface code simulations.}
+        From the d=9,11 crossings, we estimate the error threshold $p_{thr}$ under a uniform Pauli noise regime
+    }
+    \label{fig:best-threshold-comparison}
+\end{figure}
+
+\begin{table}[H]
+    \hspace{-5em}
+    \small
+    \begin{tabularx}{1.2\textwidth}{|p{6em}|X|p{9em}|p{2em}|l|}
+        \hline
+        \textbf{Decoding Scheme} & \textbf{Monte Carlo Experiment Description} & \textbf{Parameter Sweep}                                       & \textbf{$p_{thr}$}               & \textbf{Results}                       \\ \hline
+        MWPM baseline            & \nameref{sec:experiment1}                   & $d \in \set{3, 5, 7, 9, 11}$, $p \in [0.003, 0.02]$, $p_e=0.0$ & 0.57 - 0.78                      & \autoref{fig:pymathing-pthresh}        \\ \hline
+        MWPF baseline            & \nameref{sec:experiment2}                   & $d \in \set{3, 5, 7, 9, 11}$, $p \in [0.003, 0.02]$, $p_e=0.0$ & 0.62 - 0.75                      & \autoref{fig:mwpf-pthresh}             \\ \hline
+        Hypergraph MWPF          & \nameref{sec:experiment3}                   & $d \in \set{3, 5, 7, 9, 11}$, $p \in [0.003, 0.06]$, $p_e=1.0$ & \cellcolor{yellow!25}2.70 - 3.02 & \autoref{fig:mwpf-pthresh-erase}       \\ \hline
+        MWPM with re-weighting   & \nameref{sec:experiment4}                   & $d \in \set{3, 5, 7, 9, 11}$, $p \in [0.003, 0.06]$, $p_e=1.0$ & 0.81 - 0.96                      & \autoref{fig:pymatching-pthresh-erase} \\ \hline
+    \end{tabularx}
+    \caption{Summary of experimental setups used to evaluate the impact of erasure conversion $p_e$ and correlated vs. uncorrelated decoding schemes on the surface code error threshold $p_{thr}$. The highest $p_{thr}$ was determined to be 3.02\% when $R_e=1.0$ using the hypergraph MWPF decoder.}
+    \label{tab:1}
+\end{table}
+
+\newpage
+\paragraphsc{Fault Tolerant Code Distance.} We plot logical error rate $P_L$ vs. code distance $d$ for below-threshold samples  ($p \le 0.01$) and fit a least-squares linear regression \autoref{fig:fault-tolerant-projection} and extrapolate the fit to $P_L \approx 10^{-12}$. The X-intercept of the fit line represents the minimum code distance $d$ needed for one logical bit to survive one trillion rounds, which is the current estimate of the number of rounds needed to run a useful quantum algorithm [CITATION NEEDED].
+
+For $R_e = 1.0$ and erasure-aware hypergraph MWPF decoding, \autoref{fig:fault-tolerant-projection} a logical qubit implemented with $d \approx 17$ (or $d^2 = 289$ physical qubits in the array) is projected to survive one trillion rounds. This result should be taken with a bucket of salt because we do not calculate residuals from the least-squares fit to quantify goodness of fit. The hypergraph MWPF dataset is extrapolated from a more limited range of code distances (green, $d<9$) compared to other noise regimes. Due to the computational expense of the hypergraph decoder, we could not sample as much below-threshold data in that particular noise regime. See: \nameref{sec:memleak-sidequest}.
+% TODO - this plot should say p \ltq 0.01, not p=0.01
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth,height=0.55\textheight, keepaspectratio]{fig2_survival_code_distance.png}
+    \caption{Among below-threshold ($p \le 0.01$) samples,
+        the minimum code distance $d \approx 17$ is projected to survive one trillion rounds with full erasure conversion $(p_e=1)$ and Hypergraph MWPF syndrome decoding (green),
+        and $\approx 72\%$ decrease from $d \approx 60$ with erasure-aware edge re-weighting with MWPM (orange),
+        and $\approx 83\%$ decrease  from $d \approx 100$ with MWPM in a pure Pauli noise regime with no erasures.
+    }
+    \label{fig:fault-tolerant-projection}
+\end{figure}
+
+
+
+\newpage
+\section{Methods}
+See \autoref{sec:results} for high-level methodology. This section describe our metrics, calculations, and experimental procedures in excruciating detail.
+\paragraphsc{Metrics \& Fits.}
+For our Monte Carlo simulations, we define our logical error rate $P_L$ calculation as:
+\begin{align}P_L = \dfrac{\text{k}}{\text{n}} \quad \text{$k=$ number of logical failures, $n$ = total number of shots}
+\end{align}
+
+For each circuit and decoding method described in \autoref{tab:1}, we plot $P_L$ vs physical error rate $p$ in \autoref{fig:pymathing-pthresh}, \autoref{fig:mwpf-pthresh}, \autoref{fig:mwpf-pthresh-erase}, \autoref{fig:pymatching-pthresh-erase} and fit a binomial distribution with \verb|sinter|. \footnote{See: \emph{Appendix: combining Bernoulli distributions} by Craig Gidney for a detailed explanation of the method used to combine per-shot and per-round distribution. We use per-shot representation in our final results. \cite{gidney_answer_2023}}
+
 
 \paragraphsc{Circuit Simulation}
-We studied the performance of a rotated surface code under various noise and error syndrome decoding regimes (\autoref{tab:1}), to understand the impact of erasure conversion on the error threshold. We simulate a rotated surface code in Stim \cite{gidney_stim_2021}. We perform Monte Carlo simulations over a sweep of parameters: code distance $d \in \set{3, 5, 7, 9, 11}$, depolarizing error rate $p \in [0.001, 0.06]$, and erasure error rate $p_e \in [0, 1]$.
+We use Stim to implement the surface code stabilizer circuit \cite{gidney_stim_2021}. Notably, we rely on the surface code circuit declarations produced by the \verb|stim.Circuit.generated| API, which are intended for demonstration purposes and \textbf{not} recommended for research.
 
-We estimate the logical error rate $P_L$ after $d$ rounds of measurements. We assume perfect measurements. Before each round and after each Clifford gate, we model depolarizing noise with uniformly random Pauli errors from the set $\set{I, X, Y, Z}$.
-In the cases where $p_e$ is nonzero, we convert a percentage of depolarizing errors to erasure errors with a known location. After an erasure error is detected, the affected qubit is reset to a maximally mixed state $I/2$.
-
-The resulting syndrome measurements are decoded to determine whether the sample can be corrected or results in a logical error. We begin by estimating $p_{thr}$ under uniform Pauli noise channel in \nameref{para:experiment1} and \nameref{para:experiment2}.
-
-In \nameref{para:experiment3}, we explore the impact of converting a percentage $p_e$ of events in the Pauli noise channel to an erasure error channel. This conversion scheme reflects the interleaved erasure detection that occurs when applying a fast detection pulse during a Rydberg gate protocol. We do not select a particular Rydberg gate protocol, because our initial experiment setup assumes a 100\% error conversion rate that does not correspond to a physical system.
-
-In \nameref{para:experiment4}, we explore a method for re-weighting the edges of the bipartite graph representing a parity check matrix. We imagine the weight updates are informed by mid-circuit erasure check qubits with perfect measurements. This particular setup more closely describes a dual-rail transmon system, but similar to experiments 2-3 we do not assume a particular physical system.
-
-
-\paragraphsc{Syndrome decoding}
-The decoding process occurs in two phases:
-
-\begin{enumerate}
-    \item \textbf{Offline phase} (once per unique combination of swept parameters)
-          TODO - explanation of Stim detector error model (DEM), figures generated from DEM.
-          We build a binary parity check matrix $H$ which encodes which error mechanisms flip a particular detector. Each row in $H$ corresponds to a parity check and each column corresponds to some error mechanism. The element $H[i,j]$ is $1$ is parity check $i$ is flipped by the error mechanism in $j$, otherwise $H[i,j]$ is 0.
-
-          TODO
-
-          %   The check matrix $H$ can also be understood as a Tanner graph, expressing classical constraints for the error correcting code.
-
-          %   In the cases where we consider heralded erasure errors, we add a
-
-          %   Each edge in the graph is weighted by TODO
-
-          TODO For MWPF the row/col representation has multiple incident entries. Cols of not-hyper incidence matrix have exactly two non-zero entries since each edge can only have two vertices (one at each end). The hypergraph representation can have multiple vertices per edge.
-
-    \item \textbf{Online decoding} (per shot in Monte Carlo simulation)
-
-          Sample circuit, measure binary syndrome vector with one bit per detector.
-          PyMatching: sparse blossom to find minimum-weight set of edges w/ incidence matching (exactly) the syndrome.
-          MWPF:
-\end{enumerate}
 
 In the cases where $p_e$ is zero (no erasure conversion is performed), we decode the measured error syndrome with a Minimum-Weight Perfect Matching decoder (PyMatching) \cite{oscarhiggott_oscarhiggottpymatching_2025}. TODO - explanation of Stim detector error model (DEM), figures generated from DEM. There is a one-to-one correspondence between each detector in the DEM and a node in the graph passed to PyMatching.
 
@@ -230,46 +285,122 @@ In the cases where $p_e$ is nonzero, we TODO
 
 
 
-\subsection{Experiments}
+\subsection{Experiment 1: Min-weight Perfect Matching Baseline.} \label{sec:experiment1}
+See \autoref{appendix:experiment1} for experiment results. We consider $R_e=0.0$ with a purely Pauli noise regime. We apply a minimum-weight perfect matching (PyMatching) decoder, with the syndrome decoding process split between two phases:
+\begin{enumerate}
+    \item \textbf{Offline phase} (once per unique combination of swept parameters)
 
+          For each choice of code distance $d$, physical error rate $p$, and erasure conversion rate $p_e$,
+          we compile the Stim circuit into a \emph{detector error model} (DEM) \cite{gidney_stim_2021}.
+          The DEM defines a collection of binary detectors $\{D_i\}_{i=1}^m$ and a collection of
+          error mechanisms $\{E_j\}_{j=1}^n$. Each error mechanism $E_j$ is annotated with the subset of
+          detectors it flips. This defines a binary parity-check matrix: \footnote{We understand the binary parity-check matrix as a Tanner graph, a type of bipartite graph used in classical low-density parity-check error-correcting codes. \cite{noauthor_tanner_2025}}
+          \begin{align*}
+              H \in \{0,1\}^{m\times n}, \qquad
+              H_{ij} =
+              \begin{cases}
+                  1 & \text{if error mechanism } E_j \text{ flips detector } D_i, \\[4pt]
+                  0 & \text{otherwise}.
+              \end{cases}
+          \end{align*}
 
-\begin{table}[ht]
-    \hspace{-2em}
-    \begin{tabularx}{1.1\textwidth}{|l|X|p{9em}|p{2em}|l|}
-        \hline
-        \textbf{Decoding Scheme} & \textbf{Monte Carlo Experiment Description} & \textbf{Parameter Sweep}                                       & \textbf{$p_{thr}$} & \textbf{Results}                       \\ \hline
-        MWPM baseline            & \nameref{para:experiment1}                  & $d \in \set{3, 5, 7, 9, 11}$, $p \in [0.003, 0.02]$, $p_e=0.0$ & 0.57 - 0.78        & \autoref{fig:pymathing-pthresh}        \\ \hline
-        MWPF baseline            & \nameref{para:experiment2}                  & $d \in \set{3, 5, 7, 9, 11}$, $p \in [0.003, 0.02]$, $p_e=0.0$ & 0.62 - 0.75        & \autoref{fig:mwpf-pthresh}             \\ \hline
-        Hypergraph MWPF          & \nameref{para:experiment3}                  & $d \in \set{3, 5, 7, 9, 11}$, $p \in [0.003, 0.06]$, $p_e=1.0$ & 2.70 - 3.02        & \autoref{fig:mwpf-pthresh-erase}       \\ \hline
-        MWPM with re-weighting   & \nameref{para:experiment4}                  & $d \in \set{3, 5, 7, 9, 11}$, $p \in [0.003, 0.06]$, $p_e=1.0$ & 0.81 - 0.96        & \autoref{fig:pymatching-pthresh-erase} \\ \hline
-    \end{tabularx}
-    \caption{Summary of experimental setups used to evaluate the impact of erasure conversion $p_e$ and correlated vs. uncorrelated decoding schemes on the surface code error threshold $p_{thr}$.}
-    \label{tab:1}
-\end{table}
+          Each column of $H$ has Hamming weight 1 or~2, so we can represent the parity check matrix as a graph where column $j$ corresponds to either an edge between two detectors or a half-edge connecting a detector to a boundary node.
+          Each column $j$ is assigned an edge weight $w_j$ derived from the probability $p_j$ of the error
+          mechanism $E_j$: \cite{higgott_sparse_2025}
+          \begin{align*}
+              w_j \approx \log\!\left(\frac{1 - p_j}{p_j}\right).
+          \end{align*}
 
-\paragraphsc{Experiment 1: Minimum-weight perfect matching baseline.} \label{para:experiment1}
+          These data $(H, \{w_j\})$ are used to construct a \texttt{pymatching.Matching} object.
+
+    \item \textbf{Online phase:} syndrome measurement and minimum-weight decodings
+
+          \subsection*{Online phase: syndrome measurement and minimum-weight decoding}
+
+          During Monte Carlo simulation, each noisy circuit shot produces a binary syndrome vector:
+          \begin{align*}
+              \mathbf{s} \in \{0,1\}^m,
+          \end{align*}
+          where $s_i$ is the value of detector $D_i$ for that shot.
+          If we let $\mathbf{x} \in \{0,1\}^n$ be some unknown binary error vector, with $x_j = 1$ indicating
+          that error mechanism $E_j$ occurred. The detectors then must be constrainted to the solutions for:
+          \begin{align*}
+              H \mathbf{x} = \mathbf{s} \pmod{2}.
+          \end{align*}
+
+          For binary syndrome vector $\mathbf{s}$, \texttt{PyMatching} solves the minimum-weight decoding problem on the graph $H$ with the Sparse Blossom algorithm \cite{higgott_sparse_2025}, an implementation of MWPM designed for fast computations. The authors of Sparse Blossom explot the fact that the decoder only needs to predict which logical observables were flipped, rather than the physical errors.  \footnote{ For a textbook-quality explanation of decoding error syndromes in the surface code, see Craig Gidney's answer to StackExchange post: "Can you give an intuitive idea behind how the Minimum Weight Perfect Matching (MWPM) decoder works?"\cite{gidney_answer_2023-1} }. The result $\hat{\mathbf{x}}$ is mapped to a corresponding Pauli correction on the data qubits. We assume
+          \begin{align*}
+              \hat{\mathbf{x}}
+              = \arg\min_{\mathbf{x} \in \{0,1\}^n}
+              \left\{
+              \sum_{j=1}^n w_j x_j
+              \;:\;
+              H \mathbf{x} = \mathbf{s} \pmod{2}
+              \right\},
+          \end{align*}
+          The result $\hat{\mathbf{x}}$ is mapped to a corresponding Pauli correction on the data qubits.
+          Comparing the corrected logical measurement to the ideal value determines whether the shot
+          contributes to the logical error rate $P_L$.
+
+    \item \textbf{Online decoding} (per shot in Monte Carlo simulation)
+
+          Sample circuit, measure binary syndrome vector with one bit per detector.
+          PyMatching: sparse blossom to find minimum-weight set of edges w/ incidence matching (exactly) the syndrome.
+          MWPF:
+\end{enumerate}
+
+\subsection{Experiment 2: Min-weight Parity Factor Baseline } \label{sec:experiment2}
 TODO
 
-\paragraphsc{Experiment 2: Minimum-weight parity factor baseline } \label{para:experiment2}
-TODO
-
-\paragraphsc{Experiment 3: Erasure-aware minimum-weight parity factor } \label{para:experiment3}
+\subsection{Experiment 3: Erasure-aware Min-weight Parity Factor } \label{sec:experiment3}
 TOOD
 
 \newpage
-\paragraphsc{Experiment 4: Erasure-aware minimum-weight perfect matching} \label{para:experiment4}
+\subsection{Experiment 4: Erasure-aware Min-weight Perfect Matching} \label{sec:experiment4}
 
-\begin{figure}[hb]
-    \hspace{-2em}
-    \includegraphics[width=1.5\linewidth, height=0.4\textheight, keepaspectratio]{fig_experiment4.png}
-    \caption{\textbf{Dual-rail rrasure-check qubits in superconducting transmons }.
-        \textbf{(a)} A set of errors occuring in the surface code. \textbf{(b)} Syndrome information available in a pure Pauli noise regime. \textbf{(c)} Decoder prediction that results in a logical Z error (orange path). \textbf{(d)} Syndrome information from parity-check ancilla qubits enriched with erasure checks. \textbf{(e)} A correlated erasure-aware error model weights the green path more heavily, avoiding the logical error in (b).
-        \cite{chadwick_erasure_2025}
-    }
-    \label{fig:experiment4-sampler}
-\end{figure}
+
+
+
+\section{Discussion}
+
+TODO our opinion of the hypergraph construction of this problem.
+
+In \nameref{sec:experiment3}, we explore the impact of converting a percentage $p_e$ of events in the Pauli noise channel to an erasure error channel. This conversion scheme reflects the interleaved erasure detection that occurs when applying a fast detection pulse during a Rydberg gate protocol. We do not select a particular Rydberg gate protocol, because our initial experiment setup assumes a 100\% error conversion rate that does not correspond to a physical system.
+
+In \nameref{sec:experiment4},
+
+and replace all \verb|DEPOLARIZE1| \verb|DEPOLARIZE2| noise channels with a \verb|HERALDED_ERROR| noise channel that fires with probability $p$ at a known location.
+
+we explore a method for re-weighting the edges of the bipartite graph representing a parity check matrix. We imagine the weight updates are informed by mid-circuit erasure check qubits with perfect measurements. This particular setup more closely describes a dual-rail transmon system, but similar to experiments 2-3 we do not assume a particular physical system.
+
+
+\section{Conclusion}
+
+Summarize key findings succintly.
+
+Sketch a follow-up project w/ sweep across $R_e$.
+
+\paragraphsc{Acknowledgements}
+
+Shimon Kolkowitz, Harry Levine, Thiago Bergamaschi
+
+\paragraphsc{Code \& Data Availability.}
+% TODO add license
+All contents of this report are freely available under the MIT license: \href{https://github.com/leigh-johnson/C191A-qubit-minesweeper}{https://github.com/leigh-johnson/C191A-qubit-minesweeper}
 
 \newpage
+% cite all references
+% \nocite{*}
+\printbibliography[title={References},heading=bibnumbered]
+
+\newpage
+\appendix
+
+
+\section{Appendix: Experiment Results}
+
+
+\subsection{Experiment 1: Min-weight Perfect Matching Baseline.} \label{appendix:experiment1}
 \begin{figure}[H]
     \centering
     \begin{subfigure}[b]{\linewidth}
@@ -284,11 +415,12 @@ TOOD
         \includegraphics[width=\linewidth, height=0.4\textheight, keepaspectratio]{fig1_pymatching_threshold_zoomed.png}
         \label{fig:pymatching-pthresh-b}
     \end{subfigure}
-    \caption{\textbf{Baseline circuit-level error threshold: minimum-weight perfect matching}.Comparison of logical error rate $P_L$ with physical qubit error rate $p$ modeled by uniform Pauli noise. The lower and upper bounds of the threshold region $p_{thrs}$ between 0.57\% and 0.78\% is estimated from the d=3,5 and d=9,11 crossings. \\ See: \nameref{para:experiment1}.}
+    \caption{\textbf{Baseline circuit-level error threshold: minimum-weight perfect matching}.Comparison of logical error rate $P_L$ with physical qubit error rate $p$ modeled by uniform Pauli noise. The lower and upper bounds of the threshold region $p_{thrs}$ between 0.57\% and 0.78\% is estimated from the d=3,5 and d=9,11 crossings. \\ See: \nameref{sec:experiment1}.}
     \label{fig:pymathing-pthresh}
 
 \end{figure}
 
+\subsection{Experiment 2: Min-weight Parity Factor Baseline } \label{appendix:experiment2}
 \begin{figure}[H]
     \centering
     \begin{subfigure}[b]{\linewidth}
@@ -303,11 +435,12 @@ TOOD
         \includegraphics[width=\linewidth, height=0.4\textheight, keepaspectratio]{fig1_mwpf_threshold_erasure=0_zoomed.png}
         \label{fig:mwpf-pthresh-b}
     \end{subfigure}
-    \caption{\textbf{Baseline circuit-level error threshold: minimum-weight parity factor.} Comparison of logical error rate $P_L$ with physical qubit error rate $p$ modeled by uniform Pauli noise. The lower and upper bounds of the threshold region $p_{thrs}$ between 0.62\% and 0.75\% is estimated from the d=3,5 and d=9,11 crossings. \\ See: \nameref{para:experiment2}.}
+    \caption{\textbf{Baseline circuit-level error threshold: minimum-weight parity factor.} Comparison of logical error rate $P_L$ with physical qubit error rate $p$ modeled by uniform Pauli noise. The lower and upper bounds of the threshold region $p_{thrs}$ between 0.62\% and 0.75\% is estimated from the d=3,5 and d=9,11 crossings. \\ See: \nameref{sec:experiment2}.}
     \label{fig:mwpf-pthresh}
 \end{figure}
 
 
+\subsection{Experiment 3: Erasure-aware Min-weight Parity Factor } \label{appendix:experiment3}
 \begin{figure}[H]
     \centering
     \begin{subfigure}[b]{\linewidth}
@@ -322,10 +455,12 @@ TOOD
         \includegraphics[width=\linewidth, height=0.4\textheight, keepaspectratio]{fig1_mwpf_threshold_erasure=1_zoomed.png}
         \label{fig:mwpf-pthresh-erase-b}
     \end{subfigure}
-    \caption{\textbf{Circuit-level error threshold: hypergraph minimum-weight parity factor decoding for errors correlated to erasure events $p_e$. } Comparison of logical error rate $P_L$ with physical qubit error rate $p$ converted to erasure errors. Following  The lower and upper bounds of the threshold region $p_{thrs}$ between 2.70\% and 3.02\% is estimated from the d=3,5 and d=9,11 crossings. \\ See: \nameref{para:experiment3}.}
+    \caption{\textbf{Circuit-level error threshold: hypergraph minimum-weight parity factor decoding for errors correlated to erasure events $p_e$. } Comparison of logical error rate $P_L$ with physical qubit error rate $p$ converted to erasure errors. Following  The lower and upper bounds of the threshold region $p_{thrs}$ between 2.70\% and 3.02\% is estimated from the d=3,5 and d=9,11 crossings. \\ See: \nameref{sec:experiment3}.}
     \label{fig:mwpf-pthresh-erase}
 \end{figure}
 
+
+\subsection{Experiment 4: Erasure-aware Min-weight Perfect Matching} \label{appendix:experiment4}
 \begin{figure}[H]
     \centering
     \begin{subfigure}[b]{\linewidth}
@@ -340,7 +475,7 @@ TOOD
         \includegraphics[width=\linewidth, height=0.4\textheight, keepaspectratio]{fig1_pymatching_custom_erasure=1_zoomed.png}
         \label{fig:mwpf-pymatching-erase-b}
     \end{subfigure}
-    \caption{\textbf{Circuit-level error threshold: minimum-weight perfect matching with edge re-weighting for errors correlated to erasure events $p_e$. } Comparison of logical error rate $P_L$ with physical qubit error rate $p$ converted to erasure errors. Following  The lower and upper bounds of the threshold region $p_{thrs}$ between 0.57\% and 0.78\% is estimated from the d=3,5 and d=9,11 crossings. \\ See: \nameref{para:experiment4}.}
+    \caption{\textbf{Circuit-level error threshold: minimum-weight perfect matching with edge re-weighting for errors correlated to erasure events $p_e$. } Comparison of logical error rate $P_L$ with physical qubit error rate $p$ converted to erasure errors. Following  The lower and upper bounds of the threshold region $p_{thrs}$ between 0.57\% and 0.78\% is estimated from the d=3,5 and d=9,11 crossings. \\ See: \nameref{sec:experiment4}.}
     \label{fig:pymatching-pthresh-erase}
 \end{figure}
 
@@ -381,47 +516,150 @@ TOOD
 %     \label{fig:1_thresholds}
 % \end{figure}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\linewidth,height=0.45\textheight, keepaspectratio]{fig2_survival_code_distance.png}
-    \label{fig:2}
-    \caption{Among below-threshold ($p_{thr}=0.01$) samples,
-        the minimum code distance $d \approx 17$ is projected to survive one trillion rounds with full erasure conversion $(p_e=1)$ and Hypergraph MWPF syndrome decoding (green),
-        and $\approx 72\%$ decrease from $d \approx 60$ with erasure-aware edge re-weighting with MWPM (orange),
-        and $\approx 83\%$ decrease  from $d \approx 100$ with MWPM in a pure Pauli noise regime with no erasures.
-    }
-\end{figure}
+% \section{Appendix: Example Stim Circuit}
 
+% \footnotesize
+% \begin{verbatim}
+% stim gen \
+%     --code surface_code \
+%     --task rotated_memory_x \
+%     --distance 3 \
+%     --rounds 3 \
+%     --before_round_data_depolarization 0.001 \
+%     --after_clifford_depolarization 0.02
+% # Generated surface_code circuit.
+% # task: rotated_memory_x
+% # rounds: 3
+% # distance: 3
+% # before_round_data_depolarization: 0.001
+% # before_measure_flip_probability: 0
+% # after_reset_flip_probability: 0
+% # after_clifford_depolarization: 0.02
+% # layout:
+% #                 X25
+% #     L15     d17     d19
+% # Z14     X16     Z18
+% #     L8      d10     d12
+% #         Z9      X11     Z13
+% #     L1      d3      d5 
+% #         X2 
+% # Legend:
+% #     d# = data qubit
+% #     L# = data qubit with logical observable crossing
+% #     X# = measurement qubit (X stabilizer)
+% #     Z# = measurement qubit (Z stabilizer)
+% QUBIT_COORDS(1, 1) 1
+% QUBIT_COORDS(2, 0) 2
+% QUBIT_COORDS(3, 1) 3
+% QUBIT_COORDS(5, 1) 5
+% QUBIT_COORDS(1, 3) 8
+% QUBIT_COORDS(2, 2) 9
+% QUBIT_COORDS(3, 3) 10
+% QUBIT_COORDS(4, 2) 11
+% QUBIT_COORDS(5, 3) 12
+% QUBIT_COORDS(6, 2) 13
+% QUBIT_COORDS(0, 4) 14
+% QUBIT_COORDS(1, 5) 15
+% QUBIT_COORDS(2, 4) 16
+% QUBIT_COORDS(3, 5) 17
+% QUBIT_COORDS(4, 4) 18
+% QUBIT_COORDS(5, 5) 19
+% QUBIT_COORDS(4, 6) 25
+% RX 1 3 5 8 10 12 15 17 19
+% R 2 9 11 13 14 16 18 25
+% TICK
+% DEPOLARIZE1(0.001) 1 3 5 8 10 12 15 17 19
+% H 2 11 16 25
+% DEPOLARIZE1(0.02) 2 11 16 25
+% TICK
+% CX 2 3 16 17 11 12 15 14 10 9 19 18
+% DEPOLARIZE2(0.02) 2 3 16 17 11 12 15 14 10 9 19 18
+% TICK
+% CX 2 1 16 15 11 10 8 14 3 9 12 18
+% DEPOLARIZE2(0.02) 2 1 16 15 11 10 8 14 3 9 12 18
+% TICK
+% CX 16 10 11 5 25 19 8 9 17 18 12 13
+% DEPOLARIZE2(0.02) 16 10 11 5 25 19 8 9 17 18 12 13
+% TICK
+% CX 16 8 11 3 25 17 1 9 10 18 5 13
+% DEPOLARIZE2(0.02) 16 8 11 3 25 17 1 9 10 18 5 13
+% TICK
+% H 2 11 16 25
+% DEPOLARIZE1(0.02) 2 11 16 25
+% TICK
+% MR 2 9 11 13 14 16 18 25
+% DETECTOR(2, 0, 0) rec[-8]
+% DETECTOR(2, 4, 0) rec[-3]
+% DETECTOR(4, 2, 0) rec[-6]
+% DETECTOR(4, 6, 0) rec[-1]
+% REPEAT 2 {
+%     TICK
+%     DEPOLARIZE1(0.001) 1 3 5 8 10 12 15 17 19
+%     H 2 11 16 25
+%     DEPOLARIZE1(0.02) 2 11 16 25
+%     TICK
+%     CX 2 3 16 17 11 12 15 14 10 9 19 18
+%     DEPOLARIZE2(0.02) 2 3 16 17 11 12 15 14 10 9 19 18
+%     TICK
+%     CX 2 1 16 15 11 10 8 14 3 9 12 18
+%     DEPOLARIZE2(0.02) 2 1 16 15 11 10 8 14 3 9 12 18
+%     TICK
+%     CX 16 10 11 5 25 19 8 9 17 18 12 13
+%     DEPOLARIZE2(0.02) 16 10 11 5 25 19 8 9 17 18 12 13
+%     TICK
+%     CX 16 8 11 3 25 17 1 9 10 18 5 13
+%     DEPOLARIZE2(0.02) 16 8 11 3 25 17 1 9 10 18 5 13
+%     TICK
+%     H 2 11 16 25
+%     DEPOLARIZE1(0.02) 2 11 16 25
+%     TICK
+%     MR 2 9 11 13 14 16 18 25
+%     SHIFT_COORDS(0, 0, 1)
+%     DETECTOR(2, 0, 0) rec[-8] rec[-16]
+%     DETECTOR(2, 2, 0) rec[-7] rec[-15]
+%     DETECTOR(4, 2, 0) rec[-6] rec[-14]
+%     DETECTOR(6, 2, 0) rec[-5] rec[-13]
+%     DETECTOR(0, 4, 0) rec[-4] rec[-12]
+%     DETECTOR(2, 4, 0) rec[-3] rec[-11]
+%     DETECTOR(4, 4, 0) rec[-2] rec[-10]
+%     DETECTOR(4, 6, 0) rec[-1] rec[-9]
+% }
+% MX 1 3 5 8 10 12 15 17 19
+% DETECTOR(2, 0, 1) rec[-8] rec[-9] rec[-17]
+% DETECTOR(2, 4, 1) rec[-2] rec[-3] rec[-5] rec[-6] rec[-12]
+% DETECTOR(4, 2, 1) rec[-4] rec[-5] rec[-7] rec[-8] rec[-15]
+% DETECTOR(4, 6, 1) rec[-1] rec[-2] rec[-10]
+% OBSERVABLE_INCLUDE(0) rec[-3] rec[-6] rec[-9]
+% \end{verbatim}
 
-\section{Discussion}
-
-TODO why we opted to use mwpf instead of updating PyMatching edge weights, per the Thompson paper / talk.
-
-TODO our opinion of the hypergraph construction of this problem.
-
-
-
-\section{Conclusion}
-
-\paragraphsc{Acknowledgements}
-
-Shimon Kolkowitz, Harry Levine, Thiago Bergamaschi
-
-
-
-\newpage
-% cite all references
-% \nocite{*}
-\printbibliography[title={References},heading=bibnumbered]
-
-\newpage
-\appendix
 
 \section{Appendix: Syndrome of Loss Errors}
 
 Describe how a loss is heralded during state readout. Each potential loss location is described by a distinct error probability, described by a unique configuration of the error syndroms. [EXAMPLE OF ERROR SYNDROME]
 
 \section{Appendix: Additional Figures and Tables}
+
+\begin{figure}[hb]
+    \hspace{-2em}
+    \includegraphics[width=1.5\linewidth, height=0.4\textheight, keepaspectratio]{fig_experiment4.png}
+    \caption{\textbf{Dual-rail rrasure-check qubits in superconducting transmons }.
+        \textbf{(a)} A set of errors occuring in the surface code. \textbf{(b)} Syndrome information available in a pure Pauli noise regime. \textbf{(c)} Decoder prediction that results in a logical Z error (orange path). \textbf{(d)} Syndrome information from parity-check ancilla qubits enriched with erasure checks. \textbf{(e)} A correlated erasure-aware error model weights the green path more heavily, avoiding the logical error in (b).
+        \cite{chadwick_erasure_2025}
+    }
+    \label{fig:experiment4-sampler}
+\end{figure}
+
+\section{Appendix: A Fun Sidequest: Profiling and Patching a Memory Leak}\label{sec:memleak-sidequest}
+
+if I have time, writeup how I diagnosed/profiled the memory leak in MWPF, how it impacted our results where $R_e=1.0$, and how I patched the issue so we could collect the rest of our data.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth, keepaspectratio]{fig_mwpf_memory_leak.png}
+    \caption{\textbf{Memory Leak}}
+    \label{fig:mwpf-memleak}
+\end{figure}
+
 
 \newpage
 \printglossaries
