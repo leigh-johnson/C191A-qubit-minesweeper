@@ -196,6 +196,7 @@ To explore the impact of erasure error conversion, we implement the error model 
 We compare four methods for decoding syndrome measurements, described in more detail in each experiment procedure section:
 
 \begin{itemize}
+    \small
     \item \nameref{para:experiment1}
           We consider $R_e=0.0$ with a purely Pauli noise regime. We apply a minimum-weight perfect matching (PyMatching) decoder.
     \item \nameref{para:experiment4}
@@ -216,12 +217,12 @@ We compare four methods for decoding syndrome measurements, described in more de
 % TODO - move to background
 % $p_e$ of events in the Pauli noise channel to an erasure error channel. This conversion scheme reflects the interleaved erasure detection that occurs when applying a fast detection pulse during a Rydberg gate protocol. We do not select a particular Rydberg gate protocol, because our initial experiment setup assumes a 100\% error conversion rate that does not correspond to a physical system.
 
-In \autoref{fig:best-threshold-comparison}, we define $p_{thr}$ as the physical error rate $p$ where the logical error rate $P_L$ decreases as a function of $d$. To estimate $p_{thr}$, we identify crossing points where the logical error rate decreases as code distance $d$ increases, with the d=3,5 and d=9,11 crossings representing the lower and upper bound of $p_{thr}$ respectively. The highest $p_{thr}$ was 3.02\% when $R_e=1.0$ using the hypergraph MWPF decoder.
+We define $p_{thr}$ as the physical error rate $p$ where the logical error rate $P_L$ decreases as a function of $d$. To estimate $p_{thr}$, we identify crossing points in \autoref{fig:best-threshold-comparison}, where the logical error rate decreases as code distance $d$ increases, with the d=3,5 and d=9,11 crossings representing the lower and upper bound of $p_{thr}$ respectively. The highest $p_{thr}$ was 3.02\% when $R_e=1.0$ using the erasure-aware hypergraph MWPF decoder, compared to a 0.75\% threshold using the MWPF decoder in a pure Pauli noise regime.
 
-
+% TODO - fix legend location in this plot, should be pinned to bottom-right whitespace
 \begin{figure}[H]
     \hspace{-2em}
-    \includegraphics[width=1.5\linewidth, height=0.4\textheight, keepaspectratio]{fig1_summary}
+    \includegraphics[width=1.5\linewidth, height=0.55\textheight, keepaspectratio]{fig1_summary}
     \caption{\textbf{Physical error thresholds in our surface code simulations.}
         From the d=9,11 crossings, we estimate the error threshold $p_{thr}$ under a uniform Pauli noise regime
     }
@@ -229,8 +230,9 @@ In \autoref{fig:best-threshold-comparison}, we define $p_{thr}$ as the physical 
 \end{figure}
 
 \begin{table}[H]
-    \hspace{-2em}
-    \begin{tabularx}{1.1\textwidth}{|l|X|p{9em}|p{2em}|l|}
+    \hspace{-5em}
+    \small
+    \begin{tabularx}{1.2\textwidth}{|p{6em}|X|p{9em}|p{2em}|l|}
         \hline
         \textbf{Decoding Scheme} & \textbf{Monte Carlo Experiment Description} & \textbf{Parameter Sweep}                                       & \textbf{$p_{thr}$}               & \textbf{Results}                       \\ \hline
         MWPM baseline            & \nameref{para:experiment1}                  & $d \in \set{3, 5, 7, 9, 11}$, $p \in [0.003, 0.02]$, $p_e=0.0$ & 0.57 - 0.78                      & \autoref{fig:pymathing-pthresh}        \\ \hline
@@ -241,6 +243,23 @@ In \autoref{fig:best-threshold-comparison}, we define $p_{thr}$ as the physical 
     \caption{Summary of experimental setups used to evaluate the impact of erasure conversion $p_e$ and correlated vs. uncorrelated decoding schemes on the surface code error threshold $p_{thr}$. The highest $p_{thr}$ was determined to be 3.02\% when $R_e=1.0$ using the hypergraph MWPF decoder.}
     \label{tab:1}
 \end{table}
+
+\newpage
+\paragraphsc{Fault Tolerant Code Distance.} We plot logical error rate $P_L$ vs. code distance $d$ for below-threshold samples  ($p \le 0.01$) and fit a least-squares linear regression \autoref{fig:fault-tolerant-projection} and extrapolate the fit to $P_L \approx 10^{-12}$. The X-intercept of the fit line represents the minimum code distance $d$ needed for one logical bit to survive one trillion rounds, which is the current estimate of the number of rounds needed to run a useful quantum algorithm [CITATION NEEDED].
+
+For $R_e = 1.0$ and erasure-aware hypergraph MWPF decoding, \autoref{fig:fault-tolerant-projection} a logical qubit implemented with $d \approx 17$ (or $d^2 = 289$ physical qubits in the array) is projected to survive one trillion rounds. This result should be taken with a bucket of salt because we do not calculate residuals from the least-squares fit to quantify goodness of fit. The hypergraph MWPF dataset is extrapolated from a more limited range of code distances (green, $d<9$) compared to other noise regimes. Due to the computational expense of the hypergraph decoder, we could not sample as much below-threshold data in that particular noise regime. See: \nameref{sec:memleak-sidequest} and \autoref{fig:mwpf-memleak}
+% TODO - this plot should say p \ltq 0.01, not p=0.01
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth,height=0.55\textheight, keepaspectratio]{fig2_survival_code_distance.png}
+    \caption{Among below-threshold ($p \le 0.01$) samples,
+        the minimum code distance $d \approx 17$ is projected to survive one trillion rounds with full erasure conversion $(p_e=1)$ and Hypergraph MWPF syndrome decoding (green),
+        and $\approx 72\%$ decrease from $d \approx 60$ with erasure-aware edge re-weighting with MWPM (orange),
+        and $\approx 83\%$ decrease  from $d \approx 100$ with MWPM in a pure Pauli noise regime with no erasures.
+    }
+    \label{fig:fault-tolerant-projection}
+\end{figure}
+
 
 
 \newpage
@@ -446,17 +465,6 @@ TOOD
 %     \label{fig:1_thresholds}
 % \end{figure}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\linewidth,height=0.45\textheight, keepaspectratio]{fig2_survival_code_distance.png}
-    \label{fig:2}
-    \caption{Among below-threshold ($p_{thr}=0.01$) samples,
-        the minimum code distance $d \approx 17$ is projected to survive one trillion rounds with full erasure conversion $(p_e=1)$ and Hypergraph MWPF syndrome decoding (green),
-        and $\approx 72\%$ decrease from $d \approx 60$ with erasure-aware edge re-weighting with MWPM (orange),
-        and $\approx 83\%$ decrease  from $d \approx 100$ with MWPM in a pure Pauli noise regime with no erasures.
-    }
-\end{figure}
-
 
 \section{Discussion}
 
@@ -487,6 +495,18 @@ Shimon Kolkowitz, Harry Levine, Thiago Bergamaschi
 Describe how a loss is heralded during state readout. Each potential loss location is described by a distinct error probability, described by a unique configuration of the error syndroms. [EXAMPLE OF ERROR SYNDROME]
 
 \section{Appendix: Additional Figures and Tables}
+
+\section{Appendix: A Fun Sidequest: Profiling and Patching a Memory Leak}\label{sec:memleak-sidequest}
+
+if I have time, writeup how I diagnosed/profiled the memory leak in MWPF, how it impacted our results where $R_e=1.0$, and how I patched the issue so we could collect the rest of our data.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth, keepaspectratio]{fig_mwpf_memory_leak.png}
+    \caption{\textbf{Memory Leak}}
+    \label{fig:mwpf-memleak}
+\end{figure}
+
 
 \newpage
 \printglossaries
