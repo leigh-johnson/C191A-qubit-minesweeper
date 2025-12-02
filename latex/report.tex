@@ -404,8 +404,11 @@ to Experiment1; only the decoding algorithm is changed.  Notably, we do not use 
               \right\},
           \end{align*}
 
-          Although the solution structure may look similar to Experiment1, the solution set $\mathbf{x}$ are now all the parity factors whose incident hyperedges correspond to the observed detector parities. In the pure Pauli-noise baseline ($R_e = 0$), we understand this methodology to approximate the MWPM
+          Although the solution structure may look similar to Experiment1, the solution set $\mathbf{x}$ are now all the parity factors whose incident hyperedges correspond to the observed detector parities. In the pure Pauli-noise baseline ($R_e = 0$), we understand this methodology to approximate the MWPM because in this special case each error mechanism flips at most two detectors.
 
+          TODO maybe it makes more sense to constrast how MWPM formulates a biparite graph, MWPF formulates an N-partite graph? That distinction might be more clear than my handwavey mathematical description, which makes the two approaches seem almost identical.
+
+          TODO also we use \verb|cluster_node_size=50| and the solver \verb|SolverSerialJointSingleHair|. Mention where the solver comes in (solving the linear matrix constraint problem) and how the clustering technique is similar to the approach in the Blossom algorithm, adapted to hypergraphs. It's Hyperblossom!
 
 \end{enumerate}
 
