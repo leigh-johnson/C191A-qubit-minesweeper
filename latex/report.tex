@@ -247,7 +247,7 @@ We define $p_{thr}$ as the physical error rate $p$ where the logical error rate 
 \newpage
 \paragraphsc{Fault Tolerant Code Distance.} We plot logical error rate $P_L$ vs. code distance $d$ for below-threshold samples  ($p \le 0.01$) and fit a least-squares linear regression \autoref{fig:fault-tolerant-projection} and extrapolate the fit to $P_L \approx 10^{-12}$. The X-intercept of the fit line represents the minimum code distance $d$ needed for one logical bit to survive one trillion rounds, which is the current estimate of the number of rounds needed to run a useful quantum algorithm [CITATION NEEDED].
 
-For $R_e = 1.0$ and erasure-aware hypergraph MWPF decoding, \autoref{fig:fault-tolerant-projection} a logical qubit implemented with $d \approx 17$ (or $d^2 = 289$ physical qubits in the array) is projected to survive one trillion rounds. This result should be taken with a bucket of salt because we do not calculate residuals from the least-squares fit to quantify goodness of fit. The hypergraph MWPF dataset is extrapolated from a more limited range of code distances (green, $d<9$) compared to other noise regimes. Due to the computational expense of the hypergraph decoder, we could not sample as much below-threshold data in that particular noise regime. See: \nameref{sec:memleak-sidequest}.
+For $R_e = 1.0$ and erasure-aware hypergraph MWPF decoding, \autoref{fig:fault-tolerant-projection} a logical qubit implemented with $d \approx 17$ (or $2d^2 = 578$ physical qubits in the array) is projected to survive one trillion rounds. This result should be taken with a bucket of salt because we do not calculate residuals from the least-squares fit to quantify goodness of fit. The hypergraph MWPF dataset is extrapolated from a more limited range of code distances (green, $d<9$) compared to other noise regimes. Due to the computational expense of the hypergraph decoder, we could not sample as much below-threshold data in that particular noise regime. See: \nameref{sec:memleak-sidequest}.
 % TODO - this plot should say p \ltq 0.01, not p=0.01
 \begin{figure}
     \centering
@@ -276,17 +276,15 @@ For each circuit and decoding method described in \autoref{tab:1}, we plot $P_L$
 \paragraphsc{Circuit Simulation}
 We use Stim to implement the surface code stabilizer circuit \cite{gidney_stim_2021}. Notably, we rely on the surface code circuit declarations produced by the \verb|stim.Circuit.generated| API, which are intended for demonstration purposes and \textbf{not} recommended for research.
 
-
-In the cases where $p_e$ is zero (no erasure conversion is performed), we decode the measured error syndrome with a Minimum-Weight Perfect Matching decoder (PyMatching) \cite{oscarhiggott_oscarhiggottpymatching_2025}. TODO - explanation of Stim detector error model (DEM), figures generated from DEM. There is a one-to-one correspondence between each detector in the DEM and a node in the graph passed to PyMatching.
-
-TODO - additionally, we decode using MWPF when $p_e=0$ as an ablation study.
-
-In the cases where $p_e$ is nonzero, we TODO
-
-
+\paragraphsc{Parameters}
+TODO briefly re-summarize the parameters swept: d, $R_e$, p, and decoding strategy.
 
 \subsection{Experiment 1: Min-weight Perfect Matching Baseline.} \label{sec:experiment1}
-See \autoref{appendix:experiment1} for experiment results. We consider $R_e=0.0$ with a purely Pauli noise regime. We apply a minimum-weight perfect matching (PyMatching) decoder, with the syndrome decoding process split between two phases:
+\paragraphsc{Overview.} TODO re-summarize
+\paragraphsc{Additional Results.} See \autoref{appendix:experiment1}.
+\paragraphsc{Data.} \footnotesize \href{https://github.com/leigh-johnson/C191A-qubit-minesweeper/tree/main/datasets/circuit%3Dsurface_code%3Arotated_memory_x/decoder%3Dpymatching}{datasets/circuit=surface\_code:rotated\_memory\_x/decoder=pymatching}
+\normalsize
+\paragraphsc{Procedure.} We consider $R_e=0.0$ with a purely Pauli noise regime. We apply a minimum-weight perfect matching (PyMatching) decoder, with the syndrome decoding process split between two phases:
 \begin{enumerate}
     \item \textbf{Offline phase} (once per unique combination of swept parameters)
 
@@ -311,11 +309,9 @@ See \autoref{appendix:experiment1} for experiment results. We consider $R_e=0.0$
               w_j \approx \log\!\left(\frac{1 - p_j}{p_j}\right).
           \end{align*}
 
-          These data $(H, \{w_j\})$ are used to construct a \texttt{pymatching.Matching} object.
+          These data $(H, \{w_j\})$ are used to construct a \texttt{pymatching.Matching} object \cite{oscarhiggott_oscarhiggottpymatching_2025}.
 
-    \item \textbf{Online phase:} syndrome measurement and minimum-weight decodings
-
-          \subsection*{Online phase: syndrome measurement and minimum-weight decoding}
+    \item \textbf{Online phase:} syndrome measurement and minimum-weight decodings (per shot)
 
           During Monte Carlo simulation, each noisy circuit shot produces a binary syndrome vector:
           \begin{align*}
@@ -341,31 +337,104 @@ See \autoref{appendix:experiment1} for experiment results. We consider $R_e=0.0$
           The result $\hat{\mathbf{x}}$ is mapped to a corresponding Pauli correction on the data qubits.
           Comparing the corrected logical measurement to the ideal value determines whether the shot
           contributes to the logical error rate $P_L$.
-
-    \item \textbf{Online decoding} (per shot in Monte Carlo simulation)
-
-          Sample circuit, measure binary syndrome vector with one bit per detector.
-          PyMatching: sparse blossom to find minimum-weight set of edges w/ incidence matching (exactly) the syndrome.
-          MWPF:
 \end{enumerate}
 
+\newpage
 \subsection{Experiment 2: Min-weight Parity Factor Baseline } \label{sec:experiment2}
-TODO
+\paragraphsc{Overview.} In this experiment we study the performance of the minimum-weight parity factor (MWPF) decoder
+in the absence of erasure information, as an ablation against the MWPM baseline.
+We assume a uniform Pauli noise model with physical error rate $p$ on each qubit and set the
+erasure conversion rate to $R_e = 0$. The underlying Stim circuit and noise model are identical
+to Experiment1; only the decoding algorithm is changed.  Notably, we do not use the version of the \verb|mwpf| decoder bundled with Stim in \verb|sinter\.decoders| and instead run our initial experiments with \verb|mwpf[stim]@0.2.12|. Later on, we incorporate alternative memory layouts in a fork of mwpf.
+
+\paragraphsc{Additional Results.} See \autoref{appendix:experiment2}.
+\paragraphsc{Data.} \footnotesize \href{https://github.com/leigh-johnson/C191A-qubit-minesweeper/tree/main/datasets/circuit%3Dsurface_code%3Arotated_memory_x/decoder%3Dmwpf/erasure%3D0.0/solver%3DSolverSerialJointSingleHair}{datasets/circuit=surface\_code:rotated\_memory\_x/decoder=mwpf/erasure=0.0/solver=SolverSerialJointSingleHair}
+\normalsize
+
+\paragraphsc{Procedure.}
+\begin{enumerate}
+    \item {\textbf{Offline phase:} hypergraph detector error model and incidence matrix.}
+
+          For each choice of code distance $d$, physical error rate $p$, and erasure conversion rate $p_e$,
+          we compile the Stim circuit. We pass the circuit reference to the MWPF library via \verb|SinterMWPFDecoder|, which constructs the DEM \cite{wu_yuewuomwpf_2025}\cite{gidney_stim_2021}.
+          The DEM again defines a set of binary detectors
+          $\{D_i\}_{i=1}^m$ and a set of error mechanisms $\{E_j\}_{j=1}^n$. Unlike the biparite graph constraint used
+          by \texttt{PyMatching}, the \texttt{MWPF} decoder allows each error mechanism $E_j$ to flip an \textit{arbitrary subset
+              of detectors}, which is interpreted as a hyperedge: $F_j \subseteq \{D_1,\dots,D_m\}$. This defines a hypergraph parity check matrix, which is structured like an incident matrix having columns that can have \textit{more than} 2 non-zero entries. We compare with the incident matrix in Experiment1, where the columns had \textit{at most} 2 non-zero entries.
+          \begin{align*}
+              H^{(\mathrm{hyp})} \in \{0,1\}^{m\times n}, \qquad
+              H^{(\mathrm{hyp})}_{ij} =
+              \begin{cases}
+                  1 & \text{if detector } D_i \text{ is incident on hyperedge } F_j, \\[4pt]
+                  0 & \text{otherwise}.
+              \end{cases}
+          \end{align*}
+          Each column of $H^{(\mathrm{hyp})}$ may have Hamming weight greater than 2, corresponding to
+          hyperedges that touch more than two detectors, but in this baseline experiment all noise is still
+          pure Pauli noise (no erasures), so many columns remain graphlike.
+
+          Each error mechanism $E_j$ has an associated error probability $p_j$ determined by the circuit-level noise model. Like in Experiment1, assign a log-likelihood weight to each edge and pass \cite{wu_yuewuomwpf_2025}:
+          \begin{align*}
+              w_j \approx \log\!\left(\frac{1 - p_j}{p_j}\right),
+          \end{align*}
+
+    \item {\textbf{Online phase:} syndrome measurement and minimum-weight parity factor decoding.}
+
+          During Monte Carlo simulation, each noisy circuit shot produces a binary syndrome vector
+          \begin{align*}
+              \mathbf{s} \in \{0,1\}^m,
+          \end{align*}
+          where $s_i$ is the outcome of detector $D_i$ for that shot. Again we define some unknown binary error vector $\mathbf{x} \in \{0,1\}^n$, with $x_j = 1$ indicating that error mechanism $E_j$ has occurred. The parity constraints imposed by the detectors can then be written as:
+          \begin{align*}
+              H^{(\mathrm{hyp})}\, \mathbf{x} = \mathbf{s} \pmod{2}.
+          \end{align*}
+          Given a measured syndrome $\mathbf{s}$, the MWPF decoder searches over subsets of hyperedges
+          (parity factors) to find a minimum-weight explanation of the syndrome. This corresponds to solving
+          \begin{align*}
+              \hat{\mathbf{x}}
+              =
+              \arg\min_{\mathbf{x} \in \{0,1\}^n}
+              \left\{
+              \sum_{j=1}^n w_j x_j
+              \;:\;
+              H^{(\mathrm{hyp})}\, \mathbf{x}
+              =
+              \mathbf{s}
+              \pmod{2}
+              \right\},
+          \end{align*}
+
+          Although the solution structure may look similar to Experiment1, the solution set $\mathbf{x}$ are now all the parity factors whose incident hyperedges correspond to the observed detector parities. In the pure Pauli-noise baseline ($R_e = 0$), we understand this methodology to approximate the MWPM because in this special case each error mechanism flips at most two detectors.
+
+          TODO maybe it makes more sense to constrast how MWPM formulates a biparite graph, MWPF formulates an N-partite graph? That distinction might be more clear than my handwavey mathematical description, which makes the two approaches seem almost identical.
+
+          TODO also we use \verb|cluster_node_size=50| and the solver \verb|SolverSerialJointSingleHair|. Mention where the solver comes in (solving the linear matrix constraint problem) and how the clustering technique is similar to the approach in the Blossom algorithm, adapted to hypergraphs. It's Hyperblossom!
+
+\end{enumerate}
+
+\paragraph{Offline phase: hypergraph detector error model and incidence matrix.}
+
 
 \subsection{Experiment 3: Erasure-aware Min-weight Parity Factor } \label{sec:experiment3}
-TOOD
+\paragraphsc{Overview} TODO: we repeat the procedure in Experiment2, but with $R_e=1.0$.
+\paragraphsc{Additional Results.} See \autoref{appendix:experiment3}.
+\paragraphsc{Data.} \footnotesize \href{https://github.com/leigh-johnson/C191A-qubit-minesweeper/tree/main/datasets/circuit%3Dsurface_code%3Arotated_memory_x/decoder%3Dmwpf/erasure%3D1.0/solver%3DSolverSerialJointSingleHair}{datasets/circuit=surface\_code:rotated\_memory\_x/decoder=mwpf/erasure=1.0/solver=SolverSerialJointSingleHair}
 
-\newpage
 \subsection{Experiment 4: Erasure-aware Min-weight Perfect Matching} \label{sec:experiment4}
+\paragraphsc{Overview} TODO: we modify the procedure in Experiment1, with $R_e=1.0$. We adapt the strategy described by Gu et al. \cite{gu_fault-tolerant_2025}.
+\paragraphsc{Additional Results.} See \autoref{appendix:experiment4}.
+\paragraphsc{Data.} \footnotesize \href{https://github.com/leigh-johnson/C191A-qubit-minesweeper/tree/main/datasets/circuit%3Dsurface_code%3Arotated_memory_x/decoder%3Dmwpf/erasure%3D1.0/solver%3DSolverSerialJointSingleHair}{datasets/circuit=surface\_code:rotated\_memory\_x/decoder=mwpf/erasure=1.0/solver=SolverSerialJointSingleHair}
 
 
 
 
 \section{Discussion}
 
+TODO we assume perfect measurements, we perform $d$ rounds of syndrome measurements.
+
 TODO our opinion of the hypergraph construction of this problem.
 
-In \nameref{sec:experiment3}, we explore the impact of converting a percentage $p_e$ of events in the Pauli noise channel to an erasure error channel. This conversion scheme reflects the interleaved erasure detection that occurs when applying a fast detection pulse during a Rydberg gate protocol. We do not select a particular Rydberg gate protocol, because our initial experiment setup assumes a 100\% error conversion rate that does not correspond to a physical system.
+In \nameref{sec:experiment3}, we explore the impact of converting a percentage $R_e$ of events in the Pauli noise channel to an erasure error channel. This conversion scheme reflects the interleaved erasure detection that occurs when applying a fast detection pulse during a Rydberg gate protocol. We do not select a particular Rydberg gate protocol, because our initial experiment setup assumes a 100\% error conversion rate that does not correspond to a physical system.
 
 In \nameref{sec:experiment4},
 
@@ -382,11 +451,17 @@ Sketch a follow-up project w/ sweep across $R_e$.
 
 \paragraphsc{Acknowledgements}
 
-Shimon Kolkowitz, Harry Levine, Thiago Bergamaschi
+Special thanks to Shimon Kolkowitz and Harry Levine for their generous time contributions. This project would not have been possible without their week-to-week guidance and time investment. We also thank Thiago Bergamaschi and Thilo Scharnhorst for their patient pedagogy; just a few months ago, understanding the surface code felt like an insurmountable challenge. We also want to recognize Umesh Vazirani for his early steering and for hosting the lively office hours where we (the authors) met.
+
+We are also grateful for Craig Gidney's wonderfully illustrative posts on StackExchange and for his work maintaining Stim, which is a Herculean effort for a single tech lead. Thanks also to Yue Wu for developing MWPF in public; our ideas and feasibility estimates for this project were largely informed by his work and meticulous notes.
 
 \paragraphsc{Code \& Data Availability.}
 % TODO add license
 All contents of this report are freely available under the MIT license: \href{https://github.com/leigh-johnson/C191A-qubit-minesweeper}{https://github.com/leigh-johnson/C191A-qubit-minesweeper}
+
+\paragraphsc{Contributions}
+
+TODO this is where we all brag about how proud we are of the sections we submitted.
 
 \newpage
 % cite all references
