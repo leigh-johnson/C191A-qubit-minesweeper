@@ -286,7 +286,7 @@ In the cases where $p_e$ is nonzero, we TODO
 
 
 \subsection{Experiment 1: Min-weight Perfect Matching Baseline.} \label{sec:experiment1}
-We consider $R_e=0.0$ with a purely Pauli noise regime. We apply a minimum-weight perfect matching (PyMatching) decoder, with the syndrome decoding process split between two phases:
+See \autoref{appendix:experiment1} for experiment results. We consider $R_e=0.0$ with a purely Pauli noise regime. We apply a minimum-weight perfect matching (PyMatching) decoder, with the syndrome decoding process split between two phases:
 \begin{enumerate}
     \item \textbf{Offline phase} (once per unique combination of swept parameters)
 
@@ -313,21 +313,22 @@ We consider $R_e=0.0$ with a purely Pauli noise regime. We apply a minimum-weigh
 
           These data $(H, \{w_j\})$ are used to construct a \texttt{pymatching.Matching} object.
 
+    \item \textbf{Online phase:} syndrome measurement and minimum-weight decodings
+
           \subsection*{Online phase: syndrome measurement and minimum-weight decoding}
 
-          During Monte Carlo simulation, each noisy circuit shot produces a binary syndrome vector
+          During Monte Carlo simulation, each noisy circuit shot produces a binary syndrome vector:
           \begin{align*}
               \mathbf{s} \in \{0,1\}^m,
           \end{align*}
           where $s_i$ is the value of detector $D_i$ for that shot.
-          Let $\mathbf{x} \in \{0,1\}^n$ denote the (unknown) binary error vector, with $x_j = 1$ indicating
-          that error mechanism $E_j$ occurred.
-          The detector constraints satisfy the linear relation
+          If we let $\mathbf{x} \in \{0,1\}^n$ be some unknown binary error vector, with $x_j = 1$ indicating
+          that error mechanism $E_j$ occurred. The detectors then must be constrainted to the solutions for:
           \begin{align*}
               H \mathbf{x} = \mathbf{s} \pmod{2}.
           \end{align*}
 
-          Given $\mathbf{s}$, \texttt{PyMatching} solves the minimum-weight decoding problem
+          For binary syndrome vector $\mathbf{s}$, \texttt{PyMatching} solves the minimum-weight decoding problem on the graph $H$ with the Sparse Blossom algorithm \cite{higgott_sparse_2025}, an implementation of MWPM designed for fast computations. The authors of Sparse Blossom explot the fact that the decoder only needs to predict which logical observables were flipped, rather than the physical errors.  \footnote{ For a textbook-quality explanation of decoding error syndromes in the surface code, see Craig Gidney's answer to StackExchange post: "Can you give an intuitive idea behind how the Minimum Weight Perfect Matching (MWPM) decoder works?"\cite{gidney_answer_2023-1} }. The result $\hat{\mathbf{x}}$ is mapped to a corresponding Pauli correction on the data qubits. We assume
           \begin{align*}
               \hat{\mathbf{x}}
               = \arg\min_{\mathbf{x} \in \{0,1\}^n}
@@ -337,24 +338,9 @@ We consider $R_e=0.0$ with a purely Pauli noise regime. We apply a minimum-weigh
               H \mathbf{x} = \mathbf{s} \pmod{2}
               \right\},
           \end{align*}
-          using a sparse-blossom minimum-weight perfect matching algorithm on the graph induced by $H$.
           The result $\hat{\mathbf{x}}$ is mapped to a corresponding Pauli correction on the data qubits.
           Comparing the corrected logical measurement to the ideal value determines whether the shot
           contributes to the logical error rate $P_L$.
-
-
-          TODO - explanation of Stim detector error model (DEM), figures generated from DEM.
-          We build a binary parity check matrix $H$ which encodes which error mechanisms flip a particular detector. Each row in $H$ corresponds to a parity check and each column corresponds to some error mechanism. The element $H[i,j]$ is $1$ is parity check $i$ is flipped by the error mechanism in $j$, otherwise $H[i,j]$ is 0.
-
-          TODO
-
-          %   The check matrix $H$ can also be understood as a Tanner graph, expressing classical constraints for the error correcting code.
-
-          %   In the cases where we consider heralded erasure errors, we add a
-
-          %   Each edge in the graph is weighted by TODO
-
-          TODO For MWPF the row/col representation has multiple incident entries. Cols of not-hyper incidence matrix have exactly two non-zero entries since each edge can only have two vertices (one at each end). The hypergraph representation can have multiple vertices per edge.
 
     \item \textbf{Online decoding} (per shot in Monte Carlo simulation)
 
