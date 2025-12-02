@@ -276,19 +276,13 @@ For each circuit and decoding method described in \autoref{tab:1}, we plot $P_L$
 \paragraphsc{Circuit Simulation}
 We use Stim to implement the surface code stabilizer circuit \cite{gidney_stim_2021}. Notably, we rely on the surface code circuit declarations produced by the \verb|stim.Circuit.generated| API, which are intended for demonstration purposes and \textbf{not} recommended for research.
 
-
-In the cases where $p_e$ is zero (no erasure conversion is performed), we decode the measured error syndrome with a Minimum-Weight Perfect Matching decoder (PyMatching) \cite{oscarhiggott_oscarhiggottpymatching_2025}. TODO - explanation of Stim detector error model (DEM), figures generated from DEM. There is a one-to-one correspondence between each detector in the DEM and a node in the graph passed to PyMatching.
-
-TODO - additionally, we decode using MWPF when $p_e=0$ as an ablation study.
-
-In the cases where $p_e$ is nonzero, we TODO
-
-
+\paragraphsc{Parameters}
+TODO briefly re-summarize the parameters swept: d, $R_e$, p, and decoding strategy.
 
 \subsection{Experiment 1: Min-weight Perfect Matching Baseline.} \label{sec:experiment1}
 \paragraphsc{Additional Results.} See \autoref{appendix:experiment1}.
 \paragraphsc{Data.} \footnotesize \href{https://github.com/leigh-johnson/C191A-qubit-minesweeper/tree/main/datasets/circuit%3Dsurface_code%3Arotated_memory_x/decoder%3Dpymatching}{datasets/circuit=surface\_code:rotated\_memory\_x/decoder=pymatching}
-
+\normalsize
 \paragraphsc{Procedure.} We consider $R_e=0.0$ with a purely Pauli noise regime. We apply a minimum-weight perfect matching (PyMatching) decoder, with the syndrome decoding process split between two phases:
 \begin{enumerate}
     \item \textbf{Offline phase} (once per unique combination of swept parameters)
@@ -314,7 +308,7 @@ In the cases where $p_e$ is nonzero, we TODO
               w_j \approx \log\!\left(\frac{1 - p_j}{p_j}\right).
           \end{align*}
 
-          These data $(H, \{w_j\})$ are used to construct a \texttt{pymatching.Matching} object.
+          These data $(H, \{w_j\})$ are used to construct a \texttt{pymatching.Matching} object \cite{oscarhiggott_oscarhiggottpymatching_2025}.
 
     \item \textbf{Online phase:} syndrome measurement and minimum-weight decodings
 
@@ -342,12 +336,6 @@ In the cases where $p_e$ is nonzero, we TODO
           The result $\hat{\mathbf{x}}$ is mapped to a corresponding Pauli correction on the data qubits.
           Comparing the corrected logical measurement to the ideal value determines whether the shot
           contributes to the logical error rate $P_L$.
-
-    \item \textbf{Online decoding} (per shot in Monte Carlo simulation)
-
-          Sample circuit, measure binary syndrome vector with one bit per detector.
-          PyMatching: sparse blossom to find minimum-weight set of edges w/ incidence matching (exactly) the syndrome.
-          MWPF:
 \end{enumerate}
 
 \subsection{Experiment 2: Min-weight Parity Factor Baseline } \label{sec:experiment2}
@@ -355,11 +343,14 @@ In the cases where $p_e$ is nonzero, we TODO
 \paragraphsc{Data.} \footnotesize \href{https://github.com/leigh-johnson/C191A-qubit-minesweeper/tree/main/datasets/circuit%3Dsurface_code%3Arotated_memory_x/decoder%3Dmwpf/erasure%3D0.0/solver%3DSolverSerialJointSingleHair}{datasets/circuit=surface\_code:rotated\_memory\_x/decoder=mwpf/erasure=0.0/solver=SolverSerialJointSingleHair}
 \normalsize
 
-In this experiment we study the performance of the minimum-weight parity factor (MWPF) decoder
+\paragraphsc{Procedure.} In this experiment we study the performance of the minimum-weight parity factor (MWPF) decoder
 in the absence of erasure information, as an ablation against the MWPM baseline.
 We assume a uniform Pauli noise model with physical error rate $p$ on each qubit and set the
 erasure conversion rate to $p_e = 0$. The underlying Stim circuit and noise model are identical
 to Experiment1; only the decoding algorithm is changed.
+
+\paragraph{Offline phase: hypergraph detector error model and incidence matrix.}
+
 
 \subsection{Experiment 3: Erasure-aware Min-weight Parity Factor } \label{sec:experiment3}
 \paragraphsc{Additional Results.} See \autoref{appendix:experiment3}.
