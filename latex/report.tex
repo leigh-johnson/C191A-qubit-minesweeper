@@ -272,7 +272,7 @@ To address the NP-hardness of the hypergraph, MWPF incorporates two techniques: 
 
 \newpage
 \section{Results}\label{sec:results}
-\subsection{Surface Code Thresholds}
+\subsection{Surface Code Thresholds}\label{sec:results-overview}
 \paragraphsc{Overview}
 We studied the performance of a rotated surface code under various noise and error syndrome decoding regimes (\autoref{tab:1}), with the goal of observing the impact of erasure conversion on our definition of the fault-tolerant error threshold $p_{thr}$. Using Stim \cite{gidney_stim_2021} to simulate the surface code stabilizer circuit, we perform Monte Carlo simulations of a $d \times d$ array of qubits representing an X-rotated surface stabilizer with code distance $d \in \set{3, 5, 7, 9, 11}$, physical error rate $p \in [0.001, 0.06]$, and erasure error conversion rate $R_e \in [0, 1]$.
 
@@ -301,7 +301,7 @@ We compare four methods for decoding syndrome measurements, described in more de
     \vspace{-3em}
     \centering
     \includegraphics[width=1\linewidth, height=0.9\textheight, keepaspectratio]{fig1_summary}
-    \caption{\textbf{Error thresholds in a rotated surface code.} We compare the scaling of logical error rate $P_L$ vs. physical error rate $p$ under two noise regimes: (1) pure Pauli noise ($R_e=0$, dotted lines, semi-transparant) and (2) conversion to erasure-type errors ($R_e=1$, solid lines). We visually estimate the thresholds from the d=7,9 crossing: $p_{thr}=0.65\%$ (aqua) under the Pauli noise regime and $p_{thr}=3.00\%$ (magenta) when 100\% of errors are converted to erasure events. In both cases, syndromes are decoded with a hypergraph minimum-weight parity factor decoder.  See \autoref{fig:mwpf-pthresh} and \autoref{fig:mwpf-pthresh-erase} for plots showing a 95\% confidence interval.
+    \caption{\textbf{Error thresholds in a rotated surface code.} We compare the scaling of logical error rate $P_L$ vs. physical error rate $p$ under two noise regimes: (1) pure Pauli noise ($R_e=0$, dotted lines, semi-transparant) and (2) conversion to erasure-type errors ($R_e=1$, solid lines). We visually estimate the thresholds from the d=7,9 crossing: $p_{thr}=0.65\%$ (aqua) under the Pauli noise regime and $p_{thr}=3.00\%$ (magenta) when 100\% of errors are converted to erasure events. In both cases, syndromes are decoded with a hypergraph minimum-weight parity factor decoder.  See \autoref{fig:mwpf-pthresh} and \autoref{fig:mwpf-pthresh-erase} for plots showing a 95\% confidence interval and see \autoref{sec:results-overview} for a high-level overview of our methods. For a more detailed deep-dive into our methods, see \autoref{sec:experiment2} and\autoref{sec:experiment3}.
     }
     \label{fig:best-threshold-comparison}
 \end{figure}
