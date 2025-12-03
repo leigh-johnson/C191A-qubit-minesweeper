@@ -237,6 +237,10 @@ compare w/ surface code having only pauli error channel
 
 
 Describe Stim circuits. Link to Stim circuits / appendix figures of selected timeline-svg operations.
+
+Stim efficiently simulates stabilizer circuits containing exclusively clifford gates by computing the inverse stabilizer tableau of the circuit for each stabilizer measurement $Z_q$, where $Z_q$ corresponds to a measurement in the Z basis on qubit q. What this means, is that when given a clifford circuit C and a stabilizer code, rather than simulating the actions of C on qubits directly, what stim does is it computes the inverse change of basis with respect to C, C$Z_q$$C^{-1}$, to determine an equivalent measurement that can be conducted on the initial qubit state. 
+
+
 \cite{gidney_stim_2021}
 
 \paragraphsc{Decoding}
