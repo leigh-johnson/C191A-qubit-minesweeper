@@ -308,15 +308,16 @@ We compare four methods for decoding syndrome measurements, described in more de
 
 \begin{table}[H]
     \footnotesize
-    \begin{tabularx}{\textwidth}{|p{6em}|X|p{9em}|p{3em}|l|}
+    \begin{tabularx}{\textwidth}{|X||p{9em}|X|p{9em}|p{9em}|}
         \hline
-        \textbf{Decoding Scheme} & \textbf{Monte Carlo Experiment Description} & \textbf{Parameter Sweep}                                       & \textbf{$p_{thr} (\%)$}          & \textbf{Results}                       \\ \hline
-        MWPM baseline            & \nameref{sec:experiment1}                   & $d \in \set{3, 5, 7, 9, 11}$, $p \in [0.003, 0.02]$, $p_e=0.0$ & 0.57 - 0.78                      & \autoref{fig:pymathing-pthresh}        \\ \hline
-        MWPF baseline            & \nameref{sec:experiment2}                   & $d \in \set{3, 5, 7, 9, 11}$, $p \in [0.003, 0.02]$, $p_e=0.0$ & 0.62 - 0.75                      & \autoref{fig:mwpf-pthresh}             \\ \hline
-        Hypergraph MWPF          & \nameref{sec:experiment3}                   & $d \in \set{3, 5, 7, 9, 11}$, $p \in [0.003, 0.06]$, $p_e=1.0$ & \cellcolor{yellow!25}2.70 - 3.02 & \autoref{fig:mwpf-pthresh-erase}       \\ \hline
-        MWPM with re-weighting   & \nameref{sec:experiment4}                   & $d \in \set{3, 5, 7, 9, 11}$, $p \in [0.003, 0.06]$, $p_e=1.0$ & 0.81 - 0.96                      & \autoref{fig:pymatching-pthresh-erase} \\ \hline
+        \textbf{Monte Carlo Experiment Description} & \textbf{Parameters}                                                                                                                          & \textbf{$p_{thr}$ Ref Value (upper, lower \%)}               & \textbf{$p_{thr}$ Measured (upper, lower \%)}                                & \textbf{Percentage Error (upper, lower \%)} \\ \hline \hline
+        \nameref{sec:experiment1}                   & $d \in \set{3, 5, 7, 9, 11}$, $p \in [0.003, 0.02]$, $R_e=0.0$ \newline decoder=PyMatching \cite{oscarhiggott_oscarhiggottpymatching_2025}   & 0.93 - 1. \cite{wu_erasure_2022} \cite{acharya_quantum_2025} & 0.570, 0.775    \linebreak    \autoref{fig:pymathing-pthresh}                & -38.7, -22.5                                \\ \hline
+        \nameref{sec:experiment2}                   & $d \in \set{3, 5, 7, 9, 11}$, $p \in [0.003, 0.02]$, $R_e=0.0$ \newline decoder=MWPF \cite{wu_yuewuomwpf_2025} \cite{wu_minimum-weight_2025} & 0.93 - 1. \cite{wu_erasure_2022} \cite{acharya_quantum_2025} & 0.650, 0.750     \linebreak       \autoref{fig:mwpf-pthresh}                 & -30.1, -25.0                                \\ \hline
+        \nameref{sec:experiment3}                   & $d \in \set{3, 5, 7, 9, 11}$, $p \in [0.003, 0.06]$, $R_e=1.0$ \newline decoder=MWPF \cite{wu_yuewuomwpf_2025} \cite{wu_minimum-weight_2025} & 5.13 \cite{wu_erasure_2022}                                  & \cellcolor{yellow!25}2.75, 3.00  \linebreak \autoref{fig:mwpf-pthresh-erase} & -41.2                                       \\ \hline
+        \nameref{sec:experiment4}                   & $d \in \set{3, 5, 7, 9, 11}$, $p \in [0.003, 0.06]$, $R_e=1.0$ \newline decoder=PyMatching with per-shot edge weights (ours)                 & 5.13 \cite{wu_erasure_2022}                                  & 0.800, 1.0          \linebreak      \autoref{fig:pymatching-pthresh-erase}   & -80.5                                       \\ \hline
     \end{tabularx}
-    \caption{Summary of experimental setups used to evaluate the impact of erasure conversion $p_e$ and correlated vs. uncorrelated decoding schemes on the surface code error threshold $p_{thr}$. The highest $p_{thr}$ (highlighted in yellow) was determined to be 3.02\% when $R_e=1.0$ using the hypergraph MWPF decoder.}
+    \caption{Summary of experimental setups used to evaluate the impact of erasure conversion $p_e$ and correlated vs. uncorrelated decoding schemes on the surface code error threshold $p_{thr}$. The highest $p_{thr}$ (highlighted in yellow) was determined to be $\approx 3.00\%$ when $R_e=1.0$ using the hypergraph MWPF decoder. In all experiments, we observed significant (percent err $>25\%$) differences between our threshold measurements and reference values published by Wu et al \cite{wu_minimum-weight_2025}. We attribute this difference to our error regime, which applied the same error rate to both one and two-qubit gates and discuss in detail in \nameref{sec:discussion}.
+    }
     \label{tab:1}
 \end{table}
 
@@ -567,14 +568,9 @@ to Experiment1; only the decoding algorithm is changed.  Notably, we do not use 
 \paragraphsc{Additional Results.} See \autoref{appendix:experiment4}.
 \paragraphsc{Data.} \footnotesize \href{https://github.com/leigh-johnson/C191A-qubit-minesweeper/tree/main/datasets/circuit%3Dsurface_code%3Arotated_memory_x/decoder%3Dmwpf/erasure%3D1.0/solver%3DSolverSerialJointSingleHair}{datasets/circuit=surface\_code:rotated\_memory\_x/decoder=mwpf/erasure=1.0/solver=SolverSerialJointSingleHair} \normalsize
 
+\section{Discussion}\label{sec:discussion}
 
-
-
-
-\section{Discussion}
-
-TODO we assume perfect measurements, we perform $d$ rounds of syndrome measurements.
-
+In experiments
 TODO our opinion of the hypergraph construction of this problem.
 
 In \nameref{sec:experiment3}, we explore the impact of converting a percentage $R_e$ of events in the Pauli noise channel to an erasure error channel. This conversion scheme reflects the interleaved erasure detection that occurs when applying a fast detection pulse during a Rydberg gate protocol. We do not select a particular Rydberg gate protocol, because our initial experiment setup assumes a 100\% error conversion rate that does not correspond to a physical system.
