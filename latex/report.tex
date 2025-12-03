@@ -550,18 +550,35 @@ to Experiment1; only the decoding algorithm is changed.  Notably, we do not use 
 
 \subsection{Experiment 3: Erasure-aware Min-weight Parity Factor } \label{sec:experiment3}
 \paragraphsc{Overview} TODO: we repeat the procedure in Experiment2, but with $R_e=1.0$.
-\paragraphsc{Additional Results.} See \autoref{appendix:experiment3}.
+\paragraphsc{Additional Results.} See \autoref{sec:experiment3}.
 \paragraphsc{Data.} \footnotesize \href{https://github.com/leigh-johnson/C191A-qubit-minesweeper/tree/main/datasets/circuit%3Dsurface_code%3Arotated_memory_x/decoder%3Dmwpf/erasure%3D1.0/solver%3DSolverSerialJointSingleHair}{datasets/circuit=surface\_code:rotated\_memory\_x/decoder=mwpf/erasure=1.0/solver=SolverSerialJointSingleHair} \normalsize
 
 \subsection{Experiment 4: Erasure-aware Min-weight Perfect Matching} \label{sec:experiment4}
 \paragraphsc{Overview} TODO: we modify the procedure in Experiment1, with $R_e=1.0$. We adapt the strategy described by Gu et al. \cite{gu_fault-tolerant_2025}.
-\paragraphsc{Additional Results.} See \autoref{appendix:experiment4}.
+\paragraphsc{Additional Results.} See \autoref{sec:experiment4}.
 \paragraphsc{Data.} \footnotesize \href{https://github.com/leigh-johnson/C191A-qubit-minesweeper/tree/main/datasets/circuit%3Dsurface_code%3Arotated_memory_x/decoder%3Dmwpf/erasure%3D1.0/solver%3DSolverSerialJointSingleHair}{datasets/circuit=surface\_code:rotated\_memory\_x/decoder=mwpf/erasure=1.0/solver=SolverSerialJointSingleHair} \normalsize
 
+\newpage
 \section{Discussion}\label{sec:discussion}
+\paragraphsc{Reduced tolerance of errors in our surface code simulations}
+\autoref{tab:1}.
+In the case where depolarizing noise is modeled with purely Pauli errors, we reference the physical error threshold $p_{thr}$ published by \citeauthor{wu_erasure_2022} ($p_{thr} = 0.937(4)\%$) and \citeauthor{acharya_quantum_2025} ($p_{thr} \approx 1\%$) \cite{wu_erasure_2022}\cite{acharya_quantum_2025}.
 
-\paragraphsc{Reduced tolerance of errors in our experimental thresholds}
-\autoref{tab:1}, our baseline error thresholds ($p_{thr} \approx 0.75$) for a rotated surface code in a pure Pauli noise regime was $\approx 25\%$ lower than the surface error threshold $\approx 1\%$ in
+In Experiment1, we visually estimated a much \textit{lower} error ($p_{thr} = 0.775$, \%err $=22.5\%$) for our X-rotated surface code with pure Pauli noise and the PyMatching decoder. We ruled out decoder implementation as a contributing factor (under this particular noise regime) after determining a similar result in our ablation study of MWPF in Experiment2 ($p_{thr} = 0.750$, \%err $=25.0\%$). We attribute this systemic error to multiple sources, in order of signifiance:
+
+\begin{itemize}
+    \item \autoref{fig:stim-circuit-gen}. We intended to assume perfect stabilizer measurements, but our circuit implementation applied the depolarizing error channel to each data qubit per measurement round.
+    \item We applied the depolarizing noise channel to one and two-qubit gates at the same rate. Our references consider only two-qubit gates.
+\end{itemize}
+
+\begin{figure}[h]
+    \centering
+    \hspace{-4.8em}
+    \includegraphics[width=\linewidth, height=\textheight, keepaspectratio ]{fig_stim_circuit_implementation.png}
+    \caption{ \textbf{Stim stabilizer circuit generator} We intended to implement perfect stabilizer measurements, but instead we applied a depolarizing noise channel via the \textbf{before\_round\_data\_depolarization} parameter. }
+    \label{fig:stim-circuit-gen}
+\end{figure}
+
 
 \subsection{A Fun Sidequest: Profiling and Patching a Memory Leak}\label{sec:memleak-sidequest}
 
