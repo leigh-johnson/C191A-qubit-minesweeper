@@ -3,7 +3,7 @@
 \usepackage{physics}
 
 \begin{document}
-\title{\LARGE{Comparison of Erasure-Aware Error Correction Decoding \\ for Fault-Tolerant Quantum Computing \\}
+\title{\LARGE{Comparison of Erasure-Aware Error Correction Decoders \\ for Fault-Tolerant Quantum Computing \\}
 
     % \LARGE{Erasure is All You Need}
 
@@ -11,7 +11,7 @@
     Final Project. Fall 2025\\}
 
 \author{Leigh Zaman\\ \texttt{leighzaman@berkeley.edu}
-    \and Arin Sen \\ \texttt{arin.sen@berkeley.edu}
+    \and Arin Sen \\ \texttt{git arin.sen@berkeley.edu}
     \and Ilyes Tata \\ \texttt{ilyes.tata@berkeley.edu}
 }
 \date{Last revised:\\ \today}
@@ -349,9 +349,9 @@ For $R_e = 1.0$ and erasure-aware hypergraph MWPF decoding, \autoref{fig:fault-t
     \centering
     \includegraphics[width=\linewidth,height=0.55\textheight, keepaspectratio]{fig2_survival_code_distance.png}
     \caption{Among below-threshold ($p \le 0.01$) samples,
-        the minimum code distance $d \approx 17$ is projected to survive one trillion rounds with full erasure conversion $(p_e=1)$ and Hypergraph MWPF syndrome decoding (green),
-        and $\approx 72\%$ decrease from $d \approx 60$ with erasure-aware edge re-weighting with MWPM (orange),
-        and $\approx 83\%$ decrease  from $d \approx 100$ with MWPM in a pure Pauli noise regime with no erasures.
+        the minimum code distance $d \approx 17$ is projected to survive one trillion rounds with full erasure conversion $(R_e=1.0)$ and Hypergraph MWPF syndrome decoding (plotted in green),
+        and $\approx 72\%$ decrease from $d \approx 60$ with erasure-aware edge re-weighting with MWPM (plotted in orange),
+        and $\approx 83\%$ decrease  from $d \approx 100$ with MWPM in a pure Pauli noise regime with no erasures (plotted in blue).
     }
     \label{fig:fault-tolerant-projection}
 \end{figure}
