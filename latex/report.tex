@@ -318,7 +318,7 @@ We define $p_{thr}$ as the physical error rate $p$ where the logical error rate 
 % TODO - fix legend location in this plot, should be pinned to bottom-right whitespace
 \begin{figure}[H]
     \hspace{-2em}
-    \includegraphics[width=1.5\linewidth, height=0.55\textheight, keepaspectratio]{fig1_summary}
+    \includegraphics[width=1.1\linewidth, height=0.55\textheight, keepaspectratio]{fig1_summary}
     \caption{\textbf{Physical error thresholds in our surface code simulations.}
         From the d=9,11 crossings, we estimate the error threshold $p_{thr}$ under a uniform Pauli noise regime
     }
@@ -437,6 +437,7 @@ TODO briefly re-summarize the parameters swept: d, $R_e$, p, and decoding strate
 
 \newpage
 \subsection{Experiment 2: Min-weight Parity Factor Baseline } \label{sec:experiment2}
+
 \paragraphsc{Overview.} In this experiment we study the performance of the minimum-weight parity factor (MWPF) decoder
 in the absence of erasure information, as an ablation against the MWPM baseline.
 We assume a uniform Pauli noise model with physical error rate $p$ on each qubit and set the
@@ -566,24 +567,20 @@ TODO this is where we all brag about how proud we are of the sections we submitt
 
 \newpage
 \appendix
-
-
 \section{Appendix: Experiment Results}
-
-
 \subsection{Experiment 1: Min-weight Perfect Matching Baseline.} \label{appendix:experiment1}
 \begin{figure}[H]
     \centering
-    \begin{subfigure}[b]{0.49\linewidth}
+    \begin{subfigure}[b]{\linewidth}
         \centering
-        \includegraphics[width=\linewidth]{fig1_pymatching_threshold.png}
+        \includegraphics[width=\linewidth, height=0.4\textheight, keepaspectratio ]{fig1_pymatching_threshold.png}
         \caption{}
         \label{fig:1a}
     \end{subfigure}
     \hfill
-    \begin{subfigure}[b]{0.49\linewidth}
+    \begin{subfigure}[b]{\linewidth}
         \centering
-        \includegraphics[width=\linewidth]{fig1_pymatching_threshold_zoomed.png}
+        \includegraphics[width=\linewidth, height=0.4\textheight, keepaspectratio]{fig1_pymatching_threshold_zoomed.png}
         \caption{}
         \label{fig:1b}
     \end{subfigure}
@@ -601,7 +598,7 @@ TODO this is where we all brag about how proud we are of the sections we submitt
         \caption{}
         \label{fig:1c}
     \end{subfigure}
-    \begin{subfigure}[b]{0.49\linewidth}
+    \begin{subfigure}[b]{\linewidth}
         \centering
         \includegraphics[width=\linewidth]{fig1_mwpf_threshold_erasure=0_zoomed.png}
         \caption{}
