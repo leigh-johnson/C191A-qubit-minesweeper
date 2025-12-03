@@ -198,12 +198,12 @@ Quantum error correction (QEC) assumes a piece of quantum information is distrib
 
 The surface code implements quantum errror correction on a scalable array of qubits using tessalatable bit and phase flip syndrome measurements. As shown in the figure below, each plaquette is associated with either an Pauli X or a Pauli Z syndrome measurement on the qubits in the corners of the plaquette. If a single qubit bit flip error occurs on a physical qubit, then the adjoining Z plaquettes will return a syndrome measurement of -1, creating a unique pattern that can be used to identify the erring qubit.
 
-% \begin{figure}[h]
-%     \centering
-%     \includegraphics[width=0.49\linewidth]{Surface_Code_Graphic.png}
-%     \caption{9 Qubit Surface code.}
-%     \label{fig:my_image}
-% \end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.49\linewidth]{Surface_Code_Graphic.png}
+    \caption{9 Qubit Surface code.}
+    \label{fig:my_image}
+\end{figure}
 
 
 \cite{fowler_surface_2012}
@@ -242,11 +242,13 @@ Describe Stim circuits. Link to Stim circuits / appendix figures of selected tim
 \paragraphsc{Decoding}
 When given an error syndrome for a logical qubit encoded using the surface code, the task of determining which error(s) occured is surprisingly nontrivial. The central issue with determining what error occured is that, while single qubit error syndrome patterns are unique, if you allow for multiple errors to occur in between or during syndrome measurements, there are multiple errors that can generate the same set of syndromes. Therefore, the problem of correcting an error measurement is not the problem of determining which error occurred, but rather is the problem of determining what is the most likely error to have occured. This problem can be solved efficiently using the minimum weight perfect matching algorithm...
 
-It turns out that the problem of solving for the most likely error given syndrome is equivalent to a graph matching problem. Let us assume we are given a syndrome for a nine qubit surface code, such as the one given in figure 1, with the two middle Pauli Z plaquettes flagged. Because the $p_{n errors} < p_{n-1 errors}$ provided that $p_{error} < 50\%$, the most likely error to have occurred is precisely the error that acts on the least number of qubits. Therefore, while both an X error on the top left and bottom right qubits or an X error on the middle qubit produce the desired error syndrome, the most likely error is an X error on the middle qubit. This generalizes quite nicely to a surface code of arbritary distance. Assuming that a path is a chain of plaquette edges, let the minimum weight path between two plaquettes be defined as the path that connects a vertex touching each plaquette while traversing least number of vertices. Given two plaquette flags of the same type of a distance d surface code, the most likely error is given by the minimum weight path that connects the two flags. This is because each vertex corresponds to a qubit, and so the least number of vertices traversed is equivalent to the least number of pauli errors occuring.
+It turns out that the problem of solving for the most likely error given syndrome is equivalent to a graph matching problem. Let us assume we are given a syndrome for a nine qubit surface code, such as the one given in figure 1, with the two middle Pauli Z plaquettes flagged. Because the $p_{n errors} < p_{n-1 errors}$ provided that $p_{error} < 50\%$, the most likely error to have occurred is precisely the error that acts on the least number of qubits. Therefore, while both an X error on the top left and bottom right qubits or an X error on the middle qubit produce the desired error syndrome, the most likely error is an X error on the middle qubit. 
 
-Now let us say we are given n syndrome flags of the same type. Remembering that connecting two syndrome flags via a path corrects for both flags, if given an even number of flags, the problem of finding the most likely error is then the problem of pairing nodes such that the number of vertices traversed along all paths is minimized. If given an odd number of flags, one just has to find the minimum weight pairing between n - 1 flags, as a single flag can always be a corrected by applying a Pauli operator to a single qubit.
+To find the most likely correction for any two error syndromes first note that it is only possible to generate single stabilizer flags if an error occurs at a boundary not containing semicircle stabilizers of the same type. Define the X boundary as the boundary containing X semicircular stabilizers and the Z boundary as the boundary containing Z semicircular stabilizers. Assuming that a path is a chain of plaquette edges, let the minimum weight path between two plaquettes be defined as the path that connects a vertex touching each plaquette while touching the least number of vertices. Given two plaquette flags of the same type of a distance d surface code, the most likely error is given by the minimum weight path that connects either the two flags together, or both flags to the boundary corresponding to the Pauli Error that occured. 
 
-There is an issue with the schema
+Now let us say we are given n syndrome flags of the same type. Remember that if two syndrome flags are connected via a path, then applying a corrective action along that path addresses both flags. Thus, to find the most likely error, we need to find a configuration with minimum total path weight, where every flag is either connected to a unique other flag, or is connected to the requisite boundary.
+
+
 \cite{Pesah_Introduction_to_Surface_Code_2023}
 A hypergraph can be simplified to a normal graph if every hyperedge is connected to two vertices. In this particular case, the most likely error (MLE) problem can be reduced to a minimum-weight perfect matching (MWPM) problem. Through the blossom algorithm, the MWPM decode can solve the reformulation of MLE problems in polynomial time.
 
