@@ -320,33 +320,41 @@ We compare four methods for decoding syndrome measurements, described in more de
     \label{tab:1}
 \end{table}
 
+\subsubsection{Experiment 1: Min-weight Perfect Matching Baseline}
 \normalsize
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\linewidth, height=\textheight, keepaspectratio ]{fig1_pymatching_threshold.png}
-    \caption{\textbf{Experiment 1: Min-weight Perfect Matching Baseline}.Comparison of logical error rate $P_L$ with physical qubit error rate $p$ modeled by uniform Pauli noise, decoded using the minimum-weight perfect matching decoder. The lower and upper bounds of the threshold region $p_{thrs}$ between 0.57\% and 0.78\% is estimated from the d=3,5 and d=9,11 crossings. \\ See: \nameref{sec:experiment1}.}
+    \hspace{-4.8em}
+    \includegraphics[width=1.1\linewidth, height=\textheight, keepaspectratio ]{fig1_pymatching_threshold.png}
+    \caption{\textbf{Surface code threshold in Experiment 1}. Comparison of logical error rate $P_L$ with physical qubit error rate $p$ modeled by uniform Pauli noise ($R_e=0$), decoded using the minimum-weight perfect matching (PyMatching) decoder. The lower and upper bounds of the threshold region $p_{thrs}$ (0.570\%, 0.775\%) are determined from the d=3,5 and d=9,11 crossings. A 95\% confidence interval is determined using a log-likelihood method, shown using a transparent highlighted region around each fit line. \\ For a complete description of the experiment procedure, see \nameref{sec:experiment1}.}
     \label{fig:pymathing-pthresh}
 \end{figure}
 
+\subsubsection{Experiment 2: Min-weight Parity Factor Baseline}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\linewidth]{fig1_mwpf_threshold_erasure=0.png}
-    \caption{\textbf{Experiment 2: Min-weight Parity Factor Baseline.} Comparison of logical error rate $P_L$ with physical qubit error rate $p$ modeled by uniform Pauli noise. The lower and upper bounds of the threshold region $p_{thrs}$ between 0.62\% and 0.75\% is estimated from the d=3,5 and d=9,11 crossings. \\ See: \nameref{sec:experiment2}.}
+    \includegraphics[width=1.1\linewidth, height=\textheight, keepaspectratio ]{fig1_mwpf_threshold_erasure=0.png}
+    \caption{\textbf{Surface code threshold in Experiment 2.} Comparison of logical error rate $P_L$ with physical qubit error rate $p$ modeled by uniform Pauli noise, decoded using the minimum-weight parity factor (MWPF) decoder. The lower and upper bounds of the threshold region $p_{thrs}$ between 0.650\% and 0.750\% is estimated from the d=3,5 and d=9,11 crossings. A 95\% confidence interval is determined using a log-likelihood method, shown using a transparent highlighted region around each fit line. \\ For a complete description of the experiment procedure, see \nameref{sec:experiment2}.}
     \label{fig:mwpf-pthresh}
 \end{figure}
 
+
+\subsubsection{Experiment 3: Erasure-aware Min-weight Parity Factor Baseline}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\linewidth]{fig1_mwpf_threshold_erasure=1.png}
-    \caption{\textbf{Experiment 3: Erasure-aware Min-weight Parity Factor } Comparison of logical error rate $P_L$ with physical qubit error rate $p$ converted to erasure errors. Following  The lower and upper bounds of the threshold region $p_{thrs}$ between 2.70\% and 3.02\% is estimated from the d=3,5 and d=9,11 crossings. \\ See: \nameref{sec:experiment3}.}
+    \hspace{-4.8em}
+    \includegraphics[width=1.1\linewidth, height=\textheight, keepaspectratio ]{fig1_mwpf_threshold_erasure=1.png}
+    \caption{\textbf{Surface code threshold in Experiment 3 } Comparison of logical error rate $P_L$ with physical qubit error rate $p$ converted to erasure errors ($R_e=1$). The lower and upper bounds of the threshold region $p_{thrs}$ ( 2.75\%, 3.00\%) are determined from the d=3,5 and d=9,11 crossings. A 95\% confidence interval is determined using a log-likelihood method, shown using a transparent highlighted region around each fit line. Due to a high memory footprint (in excess of 200GB RAM allocation), we were unable to collect enough samples to fit a narrow confidence interval for $d=7,9,11$ trials.
+        \\ For a complete description of the experiment procedure, see \nameref{sec:experiment3}.}
     \label{fig:mwpf-pthresh-erase}
 \end{figure}
 
-
+\subsubsection{Experiment 4: Erasure-aware Min-weight Parity Factor }
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\linewidth, keepaspectratio]{fig1_pymatching_custom_erasure=1.png}
-    \caption{\textbf{Experiment 4: Erasure-aware Min-weight Perfect Matching } Comparison of logical error rate $P_L$ with physical qubit error rate $p$ converted to erasure errors. Following  The lower and upper bounds of the threshold region $p_{thrs}$ between 0.57\% and 0.78\% is estimated from the d=3,5 and d=9,11 crossings. \\ See: \nameref{sec:experiment4}.}
+    \hspace{-4.8em}
+    \includegraphics[width=1.1\linewidth, height=\textheight, keepaspectratio ]{fig1_pymatching_custom_erasure=1.png}
+    \caption{\textbf{Surface code threshold in Experiment 4 } Comparison of logical error rate $P_L$ with physical qubit error rate $p$ converted to erasure errors ($R_e=1$). Following  The lower and upper bounds of the threshold region $p_{thrs}$ between 0.57\% and 0.78\% are determined from the d=3,5 and d=9,11 crossings. \\ For a complete description of the experiment procedure, see \nameref{sec:experiment4}.}
     \label{fig:pymatching-pthresh-erase}
 \end{figure}
 
