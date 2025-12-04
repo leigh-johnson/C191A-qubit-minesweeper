@@ -213,8 +213,6 @@ If physical qubit error is below a critical noise threshold, the logical error r
 
 \paragraph{Erasure Tolerance and Enhancements}
 
-TODO (Addressed below) Thresholds for $p_{erase} << p$, also some useful background on erasure errors in general: (see: Previous Work on Erasure Errors)
-
 If left uncorrected, erasure errors pose a existential threat to encoded logical qubits that utilize the surface code encoding schema. While it is possible to compensate to some degree for erasure errors via the introduction of superstabilizers, the accumulation of erasures will eventually render your state unreconstructable if left unchecked. Kobayashi et al showed that a probability of erasure as low as 0.1\% can lead to logical failure rates increasing with code distance in regimes where the Pauli error rate is less than or on the order of 0.1\%. This suggests that to build a functional quantum computer, using the standard surface code encoding and the minimum weight perfect matching algorithm, one would need $p_{erase} << p_{pauli}$.
 \cite{kobayashi_erasure-tolerance_2025}
 
