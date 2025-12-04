@@ -75,9 +75,7 @@ At the same time, erasure detection is imperfect and requires additional physica
 
 A qubit engineered so the dominant source of errors is from erasures. A bias towards erasure-type errors occurs natively in some types of qubits (e.g. photons) or can be engineered by converting leakage errors to erasures (e.g. with LDUs in superconducting qubits). For more information on how erasure conversion works for neutral atoms, refer to the following papers: \cite{wu_erasure_2022} \cite{baranes_leveraging_2025} For superconducting qubits, refer to the following papers: \cite{gu_optimizing_2024} \cite{gu_fault-tolerant_2025}.
 
-\subsection{Surface Code}
-
-\subsection{The Surface Code and Threshold Behavior}\label{subsec:surface-code}
+\subsection{Surface Code}\label{subsec:surface-code}
 
 The \emph{surface code} is a leading candidate for fault-tolerant quantum computation due to its local stabilizers, high threshold, and compatibility with two-dimensional hardware architectures~\cite{fowler_surface_2012}\cite{pesah_interactive_2023}. In its rotated layout, a single logical qubit is encoded across a $d \times d$ lattice of physical qubits, with repeated stabilizer measurements producing a space--time syndrome history. The code distance $d$ sets the minimum number of physical errors required to implement a logical error.
 
@@ -120,42 +118,66 @@ Therefore when $p << p_{thr}$, the logical error rate is supressed exponentially
     \Lambda & = \dfrac{E_d}{E_{d+1}} \approx  \dfrac{p_{thr}}{p} & \quad \text{[Supression factor]}
 \end{align}
 
-\paragraphsc{Decoding}
-When given an error syndrome for a logical qubit encoded using the surface code, the task of determining which error(s) occured is surprisingly nontrivial. The central issue with determining what error occured is that, while single qubit error syndrome patterns are unique, if you allow for multiple errors to occur in between or during syndrome measurements, there are multiple errors that can generate the same set of syndromes. Therefore, the problem of correcting an error measurement is not the problem of determining which error occurred, but rather is the problem of determining what is the most likely error to have occured. This problem can be solved efficiently using the minimum weight perfect matching algorithm...
+\subsection{Decoding: MWPM vs.\ MWPF}
+\label{subsec:decoding}
 
-It turns out that the problem of solving for the most likely error given syndrome is equivalent to a graph matching problem. Let us assume we are given a syndrome for a nine qubit surface code, such as the one given in figure 1, with the two middle Pauli Z plaquettes flagged. Because the $p_{n errors} < p_{n-1 errors}$ provided that $p_{error} < 50\%$, the most likely error to have occurred is precisely the error that acts on the least number of qubits. Therefore, while both an X error on the top left and bottom right qubits or an X error on the middle qubit produce the desired error syndrome, the most likely error is an X error on the middle qubit. This generalizes quite nicely to a surface code of arbritary distance. Assuming that a path is a chain of plaquette edges, let the minimum weight path between two plaquettes be defined as the path that connects a vertex touching each plaquette while traversing least number of vertices. Given two plaquette flags of the same type of a distance d surface code, the most likely error is given by the minimum weight path that connects the two flags. This is because each vertex corresponds to a qubit, and so the least number of vertices traversed is equivalent to the least number of pauli errors occuring.
+Decoding the surface code requires inferring which error configurations could have produced a given syndrome history. The two decoders we evaluate---MWPM and MWPF---differ fundamentally in how they represent and exploit error information.
 
-Now let us say we are given n syndrome flags of the same type. Remembering that connecting two syndrome flags via a path corrects for both flags, if given an even number of flags, the problem of finding the most likely error is then the problem of pairing nodes such that the number of vertices traversed along all paths is minimized. If given an odd number of flags, one just has to find the minimum weight pairing between n - 1 flags, as a single flag can always be a corrected by applying a Pauli operator to a single qubit.
+\subsubsection{Minimum-Weight Perfect Matching (MWPM)}
 
-There is an issue with the schema
-\cite{Pesah_Introduction_to_Surface_Code_2023}
-A hypergraph can be simplified to a normal graph if every hyperedge is connected to two vertices. In this particular case, the most likely error (MLE) problem can be reduced to a minimum-weight perfect matching (MWPM) problem. Through the blossom algorithm, the MWPM decode can solve the reformulation of MLE problems in polynomial time.
+\textbf{MWPM decoders} (e.g., PyMatching) cast the decoding problem as a \emph{graph matching} task: syndrome defects are nodes, edges represent possible error events, and a minimum-weight perfect matching yields the most likely Pauli error configuration consistent with the observed syndrome~\cite{oscarhiggott_oscarhiggottpymatching_2025,higgott_sparse_2025,gidney_answer_2023-1}. This approach is efficient, robust, and has become the de facto standard for decoding the surface code under uncorrelated Pauli noise~\cite{fowler_surface_2012,fowler_optimal_2013}. Our baseline simulations follow this tradition, using Stim and MWPM-based decoders to estimate thresholds under depolarizing noise~\cite{gidney_stim_2021,gidney_answer_2023}.
 
-The MWPM problem is a simple graph which is built using only the defect vertices, which correspond to qubits that flipped according to the syndrome. Every pair of defects is connected by an edge. Each of these edges are given a weight, which corresponds to the cost of the smallest error path that could connect the two defects connected to that edge. In this way, MWPM finds out which error was more likely to occur. \cite{wu_minimum-weight_2025}
+However, the standard MWPM formulation assumes:
+\begin{itemize}
+    \item errors are well-approximated as \textbf{independent Pauli faults}, and
+    \item the decoder has no side information about \emph{where} errors occurred.
+\end{itemize}
 
-However, when we discard the assumption that uniform Pauli-errors occur, and instead the noise model used is biased towards a particular type of error, MWPM will experience a sharp drop-off in performance. MWPM does not account for bias by default. Since MWPJM pairs defects based on the shortest path / minimum weight, the most likely error in a biased noise model is not necessarily the shortest path.
+In particular, MWPM does not naturally exploit the additional structure provided by erasure events, where locations of faults are known but their Pauli type is not. Extensions exist that partially incorporate erasure information within a matching framework, particularly for erasure qubits~\cite{kubica_erasure_2023,gu_fault-tolerant_2025}, but these remain limited compared to full hypergraph methods.
 
-As an example, if Z errors are 100x more likely to occur, and MWPM has the choice between two paths, one with five Z errors in a row, and one X error in the other, it will incorrectly pick the X error as the most likely error, since MWPM has no information about the error configuration.\textbf{Unsure whether to add citations to this}
+\subsubsection{Minimum-Weight Parity Factor (MWPF)}
 
-\bigskip
+The \textbf{MWPF decoder} generalizes this picture by representing the error model as a \emph{hypergraph}, where a single error mechanism can flip the parity of an arbitrary subset of detectors, not just pairs~\cite{wu_yuewuomwpf_2025,wu_minimum-weight_2025}. This allows MWPF to natively capture:
+\begin{itemize}
+    \item multi-qubit correlated error events,
+    \item erasure-tagged qubits and their constraints,
+    \item realistic detector error and measurement models across general quantum LDPC codes.
+\end{itemize}
 
+In the MWPF framework, decoding becomes a \emph{minimum-weight parity factor} problem: find a set of hyperedges whose parities match the observed syndrome while minimizing the total weight derived from the noise model~\cite{wu_minimum-weight_2025}. Hypergraph matching is NP-hard in general, but the HyperBlossom implementation used in this work employs primal--dual relaxations, clustering, and sparse data structures to achieve near-linear average runtime scaling on surface codes and other LDPC codes at relevant code distances~\cite{wu_minimum-weight_2025}.
 
-Minimum Weight Parity Factor (MWPF) provides a hypergraph-based reformulation of the Most Likely Error (MLE) decoding problem. The purpose of MLE is to find the lowest-weight error configuration consistent with a given syndrome. However, the number of error configurations grows exponentially with the number of qubits, making MLE intractable; in fact, the problem is known to be NP-hard.
+By construction, MWPF can incorporate erasure locations directly into the decoding graph, rather than approximating them as effective Pauli faults. This is especially powerful in architectures that deliberately convert dominant noise channels to erasures~\cite{wu_erasure_2022,kubica_erasure_2023,gu_fault-tolerant_2025,chadwick_erasure_2025}. Our experiments leverage this capability by comparing MWPF and MWPM in regimes where erasures are either absent (pure Pauli noise) or dominant (pure erasure noise).
 
-MWPF maps the MLE problem into a general hypergraph problem, retaining its intractability and NP-hardness. Although the conversion does not solve the NP-hardness	of MLE, the hypergraph conversion allows us to employ methods to approximate a near optimal solution in approximately polynomial time.
+\subsection{Motivation for Our Experiments}
+\label{subsec:motivation}
 
-To employ this conversion efficiently, MWPF uses Hyperblossom, a generalization of the blossom algorithm for Minimum Weight Perfect Matching (MWPM) to a hypergraph equivalent. Hyperblossom is constructed with a primal-dual linear programming (PDLP) framework, which introduces relaxation and transformations to the hypergraph.
+The literature sketched above suggests a coherent picture:
 
-PDLP offers two major advantages. It allows for a certifiable proximity bound, allowing one to quantify how close the approximate solution is to the true minimum-weight parity factor. Second, given certain simple hypergraphs, it can find the exact minimum-weight parity factor solution in polynomial time.
+\begin{enumerate}
+    \item Real hardware produces Pauli errors, leakage, and loss;
+          \textbf{leakage-reduction and mid-circuit detection convert a large fraction of these into erasures}
+          in both neutral-atom and superconducting platforms%
+          \cite{wu_erasure_2022,ma_high-fidelity_2023,scholl_erasure_2023,
+              chow_circuit-based_2024,kubica_erasure_2023,gu_fault-tolerant_2025}.
 
-To address the NP-hardness of the hypergraph, MWPF incorporates two techniques: clustering, and relaxation. Clustering exploits the locality of the errors by breaking the hypergraph into smaller subgraphs. Certain subgraphs, called relaxers, can be solved in polynomial time through Hyperblossom due to their simplicity. Subgraphs which cannot be solved exactly are handled using SingleHair, a process which assigns variables and hyperedges in a syndrome consistent manner. Local solutions from each cluster are combined into one global error estimate. Because the process breaks the decoding task into subproblems that scale with the locality of the errors rather than the number of qubits, the overall algorithm scales linearly with qubit number, achieving polynomial-time performance on average.\cite{wu_minimum-weight_2025}
+    \item \textbf{Erasures are significantly easier to correct} than unknown Pauli errors and can
+          dramatically improve thresholds and overhead when properly exploited%
+          \cite{sahay_high-threshold_2023,gu_optimizing_2024,baranes_leveraging_2025,
+              chadwick_erasure_2025}.
 
+    \item The \textbf{surface code threshold} depends strongly on the decoder’s ability
+          to use erasure information, as seen in simulations and early fault-tolerant experiments%
+          \cite{fowler_surface_2012,acharya_quantum_2025,bluvstein_logical_2024,
+              reichardt_fault-tolerant_2025,kobayashi_erasure-tolerance_2025}.
 
-% \section{Methods \& Results}
+    \item \textbf{MWPF} explicitly incorporates erasure locations and correlated error mechanisms
+          through a hypergraph formulation, while \textbf{MWPM} is tuned for uncorrelated Pauli noise%
+          \cite{oscarhiggott_oscarhiggottpymatching_2025,higgott_sparse_2025,
+              wu_minimum-weight_2025}.
+\end{enumerate}
 
-% Describe the decoding problem for Pauli error stabilizer circuits in the surface code. Explain how surface code error syndromes can be framed as a graph traversal problem with detection events as nodes and errors as the weighted edges. The minimum weight perfect matching (MWPM) algorithm can find the most probable set of errors that occurred. Explain why MWPM works for uniformly random Pauli errors, but why it experiences a sharp drop-off in performace for biased (non-identical) noise models.
+These observations motivate our study: by comparing MWPM and MWPF on the rotated surface code under both Pauli-only and erasure-dominant noise, we aim to quantify how erasure-aware decoding reshapes the threshold landscape and to clarify systematic deviations between ``idealized'' literature thresholds and practical simulation results obtained with Stim- and MWPF-based workflows.
 
-% Describe the decoding problem when 100s of noise channels can be converted to erasure errors (conversion\_ratio=1 in our codebase).  Describe how the Hypergraph Minimum-Weight Parity Factor (MWPF). \cite{wu_minimum-weight_2025}
 
 \newpage
 \section{Results}\label{sec:results}
