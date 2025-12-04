@@ -103,21 +103,6 @@ Because erasure errors are easier to correct and reveal additional information t
 \paragraphsc{Circuit-level Noise Thresholds.}
 If physical qubit error is below a critical noise threshold, the logical error rate should be supressed exponentially as the number of physical qubits per logical qubit is increased. In the surface code, the approximate relation between $d$ code distance corresponding to $2d^2 - 1$ physical qubits per logical qubit, the physical error rate $p$, logical error rate $E_d$, and error rate threshold $p_{thr}$  \cite{acharya_quantum_2025}.
 
-\paragraph{Erasure Tolerance and Enhancements}
-
-If left uncorrected, erasure errors pose a existential threat to encoded logical qubits that utilize the surface code encoding schema. While it is possible to compensate to some degree for erasure errors via the introduction of superstabilizers, the accumulation of erasures will eventually render your state unreconstructable if left unchecked. Kobayashi et al showed that a probability of erasure as low as 0.1\% can lead to logical failure rates increasing with code distance in regimes where the Pauli error rate is less than or on the order of 0.1\%. This suggests that to build a functional quantum computer, using the standard surface code encoding and the minimum weight perfect matching algorithm, one would need $p_{erase} << p_{pauli}$.
-\cite{kobayashi_erasure-tolerance_2025}
-
-\begin{align}
-    E_d & \propto \dfrac{p}{p_{thr}}^{(d+1)/2} & \quad \text{[Logical error rate]}
-\end{align}
-
-Therefore when $p << p_{thr}$, the logical error rate is supressed exponentially with code distance. The exponential supression factor $\Lambda$ is approximately the linear relation between $p_{thr}$ and $p$: \cite{acharya_quantum_2025}.
-
-\begin{align}
-    \Lambda & = \dfrac{E_d}{E_{d+1}} \approx  \dfrac{p_{thr}}{p} & \quad \text{[Supression factor]}
-\end{align}
-
 \subsection{Decoding: MWPM vs.\ MWPF}
 \label{subsec:decoding}
 
@@ -125,7 +110,7 @@ Decoding the surface code requires inferring which error configurations could ha
 
 \subsubsection{Minimum-Weight Perfect Matching (MWPM)}
 
-\textbf{MWPM decoders} (e.g., PyMatching) cast the decoding problem as a \emph{graph matching} task: syndrome defects are nodes, edges represent possible error events, and a minimum-weight perfect matching yields the most likely Pauli error configuration consistent with the observed syndrome~\cite{oscarhiggott_oscarhiggottpymatching_2025,higgott_sparse_2025,gidney_answer_2023-1}. This approach is efficient, robust, and has become the de facto standard for decoding the surface code under uncorrelated Pauli noise~\cite{fowler_surface_2012,fowler_optimal_2013}. Our baseline simulations follow this tradition, using Stim and MWPM-based decoders to estimate thresholds under depolarizing noise~\cite{gidney_stim_2021,gidney_answer_2023}.
+\textbf{MWPM decoders} (e.g., PyMatching) cast the decoding problem as a \emph{graph matching} task: syndrome defects are nodes, edges represent possible error events, and a minimum-weight perfect matching yields the most likely Pauli error configuration consistent with the observed syndrome~\cite{oscarhiggott_oscarhiggottpymatching_2025}\cite{higgott_sparse_2025,gidney_answer_2023-1}. This approach has become the de facto standard for decoding the surface code under uncorrelated Pauli noise~\cite{fowler_surface_2012}\cite{fowler_optimal_2013}. Our baseline simulations follow this tradition, using Stim and MWPM-based decoders to estimate thresholds under depolarizing noise \cite{gidney_stim_2021}.
 
 However, the standard MWPM formulation assumes:
 \begin{itemize}
