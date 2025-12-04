@@ -38,16 +38,6 @@ The simulations show that both decoders achieve thresholds near $0.6\%$ under de
 
 Building a fault-tolerant quantum computer requires correcting a variety of physical errors that arise in real hardware. In this work, we focus on how erasure-aware decoding influences the noise threshold of the rotated surface code, and how different decoders (MWPM vs. MWPF) respond to Pauli versus erasure-dominated noise. This section summarizes the key concepts that motivate our experiments and connects them to recent work on erasure qubits and erasure conversion in superconducting and neutral-atom platforms \cite{fowler_surface_2012}\cite{kubica_erasure_2023}\cite{gu_fault-tolerant_2025}\cite{sahay_high-threshold_2023}\cite{chadwick_erasure_2025}.
 
-Motivation: Fault-tolerate quantum computation at scale remains a formidable challenge, but we're excited about these recent major advancements:
-
-Decoding with erasure information dramatically increases the surface code error threshold from 0.937\% to 4.15\%, with an estimated 98\% of errors convertible into erasures. \cite{wu_erasure_2022}
-
-Machine-learned error decoding for quantum processors (surface code) by Bausch et al uses a transformer-based neutral network to decode error data with realistic noise models, including qubit cross-talk and state leakage.
-
-"Requires a system capable of dissipatively removing physical errors while simultaneously performing arbitrary coherent manipulation of the encoded logical qubits."  \cite{bluvstein_architectural_2025}
-
-Sub-questions \& hypotheses
-
 \section{Background \& Related Work}
 
 \subsection{Noise Models}
