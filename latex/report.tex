@@ -25,8 +25,6 @@
 
 \newpage
 \section{Introduction}
-
-\section{Introduction}
 \label{sec:intro}
 
 Fault-tolerant quantum computation requires the correction of physical faults at rates below a code-dependent threshold. In the surface code, this threshold depends not only on the magnitude of the underlying noise but also on the information available about the location and type of each fault~\cite{fowler_surface_2012,acharya_quantum_2025,bluvstein_logical_2024}. Several hardware platforms now permit the detection of leakage events, atom loss, or other mechanisms that remove population from the computational subspace, including superconducting circuits with erasure qubits and neutral-atom architectures with mid-circuit imaging and leakage-to-erasure conversion~\cite{kubica_erasure_2023,wu_erasure_2022,ma_high-fidelity_2023,scholl_erasure_2023,chow_circuit-based_2024,reichardt_fault-tolerant_2025}. Such events can be modeled as erasures, and their positions can be supplied directly to the decoder~\cite{gu_fault-tolerant_2025,gu_optimizing_2024,sahay_high-threshold_2023,chadwick_erasure_2025}.
@@ -610,10 +608,7 @@ A recent pull request to Stim introduces a \texttt{pymatching-correlated} decode
 
 \section{Conclusion}
 
-
-Summarize key findings succintly.
-
-Sketch a follow-up project w/ sweep across $R_e$.
+We quantified the effect of erasure information on the threshold of the rotated surface code. Under depolarizing noise, both MWPM and MWPF produce thresholds near $0.6\%$. Under full erasure conversion, MWPF reaches approximately $3\%$, while MWPM with reweighting reaches roughly $1\%$. The lower Pauli thresholds in our data are explained by an unintended measurement-noise channel in the Stim circuits (\autoref{fig:stim-circuit-gen}). The results show that decoders using explicit erasure locations provide a clear operational advantage for quantum error correction. Further work will evaluate correlated error models with the new correlation-aware PyMatching interface when it becomes available \cite{oscarhiggott_oscarhiggottpymatching_2025}.
 
 \paragraphsc{Acknowledgements}
 
