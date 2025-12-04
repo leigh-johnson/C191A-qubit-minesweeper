@@ -60,127 +60,20 @@ However, this model does not capture important features of real devices. A parti
 \begin{align}E_{\text{erase}}(\rho_j) & = (1-p_{\text{erase}})\rho_j + p_{\text{erase}}\ket{e}\bra{e} & \quad \text{[Erasure error channel \cite{suchara_leakage_2014}]}
 \end{align}
 
-Photon loss is the dominant form of error in photonic qubits [CITATION NEEDED].
+Unlike unknown Pauli errors, the location of an erasure is known to the decoder. This structural information dramatically changes the performance of error-correcting codes and has been formalized in recent work on erasure qubits and erasure-based architectures \cite{kubica_erasure_2022} \cite{gu_fault-tolerant_2025} \cite{gu_optimizing_2024}.
 
-Leakage-detection units (LDUs) were developed to address leakage errors in superconducting qubits, by periodically coupling a data qubit to an acilla that flags when the data qubit leaves the computational subspace. The flagged data qubit can be reset/replaced during subsequent error-correction cycles, effectively treating the flagged qubit as an erasure error.
+For a distance $d$ error-correcting code, up to $\dfrac{d-1}{2}$ arbitrary Pauli errors but up to $d-1$ erasures, because the decoder knows which qubits are affected. \cite{kubica_erasure_2023} \cite{gu_fault-tolerant_2025}.
 
-Neutral atoms / Rydberg arrays, each atom is arranged into a known position using optical tweezers. Although the lattice/trap is situated inside a vacuum chamber, some nonzero amount of background gas collisions or thermal energy transfer from the environment can eject an atom from its lattice site.
+This asymmetry leads to substantially higher thresholds and more favorable scaling in the erasure-dominated regime. Circuit-level simulations and code-capacity analyses of the surface code and related architectures consistently find erasure thresholds far above those for depolarizing noise—on the order of tens of percent for tailored codes—compared to ~1\% at the circuit level. \cite{wu_erasure_2022} \cite{sahay_high-threshold_2023} \cite{gu_optimizing_2024}.
 
-\paragraphsc{Correlated Errors.}
+The erasure paradigm is not purely theoretical. In neutral-atom hardware, metastable Yb qubits, Rydberg entangling gates, and fast, state-selective imaging enable mid-circuit conversion of dominant errors into detectable erasures \cite{wu_erasure_2022}\cite{ma_high-fidelity_2023}\cite{scholl_erasure_2023} \cite{chow_circuit-based_2024}
+\cite{norcia_midcircuit_2023}\cite{reichardt_fault-tolerant_2025}. Similar ideas are being pursued in superconducting circuits via dual-rail encodings and tailored measurement schemes \cite{kubica_erasure_2023} \cite{gu_fault-tolerant_2025} \cite{gu_optimizing_2024}, and in hybrid architectures that strategically deploy erasure qubits to trade physical cost for logical performance \cite{chadwick_erasure_2025} \cite{baranes_leveraging_2025}. These works collectively motivate studying how erasure-aware decoders perform on the surface code under idealized Pauli vs. erasure noise models, as we do here.
 
-TODO
-The most important thing to mention is that real-world errors are often correlated, so fault-tolerant QC requires correction of correlated noise.
-\cite{wilen_correlated_2021}
-
-Cross-talk might also be worth mentioning for completeness.
-
-\bigskip
-
-It is common and convenient to assume for general quantum error correcting codes that Pauli errors occur independently from each other. This assumption simplifies the decoding process, but does not accurately reflect the behavior of the real world. Experiments show that noise is often correlated through space or time in every platform. Thus, the correction of correlated errors is necessary to achieve a fault-tolerant quantum computer. \cite{wilen_correlated_2021}
-
-\bigskip
-
-In neutral atoms, there exists the chance of cross-talk between atoms when performing two qubit gates. Rydberg blockade is a necessary step to entangle two atoms, but applying the Rydberg excitation laser can unintentionally excite neighboring atoms. \textbf{CITATION NEEDED}
-
-\bigskip
-
-For superconducting transmon qubits, experiments have shown that the logical error rate can be reduced by increasing the code size of the surface code. This was done through the use of turnable couplers, which increase the fidelity of two qubit gates and prevent unwanted interaction. However, adding couplers introduces leakage errors. This is because during two qubit gates, couplers may gain extra population that stays there for a period of time. The extra population introduces time-corrolated errors, because it will affect the next gate operation. Furthermore, the extra population within the couplers may spread to other couplers, leading to space-corrolated errors. \cite{yang_coupler-assisted_2024}
-
+At the same time, erasure detection is imperfect and requires additional physical operations. Extra erasure checks may introduce correlated errors or additional decoherence, and realistic erasure-conversion schemes rarely achieve 100\% conversion efficiency \cite{ma_high-fidelity_2023}\cite{wu_erasure_2022}\cite{gu_optimizing_2024}. This motivates separating "pure Pauli" and "pure erasure" regimes in simulations as a first step, which we adopt in this project.
 
 \subsection{Erasure Qubits}
 
-A qubit engineered so the dominant source of errors is from erasures.
-
-A bias towards erasure-type errors occurs natively in some types of qubits (e.g. photons) or can be engineered by converting leakage errors to erasures (e.g. with LDUs in superconducting qubits).
-
-\bigskip
-
-Erasure qubits are qubits that are engineered so that the dominant error channel is erased. This means that the system can detect when and where the error happened. Some platforms exhibit a natural bias towards erasure, such as photons, which makes it easier to create erasure qubits. Other platforms however do not have a native erasure bias, but can be engineered to create one. For instance, by converting leakage errors into erasure errors when an atom is lost. \textbf{CITATION NEEDED}
-
-For more information on how erasure conversion works for neutral atoms, refer to the following papers: \cite{thompson_erasure_2022} \cite{baranes_leveraging_2025} For superconducting qubits, refer to the following papers: \cite{gu_optimizing_2024} \cite{gu_fault-tolerant_2025}
-
-
-\subsubsection{Advantages, Challenges of Erasure Errors}
-
-\paragraphsc{Advantages.}
-From: "The benefits and costs of quantum error correction with erasure qubits" (QIP 2025)
-\begin{enumerate}
-    \item Can theoretically correct more erasure errors than unknown Pauli errors.
-          We can correct $d-1$ erasure errors compared to $\dfrac{d-1}{2}$ Pauli errors. As a result, we expect logical error rate $P_L$ on the order of $p^{d}$ where $p$ is the physical qubit error rate, compared to $p^{d/2}$ for unknown Pauli errors. \cite{gu_fault-tolerant_2025}
-    \item Higher thresholds: surface code 50\% erasure noise vs. 19\% depolarizing noise.
-    \item Dominant noise source can be engineered
-\end{enumerate}
-
-TODO
-Figure: d=5 surface code with some unknown Pauli error spanning 3 qubits, with syndrome squares highlighted. If we apply the minimum-weight correction, this causes a logical error.
-
-Figure: d=5 surface code with erasure errors, exact locations known.
-
-\bigskip
-
-For Pauli errors, the decoder must infer where the error has occurred based on the specific stabilizers of the code.
-For erasure errors however, they provide the advantage of knowing exactly where the error has occurred,
-rather than guessing which qubit was affected.
-
-\medskip
-
-This small advantage allows the maximum number of errors that can be corrected to increase:
-\[
-    \frac{d - 1}{2} \quad \text{(for surface codes with Pauli errors)}
-    \qquad \longrightarrow \qquad
-    d - 1 \quad \text{(for surface codes with erasure errors)}.
-\]
-
-\medskip
-
-As a result, we can expect the logical error rate for erasure errors to be improved, where the logical error rate
-for Pauli errors is in the order of \(p^d\), and for erasure errors the logical error rate would be on the scale of \(p^{d/2}\).
-
-\medskip
-
-Another consequence of the higher correction rate is the noise thresholds. Surface codes can accept up to 19\% depolarizing noise.
-With erasure errors, the threshold increases to 50\%.
-
-\medskip
-
-Most platforms (neutral atoms, trapped ions, NV centers, photonic qubits, etc.) can either naturally produce erasures
-or can convert unknown errors into erasures through a platform-specific technique. Because many hardwares naturally exhibit erasures,
-the higher erasure thresholds are practically relevant. \cite{gu_fault-tolerant_2025}
-
-
-\paragraphsc{Challenges.}
-Challenges from "The benefits and costs of quantum error correction with erasure qubits" (QIP 2025):
-\begin{enumerate}
-    \item More physical operations.
-    \item Erasure detection imperfect, introducing another dimension to error models.
-    \item Midcircuit erasure checks can create correlated noise for neighboring qubits
-    \item Tools to simulate and decode erasure circuits are active area of research.
-\end{enumerate}
-
-\bigskip
-
-While erasure errors have a myriad of benefits, they also prove to bring some challenges: Erasure errors often require extra physical operations. Erasure checks consist of checking if a qubit is in a known, non-computational subspace, and if it is determined that the atom has experienced an erasure error, then erasure resets will bring qubits who are in a known, non-computational subspace back into a computational space. Whether the atom has been lost, or whether it has entered an invalid energy level will determine how the erasure reset mechanism functions. Another difficulty that presents itself with erasure errors is that they can spread through entangling operations as Pauli errors. If a qubit has experienced an erasure error but it has not yet been detected by erasure checks, the error will propagate onto neighboring qubits. \cite{qip2025_shouzhen_2025}
-
-
-
-\paragraphsc{Erasure Conversion in Superconducting Qubits}
-
-\begin{enumerate}
-    \item Shouzhen Gu. "Fault-tolerant quantum architectures based on erasure qubits" and "Optimizing quantum error correction protocols with erasure qubits" \cite{gu_optimizing_2024}
-          \cite{gu_fault-tolerant_2025}
-\end{enumerate}
-
-
-\paragraphsc{Erasure Conversion in Neutral / Rydberg Atoms}
-
-\begin{enumerate}
-    \item Yue Wu, Shimon Kolkowitz, Shruti Puri, Jeff D Thompson. Erasure conversion for fault-tolerant quantum computing in alkaline earth {Rydberg} atom arrays \cite{thompson_erasure_2022}
-
-    \item Gefen Baranes, Madelyn Cain, J. Pablo Bonilla Ataides, Dolev Bluvstein, Josiah Sinclair, Vladan Vuletic, Hengyun Zhou, Mikhail D. Lukin
-          . Leveraging Atom Loss Errors in Fault Tolerant Quantum Algorithms \cite{baranes_leveraging_2025}
-
-
-\end{enumerate}
+A qubit engineered so the dominant source of errors is from erasures. A bias towards erasure-type errors occurs natively in some types of qubits (e.g. photons) or can be engineered by converting leakage errors to erasures (e.g. with LDUs in superconducting qubits). For more information on how erasure conversion works for neutral atoms, refer to the following papers: \cite{wu_erasure_2022} \cite{baranes_leveraging_2025} For superconducting qubits, refer to the following papers: \cite{gu_optimizing_2024} \cite{gu_fault-tolerant_2025}.
 
 \subsection{Surface Code}
 Quantum error correction (QEC) assumes a piece of quantum information is distributed between many entangled physical qubits, realizing a logical qubit with higher fidelity than its constiuent physical qubits. Any errors affecting individual physical qubits can be detected and corrected with an ensemble of stabilizing codes, based on the diagnostic syndrome of the stabilizer code.
@@ -766,6 +659,10 @@ All species of qubit experience leakage errors, but it's important to note the u
 Transmon leakage. Transmon single and two qubit gates rely on coherent microwave driving to transition between computational basis states. Two qubit gates such as the controll Z and controll X gates are the primary source of leakage in transmon qubits because of their temporary usage of states outside of the computational basis to induce phase and bit flips in the target qubit. For example, when applying a control Z gate on transmon hardware to the state {$\ket{11}$}, temporarily force both excitons onto one qubit, pushing it into the second excited state, {$\ket{2}$}, and letting the other qubit fall into the ground state, {$\ket{0}$}, before allowing the system to relax back into {$\ket{11}$} with the intended phase shift applied. However, there is a nonzero chance that the system does not relax properly, and leaves one of our qubits in the {$\ket{2}$} state, causing a leakage error in our system.
 
 Neutral atom / Rydberg leakage. Neutral atom quantum computers exploit the large effective atomic radius of Rydberg states to perform two qubit gates. When an electron is excited to a Rydberg state, the separation between the electron and the now ionized nucleus creates an electric dipole field, which shifts excitation energy of the Rydberg state, an effect called Rydberg blockade. Following the protocol from Jaksch et. al, to perform a control Z gate, apply a {$\pi$} pulse to excite the control qubit into a Rydberg state, apply a 2{$\pi$} pulse to the target qubit, and then apply a {$\pi$} pulse to deexcite the control qubit \cite{Jaksch_Fast_Quantum_gates_2000}. If both qubits are in the {$\ket{0}$} then the state will remain unchanged, but if exactly one qubit is in the {$\ket{1}$} state then a rotation by 2{$\pi$} and thus a phase shift of -1, will be applied. If both qubits are in the {$\ket{11}$} state then after the first pulse, the Rydberg blockade will prevent the second excitation and a phase of -1 will be applied. Finally apply a Pauli Z gate to both qubits to shift the states -{$\ket{01}$ and -{$\ket{10}$ to {$\ket{01}$ and {$\ket{10}$. Occasionally when applying this protocol, the Rydberg state will not decay back to the {$\ket{1}$} state, and will instead decay to an orbital state outside of our computational basis, causing a leakage error. \cite{morgado_quantum_2021}
+
+Leakage-detection units (LDUs) were developed to address leakage errors in superconducting qubits, by periodically coupling a data qubit to an acilla that flags when the data qubit leaves the computational subspace. The flagged data qubit can be reset/replaced during subsequent error-correction cycles, effectively treating the flagged qubit as an erasure error.
+
+Neutral atoms / Rydberg arrays, each atom is arranged into a known position using optical tweezers. Although the lattice/trap is situated inside a vacuum chamber, some nonzero amount of background gas collisions or thermal energy transfer from the environment can eject an atom from its lattice site
 
 
 \end{document}
