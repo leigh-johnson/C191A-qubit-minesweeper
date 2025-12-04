@@ -258,7 +258,6 @@ We define $p_{thr}$ as the physical error rate $p$ where the logical error rate 
 \subsection{Fault Tolerant Code Distance} We plot logical error rate $P_L$ vs. code distance $d$ for below-threshold samples  ($p \le 0.01$) and fit a least-squares linear regression \autoref{fig:fault-tolerant-projection} and extrapolate the fit to $P_L \approx 10^{-12}$. The X-intercept of the fit line represents the minimum code distance $d$ needed for one logical bit to survive one trillion rounds, which is the current estimate of the number of rounds needed to run a useful quantum algorithm [CITATION NEEDED].
 
 For $R_e = 1.0$ and erasure-aware hypergraph MWPF decoding, \autoref{fig:fault-tolerant-projection} a logical qubit implemented with $d \approx 17$ (or $2d^2 = 578$ physical qubits in the array) is projected to survive one trillion rounds. This result should be taken with a bucket of salt because we do not calculate residuals from the least-squares fit to quantify goodness of fit. The hypergraph MWPF dataset is extrapolated from a more limited range of code distances (green, $d<9$) compared to other noise regimes. Due to the computational expense of the hypergraph decoder, we could not sample as much below-threshold data in that particular noise regime. See: \nameref{sec:memleak-sidequest}.
-% TODO - this plot should say p \ltq 0.01, not p=0.01
 \begin{figure}[h]
     \centering
     \includegraphics[width=\linewidth,height=0.5\textheight, keepaspectratio]{fig2_survival_code_distance.png}
@@ -313,9 +312,6 @@ For each circuit and decoding method described in \autoref{tab:1}, we plot $P_L$
 
 \paragraphsc{Circuit Simulation}
 We use Stim to implement the surface code stabilizer circuit \cite{gidney_stim_2021}. Notably, we rely on the surface code circuit declarations produced by the \verb|stim.Circuit.generated| API, which are intended for demonstration purposes and \textbf{not} recommended for research.
-
-\paragraphsc{Parameters}
-TODO briefly re-summarize the parameters swept: d, $R_e$, p, and decoding strategy.
 
 \subsection{Experiment 1: Min-weight Perfect Matching Baseline.} \label{sec:experiment1}
 \begin{itemize}
@@ -384,7 +380,6 @@ TODO briefly re-summarize the parameters swept: d, $R_e$, p, and decoding strate
     \item Additional results: \autoref{fig:mwpf-pthresh}.
 \end{itemize}
 
-
 \paragraphsc{Overview.} In this experiment we study the performance of the minimum-weight parity factor (MWPF) decoder in the uniform Pauli noise regime, as ablation against the MWPM baseline. Except for the decoder, this experiment is identical to \autoref{sec:experiment1}.  Notably, we do not use the version of the \verb|mwpf| decoder bundled with Stim in \verb|sinter\.decoders| and instead run our initial experiments with \verb|mwpf[stim]@0.2.12|. Later on, we incorporate an alternative memory layout in a fork of mwpf.
 
 \paragraphsc{Procedure.}
@@ -440,11 +435,11 @@ TODO briefly re-summarize the parameters swept: d, $R_e$, p, and decoding strate
               \right\},
           \end{align*}
 
-          Although the solution structure may look similar to Experiment1, the solution set $\mathbf{x}$ are now all the parity factors whose incident hyperedges correspond to the observed detector parities. In the pure Pauli-noise baseline ($R_e = 0$), we understand this methodology to approximate the MWPM because in this special case each error mechanism flips at most two detectors.
+          Although the solution structure may look similar to \autoref{sec:experiment1}, the solution set $\mathbf{x}$ are now all the parity factors whose incident hyperedges correspond to the observed detector parities. In the pure Pauli-noise baseline ($R_e = 0$), we understand this methodology to approximate the MWPM because in this special case each error mechanism flips at most two detectors.
 
-          TODO maybe it makes more sense to constrast how MWPM formulates a biparite graph, MWPF formulates an N-partite graph? That distinction might be more clear than my handwavey mathematical description, which makes the two approaches seem almost identical.
+          %   TODO maybe it makes more sense to constrast how MWPM formulates a biparite graph, MWPF formulates an N-partite graph? That distinction might be more clear than my handwavey mathematical description, which makes the two approaches seem almost identical.
 
-          TODO also we use \verb|cluster_node_size=50| and the solver \verb|SolverSerialJointSingleHair|. Mention where the solver comes in (solving the linear matrix constraint problem) and how the clustering technique is similar to the approach in the Blossom algorithm, adapted to hypergraphs. It's Hyperblossom!
+          %   TODO also we use \verb|cluster_node_size=50| and the solver \verb|SolverSerialJointSingleHair|. Mention where the solver comes in (solving the linear matrix constraint problem) and how the clustering technique is similar to the approach in the Blossom algorithm, adapted to hypergraphs. It's Hyperblossom!
 
 \end{itemize}
 
@@ -584,10 +579,6 @@ As in previous experiments, we map the decoder output to a Pauli correction on t
 \end{align}
 where $k$ is the number of logical failures and $n$ is the total number of shots.
 
-
-
-
-\newpage
 \section{Discussion}\label{sec:discussion}
 \paragraphsc{Reduced tolerance of errors in our surface code simulations}
 \autoref{tab:1}.
