@@ -519,9 +519,76 @@ where $k$ is the number of logical failures and $n$ is the total number of shots
 
 
 \subsection{Experiment 4: Erasure-aware Min-weight Perfect Matching} \label{sec:experiment4}
-\paragraphsc{Overview} TODO: we modify the procedure in Experiment1, with $R_e=1.0$. We adapt the strategy described by Gu et al. \cite{gu_fault-tolerant_2025}.
-\paragraphsc{Additional Results.} See \autoref{sec:experiment4}.
-\paragraphsc{Data.} \footnotesize \href{https://github.com/leigh-johnson/C191A-qubit-minesweeper/tree/main/datasets/circuit%3Dsurface_code%3Arotated_memory_x/decoder%3Dmwpf/erasure%3D1.0/solver%3DSolverSerialJointSingleHair}{datasets/circuit=surface\_code:rotated\_memory\_x/decoder=mwpf/erasure=1.0/solver=SolverSerialJointSingleHair} \normalsize
+\begin{itemize}
+    \item \href{https://github.com/leigh-johnson/C191A-qubit-minesweeper/tree/main/datasets/circuit%3Dsurface_code%3Arotated_memory_x/decoder%3Dmwpf/erasure%3D1.0/solver%3DSolverSerialJointSingleHair}{Github Link}
+    \item Additional Results: \autoref{fig:pymatching-pthresh-erase}.
+\end{itemize}
+
+\textbf{Overview.}
+This experiment modifies the MWPM baseline in Experiment \nameref{sec:experiment1} to use a fully erasure-converted noise model with $R_e = 1.0$, following the two-step strategy of \citeauthor{gu_fault-tolerant_2025} \cite{gu_fault-tolerant_2025}. In the first step, a Stim circuit with \texttt{HERALDED\_ERASE} channels produces both a syndrome bitstring and an erasure bitstring. In the second step, we build a detector error model (DEM) and decode syndromes with PyMatching, using per-shot edge re-weighting conditioned on the erasure bits.
+
+\textbf{Data.}
+We generated datasets for $d \in \{3,5,7,9,11, 13\}$, $p \in [0.003, 0.06]$, and $R_e = 1.0$ using Sinter with \texttt{max\_shots = 500{,}000} and \texttt{max\_errors = 10{,}000} per task, across $\approx 60$ workers. The resulting CSV files are stored alongside the other experiment datasets in our project repository.\footnote{\url{https://github.com/leigh-johnson/C191A-qubit-minesweeper}}
+
+\paragraph{Offline phase: circuit conversion and DEM analysis.}
+Starting from the same rotated-memory surface-code circuit used in \nameref{sec:experiment2}, we convert all Pauli faults into heralded erasures. Each physical fault is implemented as a \texttt{HERALDED\_ERASE} instruction followed by one or more dedicated \texttt{DETECTOR} instructions that act as erasure checks. All remaining \texttt{DETECTOR} instructions are treated as standard stabilizer syndrome detectors.
+
+From the converted circuit we derive a DEM via Stim, then analyze it to obtain:
+
+\begin{itemize}
+    \item a set of syndrome detector indices $\mathcal{S}$ (standard stabilizers);
+    \item a set of herald detector indices $\mathcal{H}$ (one representative detector per erasure event);
+    \item for each DEM error $E_j$, its probability $q_j$ and the set of detectors it touches;
+    \item a mapping from each error $E_j$ to the herald(s) $h \in \mathcal{H}$ whose detectors it touches.
+\end{itemize}
+
+Base log-likelihood weights for each DEM error are given by
+\begin{align}
+    w^{(0)}_j & = \log\!\left(\frac{1 - q_j}{q_j}\right),
+\end{align}
+where $q_j$ is the error probability specified by the DEM. When herald $h$ fires, we model errors associated with $h$ as having a larger conditional probability $p_{\mathrm{herald}} = \alpha$ (we use $\alpha = 0.5$), with
+\begin{align}
+    w^{(\mathrm{herald})} & = \log\!\left(\frac{1 - \alpha}{\alpha}\right),
+\end{align}
+and define the per-herald weight shift
+\begin{align}
+    \Delta w_{h,j} & =
+    \begin{cases}
+        w^{(\mathrm{herald})} - w^{(0)}_j & \text{if error $E_j$ touches herald } h, \\[4pt]
+        0                                 & \text{otherwise}.
+    \end{cases}
+\end{align}
+
+We then construct a single PyMatching graph from the DEM. This graph is reused across all shots; only the edge weights are updated per shot.
+
+\paragraph{Online phase: per-shot edge re-weighting and MWPM decoding.}
+Each noisy shot yields a bitstring of all detector outcomes,
+\begin{align}
+    z & \in \{0,1\}^{m},
+\end{align}
+from which we extract:
+\begin{align}
+    s & = z|_{\mathcal{S}} \quad\text{(syndrome detectors)}, \\
+    h & = z|_{\mathcal{H}} \quad\text{(herald detectors)}.
+\end{align}
+Interpreting $h$ as a binary row vector, we compute the per-shot edge weights as
+\begin{align}
+    w^{(\mathrm{shot})}_j & = w^{(0)}_j + \sum_{h' \in \mathcal{H}} h_{h'} \, \Delta w_{h',j},
+\end{align}
+or in vector form,
+\begin{align}
+    \mathbf{w}^{(\mathrm{shot})} & = \mathbf{w}^{(0)} + h \, \Delta W,
+\end{align}
+where $\Delta W$ is the matrix whose entries are $\Delta w_{h,j}$. These weights are passed to PyMatching, which performs minimum-weight perfect matching on the DEM graph and returns a predicted set of logical observable flips for that shot.
+
+As in previous experiments, we map the decoder output to a Pauli correction on the data qubits, apply the correction, and compare the resulting logical measurement to the ideal value. The logical error rate for a given $(d,p,R_e)$ configuration is then
+\begin{align}
+    P_L = \frac{k}{n},
+\end{align}
+where $k$ is the number of logical failures and $n$ is the total number of shots.
+
+
+
 
 \newpage
 \section{Discussion}\label{sec:discussion}
@@ -549,8 +616,12 @@ For the next/subsequent experiments, we recommend writing out \href{https://gith
 \paragraphsc{High Uncertainty in MWPF Experiments}
 In our MWPF experiments, our Monte Carlo simulation was limited to 10,000 - 50,000 shots at a time (vs. 500,000 per single run in other trials). We aggregate the datasets from many (5+) in order to compare against other experiments. Fewer samples resulted in a wider confidence interval for MWPF samples, especially at low physical error rates (see \autoref{fig:mwpf-pthresh} and \autoref{fig:mwpf-pthresh-erase}). We attempted to gather enough data to make a fair comparison between our visual estimations for $p_{thr}$, especially for the sampling region around the threshold. However, the binomial fit method in our $P_L$ vs. $p$ plots is very sensitive to outlying datapoints. A visual estimate at the extrema of the very wide confidence interval for $d=7,9,11$ in \autoref{fig:mwpf-pthresh-erase} puts the $p_{thr}$ region anywhere from $\approx 3-6$\%. We report the most convervative value in our results table.
 
+We're excited by pull request Adds 'pymatching-correlated' Sinter decoder opened one week ago (as of writing).
+https://github.com/quantumlib/Stim/pull/1012
+
 
 \section{Conclusion}
+
 
 Summarize key findings succintly.
 
