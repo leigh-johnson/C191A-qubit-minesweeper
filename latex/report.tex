@@ -308,13 +308,10 @@ For $R_e = 1.0$ and erasure-aware hypergraph MWPF decoding, \autoref{fig:fault-t
 \newpage
 \subsection{Experiments}
 
+\subsubsection{Experiment 1: Min-weight Perfect Matching Baseline.} \label{sec:experiment1}
+\textbf{Data:} \href{https://github.com/leigh-johnson/C191A-qubit-minesweeper/tree/main/datasets/circuit%3Dsurface_code%3Arotated_memory_x/decoder%3Dpymatching}{Github Link}.
+\textbf{Results:} \autoref{fig:pymathing-pthresh}.
 
-
-\subsection{Experiment 1: Min-weight Perfect Matching Baseline.} \label{sec:experiment1}
-\begin{itemize}
-    \item Data: \href{https://github.com/leigh-johnson/C191A-qubit-minesweeper/tree/main/datasets/circuit%3Dsurface_code%3Arotated_memory_x/decoder%3Dpymatching}{Github Link}
-    \item Additional results: \autoref{fig:pymathing-pthresh}.
-\end{itemize}
 
 \paragraphsc{Procedure.} We consider $R_e=0.0$ with a purely Pauli noise regime. We apply a minimum-weight perfect matching (PyMatching) decoder, with the syndrome decoding process split between two phases:
 \begin{itemize}
@@ -372,12 +369,10 @@ For $R_e = 1.0$ and erasure-aware hypergraph MWPF decoding, \autoref{fig:fault-t
 \end{itemize}
 
 \subsection{Experiment 2: Min-weight Parity Factor Baseline } \label{sec:experiment2}
-\begin{itemize}
-    \item Data:  \href{https://github.com/leigh-johnson/C191A-qubit-minesweeper/tree/main/datasets/circuit%3Dsurface_code%3Arotated_memory_x/decoder%3Dmwpf/erasure%3D0.0/solver%3DSolverSerialJointSingleHair}{Github Link} 
-    \item Additional results: \autoref{fig:mwpf-pthresh}.
-\end{itemize}
+\textbf{Data:}  \href{https://github.com/leigh-johnson/C191A-qubit-minesweeper/tree/main/datasets/circuit%3Dsurface_code%3Arotated_memory_x/decoder%3Dmwpf/erasure%3D0.0/solver%3DSolverSerialJointSingleHair}{Github Link} 
+\textbf{Results:} \autoref{fig:mwpf-pthresh}.
 
-\paragraphsc{Overview.} In this experiment we study the performance of the minimum-weight parity factor (MWPF) decoder in the uniform Pauli noise regime, as ablation against the MWPM baseline. Except for the decoder, this experiment is identical to \autoref{sec:experiment1}.  Notably, we do not use the version of the \verb|mwpf| decoder bundled with Stim in \verb|sinter\.decoders| and instead run our initial experiments with \verb|mwpf[stim]@0.2.12|. Later on, we incorporate an alternative memory layout in a fork of mwpf.
+\paragraphsc{Overview.} In this experiment we study the performance of the minimum-weight parity factor (MWPF) decoder in the uniform Pauli noise regime, as ablation against the MWPM baseline. Except for the decoder, this experiment is identical to \nameref{sec:experiment1}.  Notably, we do not use the version of the \verb|mwpf| decoder bundled with Stim in \verb|sinter\.decoders| and instead run our initial experiments with \verb|mwpf[stim]@0.2.12|. Later on, we incorporate an alternative memory layout in a fork of mwpf.
 
 \paragraphsc{Procedure.}
 \begin{itemize}
@@ -432,7 +427,7 @@ For $R_e = 1.0$ and erasure-aware hypergraph MWPF decoding, \autoref{fig:fault-t
               \right\},
           \end{align*}
 
-          Although the solution structure may look similar to \autoref{sec:experiment1}, the solution set $\mathbf{x}$ are now all the parity factors whose incident hyperedges correspond to the observed detector parities. In the pure Pauli-noise baseline ($R_e = 0$), we understand this methodology to approximate the MWPM because in this special case each error mechanism flips at most two detectors.
+          Although the solution structure may look similar to \nameref{sec:experiment1}, the solution set $\mathbf{x}$ are now all the parity factors whose incident hyperedges correspond to the observed detector parities. In the pure Pauli-noise baseline ($R_e = 0$), we understand this methodology to approximate the MWPM because in this special case each error mechanism flips at most two detectors.
 
           %   TODO maybe it makes more sense to constrast how MWPM formulates a biparite graph, MWPF formulates an N-partite graph? That distinction might be more clear than my handwavey mathematical description, which makes the two approaches seem almost identical.
 
