@@ -29,7 +29,7 @@
 \newpage
 \section{Introduction}
 
-Motivation \& research question
+Building a fault-tolerant quantum computer requires correcting a variety of physical errors that arise in real hardware. In this work, we focus on how erasure-aware decoding influences the noise threshold of the rotated surface code, and how different decoders (MWPM vs. MWPF) respond to Pauli versus erasure-dominated noise. This section summarizes the key concepts that motivate our experiments and connects them to recent work on erasure qubits and erasure conversion in superconducting and neutral-atom platforms \cite{fowler_surface_2012}\cite{kubica_erasure_2023}\cite{gu_fault-tolerant_2025}\cite{sahay_high-threshold_2023}\cite{chadwick_erasure_2025}.
 
 Motivation: Fault-tolerate quantum computation at scale remains a formidable challenge, but we're excited about these recent major advancements:
 
@@ -45,17 +45,17 @@ Sub-questions \& hypotheses
 
 \subsection{Noise Models}
 \paragraphsc{Pauli Noise.}
-The simplest model used to evaluate Quantum Error Correction (QEC) assumes all physical qubit errors can be represented by uniformly random Pauli operators applied during circuit simulation. In our simulations we implement a \gls{depolarizing error channel} to represent \gls{Pauli noise}, which has the following effect on some quantum state $\rho$ with $p$ probability of becoming a maximally-mixed state and $(1-p)$ probability of remaining unechanged:
+Quantum processors experience several classes of errors. A common simplification is to model all physical noise as independent Pauli errors, sampled uniformly from $\set{X,Y,Z}$. For the surface code this is often instantiated as a depolarizing channel \cite{fowler_surface_2012,pesah_interactive_2023}:
 \begin{align}E_{\text{pauli}}(\rho) & = (1-p)\rho + \dfrac{p}{3}(X\rho X + Y\rho Y + Z\rho Z) & \quad \text{[Depolarizing error channel]}
 \end{align}
 
-Unfortunately, error models based only on \gls{Pauli noise} are not robust enough to describe the real-world noise that must be corrected to realize fault-tolerant quantum computation. [CITATION NEEDED]
+Pauli noise has become the standard baseline for evaluating code performance and thresholds in both early and recent large-scale experiments \cite{fowler_surface_2012}\cite{acharya_quantum_2025}.
+
 
 \paragraphsc{Leakage.}
-A \gls{leakage} occurs when a qubit ``leaks'' out of the computational subspace (described by a two-dimensional Hilbert space) into a state that can only be described with a higher-order Hilbert space. If leakage goes undetected, the error compounds over time as it spreads through a multi-qubit interactions. Leakage can be stochastically modeled with a 3-level system (qutrit) with orthonormal basis: $\set{\ket{0}, \ket{1}, \ket{2}}$. Leakage events are assumed to be discrete and occur independently with probability $p_{\text{leak}}$ at each gate operation acting on the qutrit \cite{suchara_leakage_2014}. The leakage error $E_{E_{\uparrow}}$ on the $j$th qutrit in the system can then be understood as:
-\begin{align}E_{\text{leakage}}(\rho_j) & = (1-p_{\text{leak}})\rho_j + p_{\text{leak}}\ket{2}\bra{2} & \quad \text{[Leakage error channel \cite{suchara_leakage_2014}]}
-\end{align}
+However, this model does not capture important features of real devices. A particularly harmful type of hardware noise is leakage, where population escapes the computational subspace into higher energy levels (e.g.,$\ket{2}$ in a weakly anharmonic oscillator) and can persist across many QEC cycles, producing spatially and temporally correlated errors \cite{suchara_leakage_2014}\cite{wilen_correlated_2021}\cite{miao_overcoming_nodate}\cite{yang_coupler-assisted_2024}. To mitigate this, many proposals and recent experiments introduce leakage-reduction units (LRUs) or related mechanisms that periodically detect and reset leaked qubits \cite{suchara_leakage_2014}. See \nameref{appendix:leakage} for a more detailed description.
 
+<<<<<<< HEAD
 Leakage-reduction units (LRUs) were proposed as a way to convert leakage errors into Pauli-type errors, based on a one-bit teleportation protocol that effectively moves the logical state from the physical qubit in the leaked state to a freshly-prepared physical qubit \cite{suchara_leakage_2014}.
 
 All species of qubit experience leakage errors, but it's important to note the underlying \emph{physical} processes look and behave very differently despite sharing a common mathematical description.
@@ -67,98 +67,53 @@ Transmon leakage. Transmon single and two qubit gates rely on coherent microwave
 Neutral atom / Rydberg leakage. Neutral atom quantum computers exploit the large effective atomic radius of Rydberg states to perform two qubit gates. When an electron is excited to a Rydberg state, the separation between the electron and the now ionized nucleus creates an electric dipole field, which shifts excitation energy of the Rydberg state, an effect called Rydberg blockade. Following the protocol from Jaksch et. al, to perform a control Z gate, apply a {$\pi$} pulse to excite the control qubit into a Rydberg state, apply a 2{$\pi$} pulse to the target qubit, and then apply a {$\pi$} pulse to deexcite the control qubit \cite{Jaksch_Fast_Quantum_gates_2000}. If both qubits are in the {$\ket{0}$} then the state will remain unchanged, but if exactly one qubit is in the {$\ket{1}$} state then a rotation by 2{$\pi$} and thus a phase shift of -1, will be applied. If both qubits are in the {$\ket{11}$} state then after the first pulse, the Rydberg blockade will prevent the second excitation and a phase of -1 will be applied. Finally apply a Pauli Z gate to both qubits to shift the states -{$\ket{01}$ and -{$\ket{10}$ to {$\ket{01}$ and {$\ket{10}$. Occasionally when applying this protocol, the Rydberg state will not decay back to the {$\ket{1}$} state, and will instead decay to an orbital state outside of our computational basis, causing a leakage error. \cite{morgado_quantum_2021}
 
 \paragraphsc{Erasure.} An \gls{erasure} occurs when a qubit is longer detectable by the measurement device, so the quantum state information encoded by the qubit is effectively ``lost'' or ``erased''. Mathematically, we extend the qubit Hilbert space with some $\ket{e}$ that is orthogonal to the qubit state $\{\ket{0}, \ket{1}\}$. The erasure channel can be defined as:
+=======
+\paragraphsc{Erasure.} An erasure occurs when a qubit is longer detectable by the measurement device, so the quantum state information encoded by the qubit is effectively ``lost'' or ``erased''. Mathematically, we extend the qubit Hilbert space with some $\ket{e}$ that is orthogonal to the qubit state $\{\ket{0}, \ket{1}\}$. The erasure channel can be defined as:
+>>>>>>> ae42deba1886642b971caf3181b88c88354bbace
 
 \begin{align}E_{\text{erase}}(\rho_j) & = (1-p_{\text{erase}})\rho_j + p_{\text{erase}}\ket{e}\bra{e} & \quad \text{[Erasure error channel \cite{suchara_leakage_2014}]}
 \end{align}
 
-Photon loss is the dominant form of error in photonic qubits [CITATION NEEDED].
+Unlike unknown Pauli errors, the location of an erasure is known to the decoder. This structural information dramatically changes the performance of error-correcting codes and has been formalized in recent work on erasure qubits and erasure-based architectures \cite{kubica_erasure_2022} \cite{gu_fault-tolerant_2025} \cite{gu_optimizing_2024}.
 
-Leakage-detection units (LDUs) were developed to address leakage errors in superconducting qubits, by periodically coupling a data qubit to an acilla that flags when the data qubit leaves the computational subspace. The flagged data qubit can be reset/replaced during subsequent error-correction cycles, effectively treating the flagged qubit as an erasure error.
+For a distance $d$ error-correcting code, up to $\dfrac{d-1}{2}$ arbitrary Pauli errors but up to $d-1$ erasures, because the decoder knows which qubits are affected. \cite{kubica_erasure_2023} \cite{gu_fault-tolerant_2025}.
 
-Neutral atoms / Rydberg arrays, each atom is arranged into a known position using optical tweezers. Although the lattice/trap is situated inside a vacuum chamber, some nonzero amount of background gas collisions or thermal energy transfer from the environment can eject an atom from its lattice site.
+This asymmetry leads to substantially higher thresholds and more favorable scaling in the erasure-dominated regime. Circuit-level simulations and code-capacity analyses of the surface code and related architectures consistently find erasure thresholds far above those for depolarizing noise—on the order of tens of percent for tailored codes—compared to ~1\% at the circuit level. \cite{wu_erasure_2022} \cite{sahay_high-threshold_2023} \cite{gu_optimizing_2024}.
 
-\paragraphsc{Correlated Errors.}
+The erasure paradigm is not purely theoretical. In neutral-atom hardware, metastable Yb qubits, Rydberg entangling gates, and fast, state-selective imaging enable mid-circuit conversion of dominant errors into detectable erasures \cite{wu_erasure_2022}\cite{ma_high-fidelity_2023}\cite{scholl_erasure_2023} \cite{chow_circuit-based_2024}
+\cite{norcia_midcircuit_2023}\cite{reichardt_fault-tolerant_2025}. Similar ideas are being pursued in superconducting circuits via dual-rail encodings and tailored measurement schemes \cite{kubica_erasure_2023} \cite{gu_fault-tolerant_2025} \cite{gu_optimizing_2024}, and in hybrid architectures that strategically deploy erasure qubits to trade physical cost for logical performance \cite{chadwick_erasure_2025} \cite{baranes_leveraging_2025}. These works collectively motivate studying how erasure-aware decoders perform on the surface code under idealized Pauli vs. erasure noise models, as we do here.
 
-TODO
-The most important thing to mention is that real-world errors are often correlated, so fault-tolerant QC requires correction of correlated noise.
-\cite{wilen_correlated_2021}
-
-Cross-talk might also be worth mentioning for completeness.
-
-\bigskip
-
-It is common and convenient to assume for general quantum error correcting codes that Pauli errors occur independently from each other. This assumption simplifies the decoding process, but does not accurately reflect the behavior of the real world. Experiments show that noise is often correlated through space or time in every platform. Thus, the correction of correlated errors is necessary to achieve a fault-tolerant quantum computer. \cite{wilen_correlated_2021}
-
-\bigskip
-
-In neutral atoms, there exists the chance of cross-talk between atoms when performing two qubit gates. Rydberg blockade is a necessary step to entangle two atoms, but applying the Rydberg excitation laser can unintentionally excite neighboring atoms. \textbf{CITATION NEEDED}
-
-\bigskip
-
-For superconducting transmon qubits, experiments have shown that the logical error rate can be reduced by increasing the code size of the surface code. This was done through the use of turnable couplers, which increase the fidelity of two qubit gates and prevent unwanted interaction. However, adding couplers introduces leakage errors. This is because during two qubit gates, couplers may gain extra population that stays there for a period of time. The extra population introduces time-corrolated errors, because it will affect the next gate operation. Furthermore, the extra population within the couplers may spread to other couplers, leading to space-corrolated errors. \cite{yang_coupler-assisted_2024}
-
+At the same time, erasure detection is imperfect and requires additional physical operations. Extra erasure checks may introduce correlated errors or additional decoherence, and realistic erasure-conversion schemes rarely achieve 100\% conversion efficiency \cite{ma_high-fidelity_2023}\cite{wu_erasure_2022}\cite{gu_optimizing_2024}. This motivates separating "pure Pauli" and "pure erasure" regimes in simulations as a first step, which we adopt in this project.
 
 \subsection{Erasure Qubits}
 
-A qubit engineered so the dominant source of errors is from erasures.
+A qubit engineered so the dominant source of errors is from erasures. A bias towards erasure-type errors occurs natively in some types of qubits (e.g. photons) or can be engineered by converting leakage errors to erasures (e.g. with LDUs in superconducting qubits). For more information on how erasure conversion works for neutral atoms, refer to the following papers: \cite{wu_erasure_2022} \cite{baranes_leveraging_2025} For superconducting qubits, refer to the following papers: \cite{gu_optimizing_2024} \cite{gu_fault-tolerant_2025}.
 
-A bias towards erasure-type errors occurs natively in some types of qubits (e.g. photons) or can be engineered by converting leakage errors to erasures (e.g. with LDUs in superconducting qubits).
+\subsection{Surface Code}\label{subsec:surface-code}
 
-\bigskip
+The \emph{surface code} is a leading candidate for fault-tolerant quantum computation due to its local stabilizers, high threshold, and compatibility with two-dimensional hardware architectures~\cite{fowler_surface_2012}\cite{pesah_interactive_2023}. In its rotated layout, a single logical qubit is encoded across a $d \times d$ lattice of physical qubits, with repeated stabilizer measurements producing a space--time syndrome history. The code distance $d$ sets the minimum number of physical errors required to implement a logical error.
 
-Erasure qubits are qubits that are engineered so that the dominant error channel is erased. This means that the system can detect when and where the error happened. Some platforms exhibit a natural bias towards erasure, such as photons, which makes it easier to create erasure qubits. Other platforms however do not have a native erasure bias, but can be engineered to create one. For instance, by converting leakage errors into erasure errors when an atom is lost. \textbf{CITATION NEEDED}
+If the physical error rate $p$ is below a threshold $p_{\mathrm{thr}}$, the logical error rate $P_L$ decreases approximately exponentially with $d$:
+\begin{align}
+    P_L \propto \left( \frac{p}{p_{\mathrm{thr}}} \right)^{(d+1)/2} \quad \text{{Logical error rate}}
+\end{align}
+a scaling extensively validated in both simulations and experiments~\cite{fowler_surface_2012,fowler_optimal_2013,acharya_quantum_2025,bluvstein_logical_2024}. This exponential suppression underpins scalable, fault-tolerant architectures. Recent work has begun to explore how accumulated erasures, atom loss, and code deformations affect surface-code thresholds in neutral-atom settings, motivating specialized schemes for handling ongoing erasure processes~\cite{kobayashi_erasure-tolerance_2025,reichardt_fault-tolerant_2025,li_fast_2025}.
 
-For more information on how erasure conversion works for neutral atoms, refer to the following papers: \cite{thompson_erasure_2022} \cite{baranes_leveraging_2025} For superconducting qubits, refer to the following papers: \cite{gu_optimizing_2024} \cite{gu_fault-tolerant_2025}
-
-
-\subsubsection{Advantages, Challenges of Erasure Errors}
-
-\paragraphsc{Advantages.}
-From: "The benefits and costs of quantum error correction with erasure qubits" (QIP 2025)
-\begin{enumerate}
-    \item Can theoretically correct more erasure errors than unknown Pauli errors.
-          We can correct $d-1$ erasure errors compared to $\dfrac{d-1}{2}$ Pauli errors. As a result, we expect logical error rate $P_L$ on the order of $p^{d}$ where $p$ is the physical qubit error rate, compared to $p^{d/2}$ for unknown Pauli errors. \cite{gu_fault-tolerant_2025}
-    \item Higher thresholds: surface code 50\% erasure noise vs. 19\% depolarizing noise.
-    \item Dominant noise source can be engineered
-\end{enumerate}
-
-TODO
-Figure: d=5 surface code with some unknown Pauli error spanning 3 qubits, with syndrome squares highlighted. If we apply the minimum-weight correction, this causes a logical error.
-
-Figure: d=5 surface code with erasure errors, exact locations known.
-
-\bigskip
-
-For Pauli errors, the decoder must infer where the error has occurred based on the specific stabilizers of the code.
-For erasure errors however, they provide the advantage of knowing exactly where the error has occurred,
-rather than guessing which qubit was affected.
-
-\medskip
-
-This small advantage allows the maximum number of errors that can be corrected to increase:
-\[
-    \frac{d - 1}{2} \quad \text{(for surface codes with Pauli errors)}
-    \qquad \longrightarrow \qquad
-    d - 1 \quad \text{(for surface codes with erasure errors)}.
-\]
-
-\medskip
-
-As a result, we can expect the logical error rate for erasure errors to be improved, where the logical error rate
-for Pauli errors is in the order of \(p^d\), and for erasure errors the logical error rate would be on the scale of \(p^{d/2}\).
-
-\medskip
-
-Another consequence of the higher correction rate is the noise thresholds. Surface codes can accept up to 19\% depolarizing noise.
-With erasure errors, the threshold increases to 50\%.
-
-\medskip
-
-Most platforms (neutral atoms, trapped ions, NV centers, photonic qubits, etc.) can either naturally produce erasures
-or can convert unknown errors into erasures through a platform-specific technique. Because many hardwares naturally exhibit erasures,
-the higher erasure thresholds are practically relevant. \cite{gu_fault-tolerant_2025}
+\begin{figure}[H]
+    \hspace{-2em}
+    \includegraphics[width=\linewidth, height=0.5\textheight, keepaspectratio]{fig_experiment4.png}
+    \caption{\textbf{Dual-rail erasure-check qubits in superconducting transmons }.\footnotesize{
+            \textbf{(a)} A set of errors occuring in the surface code. \textbf{(b)} Syndrome information available in a pure Pauli noise regime. \textbf{(c)} Decoder prediction that results in a logical Z error (orange path). \textbf{(d)} Syndrome information from parity-check ancilla qubits enriched with erasure checks. \textbf{(e)} A correlated erasure-aware error model weights the green path more heavily, avoiding the logical error in (b).
+            Image credit: \citeauthor{chadwick_erasure_2025} \cite{chadwick_erasure_2025}.}
+    }
+    \label{fig:surface-code-erasure-comparison}
+\end{figure}
 
 
+Because erasure errors are easier to correct and reveal additional information to the decoder (example: \autoref{fig:surface-code-erasure-comparison}), the erasure-aware threshold can be substantially higher than the threshold under Pauli noise, especially when decoders are explicitly optimized for erasure structure~\cite{sahay_high-threshold_2023,gu_fault-tolerant_2025,gu_optimizing_2024}. Quantifying this gap for practical decoders is one of the main goals of our study.
+
+
+<<<<<<< HEAD
 \paragraphsc{Challenges.}
 Challenges from "The benefits and costs of quantum error correction with erasure qubits" (QIP 2025):
 \begin{enumerate}
@@ -207,25 +162,35 @@ The surface code implements quantum errror correction on a scalable array of qub
 
 
 \cite{fowler_surface_2012}
+=======
+>>>>>>> ae42deba1886642b971caf3181b88c88354bbace
 
 \paragraphsc{Circuit-level Noise Thresholds.}
 If physical qubit error is below a critical noise threshold, the logical error rate should be supressed exponentially as the number of physical qubits per logical qubit is increased. In the surface code, the approximate relation between $d$ code distance corresponding to $2d^2 - 1$ physical qubits per logical qubit, the physical error rate $p$, logical error rate $E_d$, and error rate threshold $p_{thr}$  \cite{acharya_quantum_2025}.
 
-\paragraph{Erasure Tolerance and Enhancements}
+\subsection{Decoding: MWPM vs.\ MWPF}
+\label{subsec:decoding}
 
+<<<<<<< HEAD
 If left uncorrected, erasure errors pose a existential threat to encoded logical qubits that utilize the surface code encoding schema. While it is possible to compensate to some degree for erasure errors via the introduction of superstabilizers, the accumulation of erasures will eventually render your state unreconstructable if left unchecked. Kobayashi et al showed that a probability of erasure as low as 0.1\% can lead to logical failure rates increasing with code distance in regimes where the Pauli error rate is less than or on the order of 0.1\%. This suggests that to build a functional quantum computer, using the standard surface code encoding and the minimum weight perfect matching algorithm, one would need $p_{erase} << p_{pauli}$.
 \cite{kobayashi_erasure-tolerance_2025}
+=======
+Decoding the surface code requires inferring which error configurations could have produced a given syndrome history. The two decoders we evaluate---MWPM and MWPF---differ fundamentally in how they represent and exploit error information.
 
-\begin{align}
-    E_d & \propto \dfrac{p}{p_{thr}}^{(d+1)/2} & \quad \text{[Logical error rate]}
-\end{align}
+\subsubsection{Minimum-Weight Perfect Matching (MWPM)}
+>>>>>>> ae42deba1886642b971caf3181b88c88354bbace
 
-Therefore when $p << p_{thr}$, the logical error rate is supressed exponentially with code distance. The exponential supression factor $\Lambda$ is approximately the linear relation between $p_{thr}$ and $p$: \cite{acharya_quantum_2025}.
+\textbf{MWPM decoders} (e.g., PyMatching) cast the decoding problem as a \emph{graph matching} task: syndrome defects are nodes, edges represent possible error events, and a minimum-weight perfect matching yields the most likely Pauli error configuration consistent with the observed syndrome~\cite{oscarhiggott_oscarhiggottpymatching_2025}\cite{higgott_sparse_2025,gidney_answer_2023-1}. This approach has become the de facto standard for decoding the surface code under uncorrelated Pauli noise~\cite{fowler_surface_2012}\cite{fowler_optimal_2013}. Our baseline simulations follow this tradition, using Stim and MWPM-based decoders to estimate thresholds under depolarizing noise \cite{gidney_stim_2021}.
 
-\begin{align}
-    \Lambda & = \dfrac{E_d}{E_{d+1}} \approx  \dfrac{p_{thr}}{p} & \quad \text{[Supression factor]}
-\end{align}
+However, the standard MWPM formulation assumes:
+\begin{itemize}
+    \item errors are well-approximated as \textbf{independent Pauli faults}, and
+    \item the decoder has no side information about \emph{where} errors occurred.
+\end{itemize}
 
+In particular, MWPM does not naturally exploit the additional structure provided by erasure events, where locations of faults are known but their Pauli type is not. Extensions exist that partially incorporate erasure information within a matching framework, particularly for erasure qubits~\cite{kubica_erasure_2023,gu_fault-tolerant_2025}, but these remain limited compared to full hypergraph methods.
+
+<<<<<<< HEAD
 \subsection{Formalism}
 Our assumptions when simulating stabilizer circuits with erasure channels follow the formalism laid out in Fault-tolerant quantum architectures based on erasure qubits by Gu et al.  Specifically, we assume that all circuit noise is characterized by $p_{erasure}$ and $p_{depolarization}$, ignoring the $p_{classical bit flip}$ that the paper mentions, and that two qubit gates between an erased qubit $q_e$, and a qubit in the computational subspace $q_c$, results in $q_c$ becoming a maximally mixed state, which is possible because of the paper's assumption that coherence between the erasure subspace and the computational subspace is not possible. The simulation differs from standard surface code simulations primarily because of the inclusion of erasure locations within the simulated circuit. 
 \cite{gu_fault-tolerant_2025}
@@ -234,10 +199,20 @@ Our assumptions when simulating stabilizer circuits with erasure channels follow
 
 Stim efficiently simulates stabilizer circuits containing exclusively clifford gates by computing the inverse stabilizer tableau of the circuit for each stabilizer measurement $Z_q$, where $Z_q$ corresponds to a measurement in the Z basis on qubit q. What this means, is that when given a clifford circuit C and a stabilizer code, rather than simulating the actions of C on qubits directly, what stim does is it computes the inverse change of basis with respect to C, C$Z_q$$C^{-1}$, to determine an equivalent measurement that can be conducted on the initial qubit state. Once Stim has generated a stabilizer tableau, when conduct subsequent noisy simulations of the same circuit, it conducts a Pauli frame simulation, which tracks bit flips and phase flips, and can be used in conjunction with the noiseless stabilizer tableau to simulate stabilizer circuits in O(g) time complexity and O(n) spacial complexity, where g corresponds to the number of gates and n corresponds to the number of qubits.
 \cite{gidney_stim_2021}
+=======
+\subsubsection{Minimum-Weight Parity Factor (MWPF)}
 
-\paragraphsc{Decoding}
-When given an error syndrome for a logical qubit encoded using the surface code, the task of determining which error(s) occured is surprisingly nontrivial. The central issue with determining what error occured is that, while single qubit error syndrome patterns are unique, if you allow for multiple errors to occur in between or during syndrome measurements, there are multiple errors that can generate the same set of syndromes. Therefore, the problem of correcting an error measurement is not the problem of determining which error occurred, but rather is the problem of determining what is the most likely error to have occured. This problem can be solved efficiently using the minimum weight perfect matching algorithm...
+The \textbf{MWPF decoder} generalizes this picture by representing the error model as a \emph{hypergraph}, where a single error mechanism can flip the parity of an arbitrary subset of detectors, not just pairs~\cite{wu_yuewuomwpf_2025,wu_minimum-weight_2025}. This allows MWPF to natively capture:
+\begin{itemize}
+    \item multi-qubit correlated error events,
+    \item erasure-tagged qubits and their constraints,
+    \item realistic detector error and measurement models across general quantum LDPC codes.
+\end{itemize}
+>>>>>>> ae42deba1886642b971caf3181b88c88354bbace
 
+In the MWPF framework, decoding becomes a \emph{minimum-weight parity factor} problem: find a set of hyperedges whose parities match the observed syndrome while minimizing the total weight derived from the noise model~\cite{wu_minimum-weight_2025}. Hypergraph matching is NP-hard in general, but the HyperBlossom implementation used in this work employs primal--dual relaxations, clustering, and sparse data structures to achieve near-linear average runtime scaling on surface codes and other LDPC codes at relevant code distances~\cite{wu_minimum-weight_2025}.
+
+<<<<<<< HEAD
 It turns out that the problem of solving for the most likely error given syndrome is equivalent to a graph matching problem. Let us assume we are given a syndrome for a nine qubit surface code, such as the one given in figure 1, with the two middle Pauli Z plaquettes flagged. Because the $p_{n errors} < p_{n-1 errors}$ provided that $p_{error} < 50\%$, the most likely error to have occurred is precisely the error that acts on the least number of qubits. Therefore, while both an X error on the top left and bottom right qubits or an X error on the middle qubit produce the desired error syndrome, the most likely error is an X error on the middle qubit. 
 
 To find the most likely correction for any two error syndromes first note that it is only possible to generate single stabilizer flags if an error occurs at a boundary not containing semicircle stabilizers of the same type. Define the X boundary as the boundary containing X semicircular stabilizers and the Z boundary as the boundary containing Z semicircular stabilizers. Assuming that a path is a chain of plaquette edges, let the minimum weight path between two plaquettes be defined as the path that connects a vertex touching each plaquette while touching the least number of vertices. Given two plaquette flags of the same type of a distance d surface code, the most likely error is given by the minimum weight path that connects either the two flags together, or both flags to the boundary corresponding to the Pauli Error that occured. 
@@ -247,32 +222,40 @@ Now let us say we are given n syndrome flags of the same type. Remember that if 
 
 \cite{Pesah_Introduction_to_Surface_Code_2023}
 A hypergraph can be simplified to a normal graph if every hyperedge is connected to two vertices. In this particular case, the most likely error (MLE) problem can be reduced to a minimum-weight perfect matching (MWPM) problem. Through the blossom algorithm, the MWPM decode can solve the reformulation of MLE problems in polynomial time.
+=======
+By construction, MWPF can incorporate erasure locations directly into the decoding graph, rather than approximating them as effective Pauli faults. This is especially powerful in architectures that deliberately convert dominant noise channels to erasures~\cite{wu_erasure_2022,kubica_erasure_2023,gu_fault-tolerant_2025,chadwick_erasure_2025}. Our experiments leverage this capability by comparing MWPF and MWPM in regimes where erasures are either absent (pure Pauli noise) or dominant (pure erasure noise).
 
-The MWPM problem is a simple graph which is built using only the defect vertices, which correspond to qubits that flipped according to the syndrome. Every pair of defects is connected by an edge. Each of these edges are given a weight, which corresponds to the cost of the smallest error path that could connect the two defects connected to that edge. In this way, MWPM finds out which error was more likely to occur. \cite{wu_minimum-weight_2025}
+\subsection{Motivation for Our Experiments}
+\label{subsec:motivation}
 
-However, when we discard the assumption that uniform Pauli-errors occur, and instead the noise model used is biased towards a particular type of error, MWPM will experience a sharp drop-off in performance. MWPM does not account for bias by default. Since MWPJM pairs defects based on the shortest path / minimum weight, the most likely error in a biased noise model is not necessarily the shortest path.
+The literature sketched above suggests a coherent picture:
+>>>>>>> ae42deba1886642b971caf3181b88c88354bbace
 
-As an example, if Z errors are 100x more likely to occur, and MWPM has the choice between two paths, one with five Z errors in a row, and one X error in the other, it will incorrectly pick the X error as the most likely error, since MWPM has no information about the error configuration.\textbf{Unsure whether to add citations to this}
+\begin{enumerate}
+    \item Real hardware produces Pauli errors, leakage, and loss;
+          \textbf{leakage-reduction and mid-circuit detection convert a large fraction of these into erasures}
+          in both neutral-atom and superconducting platforms%
+          \cite{wu_erasure_2022,ma_high-fidelity_2023,scholl_erasure_2023,
+              chow_circuit-based_2024,kubica_erasure_2023,gu_fault-tolerant_2025}.
 
-\bigskip
+    \item \textbf{Erasures are significantly easier to correct} than unknown Pauli errors and can
+          dramatically improve thresholds and overhead when properly exploited%
+          \cite{sahay_high-threshold_2023,gu_optimizing_2024,baranes_leveraging_2025,
+              chadwick_erasure_2025}.
 
+    \item The \textbf{surface code threshold} depends strongly on the decoder’s ability
+          to use erasure information, as seen in simulations and early fault-tolerant experiments%
+          \cite{fowler_surface_2012,acharya_quantum_2025,bluvstein_logical_2024,
+              reichardt_fault-tolerant_2025,kobayashi_erasure-tolerance_2025}.
 
-Minimum Weight Parity Factor (MWPF) provides a hypergraph-based reformulation of the Most Likely Error (MLE) decoding problem. The purpose of MLE is to find the lowest-weight error configuration consistent with a given syndrome. However, the number of error configurations grows exponentially with the number of qubits, making MLE intractable; in fact, the problem is known to be NP-hard.
+    \item \textbf{MWPF} explicitly incorporates erasure locations and correlated error mechanisms
+          through a hypergraph formulation, while \textbf{MWPM} is tuned for uncorrelated Pauli noise%
+          \cite{oscarhiggott_oscarhiggottpymatching_2025,higgott_sparse_2025,
+              wu_minimum-weight_2025}.
+\end{enumerate}
 
-MWPF maps the MLE problem into a general hypergraph problem, retaining its intractability and NP-hardness. Although the conversion does not solve the NP-hardness	of MLE, the hypergraph conversion allows us to employ methods to approximate a near optimal solution in approximately polynomial time.
+These observations motivate our study: by comparing MWPM and MWPF on the rotated surface code under both Pauli-only and erasure-dominant noise, we aim to quantify how erasure-aware decoding reshapes the threshold landscape and to clarify systematic deviations between ``idealized'' literature thresholds and practical simulation results obtained with Stim- and MWPF-based workflows.
 
-To employ this conversion efficiently, MWPF uses Hyperblossom, a generalization of the blossom algorithm for Minimum Weight Perfect Matching (MWPM) to a hypergraph equivalent. Hyperblossom is constructed with a primal-dual linear programming (PDLP) framework, which introduces relaxation and transformations to the hypergraph.
-
-PDLP offers two major advantages. It allows for a certifiable proximity bound, allowing one to quantify how close the approximate solution is to the true minimum-weight parity factor. Second, given certain simple hypergraphs, it can find the exact minimum-weight parity factor solution in polynomial time.
-
-To address the NP-hardness of the hypergraph, MWPF incorporates two techniques: clustering, and relaxation. Clustering exploits the locality of the errors by breaking the hypergraph into smaller subgraphs. Certain subgraphs, called relaxers, can be solved in polynomial time through Hyperblossom due to their simplicity. Subgraphs which cannot be solved exactly are handled using SingleHair, a process which assigns variables and hyperedges in a syndrome consistent manner. Local solutions from each cluster are combined into one global error estimate. Because the process breaks the decoding task into subproblems that scale with the locality of the errors rather than the number of qubits, the overall algorithm scales linearly with qubit number, achieving polynomial-time performance on average.\cite{wu_minimum-weight_2025}
-
-
-% \section{Methods \& Results}
-
-% Describe the decoding problem for Pauli error stabilizer circuits in the surface code. Explain how surface code error syndromes can be framed as a graph traversal problem with detection events as nodes and errors as the weighted edges. The minimum weight perfect matching (MWPM) algorithm can find the most probable set of errors that occurred. Explain why MWPM works for uniformly random Pauli errors, but why it experiences a sharp drop-off in performace for biased (non-identical) noise models.
-
-% Describe the decoding problem when 100s of noise channels can be converted to erasure errors (conversion\_ratio=1 in our codebase).  Describe how the Hypergraph Minimum-Weight Parity Factor (MWPF). \cite{wu_minimum-weight_2025}
 
 \newpage
 \section{Results}\label{sec:results}
@@ -318,54 +301,64 @@ We define $p_{thr}$ as the physical error rate $p$ where the logical error rate 
     \label{fig:best-threshold-comparison}
 \end{figure}
 
-\subsection{Experiment 1: Min-weight Perfect Matching Baseline}
-\normalsize
+
+\newpage
+
+\newgeometry{left=2cm,bottom=1.5cm,right=2cm,top=1cm}
+
+\subsection{Comparison of Pauli Errors and Erasure Errors (MWPM vs. MWPF decoders)}
+
 \begin{figure}[H]
     \centering
-    \hspace{-4.8em}
-    \includegraphics[width=1.1\linewidth, height=\textheight, keepaspectratio ]{fig1_pymatching_threshold.png}
-    \caption{\textbf{Surface code threshold in Experiment 1}. Comparison of logical error rate $P_L$ with physical qubit error rate $p$ modeled by uniform Pauli noise ($R_e=0$), decoded using the minimum-weight perfect matching (PyMatching) decoder. The lower and upper bounds of the threshold region $p_{thrs}$ (0.570\%, 0.775\%) are determined from the d=3,5 and d=9,11 crossings. A 95\% confidence interval is determined using a log-likelihood method, shown using a transparent highlighted region around each fit line. \\ For a complete description of the experiment procedure, see \nameref{sec:experiment1}.}
-    \label{fig:pymathing-pthresh}
-\end{figure}
+    \begin{subfigure}[b]{0.49\linewidth}
+        \caption{}
+        \includegraphics[width=\textwidth, keepaspectratio]{fig1_pymatching_threshold.png}
+        \label{fig:pymathing-pthresh}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.49\linewidth}
+        \caption{}
+        \includegraphics[width=\linewidth,keepaspectratio]{fig1_mwpf_threshold_erasure=0.png}
+        \label{fig:mwpf-pthresh}
+    \end{subfigure}
 
-\subsection{Experiment 2: Min-weight Parity Factor Baseline}
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1.1\linewidth, height=\textheight, keepaspectratio ]{fig1_mwpf_threshold_erasure=0.png}
-    \caption{\textbf{Surface code threshold in Experiment 2.} Comparison of logical error rate $P_L$ with physical qubit error rate $p$ modeled by uniform Pauli noise, decoded using the minimum-weight parity factor (MWPF) decoder. The lower and upper bounds of the threshold region $p_{thrs}$ between 0.650\% and 0.750\% is estimated from the d=3,5 and d=9,11 crossings. A 95\% confidence interval is determined using a log-likelihood method, shown using a transparent highlighted region around each fit line. \\ For a complete description of the experiment procedure, see \nameref{sec:experiment2}.}
-    \label{fig:mwpf-pthresh}
-\end{figure}
+    \begin{subfigure}[b]{0.49\linewidth}
+        \caption{}
+        \includegraphics[width=\textwidth, keepaspectratio]{fig1_mwpf_threshold_erasure=1.png}
+        \label{fig:mwpf-pthresh-erase}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.49\linewidth}
+        \caption{}
+        \includegraphics[width=\linewidth,keepaspectratio]{fig1_pymatching_custom_erasure=1.png}
+        \label{fig:pymatching-pthresh-erase}
+    \end{subfigure}
 
-
-\subsubsection{Experiment 3: Erasure-aware Min-weight Parity Factor Baseline}
-\begin{figure}[H]
-    \centering
-    \hspace{-4.8em}
-    \includegraphics[width=1.1\linewidth, height=\textheight, keepaspectratio ]{fig1_mwpf_threshold_erasure=1.png}
-    \caption{\textbf{Surface code threshold in Experiment 3 } Comparison of logical error rate $P_L$ with physical qubit error rate $p$ converted to erasure errors ($R_e=1$). The lower and upper bounds of the threshold region $p_{thrs}$ ( 2.75\%, 3.00\%) are determined from the d=3,5 and d=9,11 crossings.
-        A 95\% confidence interval is determined using a log-likelihood method, shown using a transparent highlighted region around each fit line. Due to a high memory footprint (in excess of 200GB RAM allocation), we were unable to collect enough samples to fit a narrow confidence interval for $d=7,9,11$ trials. See \nameref{sec:memleak-sidequest} for a discussion and our workarounds for this issue.
-        \\ For a complete description of the experiment procedure, see \nameref{sec:experiment3}.}
-    \label{fig:mwpf-pthresh-erase}
+    \caption{Comparison of logical error rate $P_L$ with physical qubit error rate $p$, for various syndrome decoding schemes and noise regimes. The lower and upper bounds of the threshold region $p_{thrs}$ is estimated from the d=3,5 and d=9,11 crossings respectively. Shaded bands indicate
+        95\% confidence intervals from a log-likelihood fit.
+        \textbf{(a) Experiment 1 — Pauli-Noise Baseline (PyMatching)}. Syndrome measurements decoded with min-weight perfect matching (PyMatching):
+        $p_{\mathrm{thr}} \in [0.570\%,\,0.775\%]$.  See \nameref{sec:experiment1} for full
+        procedure.
+        \textbf{(b) Experiment 2 — Pauli-Noise Baseline (MWPF)}. Syndrome measurements decoded with min-weight parity factor (MWPF):
+        $p_{\mathrm{thr}} \in [0.650\%,\,0.750\%]$.  See \nameref{sec:experiment2} for
+        procedure.
+        \textbf{(c) Experiment 3 — Erasure Conversion (MWPF)}. 100\% conversion of errors to erasure events, syndrome measurements decoded with MWPF.
+        $p_{\mathrm{thr}} \in [2.75\%,\,3.00\%]$.  See \nameref{sec:experiment3} for
+        procedure. Due to a high memory footprint (in excess of 200GB RAM allocation), we were unable to collect enough samples to fit a narrow confidence interval for $d=7,9,11$ trials. See \nameref{sec:memleak-sidequest} for a discussion and our workarounds for this issue.
+        \textbf{(c) Experiment 4 — Erasure Conversion (MWPF)}. 100\% conversion of errors to erasure events, syndrome measurements decoded with MWPF using a per-shot edge re-weighting.
+        $p_{\mathrm{thr}} \in [0.80\%,\,1.00\%]$.  See \nameref{sec:experimen4} for
+        procedure.
+    }
+    \label{fig:thresholds}
 \end{figure}
-
-\subsection{Experiment 4: Erasure-aware Min-weight Parity Factor }
-\begin{figure}[H]
-    \centering
-    \hspace{-4.8em}
-    \includegraphics[width=1.1\linewidth, height=\textheight, keepaspectratio ]{fig1_pymatching_custom_erasure=1.png}
-    \caption{\textbf{Surface code threshold in Experiment 4 } Comparison of logical error rate $P_L$ with physical qubit error rate $p$ converted to erasure errors ($R_e=1$). Following  The lower and upper bounds of the threshold region $p_{thrs}$ (0.80\%, 1\%) are determined from the d=3,5 and d=11,13 crossings.
-        \\ For a complete description of the experiment procedure, see \nameref{sec:experiment4}.}
-    \label{fig:pymatching-pthresh-erase}
-\end{figure}
+\restoregeometry
 
 \newpage
 \subsection{Fault Tolerant Code Distance} We plot logical error rate $P_L$ vs. code distance $d$ for below-threshold samples  ($p \le 0.01$) and fit a least-squares linear regression \autoref{fig:fault-tolerant-projection} and extrapolate the fit to $P_L \approx 10^{-12}$. The X-intercept of the fit line represents the minimum code distance $d$ needed for one logical bit to survive one trillion rounds, which is the current estimate of the number of rounds needed to run a useful quantum algorithm [CITATION NEEDED].
 
 For $R_e = 1.0$ and erasure-aware hypergraph MWPF decoding, \autoref{fig:fault-tolerant-projection} a logical qubit implemented with $d \approx 17$ (or $2d^2 = 578$ physical qubits in the array) is projected to survive one trillion rounds. This result should be taken with a bucket of salt because we do not calculate residuals from the least-squares fit to quantify goodness of fit. The hypergraph MWPF dataset is extrapolated from a more limited range of code distances (green, $d<9$) compared to other noise regimes. Due to the computational expense of the hypergraph decoder, we could not sample as much below-threshold data in that particular noise regime. See: \nameref{sec:memleak-sidequest}.
 % TODO - this plot should say p \ltq 0.01, not p=0.01
-\begin{figure}
+\begin{figure}[h]
     \centering
-    \includegraphics[width=\linewidth,height=0.55\textheight, keepaspectratio]{fig2_survival_code_distance.png}
+    \includegraphics[width=\linewidth,height=0.5\textheight, keepaspectratio]{fig2_survival_code_distance.png}
     \caption{Among below-threshold ($p \le 0.01$) samples,
         the minimum code distance $d \approx 17$ is projected to survive one trillion rounds with full erasure conversion $(R_e=1.0)$ and Hypergraph MWPF syndrome decoding (plotted in green),
         and $\approx 72\%$ decrease from $d \approx 60$ with erasure-aware edge re-weighting with MWPM (plotted in orange),
@@ -588,18 +581,6 @@ For the next/subsequent experiments, we recommend writing out \href{https://gith
 \paragraphsc{High Uncertainty in MWPF Experiments}
 In our MWPF experiments, our Monte Carlo simulation was limited to 10,000 - 50,000 shots at a time (vs. 500,000 per single run in other trials). We aggregate the datasets from many (5+) in order to compare against other experiments. Fewer samples resulted in a wider confidence interval for MWPF samples, especially at low physical error rates (see \autoref{fig:mwpf-pthresh} and \autoref{fig:mwpf-pthresh-erase}). We attempted to gather enough data to make a fair comparison between our visual estimations for $p_{thr}$, especially for the sampling region around the threshold. However, the binomial fit method in our $P_L$ vs. $p$ plots is very sensitive to outlying datapoints. A visual estimate at the extrema of the very wide confidence interval for $d=7,9,11$ in \autoref{fig:mwpf-pthresh-erase} puts the $p_{thr}$ region anywhere from $\approx 3-6$\%. We report the most convervative value in our results table.
 
-\paragraphsc{A Fun Sidequest: Profiling a Memory Leak}\label{sec:memleak-sidequest}
-During our initial experiments with MWPF, we noted a memory leak during erasure-aware trials (see \autoref{fig:mwpf-memleak}). Using a combination of flamegraphs to analyze hot CPU/blocking GIL paths and a memory profiler to rank allocation requests by size/frequency, we realized \href{https://github.com/yuewuo/mwpf/blob/b8444428f999457208c4b0956f3f1c745a0ec2d5/src/python/mwpf/ref\_circuit.py}{ref\_circuit.py} and \href{https://github.com/yuewuo/mwpf/blob/b8444428f999457208c4b0956f3f1c745a0ec2d5/src/python/mwpf/heralded\_dem.py}{heralde\_dem.py} (quite reasonably) uses Python's functools.cached\_property decorator to cache computationally-expensive walks of the hypergraph model. The memory allocations are associated with a Python object instance and are freed automatically by a garbage collector when the Python object is destroyed. We noted RefCircuit instances holding memory allocations (via parent HeraldedDetectorErrorModel) even after the related sinter. Task had finished (but other tasks were still running). This is only a guess, as we were not able to patch and validate this particular hypotheses. Instead, we opted to side-step the issue by replacing some functools.cached\_property usage with functools.lru\_cache, which implements a last-recently used cache on per class definition (instead of per object-instance). As a result, we needed many more CPU cycles to complete our simulation but the memory footprint was contained to fit our availablae hardware (64 cores, 126GB DDR4 RAM, 112GB NVME-backed disk swap space).
-
-\begin{figure}[H]
-    \centering
-    \makebox[\textwidth][c]{\includegraphics[width=1.3\textwidth]{fig_mwpf_memory_leak.png}}%
-    \caption{\textbf{Suspected Memory Leak.} We show a large (~172 GB) memory footprint in our Stim+Sinter Monte Carlo simulations using the SinterMWPFDecoder class, even though most of the tasks are completed/draining. This suggested memory was not beeing freed after a task subset was completed. As a result, our $d=7,9,11$ simulations using the MWPF encoder were limited to an order of magnitude fewer shots compared to other experiments. }
-    \label{fig:mwpf-memleak}
-\end{figure}
-
-
-
 
 \section{Conclusion}
 
@@ -611,7 +592,7 @@ Sketch a follow-up project w/ sweep across $R_e$.
 
 Special thanks to Shimon Kolkowitz and Harry Levine for their generous time contributions. This project would not have been possible without their week-to-week guidance and time investment. We also thank Thiago Bergamaschi and Thilo Scharnhorst for their patient pedagogy; just a few months ago, understanding the surface code felt like an insurmountable challenge. We also want to recognize Umesh Vazirani for his early steering and for hosting the lively office hours where we (the authors) met.
 
-We are also grateful for Craig Gidney's wonderfully illustrative posts on StackExchange and for his work maintaining Stim, which is a Herculean effort for a single tech lead. Thanks also to Yue Wu for developing MWPF in public; our ideas and feasibility estimates for this project were largely informed by his work and meticulous notes.
+We are also very grateful for Craig Gidney's wonderfully illustrative posts on StackExchange and for his work maintaining Stim, which is a Herculean effort for a single tech lead. Thanks also to Yue Wu for developing MWPF in public; our ideas and feasibility estimates for this project were largely informed by his work and meticulous notes.
 
 \paragraphsc{Code \& Data Availability.}
 % TODO add license
@@ -628,45 +609,6 @@ TODO this is where we all brag about how proud we are of the sections we submitt
 
 \newpage
 \appendix
-\section{Appendix: Experiment Results}
-
-
-% \begin{figure}[H]
-%     \centering
-%     \begin{subfigure}[b]{0.49\linewidth}
-%         \caption{}
-%         \includegraphics[width=\linewidth, height=0.28\textheight, keepaspectratio]{fig1_pymatching_threshold.png}
-%         \label{fig:1a}
-%     \end{subfigure}
-%     \begin{subfigure}[b]{0.49\linewidth}
-%         \caption{}
-%         \includegraphics[width=\linewidth, height=0.28\textheight, keepaspectratio]{fig1_pymatching_threshold_zoomed.png}
-%         \label{fig:1b}
-%     \end{subfigure}
-%     \begin{subfigure}[b]{0.49\linewidth}
-%         \caption{}
-%         \includegraphics[width=\linewidth, height=0.28\textheight, keepaspectratio]{fig1_mwpf_threshold_erasure=0.png}
-%         \label{fig:1c}
-%     \end{subfigure}
-%     \begin{subfigure}[b]{0.49\linewidth}
-%         \caption{}
-%         \includegraphics[width=\linewidth, height=0.28\textheight, keepaspectratio]{fig1_mwpf_threshold_erasure=0_zoomed.png}
-%         \label{fig:1d}
-%     \end{subfigure}
-%     \begin{subfigure}[b]{0.49\linewidth}
-%         \caption{}
-%         \includegraphics[width=\linewidth, height=0.28\textheight, keepaspectratio]{fig1_mwpf_threshold_erasure=1.png}
-%         \label{fig:1e}
-%     \end{subfigure}
-%     \begin{subfigure}[b]{0.49\linewidth}
-%         \caption{}
-%         \includegraphics[width=\linewidth, height=0.28\textheight, keepaspectratio]{fig1_mwpf_threshold_erasure=1_zoomed.png}
-%         \label{fig:1f}
-%     \end{subfigure}
-%     \caption{\textbf{Circuit-level error thresholds}. Comparison of logical error rate $P_L$ with physical qubit error rate $p$, for various syndrome decoding schemes and noise regimes. The lower and upper bounds of the threshold region $p_{thrs}$ is estimated from the d=3,5 and d=9,11 crossings respectively.
-%         \textbf{(a)(b)} Pure depolarizing noise, decoded with Minimum Weight Pefect Matching (PyMatching) with $p_{thrs}$ between $0.57\%$ and  $0.78\%$. \textbf{(c)(d)} Pure depolarizing noise, decoded with Minimum Weight Parity Factor, with with $p_{thrs}$ between $0.62\%$ and  $0.71\%$. \textbf{(e)(f)}100\% of depolarizing noise converted to erasure errors, with $p_{thrs}$ between $2.7\%$ and  $3.02\%$.}
-%     \label{fig:1_thresholds}
-% \end{figure}
 
 % \section{Appendix: Example Stim Circuit}
 
@@ -784,26 +726,53 @@ TODO this is where we all brag about how proud we are of the sections we submitt
 % OBSERVABLE_INCLUDE(0) rec[-3] rec[-6] rec[-9]
 % \end{verbatim}
 
+\section{Appendix: A Fun Sidequest: Profiling a Memory Leak}\label{sec:memleak-sidequest}
+During our initial experiments with MWPF, we noted a memory leak during erasure-aware trials (see \autoref{fig:mwpf-memleak}). Using a combination of flamegraphs to analyze hot CPU/blocking GIL paths and a memory profiler to rank allocation requests by size/frequency, we realized \href{https://github.com/yuewuo/mwpf/blob/b8444428f999457208c4b0956f3f1c745a0ec2d5/src/python/mwpf/ref\_circuit.py}{ref\_circuit.py} and \href{https://github.com/yuewuo/mwpf/blob/b8444428f999457208c4b0956f3f1c745a0ec2d5/src/python/mwpf/heralded\_dem.py}{heralde\_dem.py} (quite reasonably) uses Python's functools.cached\_property decorator to cache computationally-expensive walks of the hypergraph model. The memory allocations are associated with a Python object instance and are freed automatically by a garbage collector when the Python object is destroyed. We noted RefCircuit instances holding memory allocations (via parent HeraldedDetectorErrorModel) even after the related sinter. Task had finished (but other tasks were still running). This is only a guess, as we were not able to patch and validate this particular hypotheses. Instead, we opted to side-step the issue by replacing some functools.cached\_property usage with functools.lru\_cache, which implements a last-recently used cache on per class definition (instead of per object-instance). As a result, we needed many more CPU cycles to complete our simulation but the memory footprint was contained to fit our availablae hardware (64 cores, 126GB DDR4 RAM, 112GB NVME-backed disk swap space).
 
-\section{Appendix: Syndrome of Loss Errors}
-
-Describe how a loss is heralded during state readout. Each potential loss location is described by a distinct error probability, described by a unique configuration of the error syndroms. [EXAMPLE OF ERROR SYNDROME]
-
-\section{Appendix: Additional Figures and Tables}
-
-\begin{figure}[hb]
-    \hspace{-2em}
-    \includegraphics[width=1.5\linewidth, height=0.4\textheight, keepaspectratio]{fig_experiment4.png}
-    \caption{\textbf{Dual-rail rrasure-check qubits in superconducting transmons }.
-        \textbf{(a)} A set of errors occuring in the surface code. \textbf{(b)} Syndrome information available in a pure Pauli noise regime. \textbf{(c)} Decoder prediction that results in a logical Z error (orange path). \textbf{(d)} Syndrome information from parity-check ancilla qubits enriched with erasure checks. \textbf{(e)} A correlated erasure-aware error model weights the green path more heavily, avoiding the logical error in (b).
-        \cite{chadwick_erasure_2025}
-    }
-    \label{fig:experiment4-sampler}
+\begin{figure}[h]
+    \centering
+    \makebox[\textwidth][c]{\includegraphics[width=1.3\textwidth]{fig_mwpf_memory_leak.png}}%
+    \caption{\textbf{Suspected Memory Leak.} We show a large (~172 GB) memory footprint in our Stim+Sinter Monte Carlo simulations using the SinterMWPFDecoder class, even though most of the tasks are completed/draining. This suggested memory was not beeing freed after a task subset was completed. As a result, our $d=7,9,11$ simulations using the MWPF encoder were limited to an order of magnitude fewer shots compared to other experiments. }
+    \label{fig:mwpf-memleak}
 \end{figure}
 
 
 
-\newpage
-\printglossaries
+\section{Appendix: Additional Figures and Tables}
+
+
+\section{Appendix: Additional Notes on Leakage}\label{appendix:leakage}
+A leakage occurs when a qubit ``leaks'' out of the computational subspace (described by a two-dimensional Hilbert space) into a state that can only be described with a higher-order Hilbert space. If leakage goes undetected, the error compounds over time as it spreads through a multi-qubit interactions. Leakage can be stochastically modeled with a 3-level system (qutrit) with orthonormal basis: $\set{\ket{0}, \ket{1}, \ket{2}}$. Leakage events are assumed to be discrete and occur independently with probability $p_{\text{leak}}$ at each gate operation acting on the qutrit \cite{suchara_leakage_2014}. The leakage error $E_{E_{\uparrow}}$ on the $j$th qutrit in the system can then be understood as:
+\begin{align}E_{\text{leakage}}(\rho_j) & = (1-p_{\text{leak}})\rho_j + p_{\text{leak}}\ket{2}\bra{2} & \quad \text{[Leakage error channel \cite{suchara_leakage_2014}]}
+\end{align}
+
+Leakage-reduction units (LRUs) were proposed as a way to convert leakage errors into Pauli-type errors, based on a one-bit teleportation protocol that effectively moves the logical state from the physical qubit in the leaked state to a freshly-prepared physical qubit \cite{suchara_leakage_2014}.
+
+All species of qubit experience leakage errors, but it's important to note the underlying \emph{physical} processes look and behave very differently despite sharing a common mathematical description.
+
+
+Transmon leakage. Transmon single and two qubit gates rely on coherent microwave driving to transition between computational basis states. Two qubit gates such as the controll Z and controll X gates are the primary source of leakage in transmon qubits because of their temporary usage of states outside of the computational basis to induce phase and bit flips in the target qubit. For example, when applying a control Z gate on transmon hardware to the state {$\ket{11}$}, temporarily force both excitons onto one qubit, pushing it into the second excited state, {$\ket{2}$}, and letting the other qubit fall into the ground state, {$\ket{0}$}, before allowing the system to relax back into {$\ket{11}$} with the intended phase shift applied. However, there is a nonzero chance that the system does not relax properly, and leaves one of our qubits in the {$\ket{2}$} state, causing a leakage error in our system.
+
+Neutral atom / Rydberg leakage. Neutral atom quantum computers exploit the large effective atomic radius of Rydberg states to perform two qubit gates. When an electron is excited to a Rydberg state, the separation between the electron and the now ionized nucleus creates an electric dipole field, which shifts excitation energy of the Rydberg state, an effect called Rydberg blockade. Following the protocol from Jaksch et. al, to perform a control Z gate, apply a {$\pi$} pulse to excite the control qubit into a Rydberg state, apply a 2{$\pi$} pulse to the target qubit, and then apply a {$\pi$} pulse to deexcite the control qubit \cite{Jaksch_Fast_Quantum_gates_2000}. If both qubits are in the {$\ket{0}$} then the state will remain unchanged, but if exactly one qubit is in the {$\ket{1}$} state then a rotation by 2{$\pi$} and thus a phase shift of -1, will be applied. If both qubits are in the {$\ket{11}$} state then after the first pulse, the Rydberg blockade will prevent the second excitation and a phase of -1 will be applied. Finally apply a Pauli Z gate to both qubits to shift the states -{$\ket{01}$ and -{$\ket{10}$ to {$\ket{01}$ and {$\ket{10}$. Occasionally when applying this protocol, the Rydberg state will not decay back to the {$\ket{1}$} state, and will instead decay to an orbital state outside of our computational basis, causing a leakage error. \cite{morgado_quantum_2021}
+
+Leakage-detection units (LDUs) were developed to address leakage errors in superconducting qubits, by periodically coupling a data qubit to an acilla that flags when the data qubit leaves the computational subspace. The flagged data qubit can be reset/replaced during subsequent error-correction cycles, effectively treating the flagged qubit as an erasure error.
+
+Neutral atoms / Rydberg arrays, each atom is arranged into a known position using optical tweezers. Although the lattice/trap is situated inside a vacuum chamber, some nonzero amount of background gas collisions or thermal energy transfer from the environment can eject an atom from its lattice site
+
+\subsection{Appendix: Erasure Tolerance and Enhancements}
+
+If left uncorrected, erasure errors pose a existential threat to encoded logical qubits that utilize the surface code encoding schema. While it is possible to compensate to some degree for erasure errors via the introduction of superstabilizers, the accumulation of erasures will eventually render your state unreconstructable if left unchecked. Kobayashi et al showed that a probability of erasure as low as 0.1\% can lead to logical failure rates increasing with code distance in regimes where the Pauli error rate is less than or on the order of 0.1\%. This suggests that to build a functional quantum computer, using the standard surface code encoding and the minimum weight perfect matching algorithm, one would need $p_{erase} << p_{pauli}$.
+\cite{kobayashi_erasure-tolerance_2025}
+
+\begin{align}
+    E_d & \propto \dfrac{p}{p_{thr}}^{(d+1)/2} & \quad \text{[Logical error rate]}
+\end{align}
+
+Therefore when $p << p_{thr}$, the logical error rate is supressed exponentially with code distance. The exponential supression factor $\Lambda$ is approximately the linear relation between $p_{thr}$ and $p$: \cite{acharya_quantum_2025}.
+
+\begin{align}
+    \Lambda & = \dfrac{E_d}{E_{d+1}} \approx  \dfrac{p_{thr}}{p} & \quad \text{[Supression factor]}
+\end{align}
+
 
 \end{document}
