@@ -26,6 +26,16 @@
 \newpage
 \section{Introduction}
 
+\section{Introduction}
+\label{sec:intro}
+
+Fault-tolerant quantum computation requires the correction of physical faults at rates below a code-dependent threshold. In the surface code, this threshold depends not only on the magnitude of the underlying noise but also on the information available about the location and type of each fault~\cite{fowler_surface_2012,acharya_quantum_2025,bluvstein_logical_2024}. Several hardware platforms now permit the detection of leakage events, atom loss, or other mechanisms that remove population from the computational subspace, including superconducting circuits with erasure qubits and neutral-atom architectures with mid-circuit imaging and leakage-to-erasure conversion~\cite{kubica_erasure_2023,wu_erasure_2022,ma_high-fidelity_2023,scholl_erasure_2023,chow_circuit-based_2024,reichardt_fault-tolerant_2025}. Such events can be modeled as erasures, and their positions can be supplied directly to the decoder~\cite{gu_fault-tolerant_2025,gu_optimizing_2024,sahay_high-threshold_2023,chadwick_erasure_2025}.
+
+In this study, we examine the effect of such erasure information on the rotated surface code. We perform circuit-level Monte Carlo simulations of memory experiments using Stim~\cite{gidney_stim_2021} and consider two limiting noise regimes: depolarizing Pauli faults and full erasure conversion. We compare two decoders. Minimum-Weight Perfect Matching (MWPM), as implemented in PyMatching~\cite{oscarhiggott_oscarhiggottpymatching_2025,higgott_sparse_2025}, interprets all faults as Pauli errors. Minimum-Weight Parity Factor (MWPF) solves a hypergraph parity-factor problem that incorporates erasure locations explicitly and is implemented in the Hyperion software~\cite{wu_yuewuomwpf_2025,wu_minimum-weight_2025}.
+
+The simulations show that both decoders achieve thresholds near $0.6\%$ under depolarizing noise, while in the erasure-dominant regime MWPM reaches approximately $1\%$ and MWPF achieves about $3\%$. These results give a quantitative reference for the expected performance of the rotated surface code under idealized erasure conversion and allow a direct assessment of the benefit provided by decoders that make use of erasure information, in line with recent proposals for erasure-based fault-tolerant architectures~\cite{kubica_erasure_2023,gu_fault-tolerant_2025,sahay_high-threshold_2023,chadwick_erasure_2025}.
+
+
 Building a fault-tolerant quantum computer requires correcting a variety of physical errors that arise in real hardware. In this work, we focus on how erasure-aware decoding influences the noise threshold of the rotated surface code, and how different decoders (MWPM vs. MWPF) respond to Pauli versus erasure-dominated noise. This section summarizes the key concepts that motivate our experiments and connects them to recent work on erasure qubits and erasure conversion in superconducting and neutral-atom platforms \cite{fowler_surface_2012}\cite{kubica_erasure_2023}\cite{gu_fault-tolerant_2025}\cite{sahay_high-threshold_2023}\cite{chadwick_erasure_2025}.
 
 Motivation: Fault-tolerate quantum computation at scale remains a formidable challenge, but we're excited about these recent major advancements:
@@ -70,7 +80,7 @@ At the same time, erasure detection is imperfect and requires additional physica
 
 \subsection{Erasure Qubits}
 
-A qubit engineered so the dominant source of errors is from erasures. A bias towards erasure-type errors occurs natively in some types of qubits (e.g. photons) or can be engineered by converting leakage errors to erasures (e.g. with LDUs in superconducting qubits). For more information on how erasure conversion works for neutral atoms, refer to the following papers: \cite{wu_erasure_2022} \cite{baranes_leveraging_2025} For superconducting qubits, refer to the following papers: \cite{gu_optimizing_2024} \cite{gu_fault-tolerant_2025}.
+A qubit engineered so the dominant source of errors is from erasures. A bias towards erasure-type errors occurs natively in some types of qubits (e.g. photons) or can be engineered by converting leakage errors to erasures (e.g. with LDUs in superconducting qubits). For more information on how erasure conversion works for neutral atoms, refer to the following papers: \cite{wu_erasure_2022} \cite{baranes_leveraging_2025} \cite{scholl_erasure_2023} .For superconducting qubits, refer to the following papers: \cite{gu_optimizing_2024} \cite{gu_fault-tolerant_2025}.
 
 \subsection{Surface Code}\label{subsec:surface-code}
 
@@ -604,8 +614,14 @@ For the next/subsequent experiments, we recommend writing out \href{https://gith
 \paragraphsc{High Uncertainty in MWPF Experiments}
 In our MWPF experiments, our Monte Carlo simulation was limited to 10,000 - 50,000 shots at a time (vs. 500,000 per single run in other trials). We aggregate the datasets from many (5+) in order to compare against other experiments. Fewer samples resulted in a wider confidence interval for MWPF samples, especially at low physical error rates (see \autoref{fig:mwpf-pthresh} and \autoref{fig:mwpf-pthresh-erase}). We attempted to gather enough data to make a fair comparison between our visual estimations for $p_{thr}$, especially for the sampling region around the threshold. However, the binomial fit method in our $P_L$ vs. $p$ plots is very sensitive to outlying datapoints. A visual estimate at the extrema of the very wide confidence interval for $d=7,9,11$ in \autoref{fig:mwpf-pthresh-erase} puts the $p_{thr}$ region anywhere from $\approx 3-6$\%. We report the most convervative value in our results table.
 
+\paragraphsc{Future Work}
+
 We're excited by pull request Adds 'pymatching-correlated' Sinter decoder opened one week ago (as of writing).
 https://github.com/quantumlib/Stim/pull/1012
+
+We're also excited about "Learning from erasure errors" suggested by \cite{scholl_erasure_2023}: "we turn to studying a tool enabled by our implementation of erasure conversion: exploring the effect of errors on experimental outcomes at a microscopic level and studying correlations between different error sources" - our stabilizer circuit level simulations were interesting, but it seems like the cutting edge must incorporate correlations and conditional probability models. We're excited by pull request Adds 'pymatching-correlated' Sinter decoder opened one week ago (as of writing).
+https://github.com/quantumlib/Stim/pull/1012
+
 
 
 \section{Conclusion}
