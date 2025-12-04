@@ -456,38 +456,36 @@ After a HERALDED\_ERASE event is samplied on the noise channel, the target qubit
 \paragraphsc{Overview.}
 This experiment modifies the MWPM baseline in \nameref{sec:experiment1} to use a fully erasure-converted noise model with $R_e = 1.0$, following the two-step strategy of \citeauthor{gu_fault-tolerant_2025} \cite{gu_fault-tolerant_2025}. In the first step, a Stim circuit with \texttt{HERALDED\_ERASE} channels produces both a syndrome bitstring and an erasure bitstring. In the second step, we build a detector error model (DEM) and decode syndromes with PyMatching, using per-shot edge re-weighting conditioned on the erasure bits.
 
-\textbf{Data.}
+% \paragraph{Offline phase: circuit conversion and DEM analysis.}
+% Starting from the same rotated-memory surface-code circuit used in \nameref{sec:experiment2}, we convert all Pauli faults into heralded erasures. Each physical fault is implemented as a \texttt{HERALDED\_ERASE} instruction followed by one or more dedicated \texttt{DETECTOR} instructions that act as erasure checks. All remaining \texttt{DETECTOR} instructions are treated as standard stabilizer syndrome detectors.
 
-\paragraph{Offline phase: circuit conversion and DEM analysis.}
-Starting from the same rotated-memory surface-code circuit used in \nameref{sec:experiment2}, we convert all Pauli faults into heralded erasures. Each physical fault is implemented as a \texttt{HERALDED\_ERASE} instruction followed by one or more dedicated \texttt{DETECTOR} instructions that act as erasure checks. All remaining \texttt{DETECTOR} instructions are treated as standard stabilizer syndrome detectors.
+% From the converted circuit we derive a DEM via Stim, then analyze it to obtain:
 
-From the converted circuit we derive a DEM via Stim, then analyze it to obtain:
+% \begin{itemize}
+%     \item a set of syndrome detector indices $\mathcal{S}$ (standard stabilizers);
+%     \item a set of herald detector indices $\mathcal{H}$ (one representative detector per erasure event);
+%     \item for each DEM error $E_j$, its probability $q_j$ and the set of detectors it touches;
+%     \item a mapping from each error $E_j$ to the herald(s) $h \in \mathcal{H}$ whose detectors it touches.
+% \end{itemize}
 
-\begin{itemize}
-    \item a set of syndrome detector indices $\mathcal{S}$ (standard stabilizers);
-    \item a set of herald detector indices $\mathcal{H}$ (one representative detector per erasure event);
-    \item for each DEM error $E_j$, its probability $q_j$ and the set of detectors it touches;
-    \item a mapping from each error $E_j$ to the herald(s) $h \in \mathcal{H}$ whose detectors it touches.
-\end{itemize}
+% Base log-likelihood weights for each DEM error are given by
+% \begin{align}
+%     w^{(0)}_j & = \log\!\left(\frac{1 - q_j}{q_j}\right),
+% \end{align}
+% where $q_j$ is the error probability specified by the DEM. When herald $h$ fires, we model errors associated with $h$ as having a larger conditional probability $p_{\mathrm{herald}} = \alpha$ (we use $\alpha = 0.5$), with
+% \begin{align}
+%     w^{(\mathrm{herald})} & = \log\!\left(\frac{1 - \alpha}{\alpha}\right),
+% \end{align}
+% and define the per-herald weight shift
+% \begin{align}
+%     \Delta w_{h,j} & =
+%     \begin{cases}
+%         w^{(\mathrm{herald})} - w^{(0)}_j & \text{if error $E_j$ touches herald } h, \\[4pt]
+%         0                                 & \text{otherwise}.
+%     \end{cases}
+% \end{align}
 
-Base log-likelihood weights for each DEM error are given by
-\begin{align}
-    w^{(0)}_j & = \log\!\left(\frac{1 - q_j}{q_j}\right),
-\end{align}
-where $q_j$ is the error probability specified by the DEM. When herald $h$ fires, we model errors associated with $h$ as having a larger conditional probability $p_{\mathrm{herald}} = \alpha$ (we use $\alpha = 0.5$), with
-\begin{align}
-    w^{(\mathrm{herald})} & = \log\!\left(\frac{1 - \alpha}{\alpha}\right),
-\end{align}
-and define the per-herald weight shift
-\begin{align}
-    \Delta w_{h,j} & =
-    \begin{cases}
-        w^{(\mathrm{herald})} - w^{(0)}_j & \text{if error $E_j$ touches herald } h, \\[4pt]
-        0                                 & \text{otherwise}.
-    \end{cases}
-\end{align}
-
-We then construct a single PyMatching graph from the DEM. This graph is reused across all shots; only the edge weights are updated per shot.
+% We then construct a single PyMatching graph from the DEM. This graph is reused across all shots; only the edge weights are updated per shot.
 
 \paragraph{Online phase: per-shot edge re-weighting and MWPM decoding.}
 Each noisy shot yields a bitstring of all detector outcomes,
@@ -508,12 +506,6 @@ or in vector form,
     \mathbf{w}^{(\mathrm{shot})} & = \mathbf{w}^{(0)} + h \, \Delta W,
 \end{align}
 where $\Delta W$ is the matrix whose entries are $\Delta w_{h,j}$. These weights are passed to PyMatching, which performs minimum-weight perfect matching on the DEM graph and returns a predicted set of logical observable flips for that shot.
-
-As in previous experiments, we map the decoder output to a Pauli correction on the data qubits, apply the correction, and compare the resulting logical measurement to the ideal value. The logical error rate for a given $(d,p,R_e)$ configuration is then
-\begin{align}
-    P_L = \frac{k}{n},
-\end{align}
-where $k$ is the number of logical failures and $n$ is the total number of shots.
 
 \section{Discussion}\label{sec:discussion}
 \paragraphsc{Reduced tolerance of errors in our surface code simulations}
