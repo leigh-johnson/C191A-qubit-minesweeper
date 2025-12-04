@@ -165,11 +165,13 @@ Noise channels are applied to individual qubits \textit{before} each round (stat
 
 We explore the impact of erasure error conversion by implementing the error model described in \cite{wu_erasure_2022} with some notable differences: each physical qubit experiences either a Pauli error occurring with probability $p_{pauli} = p(1-R_e)$ or an erasure with probability $p_e = pR_e$. Notably, we simulate $R_e=0$ and $R_e=1$, representing 0\% and 100\% erasure conversion respectively. We apply this noise model to \textit{all} Clifford gates (both one and two qubit gates). After an erasure error is detected, the affected qubit is reset to a maximally mixed state $I/2$. The resulting syndrome measurements are decoded to determine whether the shot can be corrected or results in a logical error.
 
-We define $p_{thr}$ as the physical error rate $p$ where the logical error rate $P_L$ decreases as a function of $d$. To estimate $p_{thr}$, we identify crossing points in \autoref{fig:best-threshold-comparison}, where the logical error rate decreases as code distance $d$ increases, with the d=3,5 and d=9,11 crossings representing the lower and upper bound of $p_{thr}$ respectively. The highest $p_{thr}$ was 3.02\% when $R_e=1.0$ using the erasure-aware hypergraph MWPF decoder, compared to a 0.75\% threshold using the MWPF decoder in a pure Pauli noise regime. The procedure for circuit simulation, event sampling, and decoding is documented in \nameref{sec:experiment2} and \nameref{sec:experiment3}.
+We define $p_{thr}$ as the physical error rate $p$ where the logical error rate $P_L$ decreases as a function of $d$. To estimate $p_{thr}$, we identify crossing points in \autoref{fig:best-threshold-comparison}, where the logical error rate decreases as code distance $d$ increases, with the d=3,5 and d=9,11 crossings representing the lower and upper bound of $p_{thr}$ respectively. The highest $p_{thr}$ was 3.02\% when $R_e=1.0$ using the erasure-aware hypergraph MWPF decoder, compared to a 0.75\% threshold using the MWPF decoder in a pure Pauli noise regime.
+
+% The procedure for circuit simulation, event sampling, and decoding is documented in \nameref{sec:experiment2} and \nameref{sec:experiment3}.
 
 \paragraphsc{Syndrome Decoding.} We compare four methods for decoding syndrome measurements, described in more detail in each experiment procedure section:
 
-\begin{table}[h!]
+\begin{table}[hb]
     \noindent\makebox[\textwidth]{%
         \begin{threeparttable}[width=1.2\textwidth]
             \begin{tabularx}{1.25\textwidth}{|X||p{4em}|p{5em}|p{4em}|}
@@ -180,7 +182,7 @@ We define $p_{thr}$ as the physical error rate $p$ where the logical error rate 
                 \nameref{sec:experiment3}        \newline           $d \in \set{3, 5, 7, 9, 11}$, $p \in [0.003, 0.06]$, $R_e=1.0$   \newline decoder=MWPF \cite{wu_yuewuomwpf_2025} \cite{wu_minimum-weight_2025} & 5.13 \cite{wu_erasure_2022}                                  & \cellcolor{yellow!25}2.75, 3.00  \linebreak \autoref{fig:mwpf-pthresh-erase} & -41.2             \\ \hline
                 \nameref{sec:experiment4}       \newline            $d \in \set{3, 5, 7, 9, 11}$, $p \in [0.003, 0.06]$, $R_e=1.0$   \newline decoder=PyMatching with per-shot edge weights (ours)                 & 5.13 \cite{wu_erasure_2022}                                  & 0.800, 1.0          \linebreak      \autoref{fig:pymatching-pthresh-erase}   & -80.5             \\ \hline
             \end{tabularx}
-            \caption{Summary of experimental setups used to evaluate the impact of erasure conversion $p_e$ and correlated vs. uncorrelated decoding schemes on the surface code error threshold $p_{thr}$. The highest $p_{thr}$ (highlighted in yellow) was determined to be $\approx 3.00\%$ when $R_e=1.0$ using the hypergraph MWPF decoder. In all experiments, we observed significant (percent err $>25\%$) differences between our threshold measurements and reference values published by Wu et al \cite{wu_minimum-weight_2025}. We attribute this difference to our error regime, which applied the same error rate to both one and two-qubit gates and discuss in detail in \nameref{sec:discussion}.
+            \caption{Summary of experimental setups used to evaluate the impact of erasure conversion $p_e$ and correlated vs. uncorrelated decoding schemes on the surface code error threshold $p_{thr}$. The highest $p_{thr}$ (highlighted in yellow) was determined to be $\approx 3.00\%$ when $R_e=1.0$ using the hypergraph MWPF decoder. In all experiments, we observed significant (percent err $>25\%$) differences between our threshold measurements and reference values published by Wu et al \cite{wu_minimum-weight_2025}. We attribute this difference to our error regime, which applied the same error rate to both one and two-qubit gates (see \nameref{sec:discussion}).
             }
             \label{tab:1}
         \end{threeparttable}
@@ -204,7 +206,8 @@ For our Monte Carlo simulations, we define our logical error rate $P_L$ calculat
 \begin{align}P_L = \dfrac{\text{k}}{\text{n}} \quad \text{$k=$ number of logical failures, $n$ = total number of shots}
 \end{align}
 
-For each circuit and decoding method described in \autoref{tab:1}, we plot $P_L$ vs physical error rate $p$ in \autoref{fig:pymathing-pthresh}, \autoref{fig:mwpf-pthresh}, \autoref{fig:mwpf-pthresh-erase}, \autoref{fig:pymatching-pthresh-erase} and fit a binomial distribution with \verb|sinter|. \footnote{See: \emph{Appendix: combining Bernoulli distributions} by Craig Gidney for a detailed explanation of the method used to combine per-shot and per-round distribution. We use per-shot representation in our final results. \cite{gidney_answer_2023}}
+For each circuit and decoding method described in \autoref{tab:1}, we plot $P_L$ vs physical error rate $p$ in \autoref{fig:pymathing-pthresh}, \autoref{fig:mwpf-pthresh}, \autoref{fig:mwpf-pthresh-erase}, \autoref{fig:pymatching-pthresh-erase} and fit a binomial distribution with \verb|sinter|. \footnote{See: Craig Gidney's answer to StackExchange question: `max\_shots and max\_errors to reduce uncerainty in threshold
+    curves with sinter / stim?' for a detailed explanation of the method we used to combine per-shot and per-round distributions. We use per-shot representation in our final results. \cite{gidney_answer_2023}}
 
 % \newpage
 % \newgeometry{left=2cm,bottom=1.5cm,right=2cm,top=1cm}
