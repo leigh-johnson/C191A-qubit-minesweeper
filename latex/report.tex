@@ -29,7 +29,7 @@
 \newpage
 \section{Introduction}
 
-Motivation \& research question
+Building a fault-tolerant quantum computer requires correcting a variety of physical errors that arise in real hardware. In this work, we focus on how erasure-aware decoding influences the noise threshold of the rotated surface code, and how different decoders (MWPM vs. MWPF) respond to Pauli versus erasure-dominated noise. This section summarizes the key concepts that motivate our experiments and connects them to recent work on erasure qubits and erasure conversion in superconducting and neutral-atom platforms \cite{fowler_surface_2012}\cite{kubica_erasure_2023}\cite{gu_fault-tolerant_2025}\cite{sahay_high-threshold_2023}\cite{chadwick_erasure_2025}.
 
 Motivation: Fault-tolerate quantum computation at scale remains a formidable challenge, but we're excited about these recent major advancements:
 
@@ -45,26 +45,15 @@ Sub-questions \& hypotheses
 
 \subsection{Noise Models}
 \paragraphsc{Pauli Noise.}
-The simplest model used to evaluate Quantum Error Correction (QEC) assumes all physical qubit errors can be represented by uniformly random Pauli operators applied during circuit simulation. In our simulations we implement a depolarizing error channel to represent Pauli noise, which has the following effect on some quantum state $\rho$ with $p$ probability of becoming a maximally-mixed state and $(1-p)$ probability of remaining unechanged:
+Quantum processors experience several classes of errors. A common simplification is to model all physical noise as independent Pauli errors, sampled uniformly from $\set{X,Y,Z}$. For the surface code this is often instantiated as a depolarizing channel \cite{fowler_surface_2012,pesah_interactive_2023}:
 \begin{align}E_{\text{pauli}}(\rho) & = (1-p)\rho + \dfrac{p}{3}(X\rho X + Y\rho Y + Z\rho Z) & \quad \text{[Depolarizing error channel]}
 \end{align}
 
-Unfortunately, error models based only on Pauli noise are not robust enough to describe the real-world noise that must be corrected to realize fault-tolerant quantum computation. [CITATION NEEDED]
+Pauli noise has become the standard baseline for evaluating code performance and thresholds in both early and recent large-scale experiments \cite{fowler_surface_2012}\cite{acharya_quantum_2025}.
+
 
 \paragraphsc{Leakage.}
-A leakage occurs when a qubit ``leaks'' out of the computational subspace (described by a two-dimensional Hilbert space) into a state that can only be described with a higher-order Hilbert space. If leakage goes undetected, the error compounds over time as it spreads through a multi-qubit interactions. Leakage can be stochastically modeled with a 3-level system (qutrit) with orthonormal basis: $\set{\ket{0}, \ket{1}, \ket{2}}$. Leakage events are assumed to be discrete and occur independently with probability $p_{\text{leak}}$ at each gate operation acting on the qutrit \cite{suchara_leakage_2014}. The leakage error $E_{E_{\uparrow}}$ on the $j$th qutrit in the system can then be understood as:
-\begin{align}E_{\text{leakage}}(\rho_j) & = (1-p_{\text{leak}})\rho_j + p_{\text{leak}}\ket{2}\bra{2} & \quad \text{[Leakage error channel \cite{suchara_leakage_2014}]}
-\end{align}
-
-Leakage-reduction units (LRUs) were proposed as a way to convert leakage errors into Pauli-type errors, based on a one-bit teleportation protocol that effectively moves the logical state from the physical qubit in the leaked state to a freshly-prepared physical qubit \cite{suchara_leakage_2014}.
-
-All species of qubit experience leakage errors, but it's important to note the underlying \emph{physical} processes look and behave very differently despite sharing a common mathematical description.
-
-
-Transmon leakage. Transmon single and two qubit gates rely on coherent microwave driving to transition between computational basis states. Two qubit gates such as the controll Z and controll X gates are the primary source of leakage in transmon qubits because of their temporary usage of states outside of the computational basis to induce phase and bit flips in the target qubit. For example, when applying a control Z gate on transmon hardware to the state {$\ket{11}$}, temporarily force both excitons onto one qubit, pushing it into the second excited state, {$\ket{2}$}, and letting the other qubit fall into the ground state, {$\ket{0}$}, before allowing the system to relax back into {$\ket{11}$} with the intended phase shift applied. However, there is a nonzero chance that the system does not relax properly, and leaves one of our qubits in the {$\ket{2}$} state, causing a leakage error in our system.
-% \cite{Yang_2024} \cite{Miao_2023}
-
-Neutral atom / Rydberg leakage. Neutral atom quantum computers exploit the large effective atomic radius of Rydberg states to perform two qubit gates. When an electron is excited to a Rydberg state, the separation between the electron and the now ionized nucleus creates an electric dipole field, which shifts excitation energy of the Rydberg state, an effect called Rydberg blockade. Following the protocol from Jaksch et. al, to perform a control Z gate, apply a {$\pi$} pulse to excite the control qubit into a Rydberg state, apply a 2{$\pi$} pulse to the target qubit, and then apply a {$\pi$} pulse to deexcite the control qubit \cite{Jaksch_Fast_Quantum_gates_2000}. If both qubits are in the {$\ket{0}$} then the state will remain unchanged, but if exactly one qubit is in the {$\ket{1}$} state then a rotation by 2{$\pi$} and thus a phase shift of -1, will be applied. If both qubits are in the {$\ket{11}$} state then after the first pulse, the Rydberg blockade will prevent the second excitation and a phase of -1 will be applied. Finally apply a Pauli Z gate to both qubits to shift the states -{$\ket{01}$ and -{$\ket{10}$ to {$\ket{01}$ and {$\ket{10}$. Occasionally when applying this protocol, the Rydberg state will not decay back to the {$\ket{1}$} state, and will instead decay to an orbital state outside of our computational basis, causing a leakage error. \cite{morgado_quantum_2021}
+However, this model does not capture important features of real devices. A particularly harmful type of hardware noise is leakage, where population escapes the computational subspace into higher energy levels (e.g.,$\ket{2}$ in a weakly anharmonic oscillator) and can persist across many QEC cycles, producing spatially and temporally correlated errors \cite{suchara_leakage_2014}\cite{wilen_correlated_2021}\cite{miao_overcoming_nodate}\cite{yang_coupler-assisted_2024}. To mitigate this, many proposals and recent experiments introduce leakage-reduction units (LRUs) or related mechanisms that periodically detect and reset leaked qubits \cite{suchara_leakage_2014}. See \nameref{appendix:leakage} for a more detailed description.
 
 \paragraphsc{Erasure.} An erasure occurs when a qubit is longer detectable by the measurement device, so the quantum state information encoded by the qubit is effectively ``lost'' or ``erased''. Mathematically, we extend the qubit Hilbert space with some $\ket{e}$ that is orthogonal to the qubit state $\{\ket{0}, \ket{1}\}$. The erasure channel can be defined as:
 
@@ -762,5 +751,21 @@ During our initial experiments with MWPF, we noted a memory leak during erasure-
     }
     \label{fig:experiment4-sampler}
 \end{figure}
+
+
+\section{Appendix: Additional Notes on Leakage}\label{appendix:leakage}
+A leakage occurs when a qubit ``leaks'' out of the computational subspace (described by a two-dimensional Hilbert space) into a state that can only be described with a higher-order Hilbert space. If leakage goes undetected, the error compounds over time as it spreads through a multi-qubit interactions. Leakage can be stochastically modeled with a 3-level system (qutrit) with orthonormal basis: $\set{\ket{0}, \ket{1}, \ket{2}}$. Leakage events are assumed to be discrete and occur independently with probability $p_{\text{leak}}$ at each gate operation acting on the qutrit \cite{suchara_leakage_2014}. The leakage error $E_{E_{\uparrow}}$ on the $j$th qutrit in the system can then be understood as:
+\begin{align}E_{\text{leakage}}(\rho_j) & = (1-p_{\text{leak}})\rho_j + p_{\text{leak}}\ket{2}\bra{2} & \quad \text{[Leakage error channel \cite{suchara_leakage_2014}]}
+\end{align}
+
+Leakage-reduction units (LRUs) were proposed as a way to convert leakage errors into Pauli-type errors, based on a one-bit teleportation protocol that effectively moves the logical state from the physical qubit in the leaked state to a freshly-prepared physical qubit \cite{suchara_leakage_2014}.
+
+All species of qubit experience leakage errors, but it's important to note the underlying \emph{physical} processes look and behave very differently despite sharing a common mathematical description.
+
+
+Transmon leakage. Transmon single and two qubit gates rely on coherent microwave driving to transition between computational basis states. Two qubit gates such as the controll Z and controll X gates are the primary source of leakage in transmon qubits because of their temporary usage of states outside of the computational basis to induce phase and bit flips in the target qubit. For example, when applying a control Z gate on transmon hardware to the state {$\ket{11}$}, temporarily force both excitons onto one qubit, pushing it into the second excited state, {$\ket{2}$}, and letting the other qubit fall into the ground state, {$\ket{0}$}, before allowing the system to relax back into {$\ket{11}$} with the intended phase shift applied. However, there is a nonzero chance that the system does not relax properly, and leaves one of our qubits in the {$\ket{2}$} state, causing a leakage error in our system.
+
+Neutral atom / Rydberg leakage. Neutral atom quantum computers exploit the large effective atomic radius of Rydberg states to perform two qubit gates. When an electron is excited to a Rydberg state, the separation between the electron and the now ionized nucleus creates an electric dipole field, which shifts excitation energy of the Rydberg state, an effect called Rydberg blockade. Following the protocol from Jaksch et. al, to perform a control Z gate, apply a {$\pi$} pulse to excite the control qubit into a Rydberg state, apply a 2{$\pi$} pulse to the target qubit, and then apply a {$\pi$} pulse to deexcite the control qubit \cite{Jaksch_Fast_Quantum_gates_2000}. If both qubits are in the {$\ket{0}$} then the state will remain unchanged, but if exactly one qubit is in the {$\ket{1}$} state then a rotation by 2{$\pi$} and thus a phase shift of -1, will be applied. If both qubits are in the {$\ket{11}$} state then after the first pulse, the Rydberg blockade will prevent the second excitation and a phase of -1 will be applied. Finally apply a Pauli Z gate to both qubits to shift the states -{$\ket{01}$ and -{$\ket{10}$ to {$\ket{01}$ and {$\ket{10}$. Occasionally when applying this protocol, the Rydberg state will not decay back to the {$\ket{1}$} state, and will instead decay to an orbital state outside of our computational basis, causing a leakage error. \cite{morgado_quantum_2021}
+
 
 \end{document}
