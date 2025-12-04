@@ -98,72 +98,13 @@ a scaling extensively validated in both simulations and experiments~\cite{fowler
 Because erasure errors are easier to correct and reveal additional information to the decoder (example: \autoref{fig:surface-code-erasure-comparison}), the erasure-aware threshold can be substantially higher than the threshold under Pauli noise, especially when decoders are explicitly optimized for erasure structure~\cite{sahay_high-threshold_2023,gu_fault-tolerant_2025,gu_optimizing_2024}. Quantifying this gap for practical decoders is one of the main goals of our study.
 
 
-<<<<<<< HEAD
-\paragraphsc{Challenges.}
-Challenges from "The benefits and costs of quantum error correction with erasure qubits" (QIP 2025):
-\begin{enumerate}
-    \item More physical operations.
-    \item Erasure detection imperfect, introducing another dimension to error models.
-    \item Midcircuit erasure checks can create correlated noise for neighboring qubits
-    \item Tools to simulate and decode erasure circuits are active area of research.
-\end{enumerate}
 
-\bigskip
-
-While erasure errors have a myriad of benefits, they also prove to bring some challenges: Erasure errors often require extra physical operations. Erasure checks consist of checking if a qubit is in a known, non-computational subspace, and if it is determined that the atom has experienced an erasure error, then erasure resets will bring qubits who are in a known, non-computational subspace back into a computational space. Whether the atom has been lost, or whether it has entered an invalid energy level will determine how the erasure reset mechanism functions. Another difficulty that presents itself with erasure errors is that they can spread through entangling operations as Pauli errors. If a qubit has experienced an erasure error but it has not yet been detected by erasure checks, the error will propagate onto neighboring qubits. \cite{qip2025_shouzhen_2025}
-
-
-
-\paragraphsc{Erasure Conversion in Superconducting Qubits}
-
-\begin{enumerate}
-    \item Shouzhen Gu. "Fault-tolerant quantum architectures based on erasure qubits" and "Optimizing quantum error correction protocols with erasure qubits" \cite{gu_optimizing_2024}
-          \cite{gu_fault-tolerant_2025}
-\end{enumerate}
-
-
-\paragraphsc{Erasure Conversion in Neutral / Rydberg Atoms}
-
-\begin{enumerate}
-    \item Yue Wu, Shimon Kolkowitz, Shruti Puri, Jeff D Thompson. Erasure conversion for fault-tolerant quantum computing in alkaline earth {Rydberg} atom arrays \cite{thompson_erasure_2022}
-
-    \item Gefen Baranes, Madelyn Cain, J. Pablo Bonilla Ataides, Dolev Bluvstein, Josiah Sinclair, Vladan Vuletic, Hengyun Zhou, Mikhail D. Lukin
-          . Leveraging Atom Loss Errors in Fault Tolerant Quantum Algorithms \cite{baranes_leveraging_2025}
-
-
-\end{enumerate}
-
-\subsection{Surface Code}
-Quantum error correction (QEC) assumes a piece of quantum information is distributed between many entangled physical qubits, realizing a logical qubit with higher fidelity than its constiuent physical qubits. Any errors affecting individual physical qubits can be detected and corrected with an ensemble of stabilizing codes, based on the diagnostic syndrome of the stabilizer code.
-
-The surface code implements quantum errror correction on a scalable array of qubits using tessalatable bit and phase flip syndrome measurements. As shown in the figure below, each plaquette is associated with either an Pauli X or a Pauli Z syndrome measurement on the qubits in the corners of the plaquette. If a single qubit bit flip error occurs on a physical qubit, then the adjoining Z plaquettes will return a syndrome measurement of -1, creating a unique pattern that can be used to identify the erring qubit.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.49\linewidth]{Surface_Code_Graphic.png}
-    \caption{9 Qubit Surface code.}
-    \label{fig:my_image}
-\end{figure}
-
-
-\cite{fowler_surface_2012}
-=======
->>>>>>> ae42deba1886642b971caf3181b88c88354bbace
 
 \paragraphsc{Circuit-level Noise Thresholds.}
 If physical qubit error is below a critical noise threshold, the logical error rate should be supressed exponentially as the number of physical qubits per logical qubit is increased. In the surface code, the approximate relation between $d$ code distance corresponding to $2d^2 - 1$ physical qubits per logical qubit, the physical error rate $p$, logical error rate $E_d$, and error rate threshold $p_{thr}$  \cite{acharya_quantum_2025}.
 
 \subsection{Decoding: MWPM vs.\ MWPF}
 \label{subsec:decoding}
-
-<<<<<<< HEAD
-If left uncorrected, erasure errors pose a existential threat to encoded logical qubits that utilize the surface code encoding schema. While it is possible to compensate to some degree for erasure errors via the introduction of superstabilizers, the accumulation of erasures will eventually render your state unreconstructable if left unchecked. Kobayashi et al showed that a probability of erasure as low as 0.1\% can lead to logical failure rates increasing with code distance in regimes where the Pauli error rate is less than or on the order of 0.1\%. This suggests that to build a functional quantum computer, using the standard surface code encoding and the minimum weight perfect matching algorithm, one would need $p_{erase} << p_{pauli}$.
-\cite{kobayashi_erasure-tolerance_2025}
-=======
-Decoding the surface code requires inferring which error configurations could have produced a given syndrome history. The two decoders we evaluate---MWPM and MWPF---differ fundamentally in how they represent and exploit error information.
-
-\subsubsection{Minimum-Weight Perfect Matching (MWPM)}
->>>>>>> ae42deba1886642b971caf3181b88c88354bbace
 
 \textbf{MWPM decoders} (e.g., PyMatching) cast the decoding problem as a \emph{graph matching} task: syndrome defects are nodes, edges represent possible error events, and a minimum-weight perfect matching yields the most likely Pauli error configuration consistent with the observed syndrome~\cite{oscarhiggott_oscarhiggottpymatching_2025}\cite{higgott_sparse_2025,gidney_answer_2023-1}. This approach has become the de facto standard for decoding the surface code under uncorrelated Pauli noise~\cite{fowler_surface_2012}\cite{fowler_optimal_2013}. Our baseline simulations follow this tradition, using Stim and MWPM-based decoders to estimate thresholds under depolarizing noise \cite{gidney_stim_2021}.
 
@@ -175,46 +116,9 @@ However, the standard MWPM formulation assumes:
 
 In particular, MWPM does not naturally exploit the additional structure provided by erasure events, where locations of faults are known but their Pauli type is not. Extensions exist that partially incorporate erasure information within a matching framework, particularly for erasure qubits~\cite{kubica_erasure_2023,gu_fault-tolerant_2025}, but these remain limited compared to full hypergraph methods.
 
-<<<<<<< HEAD
-\subsection{Formalism}
-Our assumptions when simulating stabilizer circuits with erasure channels follow the formalism laid out in Fault-tolerant quantum architectures based on erasure qubits by Gu et al.  Specifically, we assume that all circuit noise is characterized by $p_{erasure}$ and $p_{depolarization}$, ignoring the $p_{classical bit flip}$ that the paper mentions, and that two qubit gates between an erased qubit $q_e$, and a qubit in the computational subspace $q_c$, results in $q_c$ becoming a maximally mixed state, which is possible because of the paper's assumption that coherence between the erasure subspace and the computational subspace is not possible. The simulation differs from standard surface code simulations primarily because of the inclusion of erasure locations within the simulated circuit. 
-\cite{gu_fault-tolerant_2025}
-
-\paragraphsc{Simulating Erasure Circuits}
-
-Stim efficiently simulates stabilizer circuits containing exclusively clifford gates by computing the inverse stabilizer tableau of the circuit for each stabilizer measurement $Z_q$, where $Z_q$ corresponds to a measurement in the Z basis on qubit q. What this means, is that when given a clifford circuit C and a stabilizer code, rather than simulating the actions of C on qubits directly, what stim does is it computes the inverse change of basis with respect to C, C$Z_q$$C^{-1}$, to determine an equivalent measurement that can be conducted on the initial qubit state. Once Stim has generated a stabilizer tableau, when conduct subsequent noisy simulations of the same circuit, it conducts a Pauli frame simulation, which tracks bit flips and phase flips, and can be used in conjunction with the noiseless stabilizer tableau to simulate stabilizer circuits in O(g) time complexity and O(n) spacial complexity, where g corresponds to the number of gates and n corresponds to the number of qubits.
-\cite{gidney_stim_2021}
-=======
-\subsubsection{Minimum-Weight Parity Factor (MWPF)}
-
-The \textbf{MWPF decoder} generalizes this picture by representing the error model as a \emph{hypergraph}, where a single error mechanism can flip the parity of an arbitrary subset of detectors, not just pairs~\cite{wu_yuewuomwpf_2025,wu_minimum-weight_2025}. This allows MWPF to natively capture:
-\begin{itemize}
-    \item multi-qubit correlated error events,
-    \item erasure-tagged qubits and their constraints,
-    \item realistic detector error and measurement models across general quantum LDPC codes.
-\end{itemize}
->>>>>>> ae42deba1886642b971caf3181b88c88354bbace
 
 In the MWPF framework, decoding becomes a \emph{minimum-weight parity factor} problem: find a set of hyperedges whose parities match the observed syndrome while minimizing the total weight derived from the noise model~\cite{wu_minimum-weight_2025}. Hypergraph matching is NP-hard in general, but the HyperBlossom implementation used in this work employs primal--dual relaxations, clustering, and sparse data structures to achieve near-linear average runtime scaling on surface codes and other LDPC codes at relevant code distances~\cite{wu_minimum-weight_2025}.
 
-<<<<<<< HEAD
-It turns out that the problem of solving for the most likely error given syndrome is equivalent to a graph matching problem. Let us assume we are given a syndrome for a nine qubit surface code, such as the one given in figure 1, with the two middle Pauli Z plaquettes flagged. Because the $p_{n errors} < p_{n-1 errors}$ provided that $p_{error} < 50\%$, the most likely error to have occurred is precisely the error that acts on the least number of qubits. Therefore, while both an X error on the top left and bottom right qubits or an X error on the middle qubit produce the desired error syndrome, the most likely error is an X error on the middle qubit. 
-
-To find the most likely correction for any two error syndromes first note that it is only possible to generate single stabilizer flags if an error occurs at a boundary not containing semicircle stabilizers of the same type. Define the X boundary as the boundary containing X semicircular stabilizers and the Z boundary as the boundary containing Z semicircular stabilizers. Assuming that a path is a chain of plaquette edges, let the minimum weight path between two plaquettes be defined as the path that connects a vertex touching each plaquette while touching the least number of vertices. Given two plaquette flags of the same type of a distance d surface code, the most likely error is given by the minimum weight path that connects either the two flags together, or both flags to the boundary corresponding to the Pauli Error that occured. 
-
-Now let us say we are given n syndrome flags of the same type. Remember that if two syndrome flags are connected via a path, then applying a corrective action along that path addresses both flags. Thus, to find the most likely error, we need to find a configuration with minimum total path weight, where every flag is either connected to a unique other flag, or is connected to the requisite boundary.
-
-
-\cite{Pesah_Introduction_to_Surface_Code_2023}
-A hypergraph can be simplified to a normal graph if every hyperedge is connected to two vertices. In this particular case, the most likely error (MLE) problem can be reduced to a minimum-weight perfect matching (MWPM) problem. Through the blossom algorithm, the MWPM decode can solve the reformulation of MLE problems in polynomial time.
-=======
-By construction, MWPF can incorporate erasure locations directly into the decoding graph, rather than approximating them as effective Pauli faults. This is especially powerful in architectures that deliberately convert dominant noise channels to erasures~\cite{wu_erasure_2022,kubica_erasure_2023,gu_fault-tolerant_2025,chadwick_erasure_2025}. Our experiments leverage this capability by comparing MWPF and MWPM in regimes where erasures are either absent (pure Pauli noise) or dominant (pure erasure noise).
-
-\subsection{Motivation for Our Experiments}
-\label{subsec:motivation}
-
-The literature sketched above suggests a coherent picture:
->>>>>>> ae42deba1886642b971caf3181b88c88354bbace
 
 \begin{enumerate}
     \item Real hardware produces Pauli errors, leakage, and loss;
