@@ -640,16 +640,6 @@ During our initial experiments with MWPF, we noted a memory leak during erasure-
 
 \section{Appendix: Additional Figures and Tables}
 
-\begin{figure}[hb]
-    \hspace{-2em}
-    \includegraphics[width=1.5\linewidth, height=0.4\textheight, keepaspectratio]{fig_experiment4.png}
-    \caption{\textbf{Dual-rail rrasure-check qubits in superconducting transmons }.
-        \textbf{(a)} A set of errors occuring in the surface code. \textbf{(b)} Syndrome information available in a pure Pauli noise regime. \textbf{(c)} Decoder prediction that results in a logical Z error (orange path). \textbf{(d)} Syndrome information from parity-check ancilla qubits enriched with erasure checks. \textbf{(e)} A correlated erasure-aware error model weights the green path more heavily, avoiding the logical error in (b).
-        \cite{chadwick_erasure_2025}
-    }
-    \label{fig:experiment4-sampler}
-\end{figure}
-
 
 \section{Appendix: Additional Notes on Leakage}\label{appendix:leakage}
 A leakage occurs when a qubit ``leaks'' out of the computational subspace (described by a two-dimensional Hilbert space) into a state that can only be described with a higher-order Hilbert space. If leakage goes undetected, the error compounds over time as it spreads through a multi-qubit interactions. Leakage can be stochastically modeled with a 3-level system (qutrit) with orthonormal basis: $\set{\ket{0}, \ket{1}, \ket{2}}$. Leakage events are assumed to be discrete and occur independently with probability $p_{\text{leak}}$ at each gate operation acting on the qutrit \cite{suchara_leakage_2014}. The leakage error $E_{E_{\uparrow}}$ on the $j$th qutrit in the system can then be understood as:
