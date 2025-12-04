@@ -167,6 +167,9 @@ We explore the impact of erasure error conversion by implementing the error mode
 
 We define $p_{thr}$ as the physical error rate $p$ where the logical error rate $P_L$ decreases as a function of $d$. To estimate $p_{thr}$, we identify crossing points in \autoref{fig:best-threshold-comparison}, where the logical error rate decreases as code distance $d$ increases, with the d=3,5 and d=9,11 crossings representing the lower and upper bound of $p_{thr}$ respectively. The highest $p_{thr}$ was 3.02\% when $R_e=1.0$ using the erasure-aware hypergraph MWPF decoder, compared to a 0.75\% threshold using the MWPF decoder in a pure Pauli noise regime.
 
+\paragraphsc{Circuit Simulation}
+We use Stim to implement the surface code stabilizer circuit \cite{gidney_stim_2021}. Notably, we rely on the surface code circuit declarations produced by the \verb|stim.Circuit.generated| API, which are intended for demonstration purposes and \textbf{not} recommended for research.
+
 % The procedure for circuit simulation, event sampling, and decoding is documented in \nameref{sec:experiment2} and \nameref{sec:experiment3}.
 
 \paragraphsc{Syndrome Decoding.} We compare four methods for decoding syndrome measurements, described in more detail in each experiment procedure section:
@@ -303,12 +306,9 @@ For $R_e = 1.0$ and erasure-aware hypergraph MWPF decoding, \autoref{fig:fault-t
 % \end{figure}
 
 \newpage
-\section{Methods}
-See \autoref{sec:results} for high-level methodology. This section describe our metrics, calculations, and experimental procedures in excruciating detail.
+\subsection{Experiments}
 
 
-\paragraphsc{Circuit Simulation}
-We use Stim to implement the surface code stabilizer circuit \cite{gidney_stim_2021}. Notably, we rely on the surface code circuit declarations produced by the \verb|stim.Circuit.generated| API, which are intended for demonstration purposes and \textbf{not} recommended for research.
 
 \subsection{Experiment 1: Min-weight Perfect Matching Baseline.} \label{sec:experiment1}
 \begin{itemize}
