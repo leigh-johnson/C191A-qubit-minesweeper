@@ -3,4 +3,4 @@ grid.color : 0.85
 grid.linewidth : 0.6
 grid.linestyle : -
 lines.linewidth : 1.0
-lines.markersize : 5
+lines.markersize : 4
