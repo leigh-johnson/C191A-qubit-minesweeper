@@ -308,6 +308,9 @@ For $R_e = 1.0$ and erasure-aware hypergraph MWPF decoding, \autoref{fig:fault-t
 \newpage
 \subsection{Experiments}
 
+We generated datasets for $d \in \{3,5,7,9,11, 13\}$, $p \in [0.003, 0.06]$, and $R_e \in [0.0, 1.0]$ using Sinter. In the PyMatching decoder case, our simulation ran with \texttt{max\_shots = 500{,}000} and \texttt{max\_errors = 10{,}000} per task, across $\approx 60$ workers. In the MWPF case, we were constrained to \texttt{max\_shots = 50{,}000} and \texttt{max\_errors = 1{,}000} per task due to the memory footprint of the hypergraph data structure. The resulting CSV files are stored alongside the other experiment datasets in our project repository.\footnote{\url{https://github.com/leigh-johnson/C191A-qubit-minesweeper}}
+
+
 \subsubsection{Experiment 1: Min-weight Perfect Matching Baseline.} \label{sec:experiment1}
 \textbf{Data:} \href{https://github.com/leigh-johnson/C191A-qubit-minesweeper/tree/main/datasets/circuit%3Dsurface_code%3Arotated_memory_x/decoder%3Dpymatching}{Github Link}.
 \textbf{Results:} \autoref{fig:pymathing-pthresh}.
@@ -443,20 +446,17 @@ For $R_e = 1.0$ and erasure-aware hypergraph MWPF decoding, \autoref{fig:fault-t
 % \paragraphsc{ Additional Results.} See Figure 3c in Section 3, which shows a threshold region around $p_{thr} \in [2.75\%, 3.00\%]$, the highest among all experiments. Due to a memory leak in our implementation of MWPF (see \autoref{sec:memleak-sidequest}), we had to aggregate multiple smaller Monte Carlo batches, resulting in wide confidence intervals at $d \ge 7$.
 % \paragraphsc{Data.} \href{https://github.com/leigh-johnson/C191A-qubit-minesweeper/tree/main/datasets/circuit%3Dsurface_code%3Arotated_memory_x/decoder%3Dmwpf/erasure%3D1.0/solver%3DSolverSerialJointSingleHair}{Github Link} 
 
-\paragraph{Online phase: erasure-aware MWPF decoding.}
+\paragraph{scOnline phase: erasure-aware MWPF decoding.}
 After a HERALDED\_ERASE event is samplied on the noise channel, the target qubit is reset to a maximally mixed state. The resulting parity factor $\hat{x}$ from \autoref{para:mwpf-online-decoding} is mapped to a Pauli correction on the data qubits. As in all other decoding methods, we apply this correction, measure the logical observable, and classify the shot as a success or logical failure.
 
 \subsection{Experiment 4: Erasure-aware Min-weight Perfect Matching} \label{sec:experiment4}
-\begin{itemize}
-    \item \textbf{Data}: \href{https://github.com/leigh-johnson/C191A-qubit-minesweeper/tree/main/datasets/circuit%3Dsurface_code%3Arotated_memory_x/decoder%3DHeraldedEraseDecoder/erasure%3D1.0}{Github Link}
-    \item \textbf{Results}: \autoref{fig:pymatching-pthresh-erase}.
-\end{itemize}
+\textbf{Data}: \href{https://github.com/leigh-johnson/C191A-qubit-minesweeper/tree/main/datasets/circuit%3Dsurface_code%3Arotated_memory_x/decoder%3DHeraldedEraseDecoder/erasure%3D1.0}{Github Link}
+\textbf{Results}: \autoref{fig:pymatching-pthresh-erase}.
 
-\textbf{Overview.}
-This experiment modifies the MWPM baseline in Experiment \nameref{sec:experiment1} to use a fully erasure-converted noise model with $R_e = 1.0$, following the two-step strategy of \citeauthor{gu_fault-tolerant_2025} \cite{gu_fault-tolerant_2025}. In the first step, a Stim circuit with \texttt{HERALDED\_ERASE} channels produces both a syndrome bitstring and an erasure bitstring. In the second step, we build a detector error model (DEM) and decode syndromes with PyMatching, using per-shot edge re-weighting conditioned on the erasure bits.
+\paragraphsc{Overview.}
+This experiment modifies the MWPM baseline in \nameref{sec:experiment1} to use a fully erasure-converted noise model with $R_e = 1.0$, following the two-step strategy of \citeauthor{gu_fault-tolerant_2025} \cite{gu_fault-tolerant_2025}. In the first step, a Stim circuit with \texttt{HERALDED\_ERASE} channels produces both a syndrome bitstring and an erasure bitstring. In the second step, we build a detector error model (DEM) and decode syndromes with PyMatching, using per-shot edge re-weighting conditioned on the erasure bits.
 
 \textbf{Data.}
-We generated datasets for $d \in \{3,5,7,9,11, 13\}$, $p \in [0.003, 0.06]$, and $R_e = 1.0$ using Sinter with \texttt{max\_shots = 500{,}000} and \texttt{max\_errors = 10{,}000} per task, across $\approx 60$ workers. The resulting CSV files are stored alongside the other experiment datasets in our project repository.\footnote{\url{https://github.com/leigh-johnson/C191A-qubit-minesweeper}}
 
 \paragraph{Offline phase: circuit conversion and DEM analysis.}
 Starting from the same rotated-memory surface-code circuit used in \nameref{sec:experiment2}, we convert all Pauli faults into heralded erasures. Each physical fault is implemented as a \texttt{HERALDED\_ERASE} instruction followed by one or more dedicated \texttt{DETECTOR} instructions that act as erasure checks. All remaining \texttt{DETECTOR} instructions are treated as standard stabilizer syndrome detectors.
