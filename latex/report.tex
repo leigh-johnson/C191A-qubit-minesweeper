@@ -602,15 +602,11 @@ For the next/subsequent experiments, we recommend writing out \href{https://gith
 \paragraphsc{High Uncertainty in MWPF Experiments}
 In our MWPF experiments, our Monte Carlo simulation was limited to 10,000 - 50,000 shots at a time (vs. 500,000 per single run in other trials). We aggregate the datasets from many (5+) in order to compare against other experiments. Fewer samples resulted in a wider confidence interval for MWPF samples, especially at low physical error rates (see \autoref{fig:mwpf-pthresh} and \autoref{fig:mwpf-pthresh-erase}). We attempted to gather enough data to make a fair comparison between our visual estimations for $p_{thr}$, especially for the sampling region around the threshold. However, the binomial fit method in our $P_L$ vs. $p$ plots is very sensitive to outlying datapoints. A visual estimate at the extrema of the very wide confidence interval for $d=7,9,11$ in \autoref{fig:mwpf-pthresh-erase} puts the $p_{thr}$ region anywhere from $\approx 3-6$\%. We report the most convervative value in our results table.
 
-\paragraphsc{Future Work}
+\paragraph{Future Work}
 
-We're excited by pull request Adds 'pymatching-correlated' Sinter decoder opened one week ago (as of writing).
-https://github.com/quantumlib/Stim/pull/1012
+The next step is to incorporate correlations and conditional error structure, which our present independent-noise models do not capture. Scholl \emph{et al.} highlight that erasure conversion enables ``exploring the effect of errors on experimental outcomes at a microscopic level and studying correlations between different error sources'' by conditioning on preparation and decay erasures recorded during the same shot \cite{scholl_erasure_2023}. Our circuit-level simulations treat Pauli and erasure events as independent, but real hardware exhibits spatial and temporal structure that influences decoder performance. Capturing these effects will require moving beyond i.i.d.\ noise models to conditional distributions over detector outcomes and hyperedge activations.
 
-We're also excited about "Learning from erasure errors" suggested by \cite{scholl_erasure_2023}: "we turn to studying a tool enabled by our implementation of erasure conversion: exploring the effect of errors on experimental outcomes at a microscopic level and studying correlations between different error sources" - our stabilizer circuit level simulations were interesting, but it seems like the cutting edge must incorporate correlations and conditional probability models. We're excited by pull request Adds 'pymatching-correlated' Sinter decoder opened one week ago (as of writing).
-https://github.com/quantumlib/Stim/pull/1012
-
-
+A recent pull request to Stim introduces a \texttt{pymatching-correlated} decoder interface (\href{https://github.com/quantumlib/Stim/pull/1012}{PR~\#1012}), which will enable Sinter to pass correlation-aware detector models directly into PyMatching. We explicitly tried feature in our own implementation (see \autoref{sec:experiment4}), but our erasure-aware results were only slightly improved compared to the Pauli noise regime. We're excited to see an official reference implementation and look forward to figuring out where we went off the rails.
 
 \section{Conclusion}
 
