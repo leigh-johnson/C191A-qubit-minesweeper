@@ -401,7 +401,7 @@ For $R_e = 1.0$ and erasure-aware hypergraph MWPF decoding, \autoref{fig:fault-t
               w_j \approx \log\!\left(\frac{1 - p_j}{p_j}\right),
           \end{align*}
 
-    \item {\textbf{Online phase:} syndrome measurement and minimum-weight parity factor decoding.}
+    \item {\textbf{Online phase:} syndrome measurement and minimum-weight parity factor decoding.} \label{para:mwpf-online-decoding}
 
           During Monte Carlo simulation, each noisy circuit shot produces a binary syndrome vector
           \begin{align*}
@@ -436,76 +436,20 @@ For $R_e = 1.0$ and erasure-aware hypergraph MWPF decoding, \autoref{fig:fault-t
 \end{itemize}
 
 \subsection{Experiment 3: Erasure-aware Min-weight Parity Factor } \label{sec:experiment3}
-\paragraphsc{Overview.} In this experiment we study the performance of the minimum-weight parity factor (MWPF) decoder in the uniform Pauli noise regime, as ablation against the MWPM baseline. Except for the decoder, this experiment is identical to \autoref{sec:experiment1}.
+\textbf{Data:}  \href{https://github.com/leigh-johnson/C191A-qubit-minesweeper/tree/main/datasets/circuit%3Dsurface_code%3Arotated_memory_x/decoder%3Dmwpf/erasure%3D1.0/solver%3DSolverSerialJointSingleHair}{Github Link} 
+\textbf{Results:} \autoref{fig:mwpf-pthresh-erase}.
+\paragraphsc{Overview.} In this experiment, we repeat the procedure of \nameref{sec:experiment2} but switch from a purely Pauli-noise regime to a full erasure-dominant noise model with 100\% conversion efficiency ($R_e = 1.0$). This setting approximates an idealized version of the erasure-conversion protocols described in \citeauthor{wu_erasure_2022}. Although real physical systems do not achieve $R_e = 1.0$, this extreme regime allows us to isolate the impact of erasure information on the hypergraph decoding scheme.
 
-In this experiment, we repeat the procedure of \nameref{sec:experiment1} but switch from a purely Pauli-noise regime to a full erasure-dominant noise model with 100\% conversion efficiency ($R_e = 1.0$). This setting approximates an idealized version of the erasure-conversion protocols described in \citeauthor{wu_erasure_2022}. Although real physical systems do not achieve $R_e = 1.0$, this extreme regime allows us to isolate the impact of erasure information on the hypergraph decoding scheme.
-
-Notably, we do not use the version of the \verb|mwpf| decoder bundled with Stim in \verb|sinter\.decoders| and instead run our initial experiments with \verb|mwpf[stim]@0.2.12| and then from a forked version with a revised memory layout (see \autoref{sec:memleak-sidequest}).
-
-\paragraphsc{ Additional Results.} See Figure 3c in Section 3, which shows a threshold region around $p_{thr} \in [2.75\%, 3.00\%]$, the highest among all experiments. Due to a memory leak in our implementation of MWPF (see \autoref{sec:memleak-sidequest}), we had to aggregate multiple smaller Monte Carlo batches, resulting in wide confidence intervals at $d \ge 7$.
-\paragraphsc{Data.} \href{https://github.com/leigh-johnson/C191A-qubit-minesweeper/tree/main/datasets/circuit%3Dsurface_code%3Arotated_memory_x/decoder%3Dmwpf/erasure%3D1.0/solver%3DSolverSerialJointSingleHair}{Github Link} 
-
-\paragraph{Offline phase: DEM and hypergraph construction.}
-For each choice of code distance $d$, physical error rate $p$, and erasure conversion rate $R_e = 1$, we compile the rotated-memory surface-code circuit using Stim and pass it to the MWPF decoder. From this circuit, MWPF constructs a detector error model (DEM) with detectors $\{D_i\}_{i=1}^m$ and error mechanisms $\{E_j\}_{j=1}^n$, where each $E_j$ is represented as a hyperedge
-\[
-    F_j \subseteq \{D_1,\dots,D_m\}.
-\]
-With $R_e = 1.0$, every physical fault is converted into a \texttt{HERALDED\_ERASE} event, so erased qubits are treated as known-location faults with unknown Pauli type. All hyperedges associated with erased qubits must be included in any feasible parity factor.
-
-The hypergraph incidence matrix has the form:
-\begin{align}
-    H^{(\mathrm{hyp})}_{ij} =
-    \begin{cases}
-        1 & \text{if detector } D_i \text{ is incident on hyperedge } F_j, \\[4pt]
-        0 & \text{otherwise}.
-    \end{cases}
-\end{align}
-
-With $R_e = 1.0$, every physical error is converted into a \texttt{HERALDED\_ERASE} event, so erased qubits are treated as known-location faults with unknown Pauli type. All hyperedges associated with erased qubits must appear in any feasible parity factor.
-
-All error mechanisms share the same probability $p_j = p$, giving log-likelihood weights:
-\begin{align}
-    w_j = \log\!\left(\frac{1-p}{p}\right).
-\end{align}
-
-All error mechanisms share the same erasure probability $p_j = p$, yielding log-likelihood edge weights
-\[
-    w_j = \log\!\left(\frac{1-p}{p}\right).
-\]
-We use the MWPF implementation with \texttt{cluster\_node\_limit = 50} and the \texttt{SolverSerialJointSingleHair} solver. Due to the memory footprint of MWPF, each Sinter task is limited to \texttt{max\_shots = 50{,}000} and \texttt{max\_errors = 1{,}000}, distributed over approximately 60 worker processes.
+% \paragraphsc{ Additional Results.} See Figure 3c in Section 3, which shows a threshold region around $p_{thr} \in [2.75\%, 3.00\%]$, the highest among all experiments. Due to a memory leak in our implementation of MWPF (see \autoref{sec:memleak-sidequest}), we had to aggregate multiple smaller Monte Carlo batches, resulting in wide confidence intervals at $d \ge 7$.
+% \paragraphsc{Data.} \href{https://github.com/leigh-johnson/C191A-qubit-minesweeper/tree/main/datasets/circuit%3Dsurface_code%3Arotated_memory_x/decoder%3Dmwpf/erasure%3D1.0/solver%3DSolverSerialJointSingleHair}{Github Link} 
 
 \paragraph{Online phase: erasure-aware MWPF decoding.}
-\begin{align}
-    s \in \{0,1\}^m,
-\end{align}
-and an erasure mask identifying all erased qubits. Let $x \in \{0,1\}^n$ indicate which error mechanisms occur. The MWPF decoder must satisfy the parity constraint:
-\begin{align}
-    H^{(\mathrm{hyp})} x = s \pmod{2}.
-\end{align}
-
-Given these constraints and the requirement that all erasure-associated hyperedges be included, MWPF solves the minimum-weight parity-factor problem:
-\begin{align}
-    \hat{x}
-    =
-    \arg\min_{x \in \{0,1\}^n}
-    \left\{
-    \sum_{j=1}^n w_j x_j \;:\;
-    H^{(\mathrm{hyp})} x = s \ (\mathrm{mod}\ 2),
-    \ \text{and erasure hyperedges are enforced}
-    \right\}.
-\end{align}
-
-The resulting parity factor $\hat{x}$ is mapped to a Pauli correction on the data qubits. We apply this correction, measure the logical observable, and classify the shot as a success or logical failure. As in other experiments, the logical error rate is:
-\begin{align}
-    P_L = \frac{k}{n},
-\end{align}
-where $k$ is the number of logical failures and $n$ is the total number of shots for that $(d,p,R_e)$ configuration.
-
+After a HERALDED\_ERASE event is samplied on the noise channel, the target qubit is reset to a maximally mixed state. The resulting parity factor $\hat{x}$ from \autoref{para:mwpf-online-decoding} is mapped to a Pauli correction on the data qubits. As in all other decoding methods, we apply this correction, measure the logical observable, and classify the shot as a success or logical failure.
 
 \subsection{Experiment 4: Erasure-aware Min-weight Perfect Matching} \label{sec:experiment4}
 \begin{itemize}
-    \item \href{https://github.com/leigh-johnson/C191A-qubit-minesweeper/tree/main/datasets/circuit%3Dsurface_code%3Arotated_memory_x/decoder%3Dmwpf/erasure%3D1.0/solver%3DSolverSerialJointSingleHair}{Github Link}
-    \item Additional Results: \autoref{fig:pymatching-pthresh-erase}.
+    \item \textbf{Data}: \href{https://github.com/leigh-johnson/C191A-qubit-minesweeper/tree/main/datasets/circuit%3Dsurface_code%3Arotated_memory_x/decoder%3DHeraldedEraseDecoder/erasure%3D1.0}{Github Link}
+    \item \textbf{Results}: \autoref{fig:pymatching-pthresh-erase}.
 \end{itemize}
 
 \textbf{Overview.}
