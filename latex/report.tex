@@ -92,7 +92,7 @@ Decoding the surface code requires inferring which error configurations could ha
 
 \subsubsection{Minimum-Weight Perfect Matching (MWPM)}
 
-\textbf{MWPM decoders} (e.g., PyMatching) cast the decoding problem as a \emph{graph matching} task: syndrome defects are nodes, edges represent possible error events, and a minimum-weight perfect matching yields the most likely Pauli error configuration consistent with the observed syndrome~\cite{oscarhiggott_oscarhiggottpymatching_2025}\cite{higgott_sparse_2025,gidney_answer_2023-1}. This approach has become the de facto standard for decoding the surface code under uncorrelated Pauli noise~\cite{fowler_surface_2012}\cite{fowler_optimal_2013}. Our baseline simulations follow this tradition, using Stim and MWPM-based decoders to estimate thresholds under depolarizing noise \cite{gidney_stim_2021}.
+\textbf{MWPM decoders} (e.g., PyMatching) cast the decoding problem as a \emph{graph matching} task: syndrome defects are nodes, edges represent possible error events, and a minimum-weight perfect matching yields the most likely Pauli error configuration consistent with the observed syndrome \cite{oscarhiggott_oscarhiggottpymatching_2025}\cite{higgott_sparse_2025}. This approach has become the de facto standard for decoding the surface code under uncorrelated Pauli noise \cite{fowler_surface_2012}\cite{fowler_optimal_2013}. Our baseline simulations follow this tradition, using Stim and MWPM-based decoders to estimate thresholds under depolarizing noise.
 
 However, the standard MWPM formulation assumes:
 \begin{itemize}
@@ -104,16 +104,9 @@ In particular, MWPM does not naturally exploit the additional structure provided
 
 \subsubsection{Minimum-Weight Parity Factor (MWPF)}
 
-The \textbf{MWPF decoder} generalizes this picture by representing the error model as a \emph{hypergraph}, where a single error mechanism can flip the parity of an arbitrary subset of detectors, not just pairs~\cite{wu_yuewuomwpf_2025,wu_minimum-weight_2025}. This allows MWPF to natively capture:
-\begin{itemize}
-    \item multi-qubit correlated error events,
-    \item erasure-tagged qubits and their constraints,
-    \item realistic detector error and measurement models across general quantum LDPC codes.
-\end{itemize}
+The \textbf{MWPF decoder} generalizes this picture by representing the error model as a \emph{hypergraph}, where a single error mechanism can flip the parity of an arbitrary subset of detectors, not just pairs \cite{wu_yuewuomwpf_2025}\cite{wu_minimum-weight_2025}. In the MWPF framework, decoding becomes a \emph{minimum-weight parity factor} problem: find a set of hyperedges whose parities match the observed syndrome while minimizing the total weight derived from the noise model \cite{wu_minimum-weight_2025}. Hypergraph matching is NP-hard in general, but the HyperBlossom implementation used in this work employs primal--dual relaxations, clustering, and sparse data structures to achieve near-linear average runtime scaling on surface codes and other LDPC codes at relevant code distances \cite{wu_minimum-weight_2025}.
 
-In the MWPF framework, decoding becomes a \emph{minimum-weight parity factor} problem: find a set of hyperedges whose parities match the observed syndrome while minimizing the total weight derived from the noise model~\cite{wu_minimum-weight_2025}. Hypergraph matching is NP-hard in general, but the HyperBlossom implementation used in this work employs primal--dual relaxations, clustering, and sparse data structures to achieve near-linear average runtime scaling on surface codes and other LDPC codes at relevant code distances~\cite{wu_minimum-weight_2025}.
-
-By construction, MWPF can incorporate erasure locations directly into the decoding graph, rather than approximating them as effective Pauli errors. This is especially powerful in architectures that deliberately convert dominant noise channels to erasures~\cite{wu_erasure_2022,kubica_erasure_2023,gu_fault-tolerant_2025,chadwick_erasure_2025}. Our experiments leverage this capability by comparing MWPF and MWPM in regimes where erasures are either absent (pure Pauli noise) or dominant (pure erasure noise).
+By construction, MWPF can incorporate erasure locations directly into the decoding graph, rather than approximating them as effective Pauli errors. This is especially powerful in architectures that deliberately convert dominant noise channels to erasures \cite{wu_erasure_2022}\cite{kubica_erasure_2023}\cite{gu_fault-tolerant_2025}\cite{chadwick_erasure_2025}. Our experiments leverage this capability by comparing MWPF and MWPM in regimes where erasures are either absent (pure Pauli noise) or dominant (pure erasure noise).
 
 \subsection{Motivation for Our Experiments}
 \label{subsec:motivation}
