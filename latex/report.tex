@@ -62,9 +62,8 @@ For example \citeauthor{wu_erasure_2022} predict up to 98\% of leakages errors i
 
 However, erasure conversion comes with additional complexities. In a superconducting system, extra mid-circuit erasure checks may introduce correlated errors or additional decoherence. Realistic erasure-conversion schemes cannot achieve 100\% conversion efficiency \cite{ma_high-fidelity_2023}\cite{wu_erasure_2022}\cite{gu_optimizing_2024}.
 
-\subsection{Erasure Qubits}
-
-An erasure qubit is engineered so the dominant source of errors is from erasures. A bias towards erasure-type errors occurs natively in some types of qubits (e.g. photons) or can be engineered by converting leakage errors to erasures (e.g. with LDUs in superconducting qubits). For more information on how erasure conversion works for neutral atoms, refer to the following papers: \cite{wu_erasure_2022}\cite{baranes_leveraging_2025}\cite{scholl_erasure_2023}. For superconducting qubits, refer to the following papers: \cite{gu_optimizing_2024}\cite{gu_fault-tolerant_2025}.
+% \subsection{Erasure Qubits}
+% An erasure qubit is engineered so the dominant source of errors is from erasures. A bias towards erasure-type errors occurs natively in some types of qubits (e.g. photons) or can be engineered by converting leakage errors to erasures (e.g. with LDUs in superconducting qubits). For more information on how erasure conversion works for neutral atoms, refer to the following papers: \cite{wu_erasure_2022}\cite{baranes_leveraging_2025}\cite{scholl_erasure_2023}. For superconducting qubits, refer to the following papers: \cite{gu_optimizing_2024}\cite{gu_fault-tolerant_2025}.
 
 \subsection{Surface Code}\label{subsec:surface-code}
 
@@ -72,19 +71,19 @@ The \emph{surface code} is a leading candidate for fault-tolerant quantum comput
 
 If the physical error rate $p$ is below a threshold $p_{\mathrm{thr}}$, the logical error rate $P_L$ decreases approximately exponentially with $d$:
 \begin{align}
-    P_L \propto \left( \frac{p}{p_{\mathrm{thr}}} \right)^{(d+1)/2} \quad \text{{Logical error rate}}
+    P_L & \propto \left( \frac{p}{p_{\mathrm{thr}}} \right)^{(d+1)/2} \quad \text{[Logical error rate scaling]}
 \end{align}
-a scaling extensively validated in both simulations and experiments~\cite{fowler_surface_2012,fowler_optimal_2013,acharya_quantum_2025,bluvstein_logical_2024}. This exponential suppression underpins scalable, fault-tolerant architectures. Recent work has begun to explore how accumulated erasures, atom loss, and code deformations affect surface-code thresholds in neutral-atom settings, motivating specialized schemes for handling ongoing erasure processes \cite{kobayashi_erasure-tolerance_2025,reichardt_fault-tolerant_2025,li_fast_2025}.
+This exponential suppression underpins scalable, fault-tolerant architectures and has been extensively studied in both simulations and real hardware \cite{fowler_surface_2012}\cite{fowler_optimal_2013}\cite{acharya_quantum_2025}\cite{bluvstein_logical_2024}. Recent work has begun to explore how accumulated erasures, atom loss, and code deformations affect surface-code thresholds in neutral-atom settings, motivating specialized schemes for handling ongoing erasure processes \cite{kobayashi_erasure-tolerance_2025}\cite{reichardt_fault-tolerant_2025}\cite{li_fast_2025}.
 
 \begin{figure}[h]
     \hspace{-2em}
     \makebox[\textwidth][c]{\includegraphics[width=\textwidth, height=0.4\textheight, keepaspectratio]{fig_dual_rail_erasure_checks}}%
-    \caption{\textbf{Dual-rail erasure-check qubits in superconducting transmons }.Erasure checks supply extra information to the decoder. In a pure Pauli noise regime the decoder must infer error locations only from stabilizer defects, which can lead to incorrect logical corrections. When erasure checks fire, the decoder obtains direct fault-location information and chooses higher-likelihood correction paths. Adapted from \citeauthor{chadwick_erasure_2025} \cite{chadwick_erasure_2025}.}
+    \caption{\textbf{Dual-rail erasure-check qubits in superconducting transmons}. Erasure checks supply extra information to the decoder. In a pure Pauli noise regime the decoder must infer error locations only from stabilizer defects, which can lead to incorrect logical corrections. When erasure checks fire, the decoder obtains direct fault-location information and chooses higher-likelihood correction paths. Adapted from \citeauthor{chadwick_erasure_2025} \cite{chadwick_erasure_2025}.}
     \label{fig:surface-code-erasure-comparison}
 \end{figure}
 
 
-Because erasure errors are easier to correct and reveal additional information to the decoder (example: \autoref{fig:surface-code-erasure-comparison}), the erasure-aware threshold can be substantially higher than the threshold under Pauli noise, especially when decoders are explicitly optimized for erasure structure~\cite{sahay_high-threshold_2023,gu_fault-tolerant_2025,gu_optimizing_2024}. Quantifying this gap for practical decoders is one of the main goals of our study.
+Because erasure errors are easier to correct and reveal additional information to the decoder (example: \autoref{fig:surface-code-erasure-comparison}), the erasure-aware threshold can be substantially higher than the threshold under Pauli noise, especially when decoders are explicitly optimized for erasure structure \cite{sahay_high-threshold_2023}\cite{gu_fault-tolerant_2025}\cite{gu_optimizing_2024}. Quantifying this gap for practical decoders is one of the main goals of our study.
 
 
 
