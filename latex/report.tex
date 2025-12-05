@@ -157,19 +157,19 @@ For each circuit and decoding method described in \autoref{tab:1}, we plot $P_L$
     curves with sinter / stim?' for a detailed explanation of the method we used to combine per-shot and per-round distributions. We use per-shot representation in our final results. \cite{gidney_answer_2023}}
 
 \paragraphsc{Noise Regimes.}
-We study two noise models, parameterized by a physical qubit error rate $p$ and an erasure-conversion ratio $R_e$. The noise channel is applied to each data qubit after one and two-qubit Clifford gate operations, and to each ancilla qubit before a round of stabilizer syndrome measurements.
+We study two noise models, parameterized by a physical qubit error rate $p$ and an erasure-conversion ratio $R_e$. The noise channel is applied to each data qubit \textbf{after} one and two-qubit Clifford gate operations, and \textbf{before} a round of stabilizer syndrome measurements. We assume perfect measurement of ancilla qubits.
 
 \begin{itemize}
-    \item \textbf{Pauli noise (depolarizing channel)} ($R_e = 0$): We sample uniformly at random with probability $1-p$ of no error occurring and probability $p/3$ of any error in $\set{X, Y, Z}$ occuring.
+    \item \textbf{Pauli noise (depolarizing channel)} ($R_e = 0$): We sample uniformly at random with probability $1-p$ of no error occurring and probability $p/3$ of any error in $\set{X, Y, Z}$ occurring.
     \item \textbf{Erasure-dominant channel} ($R_e = 1$): A \verb|HERALDED_ERASE| event occurs with probability $p$ per qubit, providing the decoder with the exact location of the affected qubit. The qubit is reset to a maximally mixed state before the next round of syndrome measurements.
 \end{itemize}
-Intermediate values of $R_e$ are not considered in this work; we focus on the two external cases needed to quantify the benefit of erasure information.
+Intermediate values of $R_e$ are not considered in this work; we focus on the two extreme cases needed to quantify the benefit of erasure information.
 
-\paragraphsc{Syndrome Decoders}
+\paragraphsc{Syndrome Decoders.}
 We evaluate two four combinations of noise model and decoding strategy:
 \begin{enumerate}
     \item \textbf{MWPM (PyMatching), Pauli noise}: standard minimum-weight perfect matching baseline.
-    \item \textbf{MWPM with per-shot reweighing, erasure noise}: min-weight perfect matching, with edge weights conditioned on whether an erasure event occurred.
+    \item \textbf{MWPM with per-shot reweighing, erasure noise}: minimum-weight perfect matching, with edge weights conditioned on whether an erasure event occurred.
     \item \textbf{MWPF, Pauli noise}: an ablation showing MWPF performance without erasures.
     \item \textbf{MWPF, erasure noise}: frames the problem of decoding syndrome measurements
           and erasure error locations as a hypergraph matching problem.
@@ -329,7 +329,7 @@ In the case where depolarizing noise is modeled with purely Pauli errors, we ref
 In Experiment1, we visually estimated a much \textit{lower} error ($p_{thr} = 0.775$, \%err $=22.5\%$) for our X-rotated surface code with pure Pauli noise and the PyMatching decoder. We ruled out decoder implementation as a contributing factor (under this particular noise regime) after determining a similar result in our ablation study of MWPF in Experiment2 ($p_{thr} = 0.750$, \%err $=25.0\%$). We attribute this systemic error to multiple sources, in order of significance:
 
 \begin{itemize}
-    \item \autoref{fig:stim-circuit-gen}. We intended to assume perfect stabilizer measurements, but our circuit implementation applied the depolarizing error channel to each data qubit per measurement round.
+    \item \autoref{fig:stim-circuit-gen}. We applied an extra round of errors to each data qubit before the stabilizer measurement round.
     \item We applied the depolarizing noise channel to one and two-qubit gates at the same rate. Our references consider only two-qubit gates.
 \end{itemize}
 
