@@ -151,7 +151,6 @@ The literature sketched above suggests a coherent picture:
 
 These observations motivate our study: by comparing MWPM and MWPF on the rotated surface code under both Pauli-only and erasure-dominant noise, we aim to quantify how erasure-aware decoding reshapes the threshold landscape and to clarify systematic deviations between ``idealized'' literature thresholds and practical simulation results obtained with Stim- and MWPF-based workflows. In this work, we simulate rotated-surface-code memory circuits under depolarizing and erasure noise using Stim. We compare MWPM and MWPF decoders across distances $d \in \set{3, 5, 7, 9, 11}$, with Monte Carlo sampling to estimate logical error rates and extract threshold behavior. This allows us to quantify how erasure-aware decoding scales the fault-tolerant physical error threshold, compared to a model limited to only Pauli noise.
 
-\newpage
 \section{Methods \& Results}\label{sec:results}
 \subsection{Overview}\label{sec:results-overview}
 
@@ -159,9 +158,11 @@ We studied the performance of a rotated surface code under various noise and err
 
 \paragraphsc{Circuit Stabilizer Simulations}
 We simulate the rotated surface code circuit with Stim \cite{gidney_stim_2021}. For each code distance $d \in \{3,5,7,9,11\}$, we run circuit-level Monte Carlo sampling using Sinter, collecting logical measurement outcomes after $d$ rounds of stabilizer measurements. The logical observable is the $X$ operator of the encoded qubit, initialized in the state $\ket{+}$. We define a binary success indicator to be $1$ if we measure $\ket{+}$ after $d$ rounds (otherwise the shot results in a logical failure), from which we estimate the logical error rate:
-\begin{align}P_L = \frac{k}{n}
+\begin{align}P_L = \dfrac{\text{k}}{\text{n}} \quad \text{$k=$ number of logical failures, $n$ = total number of shots}
 \end{align}
-where $k$ is the number of logical failures in $n$ shots.
+
+For each circuit and decoding method described in \autoref{tab:1}, we plot $P_L$ vs physical error rate $p$ in \autoref{fig:pymathing-pthresh}, \autoref{fig:mwpf-pthresh}, \autoref{fig:mwpf-pthresh-erase}, \autoref{fig:pymatching-pthresh-erase} and fit a binomial distribution with \verb|sinter|. \footnote{See: Craig Gidney's answer to StackExchange question: `max\_shots and max\_errors to reduce uncerainty in threshold
+    curves with sinter / stim?' for a detailed explanation of the method we used to combine per-shot and per-round distributions. We use per-shot representation in our final results. \cite{gidney_answer_2023}}
 
 \paragraphsc{Noise Regimes.}
 We study two noise models, parameterized by a physical qubit error rate $p$ and an erasure-conversion ratio $R_e$. The noise channel is applied to each data qubit after one and two-qubit Clifford gate operations, and to each ancilla qubit before a round of stabilizer syndrome measurements.
@@ -222,13 +223,7 @@ Table~\ref{tab:1} lists the parameter ranges, decoder configurations, and measur
     \label{fig:best-threshold-comparison}
 \end{figure}
 
-\paragraphsc{Metrics \& Fits.}
-For our Monte Carlo simulations, we define our logical error rate $P_L$ calculation as:
-\begin{align}P_L = \dfrac{\text{k}}{\text{n}} \quad \text{$k=$ number of logical failures, $n$ = total number of shots}
-\end{align}
 
-For each circuit and decoding method described in \autoref{tab:1}, we plot $P_L$ vs physical error rate $p$ in \autoref{fig:pymathing-pthresh}, \autoref{fig:mwpf-pthresh}, \autoref{fig:mwpf-pthresh-erase}, \autoref{fig:pymatching-pthresh-erase} and fit a binomial distribution with \verb|sinter|. \footnote{See: Craig Gidney's answer to StackExchange question: `max\_shots and max\_errors to reduce uncerainty in threshold
-    curves with sinter / stim?' for a detailed explanation of the method we used to combine per-shot and per-round distributions. We use per-shot representation in our final results. \cite{gidney_answer_2023}}
 
 % \newpage
 % \newgeometry{left=2cm,bottom=1.5cm,right=2cm,top=1cm}
