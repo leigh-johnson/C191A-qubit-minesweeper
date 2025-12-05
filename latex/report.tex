@@ -74,13 +74,12 @@ If the physical error rate $p$ is below a threshold $p_{\mathrm{thr}}$, the logi
 \begin{align}
     P_L \propto \left( \frac{p}{p_{\mathrm{thr}}} \right)^{(d+1)/2} \quad \text{{Logical error rate}}
 \end{align}
-a scaling extensively validated in both simulations and experiments~\cite{fowler_surface_2012,fowler_optimal_2013,acharya_quantum_2025,bluvstein_logical_2024}. This exponential suppression underpins scalable, fault-tolerant architectures. Recent work has begun to explore how accumulated erasures, atom loss, and code deformations affect surface-code thresholds in neutral-atom settings, motivating specialized schemes for handling ongoing erasure processes~\cite{kobayashi_erasure-tolerance_2025,reichardt_fault-tolerant_2025,li_fast_2025}.
+a scaling extensively validated in both simulations and experiments~\cite{fowler_surface_2012,fowler_optimal_2013,acharya_quantum_2025,bluvstein_logical_2024}. This exponential suppression underpins scalable, fault-tolerant architectures. Recent work has begun to explore how accumulated erasures, atom loss, and code deformations affect surface-code thresholds in neutral-atom settings, motivating specialized schemes for handling ongoing erasure processes \cite{kobayashi_erasure-tolerance_2025,reichardt_fault-tolerant_2025,li_fast_2025}.
 
-\begin{figure}[H]
+\begin{figure}[h]
     \hspace{-2em}
-    \includegraphics[width=\linewidth, height=0.5\textheight, keepaspectratio]{fig_experiment4.png}
-    \caption{\textbf{Dual-rail erasure-check qubits in superconducting transmons }.\footnotesize{Illustration of how erasure checks supply extra information to the decoder. In a pure Pauli noise regime the decoder must infer error locations only from stabilizer defects, which can lead to incorrect logical corrections. When erasure checks fire, the decoder obtains direct fault-location information and chooses higher-likelihood correction paths. Adapted from \citeauthor{chadwick_erasure_2025} \cite{chadwick_erasure_2025}.}
-    }
+    \makebox[\textwidth][c]{\includegraphics[width=\textwidth, height=0.4\textheight, keepaspectratio]{fig_dual_rail_erasure_checks}}%
+    \caption{\textbf{Dual-rail erasure-check qubits in superconducting transmons }.Erasure checks supply extra information to the decoder. In a pure Pauli noise regime the decoder must infer error locations only from stabilizer defects, which can lead to incorrect logical corrections. When erasure checks fire, the decoder obtains direct fault-location information and chooses higher-likelihood correction paths. Adapted from \citeauthor{chadwick_erasure_2025} \cite{chadwick_erasure_2025}.}
     \label{fig:surface-code-erasure-comparison}
 \end{figure}
 
