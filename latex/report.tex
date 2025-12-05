@@ -282,9 +282,11 @@ For each circuit and decoding method described in \autoref{tab:1}, we plot $P_L$
 \restoregeometry
 
 \newpage
-\subsection{Fault Tolerant Code Distance} We plot logical error rate $P_L$ vs. code distance $d$ for below-threshold samples  ($p \le 0.01$) and fit a least-squares linear regression \autoref{fig:fault-tolerant-projection} and extrapolate the fit to $P_L \approx 10^{-12}$. The X-intercept of the fit line represents the minimum code distance $d$ needed for one logical bit to survive one trillion rounds, which is the current estimate of the number of rounds needed to run a useful quantum algorithm [CITATION NEEDED].
+\subsection{Fault Tolerant Code Distance}
+We plot logical error rate $P_L$ vs.\ code distance $d$ for below-threshold samples ($p \le 0.01$) and fit a least-squares linear regression (\autoref{fig:fault-tolerant-projection}), then extrapolate the fit to $P_L \approx 10^{-12}$. The X-intercept of the fit line represents the minimum code distance $d$ needed for one logical bit to survive approximately one trillion rounds, a representative target for running long quantum algorithms.
 
-For $R_e = 1.0$ and erasure-aware hypergraph MWPF decoding, \autoref{fig:fault-tolerant-projection} a logical qubit implemented with $d \approx 17$ (or $2d^2 = 578$ physical qubits in the array) is projected to survive one trillion rounds. This result should be taken with a bucket of salt because we do not calculate residuals from the least-squares fit to quantify goodness of fit. The hypergraph MWPF dataset is extrapolated from a more limited range of code distances (green, $d<9$) compared to other noise regimes. Due to the computational expense of the hypergraph decoder, we could not sample as much below-threshold data in that particular noise regime. See: \nameref{sec:memleak-sidequest}.
+For $R_e = 1.0$ and erasure-aware hypergraph MWPF decoding, \autoref{fig:fault-tolerant-projection} shows that a logical qubit implemented with $d \approx 17$ (or $2d^2 \approx 578$ physical qubits in the array) is projected to survive one trillion rounds. This result should be interpreted cautiously because we do not calculate residuals from the least-squares fit to quantify goodness of fit. The hypergraph MWPF dataset is extrapolated from a more limited range of code distances (green, $d<9$) compared to other noise regimes. Due to the computational expense of the hypergraph decoder, we could not sample as much below-threshold data in that particular noise regime; see \nameref{sec:memleak-sidequest}.
+
 
 \begin{figure}[h]
     \centering
