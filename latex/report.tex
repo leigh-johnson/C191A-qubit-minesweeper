@@ -157,18 +157,43 @@ The literature sketched above suggests a coherent picture:
 These observations motivate our study: by comparing MWPM and MWPF on the rotated surface code under both Pauli-only and erasure-dominant noise, we aim to quantify how erasure-aware decoding reshapes the threshold landscape and to clarify systematic deviations between ``idealized'' literature thresholds and practical simulation results obtained with Stim- and MWPF-based workflows. In this work, we simulate rotated-surface-code memory circuits under depolarizing and erasure noise using Stim. We compare MWPM and MWPF decoders across distances $d \in \set{3, 5, 7, 9, 11}$, with Monte Carlo sampling to estimate logical error rates and extract threshold behavior. This allows us to quantify how erasure-aware decoding scales the fault-tolerant physical error threshold, compared to a model limited to only Pauli noise.
 
 \newpage
-\section{Methods \& Results}\label{sec:results}
 \subsection{Overview}\label{sec:results-overview}
-\paragraphsc{Surface Code Threshold.} We studied the performance of a rotated surface code under various noise and error syndrome decoding regimes (\autoref{tab:1}), with the goal of observing the impact of erasure conversion on our definition of the fault-tolerant error threshold $p_{thr}$. Using Stim \cite{gidney_stim_2021} to simulate the surface code stabilizer circuit, we perform Monte Carlo simulations of a $d \times d$ array of qubits representing an X-rotated surface stabilizer with code distance $d \in \set{3, 5, 7, 9, 11}$, physical error rate $p \in [0.001, 0.06]$, and erasure error conversion rate $R_e \in [0, 1]$.
 
-Noise channels are applied to individual qubits \textit{before} each round (state preparation) and \textit{after} each Clifford gate operation with $p$ probability. We prepare the state $\ket{+}$ and estimate the logical error rate $P_L$ after $d$ rounds of measurements in the X-basis, assuming perfect syndrome measurements ($p_{measure} = 0.0$). As a baseline, we model standard Pauli noise by sampling errors uniformly at random from the set $\set{I, X, Y, Z}$, corresponding to the \verb|DEPOLARIZE1| (single-qubit) and \verb|DEPOLARIZE2| (two-qubit) simulated error channels.
+We studied the performance of a rotated surface code under various noise and error syndrome decoding regimes (\autoref{tab:1}), with the goal of observing the impact of erasure conversion on our definition of the fault-tolerant error threshold $p_{thr}$. This section summarizes the simulation setting, noise regimes, and decoding methods used throughout our experiments. More detailed procedures are provided in sections \nameref{sec:experiment1} through \nameref{sec:experiment4}.
 
-We explore the impact of erasure error conversion by implementing the error model described in \cite{wu_erasure_2022} with some notable differences: each physical qubit experiences either a Pauli error occurring with probability $p_{pauli} = p(1-R_e)$ or an erasure with probability $p_e = pR_e$. Notably, we simulate $R_e=0$ and $R_e=1$, representing 0\% and 100\% erasure conversion respectively. We apply this noise model to \textit{all} Clifford gates (both one and two qubit gates). After an erasure error is detected, the affected qubit is reset to a maximally mixed state $I/2$. The resulting syndrome measurements are decoded to determine whether the shot can be corrected or results in a logical error.
+\paragraphsc{Circuit Stabilizer Simulations}
+We simulate the rotated surface code circuit with Stim \cite{gidney_stim_2021}. For each code distance $d \in \{3,5,7,9,11\}$, we run circuit-level Monte Carlo sampling using Sinter, collecting logical measurement outcomes after $d$ rounds of stabilizer measurements. The logical observable is the $X$ operator of the encoded qubit, initialized in the state $\ket{+}$. We define a binary success indicator to be $1$ if we measure $\ket{+}$ after $d$ rounds (otherwise the shot results in a logical failure), from which we estimate the logical error rate:
+\begin{align}P_L = \frac{k}{n}
+\end{align}
+where $k$ is the number of logical failures in $n$ shots.
 
-We define $p_{thr}$ as the physical error rate $p$ where the logical error rate $P_L$ decreases as a function of $d$. To estimate $p_{thr}$, we identify crossing points in \autoref{fig:best-threshold-comparison}, where the logical error rate decreases as code distance $d$ increases, with the d=3,5 and d=9,11 crossings representing the lower and upper bound of $p_{thr}$ respectively. The highest $p_{thr}$ was 3.02\% when $R_e=1.0$ using the erasure-aware hypergraph MWPF decoder, compared to a 0.75\% threshold using the MWPF decoder in a pure Pauli noise regime.
+\paragraphsc{Noise Regimes.}
+We study two noise models, parameterized by a physical qubit error rate $p$ and an erasure-conversion ratio $R_e$. The noise channel is applied to each data qubit after one and two-qubit Clifford gate operations, and to each ancilla qubit before a round of stabilizer syndrome measurements.
 
-\paragraphsc{Circuit Simulation}
-We use Stim to implement the surface code stabilizer circuit \cite{gidney_stim_2021}. Notably, we rely on the surface code circuit declarations produced by the \verb|stim.Circuit.generated| API, which are intended for demonstration purposes and \textbf{not} recommended for research.
+\begin{itemize}
+    \item \textbf{Pauli noise (depolarizing channel)} ($R_e = 0$): We sample uniformly at random with probability $1-p$ of no error occuring and probability $p/3$ of any error in $\set{X, Y, Z}$ occuring.
+    \item \textbf{Erasure-dominant channel} ($R_e = 1$): A \verb|HERALDED_ERASE| event occurs with probability $p$ per qubit, providing the decoder with the exact location of the affected qubit. The qubit is reset to a maximally mixed state before the next round of syndrome measurements.
+\end{itemize}
+Intermediate values of $R_e$ are not considered in this work; we focus on the two extremal cases needed to quantify the benefit of erasure information.
+
+\paragraphsc{Decoders Compared.}
+We evaluatee two four combinations of noise model and decoding stategy:
+\begin{enumerate}
+    \item \textbf{MWPM (PyMatching), Pauli noise}: standard minimum-weight perfect matching baseline.
+    \item \textbf{MWPM with per-shot reweighting, erasure noise}: min-weight perfect matching, with edge weights conditioned on whether an erasure event occurred.
+    \item \textbf{MWPF, Pauli noise}: an ablation showing MWPF performance without erasures.
+    \item \textbf{MWPF, erasure noise}: frames the problem of decoding syndrome measurements
+          and erasure error locations as a hypergraph matching problem.
+
+\end{enumerate}
+Each decoder receives the syndrome bitstring; erasure-aware methods additionally receive an erasure bitstring.
+
+\paragraphsc{Threshold Definition.}
+We define the threshold $p_{\mathrm{thr}}$ as the crossing point where higher code distances achieve lower logical error rates. In the figures, we visualize this by identifying the crossing of the $d=7$ and $d=9$ curves; crossings of $d=3,5$ and $d=9,11$ provide lower and upper bounds. All threshold estimates shown in Table~\ref{tab:1} and Figures~\ref{fig:best-threshold-comparison}--\ref{fig:thresholds} follow this criterion.
+
+\paragraphsc{Summary of Experiments.}
+Table~\ref{tab:1} lists the parameter ranges, decoder configurations, and measured thresholds for all four experiments. The highest threshold observed is $p_{\mathrm{thr}}\approx 3.0\%$ under full erasure conversion with the MWPF decoder, compared to $\approx 0.6\%$ for all methods under Pauli noise. These values demonstrate the qualitative and quantitative advantage of erasure-aware decoding on the rotated surface code.
+
 
 % The procedure for circuit simulation, event sampling, and decoding is documented in \nameref{sec:experiment2} and \nameref{sec:experiment3}.
 
