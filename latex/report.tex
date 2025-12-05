@@ -620,6 +620,7 @@ As in previous experiments, we map the decoder output to a Pauli correction on t
 where $k$ is the number of logical failures and $n$ is the total number of shots.
 
 \section{Discussion}\label{sec:discussion}
+\paragraph{Key Findings}
 We found that an erasure aware version of the surface code using a MWPF decoder, under the assumption that 100\% of Pauli errors can be converted to erasure errors, has a threshold, $p_{th}$, between 2.75\% and 3.0\%. This is roughly 4x the threshold we measured for a surface code encoded logical qubit using the standard MWPM decoder and assuming 0.0\% erasure conversion.
 
 \paragraphsc{Reduced tolerance of errors in our surface code simulations}
@@ -649,6 +650,8 @@ In our MWPF experiments, our Monte Carlo simulation was limited to 10,000 - 50,0
 \paragraph{Implications for Future Quantum Computers}
 
 While additional work is required to address the discrepancies between our results and the results present in other papers on erasure based quantum error correction, they still show a significant improvement for erasure conversion over standard surface code implementations. Based on our projections for the logical error rate as a function of code distance, for a system with a pauli error rate p = 1\%, a distance 14 erasure converting surface code would achieve a logical error rate of $10^{-10}$, which is the error rate necessary for most quantum computing applications. Depolarization rates below this threshold have already been demonstrated for neutral atoms, trapped ions, and transmon qubits. \cite{Muniz_High_Fidelity_Universal_Gates_2025} \cite{L\"{o}schnauer_Scalable_High_Fidelity_All-electronic_Control_2024} \cite{Li_Realization_of_High_Fidelity_CZ_Gate_2024} \cite{Thorbeck_High-fidelity_gates_in_a_transmon_2024}
+
+
 \paragraph{Future Work}
 
 The next step is to incorporate correlations and conditional error structure, which our present independent-noise models do not capture. Scholl \emph{et al.} highlight that erasure conversion enables ``exploring the effect of errors on experimental outcomes at a microscopic level and studying correlations between different error sources'' by conditioning on preparation and decay erasures recorded during the same shot \cite{scholl_erasure_2023}. Our circuit-level simulations treat Pauli and erasure events as independent, but real hardware exhibits spatial and temporal structure that influences decoder performance. Capturing these effects will require moving beyond i.i.d.\ noise models to conditional distributions over detector outcomes and hyperedge activations.
