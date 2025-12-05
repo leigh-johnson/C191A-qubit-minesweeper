@@ -121,16 +121,14 @@ By construction, MWPF can incorporate erasure locations directly into the decodi
 The literature sketched above suggests a coherent picture:
 
 \begin{enumerate}
-    \item Real hardware produces Pauli errors, leakage, and loss;
-          \textbf{leakage-reduction and mid-circuit detection convert a large fraction of these into erasures}
-          in both neutral-atom and superconducting platforms%
-          \cite{wu_erasure_2022,ma_high-fidelity_2023,scholl_erasure_2023,
-              chow_circuit-based_2024,kubica_erasure_2023,gu_fault-tolerant_2025}.
+    \item \textbf{Real-world quantum hardware is affected by errors that can't be modeled with independent, identically distributed Pauli errors.} In particular, leakage outside the computational subspace cannot be expressed by a combination of Pauli errors. If the leakage event is detectable, the qubit can be reset and this action effectively converts some leakage errors into erasure errors. \cite{wu_erasure_2022}\cite{ma_high-fidelity_2023}\cite{scholl_erasure_2023}
+          \cite{chow_circuit-based_2024}\cite{kubica_erasure_2023}\cite{gu_fault-tolerant_2025}.
 
     \item \textbf{Erasures are significantly easier to correct} than unknown Pauli errors and can
           dramatically improve thresholds and overhead when properly exploited%
-          \cite{sahay_high-threshold_2023,gu_optimizing_2024,baranes_leveraging_2025,
-              chadwick_erasure_2025}.
+          \cite{wu_erasure_2022}
+          \cite{sahay_high-threshold_2023}\cite{gu_optimizing_2024}\cite{baranes_leveraging_2025}
+
 
     \item The \textbf{surface code threshold} depends strongly on the decoder’s ability
           to use erasure information, as seen in simulations and early fault-tolerant experiments%
