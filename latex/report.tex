@@ -67,13 +67,13 @@ However, erasure conversion comes with additional complexities. In a superconduc
 
 \subsection{Surface Code}\label{subsec:surface-code}
 
-The \emph{surface code} is a leading candidate for fault-tolerant quantum computation due to its local stabilizers, high threshold, and compatibility with two-dimensional hardware architectures~\cite{fowler_surface_2012}\cite{pesah_interactive_2023}. In its rotated layout, a single logical qubit is encoded across a $d \times d$ lattice of physical qubits, with repeated stabilizer measurements producing a space--time syndrome history. The code distance $d$ sets the minimum number of physical errors required to implement a logical error.
+The \emph{surface code} is a leading candidate for fault-tolerant quantum computation due to its local stabilizers, high threshold, and compatibility with two-dimensional hardware architectures \cite{fowler_surface_2012}\cite{pesah_interactive_2023}. In its rotated layout, a single logical qubit is encoded across a $d \times d$ lattice of physical qubits, with repeated stabilizer measurements producing a space-time syndrome vector. The code distance $d$ sets the minimum number of physical errors required to implement a logical error.
 
 If the physical error rate $p$ is below a threshold $p_{\mathrm{thr}}$, the logical error rate $P_L$ decreases approximately exponentially with $d$:
 \begin{align}
     P_L & \propto \left( \frac{p}{p_{\mathrm{thr}}} \right)^{(d+1)/2} \quad \text{[Logical error rate scaling]}
 \end{align}
-This exponential suppression underpins scalable, fault-tolerant architectures and has been extensively studied in both simulations and real hardware \cite{fowler_surface_2012}\cite{fowler_optimal_2013}\cite{acharya_quantum_2025}\cite{bluvstein_logical_2024}. Recent work has begun to explore how accumulated erasures, atom loss, and code deformations affect surface-code thresholds in neutral-atom settings, motivating specialized schemes for handling ongoing erasure processes \cite{kobayashi_erasure-tolerance_2025}\cite{reichardt_fault-tolerant_2025}\cite{li_fast_2025}.
+This exponential suppression underpins scalable, fault-tolerant architectures and has been extensively studied in both simulations and real hardware \cite{fowler_surface_2012}\cite{fowler_optimal_2013}\cite{acharya_quantum_2025}\cite{bluvstein_logical_2024}.
 
 \begin{figure}[h]
     \hspace{-2em}
@@ -82,13 +82,8 @@ This exponential suppression underpins scalable, fault-tolerant architectures an
     \label{fig:surface-code-erasure-comparison}
 \end{figure}
 
-
-Because erasure errors are easier to correct and reveal additional information to the decoder (example: \autoref{fig:surface-code-erasure-comparison}), the erasure-aware threshold can be substantially higher than the threshold under Pauli noise, especially when decoders are explicitly optimized for erasure structure \cite{sahay_high-threshold_2023}\cite{gu_fault-tolerant_2025}\cite{gu_optimizing_2024}. Quantifying this gap for practical decoders is one of the main goals of our study.
-
-
-
-\paragraphsc{Circuit-level Noise Thresholds.}
-If physical qubit error is below a critical noise threshold, the logical error rate should be suppressed exponentially as the number of physical qubits per logical qubit is increased. In the surface code, the approximate relation between $d$ code distance corresponding to $2d^2 - 1$ physical qubits per logical qubit, the physical error rate $p$, logical error rate $E_d$, and error rate threshold $p_{thr}$  \cite{acharya_quantum_2025}.
+% \paragraphsc{Circuit-level Noise Thresholds.}
+% If physical qubit error is below a critical noise threshold, the logical error rate should be suppressed exponentially as the number of physical qubits per logical qubit is increased. In the surface code, the approximate relation between $d$ code distance corresponding to $2d^2 - 1$ physical qubits per logical qubit, the physical error rate $p$, logical error rate $E_d$, and error rate threshold $p_{thr}$  \cite{acharya_quantum_2025}.
 
 \subsection{Decoding: MWPM vs.\ MWPF}
 \label{subsec:decoding}
