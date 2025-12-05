@@ -153,6 +153,7 @@ The literature sketched above suggests a coherent picture:
 These observations motivate our study: by comparing MWPM and MWPF on the rotated surface code under both Pauli-only and erasure-dominant noise, we aim to quantify how erasure-aware decoding reshapes the threshold landscape and to clarify systematic deviations between ``idealized'' literature thresholds and practical simulation results obtained with Stim- and MWPF-based workflows. In this work, we simulate rotated-surface-code memory circuits under depolarizing and erasure noise using Stim. We compare MWPM and MWPF decoders across distances $d \in \set{3, 5, 7, 9, 11}$, with Monte Carlo sampling to estimate logical error rates and extract threshold behavior. This allows us to quantify how erasure-aware decoding scales the fault-tolerant physical error threshold, compared to a model limited to only Pauli noise.
 
 \newpage
+\section{Methods \& Results}\label{sec:results}
 \subsection{Overview}\label{sec:results-overview}
 
 We studied the performance of a rotated surface code under various noise and error syndrome decoding regimes (\autoref{tab:1}), with the goal of observing the impact of erasure conversion on our definition of the fault-tolerant error threshold $p_{thr}$. This section summarizes the simulation setting, noise regimes, and decoding methods used throughout our experiments. More detailed procedures are provided in sections \nameref{sec:experiment1} through \nameref{sec:experiment4}.
@@ -172,7 +173,7 @@ We study two noise models, parameterized by a physical qubit error rate $p$ and 
 \end{itemize}
 Intermediate values of $R_e$ are not considered in this work; we focus on the two extremal cases needed to quantify the benefit of erasure information.
 
-\paragraphsc{Decoders Compared.}
+\paragraphsc{Syndrome Decoders}
 We evaluatee two four combinations of noise model and decoding stategy:
 \begin{enumerate}
     \item \textbf{MWPM (PyMatching), Pauli noise}: standard minimum-weight perfect matching baseline.
@@ -182,7 +183,6 @@ We evaluatee two four combinations of noise model and decoding stategy:
           and erasure error locations as a hypergraph matching problem.
 
 \end{enumerate}
-Each decoder receives the syndrome bitstring; erasure-aware methods additionally receive an erasure bitstring.
 
 \paragraphsc{Threshold Definition.}
 We define the threshold $p_{\mathrm{thr}}$ as the crossing point where higher code distances achieve lower logical error rates. In the figures, we visualize this by identifying the crossing of the $d=7$ and $d=9$ curves; crossings of $d=3,5$ and $d=9,11$ provide lower and upper bounds. All threshold estimates shown in Table~\ref{tab:1} and Figures~\ref{fig:best-threshold-comparison}--\ref{fig:thresholds} follow this criterion.
@@ -190,10 +190,6 @@ We define the threshold $p_{\mathrm{thr}}$ as the crossing point where higher co
 \paragraphsc{Summary of Experiments.}
 Table~\ref{tab:1} lists the parameter ranges, decoder configurations, and measured thresholds for all four experiments. The highest threshold observed is $p_{\mathrm{thr}}\approx 3.0\%$ under full erasure conversion with the MWPF decoder, compared to $\approx 0.6\%$ for all methods under Pauli noise. These values demonstrate the qualitative and quantitative advantage of erasure-aware decoding on the rotated surface code.
 
-
-% The procedure for circuit simulation, event sampling, and decoding is documented in \nameref{sec:experiment2} and \nameref{sec:experiment3}.
-
-\paragraphsc{Syndrome Decoding.} We compare four methods for decoding syndrome measurements, described in more detail in each experiment procedure section:
 
 \begin{table}[hb]
     \noindent\makebox[\textwidth]{%
@@ -212,10 +208,12 @@ Table~\ref{tab:1} lists the parameter ranges, decoder configurations, and measur
         \end{threeparttable}
     }
 \end{table}
-\nameref{sec:experiment1}. We consider purely Pauli noise regime ($R_e=0.0$) and apply minimum-weight perfect matching (PyMatching) decoding stategy to syndrome measurements.
-\nameref{sec:experiment4}. We consider $R_e=1.0$. We sample and decode heralded erasure events first, using a strategy adapted from \cite{gu_fault-tolerant_2025} to re-weight graph edges (representing error mechanisms) on a per-shot basis. Then, we decode any measurement syndromes resulting from the maximally mixed state with a minimum-weight perfect matching (PyMatching) decoder.  We imagine the weight updates are informed by mid-circuit erasure check qubits with perfect measurements. This particular setup more closely describes a dual-rail transmon system but we do not assume a particular physical system.
-In \nameref{sec:experiment3}. We explore the impact of converting a percentage of errors in the Pauli noise channel to an erasure error channel. This conversion scheme reflects the interleaved erasure detection that occurs when applying a fast detection pulse during a Rydberg gate protocol. We do not select a particular Rydberg gate protocol, because our initial experiment setup assumes a 100\% error conversion rate ($R_e=1$) that does not correspond to any physical system. We adopt the hypergraph minimum-weight parity factor (MWPF) decoder described in \cite{wu_minimum-weight_2025}, which frames the problem of decoding syndrome measurements and erasure error locations as a hypergraph matching problem.
-\nameref{sec:experiment2} As an ablation study, we consider $R_e=0.0$ with a purely Pauli noise regime and apply the hypergraph minimum-weight parity factor (MWPF) decoder.
+
+% \paragraphsc{Syndrome Decoding.} We compare four methods for decoding syndrome measurements, described in more detail in each experiment procedure section:
+% \nameref{sec:experiment1}. We consider purely Pauli noise regime ($R_e=0.0$) and apply minimum-weight perfect matching (PyMatching) decoding stategy to syndrome measurements.
+% \nameref{sec:experiment4}. We consider $R_e=1.0$. We sample and decode heralded erasure events first, using a strategy adapted from \cite{gu_fault-tolerant_2025} to re-weight graph edges (representing error mechanisms) on a per-shot basis. Then, we decode any measurement syndromes resulting from the maximally mixed state with a minimum-weight perfect matching (PyMatching) decoder.  We imagine the weight updates are informed by mid-circuit erasure check qubits with perfect measurements. This particular setup more closely describes a dual-rail transmon system but we do not assume a particular physical system.
+% In \nameref{sec:experiment3}. We explore the impact of converting a percentage of errors in the Pauli noise channel to an erasure error channel. This conversion scheme reflects the interleaved erasure detection that occurs when applying a fast detection pulse during a Rydberg gate protocol. We do not select a particular Rydberg gate protocol, because our initial experiment setup assumes a 100\% error conversion rate ($R_e=1$) that does not correspond to any physical system. We adopt the hypergraph minimum-weight parity factor (MWPF) decoder described in \cite{wu_minimum-weight_2025}, which frames the problem of decoding syndrome measurements and erasure error locations as a hypergraph matching problem.
+% \nameref{sec:experiment2} As an ablation study, we consider $R_e=0.0$ with a purely Pauli noise regime and apply the hypergraph minimum-weight parity factor (MWPF) decoder.
 
 \begin{figure}[h!]
     \centering
