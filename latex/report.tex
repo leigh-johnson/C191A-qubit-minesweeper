@@ -325,6 +325,15 @@ We convert the rotated-memory circuit so that each physical fault is modeled as 
 
 \section{Discussion}\label{sec:discussion}
 
+\paragraphsc{Hardware Assumptions}
+In \nameref{sec:experiment3}, we quantify the impact of perfect erasure conversion ($R_e=1.0$). We assume the affected qubit is reset to the maximally mixed state \emph{immediately} after a detection event. We make three unrealistic assumptions about (1) perfect conversion efficiency, (2) instantaneous detection, and (3) instantaneous reset. While 100\% conversion is unrealistic, simulations by \citeauthor{wu_erasure_2022} report 98\% theoretical conversion of leakages errors in Yb-171 to erasures. This suggests a small corrective term could be applied to our (1) assumption to model a physical system. Of more concern are assumptions (2) and (3), which neglect the impact of:
+\begin{itemize}
+    \item Detection times on the order of $\approx 20 \unit{\micro\second}$\footnote{Fast imaging for neutral atom processors is an area of active research. \citeauthor{scholl_erasure_2023} simulate erasure conversion in Strontium-88 with $24 \unit{\micro\second}$ fast imaging, noting this method of fast imaging had only been previously performed on a few free (not optically trapped) \emph{alkali} atoms (not alkaline-earth atoms like Sr) \citeauthor{scholl_erasure_2023}. \citeauthor{zhang_leveraging_2025} report mid-circuit erasure detection in Yb with fidelity $\approx 0.99$ in $20 \unit{\micro\second}$ \cite{zhang_leveraging_2025}.}
+    \item Imperfect detection. \citeauthor{scholl_erasure_2023} simulate $0.980 \pm 0.001$ fidelity in distinguishing occupied vs. empty lattice positions (single site resolutions).
+    \item State preparation time and imperfect state preparation.
+\end{itemize}
+
+The erasure sampling method in \nameref{sec:experiment4} is more likely to resembles the mid-circuit measurements in a dual-rail transmon system, given our erasure-aware MWPM implementation was entirely based on \citeauthor{gu_fault-tolerant_2025}'s description of re-weighting edges conditioned on erasure events \cite{gu_fault-tolerant_2025}.
 
 \paragraphsc{Reduced tolerance of errors in our surface code simulations}
 \autoref{tab:1} In the case where depolarizing noise is modeled with purely Pauli errors, we reference the physical error threshold $p_{thr}$ published by \citeauthor{wu_erasure_2022} ($p_{thr} = 0.937(4)\%$) and \citeauthor{acharya_quantum_2025} ($p_{thr} \approx 1\%$) \cite{wu_erasure_2022}\cite{acharya_quantum_2025}.
