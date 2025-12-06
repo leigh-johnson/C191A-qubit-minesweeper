@@ -176,19 +176,19 @@ We evaluate two four combinations of noise model and decoding strategy:
 We define the fault-tolerant threshold $p_{\mathrm{thr}}$ as the crossing point where higher code distances achieve lower logical error rates. We estimate  $p_{\mathrm{thr}}$ from the crossing of the $d=9$ and $d=11$ curve fits. All threshold values are reported in \autoref{tab:1} and visualized in \autoref{fig:best-threshold-comparison}, \autoref{fig:thresholds}.
 
 \paragraphsc{Summary of Experiments.}
-Table~\ref{tab:1} lists the parameter ranges, decoder configurations, and measured thresholds for all four experiments. The highest threshold observed is $p_{\mathrm{thr}}\approx 3.0\%$ under full erasure conversion with the MWPF decoder, compared to $\approx 0.6\%$ for all methods under Pauli noise. These values demonstrate the qualitative and quantitative advantage of erasure-aware decoding on the rotated surface code.
+\autoref{tab:1} lists the parameter ranges, decoder configurations, and measured thresholds for all four experiments. The highest threshold observed is $p_{\mathrm{thr}}\approx 3.0\%$ under full erasure conversion with the MWPF decoder, compared to $\approx 0.6\%$ for all methods under Pauli noise. These values demonstrate the qualitative and quantitative advantage of erasure-aware decoding on the rotated surface code.
 
 
 \begin{table}[hb]
     \noindent\makebox[\textwidth]{%
-        \begin{threeparttable}[width=1.2\textwidth]
-            \begin{tabularx}{1.25\textwidth}{|X||p{4em}|p{5em}|p{4em}|}
+        \begin{threeparttable}[width=\textwidth]
+            \begin{tabularx}{1.25\textwidth}{|X|p{8em}|p{4em}|p{4em}|p{3em}|p{4em}|}
                 \hline
-                \textbf{Monte Carlo Experiment Procedure \& Parameters}                                                                                                                                            & \textbf{$p_{thr, ref}$ (\%)}                                 & \textbf{$p_{thr, exp}$ (\%)}                                                 & \textbf{\% Error} \\ \hline \hline
-                \nameref{sec:experiment1}         \newline           $d \in \set{3, 5, 7, 9, 11}$, $p \in [0.003, 0.02]$, $R_e=0.0$  \newline decoder=PyMatching \cite{oscarhiggott_oscarhiggottpymatching_2025}   & 0.93 - 1. \cite{wu_erasure_2022} \cite{acharya_quantum_2025} & 0.570, 0.775    \linebreak    \autoref{fig:pymathing-pthresh}                & -38.7, -22.5      \\ \hline
-                \nameref{sec:experiment2}       \newline            $d \in \set{3, 5, 7, 9, 11}$, $p \in [0.003, 0.02]$, $R_e=0.0$   \newline decoder=MWPF \cite{wu_yuewuomwpf_2025} \cite{wu_minimum-weight_2025} & 0.93 - 1. \cite{wu_erasure_2022} \cite{acharya_quantum_2025} & 0.650, 0.750     \linebreak       \autoref{fig:mwpf-pthresh}                 & -30.1, -25.0      \\ \hline
-                \nameref{sec:experiment3}        \newline           $d \in \set{3, 5, 7, 9, 11}$, $p \in [0.003, 0.06]$, $R_e=1.0$   \newline decoder=MWPF \cite{wu_yuewuomwpf_2025} \cite{wu_minimum-weight_2025} & 5.13 \cite{wu_erasure_2022}                                  & \cellcolor{yellow!25}2.75, 3.00  \linebreak \autoref{fig:mwpf-pthresh-erase} & -41.2             \\ \hline
-                \nameref{sec:experiment4}       \newline            $d \in \set{3, 5, 7, 9, 11}$, $p \in [0.003, 0.06]$, $R_e=1.0$   \newline decoder=PyMatching with per-shot edge weights (ours)                 & 5.13 \cite{wu_erasure_2022}                                  & 0.800, 1.0          \linebreak      \autoref{fig:pymatching-pthresh-erase}   & -80.5             \\ \hline
+                \textbf{Procedure}                                                                                                                        & \textbf{Parameters}                                                              & \textbf{$p_{thr, ref}$ (\%)}                                & \textbf{$p_{thr, exp}$ (\%)}    & \textbf{\%Err} & \textbf{Results}                       \\ \hline \hline
+                \hyperref[sec:experiment1]{Experiment \#1} \newline decoder=PyMatching \cite{oscarhiggott_oscarhiggottpymatching_2025}                    & $d \in \set{3, 5, 7, 9, 11}$ \newline $p \in [0.003, 0.02]$ \newline $R_e=0.0$   & 0.93 - 1. \cite{wu_erasure_2022}\cite{acharya_quantum_2025} & 0.570, 0.775    \linebreak      & -38.7, -22.5   & \autoref{fig:pymathing-pthresh}        \\ \hline
+                \hyperref[sec:experiment2]{Experiment \#2}   \newline decoder=MWPF \cite{wu_yuewuomwpf_2025}\cite{wu_minimum-weight_2025}                 & $d \in \set{3, 5, 7, 9, 11}$  \newline $p \in [0.003, 0.02]$ \newline  $R_e=0.0$ & 0.93 - 1. \cite{wu_erasure_2022}\cite{acharya_quantum_2025} & 0.650, 0.750     \linebreak     & -30.1, -25.0   & \autoref{fig:mwpf-pthresh}             \\ \hline
+                \hyperref[sec:experiment3]{Experiment \#3}          \newline decoder=MWPF \cite{wu_yuewuomwpf_2025}\cite{wu_minimum-weight_2025}          & $d \in \set{3, 5, 7, 9, 11}$  \newline $p \in [0.003, 0.06]$ \newline  $R_e=1.0$ & 5.13 \cite{wu_erasure_2022}                                 & \cellcolor{yellow!25}2.75, 3.00 & -41.2          & \autoref{fig:mwpf-pthresh-erase}       \\ \hline
+                \hyperref[sec:experiment4]{Experiment \#4}     \newline decoder=PyMatching with per-shot edge reweighting conditioned on erasures (ours). & $d \in \set{3, 5, 7, 9, 11}$  \newline $p \in [0.003, 0.06]$ \newline  $R_e=1.0$ & 5.13 \cite{wu_erasure_2022}                                 & 0.800, 1.0          \linebreak  & -80.5          & \autoref{fig:pymatching-pthresh-erase} \\ \hline
             \end{tabularx}
             \caption{Experimental setups used to evaluate the impact of erasure conversion $p_e$ and correlated vs. uncorrelated decoding schemes on the surface code error threshold $p_{thr}$. The highest $p_{thr}$ (highlighted in yellow) was determined to be $\approx 3.00\%$ when $R_e=1.0$ using the hypergraph MWPF decoder. In all experiments, we observed significant (percent err $>25\%$) differences between our threshold measurements and reference values published by Wu et al \cite{wu_minimum-weight_2025}. We attribute this difference to our error regime, which applied the same error rate to both one and two-qubit gates (see \nameref{sec:discussion}).
             }
@@ -196,6 +196,7 @@ Table~\ref{tab:1} lists the parameter ranges, decoder configurations, and measur
         \end{threeparttable}
     }
 \end{table}
+
 
 \begin{figure}[h!]
     \centering
