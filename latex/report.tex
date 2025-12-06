@@ -366,6 +366,15 @@ Many of the simulations and studies we found were limited to independent error m
 
 We're excited by a recent pull request to Stim introduces a \texttt{pymatching-correlated} decoder interface (\href{https://github.com/quantumlib/Stim/pull/1012}{PR~\#1012}), which will enable Sinter to pass correlation-aware detector models directly into PyMatching. We tried to implement this feature ourselves (see \autoref{sec:experiment4}), but our erasure-aware results were only slightly improved compared to the Pauli noise regime. We're excited to see an official reference implementation and look forward to figuring out where we went off the rails.
 
+\paragraph{Sweeping Over $R_{e}$}
+Our experiments compared the performance of MWPM and MWPF at the two extreme points $R_{e}=1$ and $R_{e}=0$. A natural direction for future work is to explore the intermediate regime where $0 < R_{e} < 1$. In practice, it is unrealistic to assume that all Pauli errors can be converted into erasure errors; therefore, studying decoder performance across a sweep of intermediate $R_{e}$ values would provide a more accurate picture of real-world behavior.
+
+Such an investigation could also reveal practical insights regarding decoder selection. For instance, if MWPF only outperforms MWPM when $R_{e}$ is very close to~1, then the additional complexity of MWPF may not be justified. Conversely, if MWPF yields significant improvements up to some meaningful threshold of $R_{e}$, then that value could serve as a practical target for partial conversion rather than aiming for perfect erasure conversion.
+
+
+
+
+
 \section{Conclusion}
 
 We quantified the effect of erasure information on the threshold of the rotated surface code. Under depolarizing noise, both MWPM and MWPF produce thresholds near $0.6\%$. Under full erasure conversion, MWPF reaches approximately $3\%$, while MWPM with reweighting reaches roughly $1\%$. The lower Pauli thresholds in our data are explained by an unintended measurement-noise channel in the Stim circuits (\autoref{fig:stim-circuit-gen}). The results show that decoders using explicit erasure locations provide a clear operational advantage for quantum error correction. Further work will evaluate correlated error models with the new correlation-aware PyMatching interface when it becomes available \cite{oscarhiggott_oscarhiggottpymatching_2025}.
