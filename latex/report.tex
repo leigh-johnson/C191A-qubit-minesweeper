@@ -241,11 +241,8 @@ Table~\ref{tab:1} lists the parameter ranges, decoder configurations, and measur
 
 \newpage
 \subsection{Fault Tolerant Code Distance}
-We plot logical error rate $P_L$ vs.\ code distance $d$ for below-threshold samples ($p \le p_{thr}$) and fit a least-squares linear regression (\autoref{fig:fault-tolerant-projection}), then extrapolate the fit to $P_L \approx 10^{-12}$. The X-intercept of the fit line represents the minimum code distance $d$ needed for one logical bit to survive approximately one trillion rounds, which is a benchmark for fault-tolerance. MWPF in the erasure regime $(R_e=1)$ had the smallest overhead at $d \approx 41$, equivalent to $2d^2 \approx 3362$ physical qubits in the array.
-
-This result should be interpreted cautiously because we do not calculate residuals from the least-squares fit to quantify goodness of fit. The hypergraph MWPF dataset is extrapolated from a more limited range of code distances (green, $d<9$) compared to other noise regimes (see \nameref{sec:memleak-sidequest}).
-
-\begin{table}[H]
+We plot logical error rate $P_L$ vs.\ code distance $d$ for below-threshold samples ($p \le p_{thr}$) and fit a least-squares linear regression (\autoref{fig:fault-tolerant-projection}), then extrapolate the fit to $P_L \approx 10^{-12}$. The X-intercept of the fit line represents the minimum code distance $d$ needed for one logical bit to survive approximately one trillion rounds, which is a benchmark for fault-tolerance. MWPF in the erasure regime $(R_e=1)$ had the smallest overhead at $d \approx 41$, equivalent to $2d^2 \approx 3362$ physical qubits in the array\footnote{This result should be interpreted cautiously because we do not calculate residuals from the least-squares fit to quantify goodness of fit. The MWPF dataset is extrapolated from a more limited range of code distances (green, $d<9$) compared to other noise regimes (see \nameref{sec:memleak-sidequest}).}
+\begin{table}[ht]
     \noindent\makebox[\textwidth]{%
         \footnotesize
         \begin{threeparttable}[\textwidth]
@@ -257,22 +254,19 @@ This result should be interpreted cautiously because we do not calculate residua
                 \hyperref[sec:experiment1]{Experiment \#3} & MWPF                                & $R_e=1$               & 53                 \\ \hline
                 \hyperref[sec:experiment1]{Experiment \#4} & MWPM with per-shot edge reweighting & $R_e=1$               & 41                 \\ \hline
             \end{tabularx}
-            \caption{Summary of fault-tolerant surface code threshold $d_{thr}$, determined from the least-squares fit of logical error rate $P_L$ below each respective physical error threshold $p_{thr}$ in \autoref{fig:fault-tolerant-projection}.}
+            \caption{Summary of fault-tolerant surface code threshold $d_{thr}$, determined from the least-squares fit of logical error rate $P_L$ vs. $d$ below each respective physical error threshold $p_{thr}$ in \autoref{fig:fault-tolerant-projection}.}
             \label{tab:fault-tolerance}
         \end{threeparttable}
     }
 \end{table}
-\begin{figure}[H]
+\begin{figure}[hb]
     \centering
-    \includegraphics[width=\linewidth,height=0.40\textheight, keepaspectratio]{fig2_survival_code_distance.png}
-    \caption{
-        Logical error rate $P_L$ vs.\ code distance $d$ for data below the surface code threshold found in \autoref{fig:thresholds} ($p \le p_{thr}$). Least-squares fits are extrapolated the code distance $d_{thr}$ required for one logical qubit survival over $10^{12}$ rounds. See result summary in \autoref{tab:fault-tolerance}}
+    \includegraphics[width=\linewidth,height=0.44\textheight, keepaspectratio]{fig2_survival_code_distance.png}
+    \caption{Minimum code distance $d_{thr}$ required for one logical qubit survival over $10^{12}$ rounds. Results summarized in \autoref{tab:fault-tolerance}. See \autoref{fig:d-thresholds-matrix} for individual plots.}
     \label{fig:fault-tolerant-projection}
 \end{figure}
 
-
 \subsection{Experiments}
-
 We generated datasets for $d \in \{3,5,7,9,11,13\}$, $p \in [0.003, 0.06]$, and $R_e \in [0.0, 1.0]$ using Sinter. In the PyMatching case, we used \texttt{max\_shots = 500{,}000} and \texttt{max\_errors = 10{,}000} per task across $\approx 60$ workers. In the MWPF case, the hypergraph memory footprint limited us to \texttt{max\_shots = 50{,}000} and \texttt{max\_errors = 1{,}000} per task. All resulting CSV files are stored in our project repository.\footnote{\url{https://github.com/leigh-johnson/C191A-qubit-minesweeper}}
 
 \subsubsection{Experiment 1: Minimum-Weight Perfect Matching Baseline}\label{sec:experiment1}
@@ -424,7 +418,7 @@ TODO this is where we all brag about how proud we are of the sections we submitt
         \label{fig:fig2_survival_code_distance4}
     \end{subfigure}
     \caption{Breakdown of the composite plot showing minimum fault-tolerant code distance $d_{thr}$ in \autoref{fig:fault-tolerant-projection}.  }
-    \label{fig:thresholds-matrix}
+    \label{fig:d-thresholds-matrix}
 \end{figure}
 
 \section{Appendix: A Fun Sidequest: Profiling a Memory Leak}\label{sec:memleak-sidequest}
