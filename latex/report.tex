@@ -327,9 +327,7 @@ We convert the rotated-memory circuit so that each physical fault is modeled as 
 
 
 \paragraphsc{Reduced tolerance of errors in our surface code simulations}
-\autoref{tab:1}
-
-In the case where depolarizing noise is modeled with purely Pauli errors, we reference the physical error threshold $p_{thr}$ published by \citeauthor{wu_erasure_2022} ($p_{thr} = 0.937(4)\%$) and \citeauthor{acharya_quantum_2025} ($p_{thr} \approx 1\%$) \cite{wu_erasure_2022}\cite{acharya_quantum_2025}.
+\autoref{tab:1} In the case where depolarizing noise is modeled with purely Pauli errors, we reference the physical error threshold $p_{thr}$ published by \citeauthor{wu_erasure_2022} ($p_{thr} = 0.937(4)\%$) and \citeauthor{acharya_quantum_2025} ($p_{thr} \approx 1\%$) \cite{wu_erasure_2022}\cite{acharya_quantum_2025}.
 
 In Experiment1, we visually estimated a much \textit{lower} error ($p_{thr} = 0.775$, \%err $=22.5\%$) for our X-rotated surface code with pure Pauli noise and the PyMatching decoder. We ruled out decoder implementation as a contributing factor (under this particular noise regime) after determining a similar result in our ablation study of MWPF in Experiment2 ($p_{thr} = 0.750$, \%err $=25.0\%$). We attribute this systemic error to multiple sources, in order of significance:
 
@@ -360,16 +358,16 @@ Although our extrapolations rely on linear fits over a limited range of $d$ and 
 
 
 \subsection{Future Work}
-\paragraphsc{Imperfect Detection}
+\paragraphsc{Imperfect Detection \& Erasure Conversion}
 \citeauthor{wu_erasure_2022} describe an error taxonomy in Yb-171 with four distinct leakage errors in a detectable subspace and one in an undetectable subspace in order to conclude 98\% of errors that occur in Yb-171 can theoretically be treated as erasures in the XZZX surface code. We are curious about the quantitative rates for missed Yb+ ions, missed ground-state atoms, and would want to compare a model for effective vs. idealized erasure conversion.
+
+In our work, we assume a perfect erasure conversion ratio $R_e=1$. A natural direction for future work is to explore the intermediate regime where $0 < R_{e} < 1$. \citeauthor{wu_erasure_2022} fit the exponential relationship between $p_{thr}$ vs. $R_e$ (detected error fraction), and from this fit extract a logical error exponent $v$ describing the number of errors needed to induce logical failure. We would aim to find a relationship between this parameter and MWPF's \verb|cluster_node_size| parameter, used to limit the size of HyperBlossom clusters \cite{wu_minimum-weight_2025}.
 
 \paragraphsc{Correlated Errors}
 Many of the simulations and studies we found were limited to independent error mechanisms, but erasure-aware decoding requires a conditional error structure. \citeauthor{scholl_erasure_2023} highlight that erasure conversion enables ``exploring the effect of errors on experimental outcomes at a microscopic level and studying correlations between different error sources'' by conditioning on preparation and decay erasures recorded during the same shot \cite{scholl_erasure_2023}. Our circuit-level simulations treat Pauli and erasure events as independent, but real hardware exhibits spatial and temporal structure that influences decoder performance.
 
 We're excited by a recent pull request to Stim introduces a \texttt{pymatching-correlated} decoder interface (\href{https://github.com/quantumlib/Stim/pull/1012}{PR~\#1012}), which will enable Sinter to pass correlation-aware detector models directly into PyMatching. We tried to implement this feature ourselves (see \autoref{sec:experiment4}), but our erasure-aware results were only slightly improved compared to the Pauli noise regime. We're excited to see an official reference implementation and look forward to figuring out where we went off the rails.
 
-\paragraph{Sweeping Over $R_{e}$}
-Our experiments compared the performance of MWPM and MWPF at the two extreme points $R_{e}=1$ and $R_{e}=0$. A natural direction for future work is to explore the intermediate regime where $0 < R_{e} < 1$. In practice, it is unrealistic to assume that all Pauli errors can be converted into erasure errors; therefore, studying decoder performance across a sweep of intermediate $R_{e}$ values would provide a more accurate picture of real-world behavior.
 
 \section{Conclusion}
 
