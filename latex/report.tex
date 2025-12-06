@@ -162,7 +162,7 @@ Intermediate values of $R_e$ are not considered in this work; we focus on the tw
 We evaluate two four combinations of noise model and decoding strategy:
 \begin{enumerate}
     \item \textbf{MWPM (PyMatching), Pauli noise}: standard minimum-weight perfect matching baseline.
-    \item \textbf{MWPM with per-shot reweighing, erasure noise}: minimum-weight perfect matching, with edge weights conditioned on whether an erasure event occurred.
+    \item \textbf{MWPM with per-shot reweighting, erasure noise}: minimum-weight perfect matching, with edge weights conditioned on whether an erasure event occurred.
     \item \textbf{MWPF, Pauli noise}: an ablation showing MWPF performance without erasures.
     \item \textbf{MWPF, erasure noise}: frames the problem of decoding syndrome measurements
           and erasure error locations as a hypergraph matching problem.
@@ -449,7 +449,7 @@ This is only a guess, as we were not able to patch and validate this particular 
 \begin{figure}[H]
     \centering
     \makebox[\textwidth][c]{\includegraphics[width=\textwidth, height=0.5\textheight, keepaspectratio]{fig_mwpf_memory_leak.png}}%
-    \caption{\textbf{Suspected Memory Leak.} We show a large (~172 GB) memory footprint in our Stim+Sinter Monte Carlo simulations using the SinterMWPFDecoder class, even though most of the tasks are completed/draining. This suggested memory was not being freed after a task subset was completed. As a result, our $d=7,9,11$ simulations using the MWPF encoder were limited to an order of magnitude fewer shots compared to other experiments. }
+    \caption{\textbf{Suspected Memory Leak.} We show a large (172 GB) memory footprint in our Stim+Sinter Monte Carlo simulations using the SinterMWPFDecoder class, even though most of the tasks are completed/draining. This suggested memory was not being freed after a task subset was completed. As a result, our $d=7,9,11$ simulations using the MWPF encoder were limited to an order of magnitude fewer shots compared to other experiments. }
     \label{fig:mwpf-memleak}
 \end{figure}
 
