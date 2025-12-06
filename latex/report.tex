@@ -244,20 +244,20 @@ Table~\ref{tab:1} lists the parameter ranges, decoder configurations, and measur
 
 \newpage
 \subsection{Fault Tolerant Code Distance}
-We plot logical error rate $P_L$ vs.\ code distance $d$ for below-threshold samples ($p \le p_{thr}$) and fit a least-squares linear regression (\autoref{fig:fault-tolerant-projection}), then extrapolate the fit to $P_L \approx 10^{-12}$. The X-intercept of the fit line represents the minimum code distance $d$ needed for one logical bit to survive approximately one trillion rounds, which is a benchmark for fault-tolerance. MWPF in the erasure regime $(R_e=1)$ had the smallest overhead at $d \approx 41$, equivalent to $2d^2 \approx 3362$ physical qubits in the array\footnote{This result should be interpreted cautiously because we do not calculate residuals from the least-squares fit to quantify goodness of fit. The MWPF dataset is extrapolated from a more limited range of code distances (green, $d<9$) compared to other noise regimes (see \nameref{sec:memleak-sidequest}).}
+We plot logical error rate $P_L$ vs.\ code distance $d$ for below-threshold samples ($p \le p_{thr}$) and fit a least-squares linear regression (\autoref{fig:fault-tolerant-projection}), then extrapolate the fit to $P_L \approx 10^{-12}$. The x-intercept of the fit line represents the minimum code distance $d$ needed for one logical bit to survive approximately one trillion rounds, which is a benchmark for fault-tolerance. MWPF in the erasure regime $(R_e=1)$ had the smallest overhead at $d \approx 41$, equivalent to $2d^2 \approx 3362$ physical qubits in the array\footnote{This result should be interpreted cautiously because we do not calculate residuals from the least-squares fit to quantify goodness of fit. The MWPF dataset is extrapolated from a more limited range of code distances (green, $d<9$) compared to other noise regimes (see \nameref{sec:memleak-sidequest}).}
 \begin{table}[ht]
     \noindent\makebox[\textwidth]{%
         \footnotesize
         \begin{threeparttable}[\textwidth]
-            \begin{tabularx}{\textwidth}{|p{8em}|X|p{8em}|p{4em}|}
+            \begin{tabularx}{\textwidth}{|p{7em}|X|p{7em}|p{2em}|p{5em}|}
                 \hline
-                \textbf{Experiment }                       & \textbf{Decoder}                    & \textbf{Noise Regime} & \textbf{$d_{thr}$} \\ \hline \hline
-                \hyperref[sec:experiment1]{Experiment \#1} & MWPM (PyMatching)                   & $R_e=0$               & 77                 \\ \hline
-                \hyperref[sec:experiment1]{Experiment \#2} & MWPF                                & $R_e=0$               & 69                 \\ \hline
-                \hyperref[sec:experiment1]{Experiment \#3} & MWPF                                & $R_e=1$               & 53                 \\ \hline
-                \hyperref[sec:experiment1]{Experiment \#4} & MWPM with per-shot edge reweighting & $R_e=1$               & 41                 \\ \hline
+                \textbf{Experiment }                       & \textbf{Decoder}                    & \textbf{Noise Regime} & \textbf{$d_{thr}$} & \textbf{$2d^2$ qubits } \\ \hline
+                \hyperref[sec:experiment1]{Experiment \#1} & MWPM (PyMatching)                   & $R_e=0$               & 77                 & 11858                   \\ \hline
+                \hyperref[sec:experiment1]{Experiment \#2} & MWPF                                & $R_e=0$               & 69                 & 9522                    \\ \hline
+                \hyperref[sec:experiment1]{Experiment \#3} & MWPF                                & $R_e=1$               & 41                 & 3362                    \\ \hline
+                \hyperref[sec:experiment1]{Experiment \#4} & MWPM with per-shot edge reweighting & $R_e=1$               & 53                 & 5618                    \\ \hline
             \end{tabularx}
-            \caption{Summary of fault-tolerant surface code threshold $d_{thr}$, determined from the least-squares fit of logical error rate $P_L$ vs. $d$ below each respective physical error threshold $p_{thr}$ in \autoref{fig:fault-tolerant-projection}.}
+            \caption{Summary of fault-tolerant surface code threshold $d_{thr}$, determined from the least-squares fit of logical error rate $P_L$ vs. $d$ below each respective physical error threshold $p_{thr}$ in \autoref{fig:fault-tolerant-projection}. The quantity $2d^2$ represents the number of physical data and ancilla qubits needed to realize $d_{thr}$ surface code distance.}
             \label{tab:fault-tolerance}
         \end{threeparttable}
     }
@@ -405,7 +405,7 @@ experiments, performed data analysis, and produced the figures and manuscript.
 A.S.\ contributed to the project proposal, abstract, background section, bibliography,
 and prepared the appendix material on leakage, erasure tolerance, and architectural
 considerations.
-I.T.\ contributed initial background drafts, synthesized feedback from our mentors, and played an essential role in refining both the project scope and manuscript.
+I.T. contributed by preparing the background section, researching and writing detailed explanations of the MWPF and MWPM decoders, synthesizing feedback from our mentors, and helping refine both the project scope and final manuscript.
 
 All authors reviewed manuscript drafts and had an equal role in project brainstorming.
 
