@@ -18,6 +18,7 @@
 \begin{abstract}
     Erasure based quantum error correction is a promising development in the quest to create a functional quantum computer. Converting some fraction of Pauli errors to erasure errors can lead to significant increases in code distance and error rate thresholds in surface code encoded logical qubits. Furthermore, methods for erasure conversion have been demonstrated on most leading quantum computing platforms including transmon and neutral atom hardware. In this project we investigate how erasure-aware decoding alters the noise threshold of the rotated surface code by comparing the MWPM and MWPF decoders using single qubit  circuit-level Monte Carlo simulations in Stim. We evaluate two regimes: pure Pauli noise $(R_e = 0)$ and full erasure-dominant noise $(R_e = 1)$. Under Pauli noise, both decoders achieve thresholds near $0.6\%$. Under erasure noise, MWPF reaches a threshold of $3.0\%$, while MWPM with reweighting reaches only about $1\%$. This confirms that explicitly leveraging erasure locations through MWPF's hypergraph formulation provides a substantial advantage and supports continued development of quantum hardware that converts physical faults into detectable erasures.
 
+    We investigate how erasure-aware decoding alters the noise threshold of the rotated surface code by comparing the Minimum-weight Perfect Matching (MWPM) and Minimum-weight Parity Factor (MWPF) decoders using circuit-level Monte Carlo simulations in Stim. We evaluate two noise regimes: pure Pauli noise $(R_e = 0)$ and full erasure-dominant noise $(R_e = 1)$. Under Pauli noise, both decoders achieve physical error thresholds $\approx 0.75$. Under erasure noise, MWPF reaches a threshold of $3.0\%$, while MWPM with reweighting reaches only about $1\%$. This confirms that explicitly leveraging erasure locations through MWPF's hypergraph formulation provides a substantial boost in error correction accuracy. We compare the code distance needed for logical qubit to survive $10^12$ rounds and report a 44.7\% decrease from $d=77$ (Pauli noise) to $d=41$ (erasure noise).
 \end{abstract}
 \newpage
 \tableofcontents
@@ -89,7 +90,7 @@ This exponential suppression underpins scalable, fault-tolerant architectures an
 \subsection{Decoding: MWPM vs.\ MWPF}
 \label{subsec:decoding}
 
-Decoding the surface code requires inferring which error configurations could have produced a given syndrome history. The two decoders we evaluate---MWPM and MWPF---differ fundamentally in how they represent and exploit error information.
+Decoding the surface code requires inferring which error configurations could have produced a given syndrome history. We evaluate two decoders, MWPM and MWPF, which differ fundamentally in how they represent and exploit error information.
 
 \subsubsection{Minimum-Weight Perfect Matching (MWPM)}
 
@@ -362,7 +363,7 @@ Although our extrapolations rely on linear fits over a limited range of $d$ and 
 \paragraphsc{Imperfect Detection}
 \citeauthor{wu_erasure_2022} describe an error taxonomy in Yb-171 with four distinct leakage errors in a detectable subspace and one in an undetectable subspace in order to conclude 98\% of errors that occur in Yb-171 can theoretically be treated as erasures in the XZZX surface code. We are curious about the quantitative rates for missed Yb+ ions, missed ground-state atoms, and would want to compare a model for effective vs. idealized erasure conversion.
 
-\paragraph{Correlated Errors}
+\paragraphsc{Correlated Errors}
 Many of the simulations and studies we found were limited to independent error mechanisms, but erasure-aware decoding requires a conditional error structure. \citeauthor{scholl_erasure_2023} highlight that erasure conversion enables ``exploring the effect of errors on experimental outcomes at a microscopic level and studying correlations between different error sources'' by conditioning on preparation and decay erasures recorded during the same shot \cite{scholl_erasure_2023}. Our circuit-level simulations treat Pauli and erasure events as independent, but real hardware exhibits spatial and temporal structure that influences decoder performance.
 
 We're excited by a recent pull request to Stim introduces a \texttt{pymatching-correlated} decoder interface (\href{https://github.com/quantumlib/Stim/pull/1012}{PR~\#1012}), which will enable Sinter to pass correlation-aware detector models directly into PyMatching. We tried to implement this feature ourselves (see \autoref{sec:experiment4}), but our erasure-aware results were only slightly improved compared to the Pauli noise regime. We're excited to see an official reference implementation and look forward to figuring out where we went off the rails.
