@@ -1,0 +1,3702 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global/global}
+    \entry{fowler_surface_2012}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=963708fd18e82e5d31c988cc8f3f7758}{%
+           family={Fowler},
+           familyi={F\bibinitperiod},
+           given={Austin\bibnamedelima G.},
+           giveni={A\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+        {{hash=bdb44c753feea38b69ffdaeb660ee3fb}{%
+           family={Mariantoni},
+           familyi={M\bibinitperiod},
+           given={Matteo},
+           giveni={M\bibinitperiod}}}%
+        {{hash=25ae3182aa7d65d6b2ce4baea1970309}{%
+           family={Martinis},
+           familyi={M\bibinitperiod},
+           given={John\bibnamedelima M.},
+           giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=1614de2d4794b95eddeaf9af4abf59b2}{%
+           family={Cleland},
+           familyi={C\bibinitperiod},
+           given={Andrew\bibnamedelima N.},
+           giveni={A\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{84a613885db1b0a60f44410eace9a651}
+      \strng{fullhash}{cbf2d71fcf16a2f4952653225c12e775}
+      \strng{fullhashraw}{cbf2d71fcf16a2f4952653225c12e775}
+      \strng{bibnamehash}{cbf2d71fcf16a2f4952653225c12e775}
+      \strng{authorbibnamehash}{cbf2d71fcf16a2f4952653225c12e775}
+      \strng{authornamehash}{84a613885db1b0a60f44410eace9a651}
+      \strng{authorfullhash}{cbf2d71fcf16a2f4952653225c12e775}
+      \strng{authorfullhashraw}{cbf2d71fcf16a2f4952653225c12e775}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{issn}{1050-2947, 1094-1622}
+      \field{journaltitle}{Physical Review A}
+      \field{month}{9}
+      \field{number}{3}
+      \field{shorttitle}{Surface codes}
+      \field{title}{Surface codes: {Towards} practical large-scale quantum computation}
+      \field{urlday}{22}
+      \field{urlmonth}{11}
+      \field{urlyear}{2025}
+      \field{volume}{86}
+      \field{year}{2012}
+      \field{urldateera}{ce}
+      \field{pages}{032324}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1103/PhysRevA.86.032324
+      \endverb
+      \verb{file}
+      \verb PDF:/Users/leigh/Zotero/storage/V2ZY5G24/Fowler et al. - 2012 - Surface codes Towards practical large-scale quantum computation.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://link.aps.org/doi/10.1103/PhysRevA.86.032324
+      \endverb
+      \verb{url}
+      \verb https://link.aps.org/doi/10.1103/PhysRevA.86.032324
+      \endverb
+    \endentry
+    \entry{acharya_quantum_2025}{article}{}{}
+      \name{author}{256}{}{%
+        {{hash=e825a03930fe44f598d9547f12fdffa1}{%
+           family={Acharya},
+           familyi={A\bibinitperiod},
+           given={Rajeev},
+           giveni={R\bibinitperiod}}}%
+        {{hash=59c7d3326149d6a72e734ba4d2131a4a}{%
+           family={Abanin},
+           familyi={A\bibinitperiod},
+           given={Dmitry\bibnamedelima A.},
+           giveni={D\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=09080e2b93e425320ba28bde2aff3ad8}{%
+           family={Aghababaie-Beni},
+           familyi={A\bibinithyphendelim B\bibinitperiod},
+           given={Laleh},
+           giveni={L\bibinitperiod}}}%
+        {{hash=523aa964738ca666bf379264370243d8}{%
+           family={Aleiner},
+           familyi={A\bibinitperiod},
+           given={Igor},
+           giveni={I\bibinitperiod}}}%
+        {{hash=9193031e941f5f7d35dc91d77106073b}{%
+           family={Andersen},
+           familyi={A\bibinitperiod},
+           given={Trond\bibnamedelima I.},
+           giveni={T\bibinitperiod\bibinitdelim I\bibinitperiod}}}%
+        {{hash=0eca69a0085d760b0d510091c9ee3eb5}{%
+           family={Ansmann},
+           familyi={A\bibinitperiod},
+           given={Markus},
+           giveni={M\bibinitperiod}}}%
+        {{hash=a0b41f4400dc855d7426a5f72cadaa6c}{%
+           family={Arute},
+           familyi={A\bibinitperiod},
+           given={Frank},
+           giveni={F\bibinitperiod}}}%
+        {{hash=0a2abe43325e0dd3690ccc47bfa6c6b7}{%
+           family={Arya},
+           familyi={A\bibinitperiod},
+           given={Kunal},
+           giveni={K\bibinitperiod}}}%
+        {{hash=63e6dd3c986574e089989015a6b410c8}{%
+           family={Asfaw},
+           familyi={A\bibinitperiod},
+           given={Abraham},
+           giveni={A\bibinitperiod}}}%
+        {{hash=1222d5bda5d5b4f761fbef04e90a2ce4}{%
+           family={Astrakhantsev},
+           familyi={A\bibinitperiod},
+           given={Nikita},
+           giveni={N\bibinitperiod}}}%
+        {{hash=b3f23b43c851c8ab4d1245e3a79c241d}{%
+           family={Atalaya},
+           familyi={A\bibinitperiod},
+           given={Juan},
+           giveni={J\bibinitperiod}}}%
+        {{hash=7bb1dcf8a93d1ecc6f9531ece93ef1fa}{%
+           family={Babbush},
+           familyi={B\bibinitperiod},
+           given={Ryan},
+           giveni={R\bibinitperiod}}}%
+        {{hash=5ef37e7fe45a9ff23c761910726d5e4b}{%
+           family={Bacon},
+           familyi={B\bibinitperiod},
+           given={Dave},
+           giveni={D\bibinitperiod}}}%
+        {{hash=88a1836ec9eba9485c9e63fdeb546cc5}{%
+           family={Ballard},
+           familyi={B\bibinitperiod},
+           given={Brian},
+           giveni={B\bibinitperiod}}}%
+        {{hash=d831c1d824f8a4e2a69f6495b8fdc91b}{%
+           family={Bardin},
+           familyi={B\bibinitperiod},
+           given={Joseph\bibnamedelima C.},
+           giveni={J\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=1ec652491db06beba3928734411dd45f}{%
+           family={Bausch},
+           familyi={B\bibinitperiod},
+           given={Johannes},
+           giveni={J\bibinitperiod}}}%
+        {{hash=44c29cd16b7d3a9ee27f4320f73edf81}{%
+           family={Bengtsson},
+           familyi={B\bibinitperiod},
+           given={Andreas},
+           giveni={A\bibinitperiod}}}%
+        {{hash=61bfc784245b6c392acdd152a754ce28}{%
+           family={Bilmes},
+           familyi={B\bibinitperiod},
+           given={Alexander},
+           giveni={A\bibinitperiod}}}%
+        {{hash=fea62a0512aea8dd4fd50d74129bf3b4}{%
+           family={Blackwell},
+           familyi={B\bibinitperiod},
+           given={Sam},
+           giveni={S\bibinitperiod}}}%
+        {{hash=915e31fc5958183d06275c3c3e811123}{%
+           family={Boixo},
+           familyi={B\bibinitperiod},
+           given={Sergio},
+           giveni={S\bibinitperiod}}}%
+        {{hash=2777e91a0826f76b03b194a20317e61f}{%
+           family={Bortoli},
+           familyi={B\bibinitperiod},
+           given={Gina},
+           giveni={G\bibinitperiod}}}%
+        {{hash=cc26abc4e7a1194e9597bc6e452883f2}{%
+           family={Bourassa},
+           familyi={B\bibinitperiod},
+           given={Alexandre},
+           giveni={A\bibinitperiod}}}%
+        {{hash=52f240d31848880873160f0ff47691e7}{%
+           family={Bovaird},
+           familyi={B\bibinitperiod},
+           given={Jenna},
+           giveni={J\bibinitperiod}}}%
+        {{hash=2d9ebd99e7a34fe901feb0b1a9314c32}{%
+           family={Brill},
+           familyi={B\bibinitperiod},
+           given={Leon},
+           giveni={L\bibinitperiod}}}%
+        {{hash=21fa87c1539531f85692c35121a01518}{%
+           family={Broughton},
+           familyi={B\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+        {{hash=9f333e984bfd85be175f4927b52e633a}{%
+           family={Browne},
+           familyi={B\bibinitperiod},
+           given={David\bibnamedelima A.},
+           giveni={D\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=ccb0ff5d79a540cacd490b5ce56d9647}{%
+           family={Buchea},
+           familyi={B\bibinitperiod},
+           given={Brett},
+           giveni={B\bibinitperiod}}}%
+        {{hash=d9c31f2e939b9d745063eca47791b43f}{%
+           family={Buckley},
+           familyi={B\bibinitperiod},
+           given={Bob\bibnamedelima B.},
+           giveni={B\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+        {{hash=11aed4b55c11ca1030deddd80f15b620}{%
+           family={Buell},
+           familyi={B\bibinitperiod},
+           given={David\bibnamedelima A.},
+           giveni={D\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=28321279b255d186d64ce50698134d06}{%
+           family={Burger},
+           familyi={B\bibinitperiod},
+           given={Tim},
+           giveni={T\bibinitperiod}}}%
+        {{hash=fac8774f4c39c4cc9371a032e53c0fb6}{%
+           family={Burkett},
+           familyi={B\bibinitperiod},
+           given={Brian},
+           giveni={B\bibinitperiod}}}%
+        {{hash=d109293ec03e3f788b61a2e95b5d2e14}{%
+           family={Bushnell},
+           familyi={B\bibinitperiod},
+           given={Nicholas},
+           giveni={N\bibinitperiod}}}%
+        {{hash=d43a1a943497149500b65196d3c81755}{%
+           family={Cabrera},
+           familyi={C\bibinitperiod},
+           given={Anthony},
+           giveni={A\bibinitperiod}}}%
+        {{hash=ecc558c722ccb19b0b6678eb8c85b663}{%
+           family={Campero},
+           familyi={C\bibinitperiod},
+           given={Juan},
+           giveni={J\bibinitperiod}}}%
+        {{hash=cdcdbd1d05fcf02c3d84ea6450a75762}{%
+           family={Chang},
+           familyi={C\bibinitperiod},
+           given={Hung-Shen},
+           giveni={H\bibinithyphendelim S\bibinitperiod}}}%
+        {{hash=5ffb5aba0d9858b862639d446d48f8eb}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Yu},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=1fac7e902845b1c2d0fd9ae4a0d00cc7}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Zijun},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=9cba836ac52ec45b3536ecac1ca0c4c4}{%
+           family={Chiaro},
+           familyi={C\bibinitperiod},
+           given={Ben},
+           giveni={B\bibinitperiod}}}%
+        {{hash=b055663d4b2861e15a38f33d15e588c7}{%
+           family={Chik},
+           familyi={C\bibinitperiod},
+           given={Desmond},
+           giveni={D\bibinitperiod}}}%
+        {{hash=d17c99a62e0bd616978c5b28b481fc45}{%
+           family={Chou},
+           familyi={C\bibinitperiod},
+           given={Charina},
+           giveni={C\bibinitperiod}}}%
+        {{hash=f04756c94a8a37b453bfea99ae28a510}{%
+           family={Claes},
+           familyi={C\bibinitperiod},
+           given={Jahan},
+           giveni={J\bibinitperiod}}}%
+        {{hash=fb295793ccbbdbf6a5ca7c8fce56511a}{%
+           family={Cleland},
+           familyi={C\bibinitperiod},
+           given={Agnetta\bibnamedelima Y.},
+           giveni={A\bibinitperiod\bibinitdelim Y\bibinitperiod}}}%
+        {{hash=f17dca34c28ef32180cae94329bed8c1}{%
+           family={Cogan},
+           familyi={C\bibinitperiod},
+           given={Josh},
+           giveni={J\bibinitperiod}}}%
+        {{hash=f16002805dc7f9d96346bda6700be931}{%
+           family={Collins},
+           familyi={C\bibinitperiod},
+           given={Roberto},
+           giveni={R\bibinitperiod}}}%
+        {{hash=6fc1e778d7c08810bcac35971cddabe6}{%
+           family={Conner},
+           familyi={C\bibinitperiod},
+           given={Paul},
+           giveni={P\bibinitperiod}}}%
+        {{hash=cf7e5385acaf82df7a53cd34a54e21e2}{%
+           family={Courtney},
+           familyi={C\bibinitperiod},
+           given={William},
+           giveni={W\bibinitperiod}}}%
+        {{hash=e510cacb4e1f63dc34978a1a1d1a8ee4}{%
+           family={Crook},
+           familyi={C\bibinitperiod},
+           given={Alexander\bibnamedelima L.},
+           giveni={A\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=71aae325fb0497bba3a1a4d810c24ad3}{%
+           family={Curtin},
+           familyi={C\bibinitperiod},
+           given={Ben},
+           giveni={B\bibinitperiod}}}%
+        {{hash=fac09b7cda0d224ae953a44e8ecb020e}{%
+           family={Das},
+           familyi={D\bibinitperiod},
+           given={Sayan},
+           giveni={S\bibinitperiod}}}%
+        {{hash=559245987dfd4d4e06a4d0f293c343e5}{%
+           family={Davies},
+           familyi={D\bibinitperiod},
+           given={Alex},
+           giveni={A\bibinitperiod}}}%
+        {{hash=97f0a8b088f244ec5909b34d556ec5fb}{%
+           family={De\bibnamedelima Lorenzo},
+           familyi={D\bibinitperiod\bibinitdelim L\bibinitperiod},
+           given={Laura},
+           giveni={L\bibinitperiod}}}%
+        {{hash=25780a7b44245681c95db7d5910b0701}{%
+           family={Debroy},
+           familyi={D\bibinitperiod},
+           given={Dripto\bibnamedelima M.},
+           giveni={D\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=176ac03b040dc27a28ad5220588ea6af}{%
+           family={Demura},
+           familyi={D\bibinitperiod},
+           given={Sean},
+           giveni={S\bibinitperiod}}}%
+        {{hash=bb1f559b5110c0a567862e8400f55166}{%
+           family={Devoret},
+           familyi={D\bibinitperiod},
+           given={Michel},
+           giveni={M\bibinitperiod}}}%
+        {{hash=edc5fd08e4e12148fadbe4e270ec1f15}{%
+           family={Di\bibnamedelima Paolo},
+           familyi={D\bibinitperiod\bibinitdelim P\bibinitperiod},
+           given={Agustin},
+           giveni={A\bibinitperiod}}}%
+        {{hash=0fd582c8b1177bc4c197a58f439b582d}{%
+           family={Donohoe},
+           familyi={D\bibinitperiod},
+           given={Paul},
+           giveni={P\bibinitperiod}}}%
+        {{hash=3f719c60cd15ba83b2c51106f228e403}{%
+           family={Drozdov},
+           familyi={D\bibinitperiod},
+           given={Ilya},
+           giveni={I\bibinitperiod}}}%
+        {{hash=ecea25363fad364a9f4a37613078f227}{%
+           family={Dunsworth},
+           familyi={D\bibinitperiod},
+           given={Andrew},
+           giveni={A\bibinitperiod}}}%
+        {{hash=fbaaebc99e686c3e52ab9c9439441d94}{%
+           family={Earle},
+           familyi={E\bibinitperiod},
+           given={Clint},
+           giveni={C\bibinitperiod}}}%
+        {{hash=0dd982fc1f80b2f6fc4dca655174f3d2}{%
+           family={Edlich},
+           familyi={E\bibinitperiod},
+           given={Thomas},
+           giveni={T\bibinitperiod}}}%
+        {{hash=7d1b6094e0738973c2872e6c7a300330}{%
+           family={Eickbusch},
+           familyi={E\bibinitperiod},
+           given={Alec},
+           giveni={A\bibinitperiod}}}%
+        {{hash=39c0106fa981e4bb784f03d39569becb}{%
+           family={Elbag},
+           familyi={E\bibinitperiod},
+           given={Aviv\bibnamedelima Moshe},
+           giveni={A\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=75e24cc9b499220a6b191a15cf088f57}{%
+           family={Elzouka},
+           familyi={E\bibinitperiod},
+           given={Mahmoud},
+           giveni={M\bibinitperiod}}}%
+        {{hash=ab8a3e9a5051312fb4a2dfe9284c8a1b}{%
+           family={Erickson},
+           familyi={E\bibinitperiod},
+           given={Catherine},
+           giveni={C\bibinitperiod}}}%
+        {{hash=1afb833d7b03ef33b212be2e4e36c567}{%
+           family={Faoro},
+           familyi={F\bibinitperiod},
+           given={Lara},
+           giveni={L\bibinitperiod}}}%
+        {{hash=5e61ee12360fc49d9013fbf8fe18db89}{%
+           family={Farhi},
+           familyi={F\bibinitperiod},
+           given={Edward},
+           giveni={E\bibinitperiod}}}%
+        {{hash=da6171735af4e2c7458b727b357ca030}{%
+           family={Ferreira},
+           familyi={F\bibinitperiod},
+           given={Vinicius\bibnamedelima S.},
+           giveni={V\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=cd1c60de6e01e558bc3b2c5d748d6f58}{%
+           family={Burgos},
+           familyi={B\bibinitperiod},
+           given={Leslie\bibnamedelima Flores},
+           giveni={L\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+        {{hash=b0c08d416714e0ec59dd43537ab17f74}{%
+           family={Forati},
+           familyi={F\bibinitperiod},
+           given={Ebrahim},
+           giveni={E\bibinitperiod}}}%
+        {{hash=963708fd18e82e5d31c988cc8f3f7758}{%
+           family={Fowler},
+           familyi={F\bibinitperiod},
+           given={Austin\bibnamedelima G.},
+           giveni={A\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+        {{hash=f27112cd6eb82fab2bc9d0542c995ea9}{%
+           family={Foxen},
+           familyi={F\bibinitperiod},
+           given={Brooks},
+           giveni={B\bibinitperiod}}}%
+        {{hash=ebd8abaa2c023ff09c3154e5100fdbeb}{%
+           family={Ganjam},
+           familyi={G\bibinitperiod},
+           given={Suhas},
+           giveni={S\bibinitperiod}}}%
+        {{hash=9eb5e5b4179a0bfd58df36d34da759ae}{%
+           family={Garcia},
+           familyi={G\bibinitperiod},
+           given={Gonzalo},
+           giveni={G\bibinitperiod}}}%
+        {{hash=41ccfa45fdb6e4358dc017defc410f9c}{%
+           family={Gasca},
+           familyi={G\bibinitperiod},
+           given={Robert},
+           giveni={R\bibinitperiod}}}%
+        {{hash=6cb4b7646e285de4b4493b453e47b6fa}{%
+           family={Genois},
+           familyi={G\bibinitperiod},
+           given={Élie},
+           giveni={É\bibinitperiod}}}%
+        {{hash=0dc79c1d20f20008a0578579278f86f6}{%
+           family={Giang},
+           familyi={G\bibinitperiod},
+           given={William},
+           giveni={W\bibinitperiod}}}%
+        {{hash=0101a428978c8ddc038880b7a77afd98}{%
+           family={Gidney},
+           familyi={G\bibinitperiod},
+           given={Craig},
+           giveni={C\bibinitperiod}}}%
+        {{hash=228a4cf5becfdb64a49ff89c8611c668}{%
+           family={Gilboa},
+           familyi={G\bibinitperiod},
+           given={Dar},
+           giveni={D\bibinitperiod}}}%
+        {{hash=4dbd0adfe1cf34cd6001cb46a3797a61}{%
+           family={Gosula},
+           familyi={G\bibinitperiod},
+           given={Raja},
+           giveni={R\bibinitperiod}}}%
+        {{hash=2b5dafdfedc4158cf26da9f813a3effc}{%
+           family={Dau},
+           familyi={D\bibinitperiod},
+           given={Alejandro\bibnamedelima Grajales},
+           giveni={A\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+        {{hash=c876fd1114ca5a50ff0179e5ecb3d3bf}{%
+           family={Graumann},
+           familyi={G\bibinitperiod},
+           given={Dietrich},
+           giveni={D\bibinitperiod}}}%
+        {{hash=9827c29cdb220d23007a4f4cb7a06bba}{%
+           family={Greene},
+           familyi={G\bibinitperiod},
+           given={Alex},
+           giveni={A\bibinitperiod}}}%
+        {{hash=fa19f3a3af399a4410d6fbe5afd9c171}{%
+           family={Gross},
+           familyi={G\bibinitperiod},
+           given={Jonathan\bibnamedelima A.},
+           giveni={J\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=ac01d23b67bf69493082451323481b4c}{%
+           family={Habegger},
+           familyi={H\bibinitperiod},
+           given={Steve},
+           giveni={S\bibinitperiod}}}%
+        {{hash=fa4493f4566ed8ce19dd8e722f8d57dc}{%
+           family={Hall},
+           familyi={H\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+        {{hash=f809ccf03009cd46b4328be1d674b02c}{%
+           family={Hamilton},
+           familyi={H\bibinitperiod},
+           given={Michael\bibnamedelima C.},
+           giveni={M\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=9c49fdfe34a43af512a7fc521900b230}{%
+           family={Hansen},
+           familyi={H\bibinitperiod},
+           given={Monica},
+           giveni={M\bibinitperiod}}}%
+        {{hash=fdafe36c75ea60b5e9310e5a98907464}{%
+           family={Harrigan},
+           familyi={H\bibinitperiod},
+           given={Matthew\bibnamedelima P.},
+           giveni={M\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=6ea1455617ce99b02d002adcf6f12861}{%
+           family={Harrington},
+           familyi={H\bibinitperiod},
+           given={Sean\bibnamedelima D.},
+           giveni={S\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=0f196457a57f51ef05f6abf5713a891e}{%
+           family={Heras},
+           familyi={H\bibinitperiod},
+           given={Francisco\bibnamedelimb J.\bibnamedelimi H.},
+           giveni={F\bibinitperiod\bibinitdelim J\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+        {{hash=d3ae82cd42b5db668b41a0ba2bcc1e7b}{%
+           family={Heslin},
+           familyi={H\bibinitperiod},
+           given={Stephen},
+           giveni={S\bibinitperiod}}}%
+        {{hash=d6fa70cd2ab00de33634ea2b3f6d28be}{%
+           family={Heu},
+           familyi={H\bibinitperiod},
+           given={Paula},
+           giveni={P\bibinitperiod}}}%
+        {{hash=2db1ed6b0ea0e0cd8635024ff435326e}{%
+           family={Higgott},
+           familyi={H\bibinitperiod},
+           given={Oscar},
+           giveni={O\bibinitperiod}}}%
+        {{hash=7ffeb8a3c39b634741748083aa12d33e}{%
+           family={Hill},
+           familyi={H\bibinitperiod},
+           given={Gordon},
+           giveni={G\bibinitperiod}}}%
+        {{hash=984bdb5902d49d1d37d0eb310838c029}{%
+           family={Hilton},
+           familyi={H\bibinitperiod},
+           given={Jeremy},
+           giveni={J\bibinitperiod}}}%
+        {{hash=bdbb3a16673eedc75efed8f7d5a0eecf}{%
+           family={Holland},
+           familyi={H\bibinitperiod},
+           given={George},
+           giveni={G\bibinitperiod}}}%
+        {{hash=b767743aba710806ca1ee39f56883387}{%
+           family={Hong},
+           familyi={H\bibinitperiod},
+           given={Sabrina},
+           giveni={S\bibinitperiod}}}%
+        {{hash=557e8b0644394a4580aa21daabbdf021}{%
+           family={Huang},
+           familyi={H\bibinitperiod},
+           given={Hsin-Yuan},
+           giveni={H\bibinithyphendelim Y\bibinitperiod}}}%
+        {{hash=a812fae582800f8db098b2078f52b398}{%
+           family={Huff},
+           familyi={H\bibinitperiod},
+           given={Ashley},
+           giveni={A\bibinitperiod}}}%
+        {{hash=7fa5a969d13c5644cd314c51cd157fe0}{%
+           family={Huggins},
+           familyi={H\bibinitperiod},
+           given={William\bibnamedelima J.},
+           giveni={W\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=1c0d6f2418d3fd877a58639ad999a69d}{%
+           family={Ioffe},
+           familyi={I\bibinitperiod},
+           given={Lev\bibnamedelima B.},
+           giveni={L\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+        {{hash=5b1bc1fc6c73555d5af1db48cdbef9af}{%
+           family={Isakov},
+           familyi={I\bibinitperiod},
+           given={Sergei\bibnamedelima V.},
+           giveni={S\bibinitperiod\bibinitdelim V\bibinitperiod}}}%
+        {{hash=af70885f95fba7a10ce2655d83d4a903}{%
+           family={Iveland},
+           familyi={I\bibinitperiod},
+           given={Justin},
+           giveni={J\bibinitperiod}}}%
+        {{hash=9900c4e96164131afb8af307845df9b8}{%
+           family={Jeffrey},
+           familyi={J\bibinitperiod},
+           given={Evan},
+           giveni={E\bibinitperiod}}}%
+        {{hash=67db50e40049bac70a6d264e681d86de}{%
+           family={Jiang},
+           familyi={J\bibinitperiod},
+           given={Zhang},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=1b35a228282adeaed69e72f6fc3a4fcb}{%
+           family={Jones},
+           familyi={J\bibinitperiod},
+           given={Cody},
+           giveni={C\bibinitperiod}}}%
+        {{hash=d61080787f4ae00f3862c7bcaa7de13f}{%
+           family={Jordan},
+           familyi={J\bibinitperiod},
+           given={Stephen},
+           giveni={S\bibinitperiod}}}%
+        {{hash=2401e5976585b75d9178f3963da11941}{%
+           family={Joshi},
+           familyi={J\bibinitperiod},
+           given={Chaitali},
+           giveni={C\bibinitperiod}}}%
+        {{hash=9e0c28998523e4ef0585b3a1ba1b4fd3}{%
+           family={Juhas},
+           familyi={J\bibinitperiod},
+           given={Pavol},
+           giveni={P\bibinitperiod}}}%
+        {{hash=d2351f128f45cc307e110f1bf030fa0d}{%
+           family={Kafri},
+           familyi={K\bibinitperiod},
+           given={Dvir},
+           giveni={D\bibinitperiod}}}%
+        {{hash=d28ac4509a75851506bd8d04008cc735}{%
+           family={Kang},
+           familyi={K\bibinitperiod},
+           given={Hui},
+           giveni={H\bibinitperiod}}}%
+        {{hash=bd08c448989093bd35ab2e7901b95e00}{%
+           family={Karamlou},
+           familyi={K\bibinitperiod},
+           given={Amir\bibnamedelima H.},
+           giveni={A\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+        {{hash=399f6f0649872eb96c7b5d2253ac1654}{%
+           family={Kechedzhi},
+           familyi={K\bibinitperiod},
+           given={Kostyantyn},
+           giveni={K\bibinitperiod}}}%
+        {{hash=6a2991ec48fc939b711eac2466cbcc68}{%
+           family={Kelly},
+           familyi={K\bibinitperiod},
+           given={Julian},
+           giveni={J\bibinitperiod}}}%
+        {{hash=4ef24e775ddb199324f69ec8f34aa119}{%
+           family={Khaire},
+           familyi={K\bibinitperiod},
+           given={Trupti},
+           giveni={T\bibinitperiod}}}%
+        {{hash=af02e1e482d8ff6cebf3ace582a0ee95}{%
+           family={Khattar},
+           familyi={K\bibinitperiod},
+           given={Tanuj},
+           giveni={T\bibinitperiod}}}%
+        {{hash=09dbc5ec2fd560082e10cf641374616a}{%
+           family={Khezri},
+           familyi={K\bibinitperiod},
+           given={Mostafa},
+           giveni={M\bibinitperiod}}}%
+        {{hash=d9afab65b59410d698652e896e4337cc}{%
+           family={Kim},
+           familyi={K\bibinitperiod},
+           given={Seon},
+           giveni={S\bibinitperiod}}}%
+        {{hash=cbc1620351ea65d57c28a39c84b1ac30}{%
+           family={Klimov},
+           familyi={K\bibinitperiod},
+           given={Paul\bibnamedelima V.},
+           giveni={P\bibinitperiod\bibinitdelim V\bibinitperiod}}}%
+        {{hash=bab3d65360729b49c863a5759143293b}{%
+           family={Klots},
+           familyi={K\bibinitperiod},
+           given={Andrey\bibnamedelima R.},
+           giveni={A\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=3733156666083ae5d9a21795e4643696}{%
+           family={Kobrin},
+           familyi={K\bibinitperiod},
+           given={Bryce},
+           giveni={B\bibinitperiod}}}%
+        {{hash=d0d21ff02dda6c0a7d09ef7436bd329b}{%
+           family={Kohli},
+           familyi={K\bibinitperiod},
+           given={Pushmeet},
+           giveni={P\bibinitperiod}}}%
+        {{hash=1da958990b731765101d49714c45af36}{%
+           family={Korotkov},
+           familyi={K\bibinitperiod},
+           given={Alexander\bibnamedelima N.},
+           giveni={A\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+        {{hash=a7bde64895d0208e927e79c2755b9a83}{%
+           family={Kostritsa},
+           familyi={K\bibinitperiod},
+           given={Fedor},
+           giveni={F\bibinitperiod}}}%
+        {{hash=2df8e1d047c0eadaf2cb05c8a1435675}{%
+           family={Kothari},
+           familyi={K\bibinitperiod},
+           given={Robin},
+           giveni={R\bibinitperiod}}}%
+        {{hash=8b9b17739d58bb71239623eb034c49e3}{%
+           family={Kozlovskii},
+           familyi={K\bibinitperiod},
+           given={Borislav},
+           giveni={B\bibinitperiod}}}%
+        {{hash=4562b171a8fc29f7b38eda996879e73b}{%
+           family={Kreikebaum},
+           familyi={K\bibinitperiod},
+           given={John\bibnamedelima Mark},
+           giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=e6f0a7c939e2c48685bed56d9ee29381}{%
+           family={Kurilovich},
+           familyi={K\bibinitperiod},
+           given={Vladislav\bibnamedelima D.},
+           giveni={V\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=f55d7a7464728bf4c4ee74be88182ded}{%
+           family={Lacroix},
+           familyi={L\bibinitperiod},
+           given={Nathan},
+           giveni={N\bibinitperiod}}}%
+        {{hash=0106e3d3d8629adc0639fb0388e51a73}{%
+           family={Landhuis},
+           familyi={L\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+        {{hash=f8ca38370aa08480ce2af5373d9f8859}{%
+           family={Lange-Dei},
+           familyi={L\bibinithyphendelim D\bibinitperiod},
+           given={Tiano},
+           giveni={T\bibinitperiod}}}%
+        {{hash=3398cac5e4abde4bf6914f4849f109d8}{%
+           family={Langley},
+           familyi={L\bibinitperiod},
+           given={Brandon\bibnamedelima W.},
+           giveni={B\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+        {{hash=9215080c261a06284ada434331b328a5}{%
+           family={Laptev},
+           familyi={L\bibinitperiod},
+           given={Pavel},
+           giveni={P\bibinitperiod}}}%
+        {{hash=d34e544a2e6336289e3ed926c49511bd}{%
+           family={Lau},
+           familyi={L\bibinitperiod},
+           given={Kim-Ming},
+           giveni={K\bibinithyphendelim M\bibinitperiod}}}%
+        {{hash=608587de10eed78d89aa8073199fcc4a}{%
+           family={Le\bibnamedelima Guevel},
+           familyi={L\bibinitperiod\bibinitdelim G\bibinitperiod},
+           given={Loïck},
+           giveni={L\bibinitperiod}}}%
+        {{hash=27d893a000c5d4a3655f5ae9b1714f09}{%
+           family={Ledford},
+           familyi={L\bibinitperiod},
+           given={Justin},
+           giveni={J\bibinitperiod}}}%
+        {{hash=d333f9325f8f60f584e433bef783b3b3}{%
+           family={Lee},
+           familyi={L\bibinitperiod},
+           given={Joonho},
+           giveni={J\bibinitperiod}}}%
+        {{hash=0a6e519569d4e7aec1cb14670418d26c}{%
+           family={Lee},
+           familyi={L\bibinitperiod},
+           given={Kenny},
+           giveni={K\bibinitperiod}}}%
+        {{hash=52bb67d3f6c9ea03e1761624944edfae}{%
+           family={Lensky},
+           familyi={L\bibinitperiod},
+           given={Yuri\bibnamedelima D.},
+           giveni={Y\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=fd7f54f08ade5945fd159b8950f29970}{%
+           family={Leon},
+           familyi={L\bibinitperiod},
+           given={Shannon},
+           giveni={S\bibinitperiod}}}%
+        {{hash=7c3c0993109bffcfd9a502dc9c492b84}{%
+           family={Lester},
+           familyi={L\bibinitperiod},
+           given={Brian\bibnamedelima J.},
+           giveni={B\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=366d4506fe635ac90dbe092a8b93f869}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Wing\bibnamedelima Yan},
+           giveni={W\bibinitperiod\bibinitdelim Y\bibinitperiod}}}%
+        {{hash=07e26844b73cfbeb7f20e73779d321e4}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Yin},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=79daebb6ecb2bd103d8c100a20f82048}{%
+           family={Lill},
+           familyi={L\bibinitperiod},
+           given={Alexander\bibnamedelima T.},
+           giveni={A\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
+        {{hash=3b8d9c9fd12aa07c3d259a0382d9a476}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Wayne},
+           giveni={W\bibinitperiod}}}%
+        {{hash=a2aad59cca4802085ca304918391ea22}{%
+           family={Livingston},
+           familyi={L\bibinitperiod},
+           given={William\bibnamedelima P.},
+           giveni={W\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=41dcb495f9e75e56d08237b9b7d48f85}{%
+           family={Locharla},
+           familyi={L\bibinitperiod},
+           given={Aditya},
+           giveni={A\bibinitperiod}}}%
+        {{hash=1ca86a6dfd219877ce431f01a165a869}{%
+           family={Lucero},
+           familyi={L\bibinitperiod},
+           given={Erik},
+           giveni={E\bibinitperiod}}}%
+        {{hash=e9c430361dbc8403a6fd537ccda5dbc5}{%
+           family={Lundahl},
+           familyi={L\bibinitperiod},
+           given={Daniel},
+           giveni={D\bibinitperiod}}}%
+        {{hash=c2c13c8584fdd89442688727fc546747}{%
+           family={Lunt},
+           familyi={L\bibinitperiod},
+           given={Aaron},
+           giveni={A\bibinitperiod}}}%
+        {{hash=7073b9924262b97824a839be9cdacdf6}{%
+           family={Madhuk},
+           familyi={M\bibinitperiod},
+           given={Sid},
+           giveni={S\bibinitperiod}}}%
+        {{hash=aadbeef2665a375789a9b58561e3a716}{%
+           family={Malone},
+           familyi={M\bibinitperiod},
+           given={Fionn\bibnamedelima D.},
+           giveni={F\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=4fd444999499be678651e667f17dd253}{%
+           family={Maloney},
+           familyi={M\bibinitperiod},
+           given={Ashley},
+           giveni={A\bibinitperiod}}}%
+        {{hash=3f2ddf64c1ea271a8a2634bbbb68d254}{%
+           family={Mandrà},
+           familyi={M\bibinitperiod},
+           given={Salvatore},
+           giveni={S\bibinitperiod}}}%
+        {{hash=e456d570ec236cee82b8cf83a29db39f}{%
+           family={Manyika},
+           familyi={M\bibinitperiod},
+           given={James},
+           giveni={J\bibinitperiod}}}%
+        {{hash=7dc1ea556fed2d4c6709a659959f060b}{%
+           family={Martin},
+           familyi={M\bibinitperiod},
+           given={Leigh\bibnamedelima S.},
+           giveni={L\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=0b239664920e14cabe4f88504ebdc92d}{%
+           family={Martin},
+           familyi={M\bibinitperiod},
+           given={Orion},
+           giveni={O\bibinitperiod}}}%
+        {{hash=68693e9bed95b9701971f07ece490beb}{%
+           family={Martin},
+           familyi={M\bibinitperiod},
+           given={Steven},
+           giveni={S\bibinitperiod}}}%
+        {{hash=d8bae8c12c615b579bdfee43358070c7}{%
+           family={Maxfield},
+           familyi={M\bibinitperiod},
+           given={Cameron},
+           giveni={C\bibinitperiod}}}%
+        {{hash=a253ddc1c4c24cde70238bd45dc9aeff}{%
+           family={McClean},
+           familyi={M\bibinitperiod},
+           given={Jarrod\bibnamedelima R.},
+           giveni={J\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=4177c755f1b9239cdea14abc7f724194}{%
+           family={McEwen},
+           familyi={M\bibinitperiod},
+           given={Matt},
+           giveni={M\bibinitperiod}}}%
+        {{hash=ed9b27be979946d1220bb4ff8a99c959}{%
+           family={Meeks},
+           familyi={M\bibinitperiod},
+           given={Seneca},
+           giveni={S\bibinitperiod}}}%
+        {{hash=1c6ec14427d690fa73b3021943d5439b}{%
+           family={Megrant},
+           familyi={M\bibinitperiod},
+           given={Anthony},
+           giveni={A\bibinitperiod}}}%
+        {{hash=9b445b45607e1e8e0672105779ea626b}{%
+           family={Mi},
+           familyi={M\bibinitperiod},
+           given={Xiao},
+           giveni={X\bibinitperiod}}}%
+        {{hash=6f64225841291a2f1cf9eec43a3c2f0d}{%
+           family={Miao},
+           familyi={M\bibinitperiod},
+           given={Kevin\bibnamedelima C.},
+           giveni={K\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=2d5f1b9a17a1e2ac997165f125e0fbf7}{%
+           family={Mieszala},
+           familyi={M\bibinitperiod},
+           given={Amanda},
+           giveni={A\bibinitperiod}}}%
+        {{hash=0be3f0b99974bd896913d472305073c2}{%
+           family={Molavi},
+           familyi={M\bibinitperiod},
+           given={Reza},
+           giveni={R\bibinitperiod}}}%
+        {{hash=03660711301ba48466fc679b73993e30}{%
+           family={Molina},
+           familyi={M\bibinitperiod},
+           given={Sebastian},
+           giveni={S\bibinitperiod}}}%
+        {{hash=a5508a3d87e312081a488ba0a7af7c4e}{%
+           family={Montazeri},
+           familyi={M\bibinitperiod},
+           given={Shirin},
+           giveni={S\bibinitperiod}}}%
+        {{hash=15460875fe392ae15c5374e239b7c3b2}{%
+           family={Morvan},
+           familyi={M\bibinitperiod},
+           given={Alexis},
+           giveni={A\bibinitperiod}}}%
+        {{hash=b3cb54bfda0cd8c21125765a3b5c488d}{%
+           family={Movassagh},
+           familyi={M\bibinitperiod},
+           given={Ramis},
+           giveni={R\bibinitperiod}}}%
+        {{hash=918d7c8a2ede776a016f5b0c38bd66d9}{%
+           family={Mruczkiewicz},
+           familyi={M\bibinitperiod},
+           given={Wojciech},
+           giveni={W\bibinitperiod}}}%
+        {{hash=4bda703a11fed621732b26896f391e85}{%
+           family={Naaman},
+           familyi={N\bibinitperiod},
+           given={Ofer},
+           giveni={O\bibinitperiod}}}%
+        {{hash=6bcda02c5188bf25bad1475b8f30cecd}{%
+           family={Neeley},
+           familyi={N\bibinitperiod},
+           given={Matthew},
+           giveni={M\bibinitperiod}}}%
+        {{hash=7e6d8fe85e636af42fba1f9d583e70e9}{%
+           family={Neill},
+           familyi={N\bibinitperiod},
+           given={Charles},
+           giveni={C\bibinitperiod}}}%
+        {{hash=5cd47e182ade49f9187ae93b01eed1d1}{%
+           family={Nersisyan},
+           familyi={N\bibinitperiod},
+           given={Ani},
+           giveni={A\bibinitperiod}}}%
+        {{hash=ddcc46c5456340da59be4077c7102a27}{%
+           family={Neven},
+           familyi={N\bibinitperiod},
+           given={Hartmut},
+           giveni={H\bibinitperiod}}}%
+        {{hash=2a839e605c1060e49ae2167b1709c4af}{%
+           family={Newman},
+           familyi={N\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+        {{hash=2d8ee31a3d134baf2f1e264073dc96cc}{%
+           family={Ng},
+           familyi={N\bibinitperiod},
+           given={Jiun\bibnamedelima How},
+           giveni={J\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+        {{hash=d5579f8c4241cb50ff788b3d9bb1a222}{%
+           family={Nguyen},
+           familyi={N\bibinitperiod},
+           given={Anthony},
+           giveni={A\bibinitperiod}}}%
+        {{hash=b256005e34b5cd3625a3d87f7585d1e7}{%
+           family={Nguyen},
+           familyi={N\bibinitperiod},
+           given={Murray},
+           giveni={M\bibinitperiod}}}%
+        {{hash=f64b12ca05bde12812a539362587f319}{%
+           family={Ni},
+           familyi={N\bibinitperiod},
+           given={Chia-Hung},
+           giveni={C\bibinithyphendelim H\bibinitperiod}}}%
+        {{hash=ed18aa264c8650c491f53d6dc4118292}{%
+           family={Niu},
+           familyi={N\bibinitperiod},
+           given={Murphy\bibnamedelima Yuezhen},
+           giveni={M\bibinitperiod\bibinitdelim Y\bibinitperiod}}}%
+        {{hash=7da86de9964554d392df7f6e51e49c06}{%
+           family={O’Brien},
+           familyi={O\bibinitperiod},
+           given={Thomas\bibnamedelima E.},
+           giveni={T\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{hash=7e0fdfb97a5d24e12cfe5768c4fcf567}{%
+           family={Oliver},
+           familyi={O\bibinitperiod},
+           given={William\bibnamedelima D.},
+           giveni={W\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=0fdb4d93d1b9ede5d1afa55421b0dfaf}{%
+           family={Opremcak},
+           familyi={O\bibinitperiod},
+           given={Alex},
+           giveni={A\bibinitperiod}}}%
+        {{hash=e2fd50d48cb1b7a2e0f5e810a12ffbab}{%
+           family={Ottosson},
+           familyi={O\bibinitperiod},
+           given={Kristoffer},
+           giveni={K\bibinitperiod}}}%
+        {{hash=b3e0589d3dfc4ccb2c20d9bae908ad5c}{%
+           family={Petukhov},
+           familyi={P\bibinitperiod},
+           given={Andre},
+           giveni={A\bibinitperiod}}}%
+        {{hash=e933dd00ddeccc6fd3ec613f42db1ec6}{%
+           family={Pizzuto},
+           familyi={P\bibinitperiod},
+           given={Alex},
+           giveni={A\bibinitperiod}}}%
+        {{hash=74ebe0fc06c0292871d5f756cfe5414d}{%
+           family={Platt},
+           familyi={P\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+        {{hash=9f43d643a94f07135b031590f29221ae}{%
+           family={Potter},
+           familyi={P\bibinitperiod},
+           given={Rebecca},
+           giveni={R\bibinitperiod}}}%
+        {{hash=9cb14d8fa2cae777b56e6f89aaad7f08}{%
+           family={Pritchard},
+           familyi={P\bibinitperiod},
+           given={Orion},
+           giveni={O\bibinitperiod}}}%
+        {{hash=90e49a8430e150256343fa555743044d}{%
+           family={Pryadko},
+           familyi={P\bibinitperiod},
+           given={Leonid\bibnamedelima P.},
+           giveni={L\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=d7e98df2b678f196d4696b116fb5edb6}{%
+           family={Quintana},
+           familyi={Q\bibinitperiod},
+           given={Chris},
+           giveni={C\bibinitperiod}}}%
+        {{hash=fd884ac1690c783d421ccc230d4192bd}{%
+           family={Ramachandran},
+           familyi={R\bibinitperiod},
+           given={Ganesh},
+           giveni={G\bibinitperiod}}}%
+        {{hash=fc7775b53b9867dff7436252c7de6626}{%
+           family={Reagor},
+           familyi={R\bibinitperiod},
+           given={Matthew\bibnamedelima J.},
+           giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=fd8b0c3e8b31f24382063cfcf2fddd7b}{%
+           family={Redding},
+           familyi={R\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+        {{hash=e5394e481949fef872843878604e807a}{%
+           family={Rhodes},
+           familyi={R\bibinitperiod},
+           given={David\bibnamedelima M.},
+           giveni={D\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=a00121cf2e6b223430ce256a66a151d0}{%
+           family={Roberts},
+           familyi={R\bibinitperiod},
+           given={Gabrielle},
+           giveni={G\bibinitperiod}}}%
+        {{hash=251181c37c2f58ea2502f3a833244ee7}{%
+           family={Rosenberg},
+           familyi={R\bibinitperiod},
+           given={Eliott},
+           giveni={E\bibinitperiod}}}%
+        {{hash=194f608a325b257e18720b9bb3c4d1f2}{%
+           family={Rosenfeld},
+           familyi={R\bibinitperiod},
+           given={Emma},
+           giveni={E\bibinitperiod}}}%
+        {{hash=ab67b0d3986106680d464532f25dc939}{%
+           family={Roushan},
+           familyi={R\bibinitperiod},
+           given={Pedram},
+           giveni={P\bibinitperiod}}}%
+        {{hash=79a0c3f2d2ac6a6e26b1e6e488c3b198}{%
+           family={Rubin},
+           familyi={R\bibinitperiod},
+           given={Nicholas\bibnamedelima C.},
+           giveni={N\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=88932c8b11cd9722f24b70615361b3a2}{%
+           family={Saei},
+           familyi={S\bibinitperiod},
+           given={Negar},
+           giveni={N\bibinitperiod}}}%
+        {{hash=9c196f976101682c061efc0614f70fa6}{%
+           family={Sank},
+           familyi={S\bibinitperiod},
+           given={Daniel},
+           giveni={D\bibinitperiod}}}%
+        {{hash=0c75d84410af1461d59e98fd48686228}{%
+           family={Sankaragomathi},
+           familyi={S\bibinitperiod},
+           given={Kannan},
+           giveni={K\bibinitperiod}}}%
+        {{hash=640413903b4eab5258544e70c464cf91}{%
+           family={Satzinger},
+           familyi={S\bibinitperiod},
+           given={Kevin\bibnamedelima J.},
+           giveni={K\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=34414399188bf56a1a4b56928e2510ea}{%
+           family={Schurkus},
+           familyi={S\bibinitperiod},
+           given={Henry\bibnamedelima F.},
+           giveni={H\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+        {{hash=b03ef4e06e6c24a62e30755e47ad0b89}{%
+           family={Schuster},
+           familyi={S\bibinitperiod},
+           given={Christopher},
+           giveni={C\bibinitperiod}}}%
+        {{hash=211e54ca76df5d8c1de6957d48792545}{%
+           family={Senior},
+           familyi={S\bibinitperiod},
+           given={Andrew\bibnamedelima W.},
+           giveni={A\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+        {{hash=6c11a9d4a002c1e48e349a40d76f4a02}{%
+           family={Shearn},
+           familyi={S\bibinitperiod},
+           given={Michael\bibnamedelima J.},
+           giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=b8a334c0a9fab3d755599882b9e5b1b8}{%
+           family={Shorter},
+           familyi={S\bibinitperiod},
+           given={Aaron},
+           giveni={A\bibinitperiod}}}%
+        {{hash=6e2584612f4d66917760f430afd52633}{%
+           family={Shutty},
+           familyi={S\bibinitperiod},
+           given={Noah},
+           giveni={N\bibinitperiod}}}%
+        {{hash=41192323b61fef57e0e9b18294889e32}{%
+           family={Shvarts},
+           familyi={S\bibinitperiod},
+           given={Vladimir},
+           giveni={V\bibinitperiod}}}%
+        {{hash=881aefdc6d5ecf619734a79ec7c98a36}{%
+           family={Singh},
+           familyi={S\bibinitperiod},
+           given={Shraddha},
+           giveni={S\bibinitperiod}}}%
+        {{hash=d89813ef28712039b8e762aef5ae25bd}{%
+           family={Sivak},
+           familyi={S\bibinitperiod},
+           given={Volodymyr},
+           giveni={V\bibinitperiod}}}%
+        {{hash=155df0bd71e876a1d80809e3e43047ea}{%
+           family={Skruzny},
+           familyi={S\bibinitperiod},
+           given={Jindra},
+           giveni={J\bibinitperiod}}}%
+        {{hash=db819be3d152e6c7bdb4bd7cd991e30b}{%
+           family={Small},
+           familyi={S\bibinitperiod},
+           given={Spencer},
+           giveni={S\bibinitperiod}}}%
+        {{hash=087a4bb34bd0827f9235dede4eff2970}{%
+           family={Smelyanskiy},
+           familyi={S\bibinitperiod},
+           given={Vadim},
+           giveni={V\bibinitperiod}}}%
+        {{hash=07bc6cce756eb7fb4726a35fcf0491aa}{%
+           family={Smith},
+           familyi={S\bibinitperiod},
+           given={W.\bibnamedelimi Clarke},
+           giveni={W\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=43cf28fe9b24fb17255cbd85122ef4f8}{%
+           family={Somma},
+           familyi={S\bibinitperiod},
+           given={Rolando\bibnamedelima D.},
+           giveni={R\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=6cf1e9066a910f29f335d801db3c7b8e}{%
+           family={Springer},
+           familyi={S\bibinitperiod},
+           given={Sofia},
+           giveni={S\bibinitperiod}}}%
+        {{hash=b9aa013fd29eaf67421069e27d66459f}{%
+           family={Sterling},
+           familyi={S\bibinitperiod},
+           given={George},
+           giveni={G\bibinitperiod}}}%
+        {{hash=42ec4d75c06536ac7637ef0181c3a361}{%
+           family={Strain},
+           familyi={S\bibinitperiod},
+           given={Doug},
+           giveni={D\bibinitperiod}}}%
+        {{hash=17a889e479839373f0c09c555a682413}{%
+           family={Suchard},
+           familyi={S\bibinitperiod},
+           given={Jordan},
+           giveni={J\bibinitperiod}}}%
+        {{hash=f3d5e04ca177c067703296863c787b9d}{%
+           family={Szasz},
+           familyi={S\bibinitperiod},
+           given={Aaron},
+           giveni={A\bibinitperiod}}}%
+        {{hash=2c8c675d77301fc96ca4bc401e7511e6}{%
+           family={Sztein},
+           familyi={S\bibinitperiod},
+           given={Alex},
+           giveni={A\bibinitperiod}}}%
+        {{hash=08425a524bc69aa6a49e2b90603bcd1c}{%
+           family={Thor},
+           familyi={T\bibinitperiod},
+           given={Douglas},
+           giveni={D\bibinitperiod}}}%
+        {{hash=3d0e5e36a0639ee45949bf1421044979}{%
+           family={Torres},
+           familyi={T\bibinitperiod},
+           given={Alfredo},
+           giveni={A\bibinitperiod}}}%
+        {{hash=54fa7335a94b734acfbf1ac1891ae2ca}{%
+           family={Torunbalci},
+           familyi={T\bibinitperiod},
+           given={M.\bibnamedelimi Mert},
+           giveni={M\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=1f6bb1f33532cae6801aaceb708e8852}{%
+           family={Vaishnav},
+           familyi={V\bibinitperiod},
+           given={Abeer},
+           giveni={A\bibinitperiod}}}%
+        {{hash=a0be7cf5d0fc5a224e7677baafb727cd}{%
+           family={Vargas},
+           familyi={V\bibinitperiod},
+           given={Justin},
+           giveni={J\bibinitperiod}}}%
+        {{hash=8ca36a3efacaf4941e02855787d02ea4}{%
+           family={Vdovichev},
+           familyi={V\bibinitperiod},
+           given={Sergey},
+           giveni={S\bibinitperiod}}}%
+        {{hash=d3f8c6663f1fa635f1b95e9d2da51116}{%
+           family={Vidal},
+           familyi={V\bibinitperiod},
+           given={Guifre},
+           giveni={G\bibinitperiod}}}%
+        {{hash=b483aa193391113d1234b6ae181e0dca}{%
+           family={Villalonga},
+           familyi={V\bibinitperiod},
+           given={Benjamin},
+           giveni={B\bibinitperiod}}}%
+        {{hash=4b6c162f845b7e8962187e0c4cce9c57}{%
+           family={Heidweiller},
+           familyi={H\bibinitperiod},
+           given={Catherine\bibnamedelima Vollgraff},
+           giveni={C\bibinitperiod\bibinitdelim V\bibinitperiod}}}%
+        {{hash=fac78e045804ff85d38436528fa9c5df}{%
+           family={Waltman},
+           familyi={W\bibinitperiod},
+           given={Steven},
+           giveni={S\bibinitperiod}}}%
+        {{hash=2690e6ad6fce181e6e610fe172be46a8}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Shannon\bibnamedelima X.},
+           giveni={S\bibinitperiod\bibinitdelim X\bibinitperiod}}}%
+        {{hash=ac52b3e6079c7dc1baf1cb0588bb41b0}{%
+           family={Ware},
+           familyi={W\bibinitperiod},
+           given={Brayden},
+           giveni={B\bibinitperiod}}}%
+        {{hash=f6500349da5ad29ed56dcc1b84c47482}{%
+           family={Weber},
+           familyi={W\bibinitperiod},
+           given={Kate},
+           giveni={K\bibinitperiod}}}%
+        {{hash=55986626b3fa478cbdbebe0d177fa423}{%
+           family={Weidel},
+           familyi={W\bibinitperiod},
+           given={Travis},
+           giveni={T\bibinitperiod}}}%
+        {{hash=da61f207bd110c14a1e7e8fe213f33eb}{%
+           family={White},
+           familyi={W\bibinitperiod},
+           given={Theodore},
+           giveni={T\bibinitperiod}}}%
+        {{hash=58d24fe37a779154dcae21ca6b89d3ff}{%
+           family={Wong},
+           familyi={W\bibinitperiod},
+           given={Kristi},
+           giveni={K\bibinitperiod}}}%
+        {{hash=3d6a189e1288e4515c77fb07f0e5f82a}{%
+           family={Woo},
+           familyi={W\bibinitperiod},
+           given={Bryan\bibnamedelimb W.\bibnamedelimi K.},
+           giveni={B\bibinitperiod\bibinitdelim W\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+        {{hash=f4505b199de0d3f4be5d9dbd22ac9504}{%
+           family={Xing},
+           familyi={X\bibinitperiod},
+           given={Cheng},
+           giveni={C\bibinitperiod}}}%
+        {{hash=473d08a31ed9fbf52d5baf436b7a809a}{%
+           family={Yao},
+           familyi={Y\bibinitperiod},
+           given={Z.\bibnamedelimi Jamie},
+           giveni={Z\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=e94b0ed312e1e2edcfe8a1b6bd1749d8}{%
+           family={Yeh},
+           familyi={Y\bibinitperiod},
+           given={Ping},
+           giveni={P\bibinitperiod}}}%
+        {{hash=f7be780f6a3e4e5014663cc3dbbdb6a4}{%
+           family={Ying},
+           familyi={Y\bibinitperiod},
+           given={Bicheng},
+           giveni={B\bibinitperiod}}}%
+        {{hash=e28fb0d6219e2cf37f3c05c5a478ad96}{%
+           family={Yoo},
+           familyi={Y\bibinitperiod},
+           given={Juhwan},
+           giveni={J\bibinitperiod}}}%
+        {{hash=e6f7a3ba61230f82c8c54b86dfecdb6e}{%
+           family={Yosri},
+           familyi={Y\bibinitperiod},
+           given={Noureldin},
+           giveni={N\bibinitperiod}}}%
+        {{hash=0a04abeb6bd37ba2016dc1dc4d8309a8}{%
+           family={Young},
+           familyi={Y\bibinitperiod},
+           given={Grayson},
+           giveni={G\bibinitperiod}}}%
+        {{hash=e6df2c969e6e639ddd23909ad813034d}{%
+           family={Zalcman},
+           familyi={Z\bibinitperiod},
+           given={Adam},
+           giveni={A\bibinitperiod}}}%
+        {{hash=2323c22835796db4ce89273cde66b319}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Yaxing},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=0e5041b4052626ba12ac85ef8407af98}{%
+           family={Zhu},
+           familyi={Z\bibinitperiod},
+           given={Ningfeng},
+           giveni={N\bibinitperiod}}}%
+        {{hash=3d7d01c01bbc00a1152b3fea8fc10a05}{%
+           family={Zobrist},
+           familyi={Z\bibinitperiod},
+           given={Nicholas},
+           giveni={N\bibinitperiod}}}%
+        {{hash=848d7cf810d29790e1479fdb18507444}{%
+           family={{Google Quantum AI and Collaborators}},
+           familyi={G\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{3434b4b9931a33441a057f2d1c265c4a}
+      \strng{fullhash}{9dfbd8f6a1df8c59af18f180910fd40d}
+      \strng{fullhashraw}{9dfbd8f6a1df8c59af18f180910fd40d}
+      \strng{bibnamehash}{3434b4b9931a33441a057f2d1c265c4a}
+      \strng{authorbibnamehash}{3434b4b9931a33441a057f2d1c265c4a}
+      \strng{authornamehash}{3434b4b9931a33441a057f2d1c265c4a}
+      \strng{authorfullhash}{9dfbd8f6a1df8c59af18f180910fd40d}
+      \strng{authorfullhashraw}{9dfbd8f6a1df8c59af18f180910fd40d}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Quantum error correction1–4 provides a path to reach practical quantum computing by combining multiple physical qubits into a logical qubit, in which the logical error rate is suppressed exponentially as more qubits are added. However, this exponential suppression only occurs if the physical error rate is below a critical threshold. Here we present two below-threshold surface code memories on our newest generation of superconducting processors, Willow: a distance-7 code and a distance-5 code integrated with a real-time decoder. The logical error rate of our larger quantum memory is suppressed by a factor of Λ = 2.14 ± 0.02 when increasing the code distance by 2, culminating in a 101-qubit distance-7 code with 0.143\% ± 0.003 per cent error per cycle of error correction. This logical memory is also beyond breakeven, exceeding the lifetime of its best physical qubit by a factor of 2.4 ± 0.3. Our system maintains below-threshold performance when decoding in real time, achieving an average decoder latency of 63 microseconds at distance 5 up to a million cycles, with a cycle time of 1.1 microseconds. We also run repetition codes up to distance 29 and find that logical performance is limited by rare correlated error events, occurring approximately once every hour or 3 × 109 cycles. Our results indicate device performance that, if scaled, could realize the operational requirements of large-scale fault-tolerant quantum algorithms.}
+      \field{issn}{1476-4687}
+      \field{journaltitle}{Nature}
+      \field{month}{2}
+      \field{note}{Publisher: Nature Publishing Group}
+      \field{number}{8052}
+      \field{title}{Quantum error correction below the surface code threshold}
+      \field{urlday}{23}
+      \field{urlmonth}{11}
+      \field{urlyear}{2025}
+      \field{volume}{638}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \field{pages}{920\bibrangedash 926}
+      \range{pages}{7}
+      \verb{doi}
+      \verb 10.1038/s41586-024-08449-y
+      \endverb
+      \verb{file}
+      \verb Full Text PDF:/Users/leigh/Zotero/storage/D3WR9PL8/Acharya et al. - 2025 - Quantum error correction below the surface code threshold.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://www.nature.com/articles/s41586-024-08449-y
+      \endverb
+      \verb{url}
+      \verb https://www.nature.com/articles/s41586-024-08449-y
+      \endverb
+      \keyw{Computer science,Quantum information}
+    \endentry
+    \entry{bluvstein_logical_2024}{article}{}{}
+      \name{author}{21}{}{%
+        {{hash=19f3e92397a12fdf21c4d824ebe1eb20}{%
+           family={Bluvstein},
+           familyi={B\bibinitperiod},
+           given={Dolev},
+           giveni={D\bibinitperiod}}}%
+        {{hash=1689d33e5a6c1c7ee608d780f77c992b}{%
+           family={Evered},
+           familyi={E\bibinitperiod},
+           given={Simon\bibnamedelima J.},
+           giveni={S\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=6d5035822b257a5501e8e194f1d881e1}{%
+           family={Geim},
+           familyi={G\bibinitperiod},
+           given={Alexandra\bibnamedelima A.},
+           giveni={A\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=331c9116d0f5d6a5a43593ef1d1e8177}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Sophie\bibnamedelima H.},
+           giveni={S\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+        {{hash=4aca0f18296c733c2902853a0b003b19}{%
+           family={Zhou},
+           familyi={Z\bibinitperiod},
+           given={Hengyun},
+           giveni={H\bibinitperiod}}}%
+        {{hash=24608cc5da02bfb71c4553a546ca240a}{%
+           family={Manovitz},
+           familyi={M\bibinitperiod},
+           given={Tom},
+           giveni={T\bibinitperiod}}}%
+        {{hash=938096c93ddc0e8f5dd6c916620fb07c}{%
+           family={Ebadi},
+           familyi={E\bibinitperiod},
+           given={Sepehr},
+           giveni={S\bibinitperiod}}}%
+        {{hash=a0bf7b3b6136238db6a3f3fa33a00c3c}{%
+           family={Cain},
+           familyi={C\bibinitperiod},
+           given={Madelyn},
+           giveni={M\bibinitperiod}}}%
+        {{hash=0c9bc04c854755cbf21c4b8fdde71207}{%
+           family={Kalinowski},
+           familyi={K\bibinitperiod},
+           given={Marcin},
+           giveni={M\bibinitperiod}}}%
+        {{hash=ef4bc0c6c97353b8ff0534c917bdfbbb}{%
+           family={Hangleiter},
+           familyi={H\bibinitperiod},
+           given={Dominik},
+           giveni={D\bibinitperiod}}}%
+        {{hash=2bcf69583d91e46889ac0561795b8255}{%
+           family={Bonilla\bibnamedelima Ataides},
+           familyi={B\bibinitperiod\bibinitdelim A\bibinitperiod},
+           given={J.\bibnamedelimi Pablo},
+           giveni={J\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=8e7dd632e9b20b7fc2aacbd626201986}{%
+           family={Maskara},
+           familyi={M\bibinitperiod},
+           given={Nishad},
+           giveni={N\bibinitperiod}}}%
+        {{hash=4cba85b8b0e2bfa01078ac1be77938a9}{%
+           family={Cong},
+           familyi={C\bibinitperiod},
+           given={Iris},
+           giveni={I\bibinitperiod}}}%
+        {{hash=91c0e330b6487ea1279877a28be35531}{%
+           family={Gao},
+           familyi={G\bibinitperiod},
+           given={Xun},
+           giveni={X\bibinitperiod}}}%
+        {{hash=d0578842bc2a62340b2d47e58775771e}{%
+           family={Sales\bibnamedelima Rodriguez},
+           familyi={S\bibinitperiod\bibinitdelim R\bibinitperiod},
+           given={Pedro},
+           giveni={P\bibinitperiod}}}%
+        {{hash=270fc4811227d680e12ec44c56f948cd}{%
+           family={Karolyshyn},
+           familyi={K\bibinitperiod},
+           given={Thomas},
+           giveni={T\bibinitperiod}}}%
+        {{hash=15edc0e99eb7772b9c80a8f637e1cc12}{%
+           family={Semeghini},
+           familyi={S\bibinitperiod},
+           given={Giulia},
+           giveni={G\bibinitperiod}}}%
+        {{hash=d09cda4420ec958a2d8e850c73432c07}{%
+           family={Gullans},
+           familyi={G\bibinitperiod},
+           given={Michael\bibnamedelima J.},
+           giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=28a6aa289448ed258d404c6982cd2dd7}{%
+           family={Greiner},
+           familyi={G\bibinitperiod},
+           given={Markus},
+           giveni={M\bibinitperiod}}}%
+        {{hash=6fc77d1d8f2ac7e701e7a4d34f8b42d4}{%
+           family={Vuletić},
+           familyi={V\bibinitperiod},
+           given={Vladan},
+           giveni={V\bibinitperiod}}}%
+        {{hash=8fd921a549ae6718702b6c8c84fef487}{%
+           family={Lukin},
+           familyi={L\bibinitperiod},
+           given={Mikhail\bibnamedelima D.},
+           giveni={M\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{7524645f4fddaa8c04a2fb28bb0c8c51}
+      \strng{fullhash}{5250a8ffccfd0d392e026e359f84e329}
+      \strng{fullhashraw}{5250a8ffccfd0d392e026e359f84e329}
+      \strng{bibnamehash}{7524645f4fddaa8c04a2fb28bb0c8c51}
+      \strng{authorbibnamehash}{7524645f4fddaa8c04a2fb28bb0c8c51}
+      \strng{authornamehash}{7524645f4fddaa8c04a2fb28bb0c8c51}
+      \strng{authorfullhash}{5250a8ffccfd0d392e026e359f84e329}
+      \strng{authorfullhashraw}{5250a8ffccfd0d392e026e359f84e329}
+      \field{extraname}{1}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Abstract Suppressing errors is the central challenge for useful quantum computing 1 , requiring quantum error correction (QEC) 2–6 for large-scale processing. However, the overhead in the realization of error-corrected ‘logical’ qubits, in which information is encoded across many physical qubits for redundancy 2–4 , poses substantial challenges to large-scale logical quantum computing. Here we report the realization of a programmable quantum processor based on encoded logical qubits operating with up to 280 physical qubits. Using logical-level control and a zoned architecture in reconfigurable neutral-atom arrays 7 , our system combines high two-qubit gate fidelities 8 , arbitrary connectivity 7,9 , as well as fully programmable single-qubit rotations and mid-circuit readout 10–15 . Operating this logical processor with various types of encoding, we demonstrate improvement of a two-qubit logic gate by scaling surface-code 6 distance from d  = 3 to d  = 7, preparation of colour-code qubits with break-even fidelities 5 , fault-tolerant creation of logical Greenberger–Horne–Zeilinger (GHZ) states and feedforward entanglement teleportation, as well as operation of 40 colour-code qubits. Finally, using 3D [[8,3,2]] code blocks 16,17 , we realize computationally complex sampling circuits 18 with up to 48 logical qubits entangled with hypercube connectivity 19 with 228 logical two-qubit gates and 48 logical CCZ gates 20 . We find that this logical encoding substantially improves algorithmic performance with error detection, outperforming physical-qubit fidelities at both cross-entropy benchmarking and quantum simulations of fast scrambling 21,22 . These results herald the advent of early error-corrected quantum computation and chart a path towards large-scale logical processors.}
+      \field{issn}{0028-0836, 1476-4687}
+      \field{journaltitle}{Nature}
+      \field{month}{2}
+      \field{number}{7997}
+      \field{title}{Logical quantum processor based on reconfigurable atom arrays}
+      \field{urlday}{4}
+      \field{urlmonth}{11}
+      \field{urlyear}{2025}
+      \field{volume}{626}
+      \field{year}{2024}
+      \field{urldateera}{ce}
+      \field{pages}{58\bibrangedash 65}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1038/s41586-023-06927-3
+      \endverb
+      \verb{file}
+      \verb PDF:/Users/leigh/Zotero/storage/PSF4G6FZ/Bluvstein et al. - 2024 - Logical quantum processor based on reconfigurable atom arrays.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://www.nature.com/articles/s41586-023-06927-3
+      \endverb
+      \verb{url}
+      \verb https://www.nature.com/articles/s41586-023-06927-3
+      \endverb
+    \endentry
+    \entry{kubica_erasure_2023}{article}{}{}
+      \name{author}{6}{}{%
+        {{hash=0fe1ec3b788b9fa1e44077bb69c896e5}{%
+           family={Kubica},
+           familyi={K\bibinitperiod},
+           given={Aleksander},
+           giveni={A\bibinitperiod}}}%
+        {{hash=dc74f2c636b75b2da79df63998457b8c}{%
+           family={Haim},
+           familyi={H\bibinitperiod},
+           given={Arbel},
+           giveni={A\bibinitperiod}}}%
+        {{hash=297a2c9058d21f5a10272df530c3fac3}{%
+           family={Vaknin},
+           familyi={V\bibinitperiod},
+           given={Yotam},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=3d882c9d3ed49738af5e04139f81e3ed}{%
+           family={Levine},
+           familyi={L\bibinitperiod},
+           given={Harry},
+           giveni={H\bibinitperiod}}}%
+        {{hash=8df6dfab0ea1f5699ad36e8af33c0fd0}{%
+           family={Brandão},
+           familyi={B\bibinitperiod},
+           given={Fernando},
+           giveni={F\bibinitperiod}}}%
+        {{hash=e0582d5d32297c836d4f0dbe74a532b2}{%
+           family={Retzker},
+           familyi={R\bibinitperiod},
+           given={Alex},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{194520b3419b59299496a44de512b200}
+      \strng{fullhash}{0a8620b4dbc84331c2e80bf7ccc4ad21}
+      \strng{fullhashraw}{0a8620b4dbc84331c2e80bf7ccc4ad21}
+      \strng{bibnamehash}{0a8620b4dbc84331c2e80bf7ccc4ad21}
+      \strng{authorbibnamehash}{0a8620b4dbc84331c2e80bf7ccc4ad21}
+      \strng{authornamehash}{194520b3419b59299496a44de512b200}
+      \strng{authorfullhash}{0a8620b4dbc84331c2e80bf7ccc4ad21}
+      \strng{authorfullhashraw}{0a8620b4dbc84331c2e80bf7ccc4ad21}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{issn}{2160-3308}
+      \field{journaltitle}{Physical Review X}
+      \field{month}{11}
+      \field{number}{4}
+      \field{shorttitle}{Erasure {Qubits}}
+      \field{title}{Erasure {Qubits}: {Overcoming} the {T} 1 {Limit} in {Superconducting} {Circuits}}
+      \field{urlday}{18}
+      \field{urlmonth}{10}
+      \field{urlyear}{2025}
+      \field{volume}{13}
+      \field{year}{2023}
+      \field{urldateera}{ce}
+      \field{pages}{041022}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1103/PhysRevX.13.041022
+      \endverb
+      \verb{file}
+      \verb Available Version (via Google Scholar):/Users/leigh/Zotero/storage/H6Q24DFS/Kubica et al. - 2023 - Erasure Qubits Overcoming the T 1 Limit in Superconducting Circuits.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://link.aps.org/doi/10.1103/PhysRevX.13.041022
+      \endverb
+      \verb{url}
+      \verb https://link.aps.org/doi/10.1103/PhysRevX.13.041022
+      \endverb
+    \endentry
+    \entry{wu_erasure_2022}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=5054d8715f6746af9ed28c566f168046}{%
+           family={Wu},
+           familyi={W\bibinitperiod},
+           given={Yue},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=1d7a222c6cd258cd6b48235ab32ab9bf}{%
+           family={Kolkowitz},
+           familyi={K\bibinitperiod},
+           given={Shimon},
+           giveni={S\bibinitperiod}}}%
+        {{hash=7e87353998bc5444ec07ed2b21d2e233}{%
+           family={Puri},
+           familyi={P\bibinitperiod},
+           given={Shruti},
+           giveni={S\bibinitperiod}}}%
+        {{hash=97308d8cbf01634c17c749057d74a8ad}{%
+           family={Thompson},
+           familyi={T\bibinitperiod},
+           given={Jeff\bibnamedelima D.},
+           giveni={J\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{77aa4285bb0660bf6222f13bc03c3431}
+      \strng{fullhash}{1b892d76d2077dc5258d55be7dc6636b}
+      \strng{fullhashraw}{1b892d76d2077dc5258d55be7dc6636b}
+      \strng{bibnamehash}{1b892d76d2077dc5258d55be7dc6636b}
+      \strng{authorbibnamehash}{1b892d76d2077dc5258d55be7dc6636b}
+      \strng{authornamehash}{77aa4285bb0660bf6222f13bc03c3431}
+      \strng{authorfullhash}{1b892d76d2077dc5258d55be7dc6636b}
+      \strng{authorfullhashraw}{1b892d76d2077dc5258d55be7dc6636b}
+      \field{extraname}{1}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Abstract Executing quantum algorithms on error-corrected logical qubits is a critical step for scalable quantum computing, but the requisite numbers of qubits and physical error rates are demanding for current experimental hardware. Recently, the development of error correcting codes tailored to particular physical noise models has helped relax these requirements. In this work, we propose a qubit encoding and gate protocol for 171 Yb neutral atom qubits that converts the dominant physical errors into erasures, that is, errors in known locations. The key idea is to encode qubits in a metastable electronic level, such that gate errors predominantly result in transitions to disjoint subspaces whose populations can be continuously monitored via fluorescence. We estimate that 98\% of errors can be converted into erasures. We quantify the benefit of this approach via circuit-level simulations of the surface code, finding a threshold increase from 0.937\% to 4.15\%. We also observe a larger code distance near the threshold, leading to a faster decrease in the logical error rate for the same number of physical qubits, which is important for near-term implementations. Erasure conversion should benefit any error correcting code, and may also be applied to design new gates and encodings in other qubit platforms.}
+      \field{issn}{2041-1723}
+      \field{journaltitle}{Nature Communications}
+      \field{month}{8}
+      \field{number}{1}
+      \field{title}{Erasure conversion for fault-tolerant quantum computing in alkaline earth {Rydberg} atom arrays}
+      \field{urlday}{11}
+      \field{urlmonth}{10}
+      \field{urlyear}{2025}
+      \field{volume}{13}
+      \field{year}{2022}
+      \field{urldateera}{ce}
+      \field{pages}{4657}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1038/s41467-022-32094-6
+      \endverb
+      \verb{file}
+      \verb PDF:/Users/leigh/Zotero/storage/X33S3A5W/Wu et al. - 2022 - Erasure conversion for fault-tolerant quantum computing in alkaline earth Rydberg atom arrays.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://www.nature.com/articles/s41467-022-32094-6
+      \endverb
+      \verb{url}
+      \verb https://www.nature.com/articles/s41467-022-32094-6
+      \endverb
+    \endentry
+    \entry{ma_high-fidelity_2023}{article}{}{}
+      \name{author}{10}{}{%
+        {{hash=09d5aaacdfbbc789c9d61fce1728387a}{%
+           family={Ma},
+           familyi={M\bibinitperiod},
+           given={Shuo},
+           giveni={S\bibinitperiod}}}%
+        {{hash=18c8ff13c1b4d3f50de5bb0c904ecca4}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Genyue},
+           giveni={G\bibinitperiod}}}%
+        {{hash=2eaf4ab1b7fbff3799d43f8e06db9995}{%
+           family={Peng},
+           familyi={P\bibinitperiod},
+           given={Pai},
+           giveni={P\bibinitperiod}}}%
+        {{hash=c8aa7f4f13efae73a12cc4daa014c1d5}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Bichen},
+           giveni={B\bibinitperiod}}}%
+        {{hash=8bc38d76095a8fb94c89aa063ecf99fd}{%
+           family={Jandura},
+           familyi={J\bibinitperiod},
+           given={Sven},
+           giveni={S\bibinitperiod}}}%
+        {{hash=f04756c94a8a37b453bfea99ae28a510}{%
+           family={Claes},
+           familyi={C\bibinitperiod},
+           given={Jahan},
+           giveni={J\bibinitperiod}}}%
+        {{hash=3ab711808d7a0ae2371767d0f71ca531}{%
+           family={Burgers},
+           familyi={B\bibinitperiod},
+           given={Alex\bibnamedelima P.},
+           giveni={A\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=f2852eb0c9a59ae9e4b30465f6876ddf}{%
+           family={Pupillo},
+           familyi={P\bibinitperiod},
+           given={Guido},
+           giveni={G\bibinitperiod}}}%
+        {{hash=7e87353998bc5444ec07ed2b21d2e233}{%
+           family={Puri},
+           familyi={P\bibinitperiod},
+           given={Shruti},
+           giveni={S\bibinitperiod}}}%
+        {{hash=97308d8cbf01634c17c749057d74a8ad}{%
+           family={Thompson},
+           familyi={T\bibinitperiod},
+           given={Jeff\bibnamedelima D.},
+           giveni={J\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{16d8a10bc9fa6913586dcbf8b4d004e1}
+      \strng{fullhash}{9001c84f4a25859c87d190a9597d50a8}
+      \strng{fullhashraw}{9001c84f4a25859c87d190a9597d50a8}
+      \strng{bibnamehash}{16d8a10bc9fa6913586dcbf8b4d004e1}
+      \strng{authorbibnamehash}{16d8a10bc9fa6913586dcbf8b4d004e1}
+      \strng{authornamehash}{16d8a10bc9fa6913586dcbf8b4d004e1}
+      \strng{authorfullhash}{9001c84f4a25859c87d190a9597d50a8}
+      \strng{authorfullhashraw}{9001c84f4a25859c87d190a9597d50a8}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The development of scalable, high-fidelity qubits is a key challenge in quantum information science. Neutral atom qubits have progressed rapidly in recent years, demonstrating programmable processors1,2 and quantum simulators with scaling to hundreds of atoms3,4. Exploring new atomic species, such as alkaline earth atoms5–7, or combining multiple species8 can provide new paths to improving coherence, control and scalability. For example, for eventual application in quantum error correction, it is advantageous to realize qubits with structured error models, such as biased Pauli errors9 or conversion of errors into detectable erasures10. Here we demonstrate a new neutral atom qubit using the nuclear spin of a long-lived metastable state in 171Yb. The long coherence time and fast excitation to the Rydberg state allow one- and two-qubit gates with fidelities of 0.9990(1) and 0.980(1), respectively. Importantly, a large fraction of all gate errors result in decays out of the qubit subspace to the ground state. By performing fast, mid-circuit detection of these errors, we convert them into erasure errors; during detection, the induced error probability on qubits remaining in the computational space is less than 10−5. This work establishes metastable 171Yb as a promising platform for realizing fault-tolerant quantum computing.}
+      \field{issn}{1476-4687}
+      \field{journaltitle}{Nature}
+      \field{month}{10}
+      \field{note}{Publisher: Nature Publishing Group}
+      \field{number}{7982}
+      \field{title}{High-fidelity gates and mid-circuit erasure conversion in an atomic qubit}
+      \field{urlday}{1}
+      \field{urlmonth}{11}
+      \field{urlyear}{2025}
+      \field{volume}{622}
+      \field{year}{2023}
+      \field{urldateera}{ce}
+      \field{pages}{279\bibrangedash 284}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1038/s41586-023-06438-1
+      \endverb
+      \verb{file}
+      \verb Full Text PDF:/Users/leigh/Zotero/storage/9NUGGXWV/Ma et al. - 2023 - High-fidelity gates and mid-circuit erasure conversion in an atomic qubit.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://www.nature.com/articles/s41586-023-06438-1
+      \endverb
+      \verb{url}
+      \verb https://www.nature.com/articles/s41586-023-06438-1
+      \endverb
+      \keyw{Qubits,Ultracold gases}
+    \endentry
+    \entry{scholl_erasure_2023}{article}{}{}
+      \name{author}{6}{}{%
+        {{hash=1c3b452ba0e49a72d33d53aeed674d6b}{%
+           family={Scholl},
+           familyi={S\bibinitperiod},
+           given={Pascal},
+           giveni={P\bibinitperiod}}}%
+        {{hash=c906e4e7569caaede80d81b5fb9f7f7e}{%
+           family={Shaw},
+           familyi={S\bibinitperiod},
+           given={Adam\bibnamedelima L.},
+           giveni={A\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=8042959c04a3b6c41793d976790b8dcf}{%
+           family={Tsai},
+           familyi={T\bibinitperiod},
+           given={Richard\bibnamedelima Bing-Shiun},
+           giveni={R\bibinitperiod\bibinitdelim B\bibinithyphendelim S\bibinitperiod}}}%
+        {{hash=688a488e371557ac59c60503606a7301}{%
+           family={Finkelstein},
+           familyi={F\bibinitperiod},
+           given={Ran},
+           giveni={R\bibinitperiod}}}%
+        {{hash=57a57425ca896b5ff04437ae9326358a}{%
+           family={Choi},
+           familyi={C\bibinitperiod},
+           given={Joonhee},
+           giveni={J\bibinitperiod}}}%
+        {{hash=aa730f0fe3724843990535fb381fb8a9}{%
+           family={Endres},
+           familyi={E\bibinitperiod},
+           given={Manuel},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{216cd8da747c9b0aef918592bf0cef97}
+      \strng{fullhash}{1c04d2d5634275390865e7535e72e47b}
+      \strng{fullhashraw}{1c04d2d5634275390865e7535e72e47b}
+      \strng{bibnamehash}{1c04d2d5634275390865e7535e72e47b}
+      \strng{authorbibnamehash}{1c04d2d5634275390865e7535e72e47b}
+      \strng{authornamehash}{216cd8da747c9b0aef918592bf0cef97}
+      \strng{authorfullhash}{1c04d2d5634275390865e7535e72e47b}
+      \strng{authorfullhashraw}{1c04d2d5634275390865e7535e72e47b}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Abstract Minimizing and understanding errors is critical for quantum science, both in noisy intermediate scale quantum (NISQ) devices 1 and for the quest towards fault-tolerant quantum computation 2,3 . Rydberg arrays have emerged as a prominent platform in this context 4 with impressive system sizes 5,6 and proposals suggesting how error-correction thresholds could be significantly improved by detecting leakage errors with single-atom resolution 7,8 , a form of erasure error conversion 9–12 . However, two-qubit entanglement fidelities in Rydberg atom arrays 13,14 have lagged behind competitors 15,16 and this type of erasure conversion is yet to be realized for matter-based qubits in general. Here we demonstrate both erasure conversion and high-fidelity Bell state generation using a Rydberg quantum simulator 5,6,17,18 . When excising data with erasure errors observed via fast imaging of alkaline-earth atoms 19–22 , we achieve a Bell state fidelity of \$\${\textbackslash}ge 0.997\{1\}\_\{-13\}{\textasciicircum}\{+10\}\$\$ ≥ 0.997 1 − 13 + 10 , which improves to \$\${\textbackslash}ge 0.998\{5\}\_\{-12\}{\textasciicircum}\{+7\}\$\$ ≥ 0.998 5 − 12 + 7 when correcting for remaining state-preparation errors. We further apply erasure conversion in a quantum simulation experiment for quasi-adiabatic preparation of long-range order across a quantum phase transition, and reveal the otherwise hidden impact of these errors on the simulation outcome. Our work demonstrates the capability for Rydberg-based entanglement to reach fidelities in the 0.999 regime, with higher fidelities a question of technical improvements, and shows how erasure conversion can be utilized in NISQ devices. These techniques could be translated directly to quantum-error-correction codes with the addition of long-lived qubits 7,22–24 .}
+      \field{issn}{0028-0836, 1476-4687}
+      \field{journaltitle}{Nature}
+      \field{month}{10}
+      \field{number}{7982}
+      \field{title}{Erasure conversion in a high-fidelity {Rydberg} quantum simulator}
+      \field{urlday}{11}
+      \field{urlmonth}{10}
+      \field{urlyear}{2025}
+      \field{volume}{622}
+      \field{year}{2023}
+      \field{urldateera}{ce}
+      \field{pages}{273\bibrangedash 278}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1038/s41586-023-06516-4
+      \endverb
+      \verb{file}
+      \verb PDF:/Users/leigh/Zotero/storage/I3PEKRHR/Scholl et al. - 2023 - Erasure conversion in a high-fidelity Rydberg quantum simulator.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://www.nature.com/articles/s41586-023-06516-4
+      \endverb
+      \verb{url}
+      \verb https://www.nature.com/articles/s41586-023-06516-4
+      \endverb
+    \endentry
+    \entry{chow_circuit-based_2024}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=e8b3fb7cfa5613ca16deca82175324ea}{%
+           family={Chow},
+           familyi={C\bibinitperiod},
+           given={Matthew\bibnamedelimb N.\bibnamedelimi H.},
+           giveni={M\bibinitperiod\bibinitdelim N\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+      }
+      \strng{namehash}{e8b3fb7cfa5613ca16deca82175324ea}
+      \strng{fullhash}{e8b3fb7cfa5613ca16deca82175324ea}
+      \strng{fullhashraw}{e8b3fb7cfa5613ca16deca82175324ea}
+      \strng{bibnamehash}{e8b3fb7cfa5613ca16deca82175324ea}
+      \strng{authorbibnamehash}{e8b3fb7cfa5613ca16deca82175324ea}
+      \strng{authornamehash}{e8b3fb7cfa5613ca16deca82175324ea}
+      \strng{authorfullhash}{e8b3fb7cfa5613ca16deca82175324ea}
+      \strng{authorfullhashraw}{e8b3fb7cfa5613ca16deca82175324ea}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{PRX Quantum}
+      \field{number}{4}
+      \field{title}{Circuit-{Based} {Leakage}-to-{Erasure} {Conversion} in a {Neutral}-{Atom} {Quantum} {Processor}}
+      \field{volume}{5}
+      \field{year}{2024}
+      \verb{doi}
+      \verb 10.1103/PRXQuantum.5.040343
+      \endverb
+      \verb{file}
+      \verb Submitted Version:/Users/leigh/Zotero/storage/VI9LBMUI/Chow - 2024 - Circuit-Based Leakage-to-Erasure Conversion in a Neutral-Atom Quantum Processor.pdf:application/pdf;text/html Attachment:/Users/leigh/Zotero/storage/WK4652UT/PRXQuantum.5.html:text/html
+      \endverb
+    \endentry
+    \entry{reichardt_fault-tolerant_2025}{misc}{}{}
+      \name{author}{72}{}{%
+        {{hash=d6ae3cfcc2607b5a18caff514bf4f3f3}{%
+           family={Reichardt},
+           familyi={R\bibinitperiod},
+           given={Ben\bibnamedelima W.},
+           giveni={B\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+        {{hash=1ee73a43db39ac2b427e42a29f0360a5}{%
+           family={Paetznick},
+           familyi={P\bibinitperiod},
+           given={Adam},
+           giveni={A\bibinitperiod}}}%
+        {{hash=31d859a514f0db6dca25a90102c0cccf}{%
+           family={Aasen},
+           familyi={A\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+        {{hash=a01e179e0cfc911fb75ebd7f3dcff97c}{%
+           family={Basov},
+           familyi={B\bibinitperiod},
+           given={Ivan},
+           giveni={I\bibinitperiod}}}%
+        {{hash=84807c75cfe8cb7b6db8833393f3c718}{%
+           family={Bello-Rivas},
+           familyi={B\bibinithyphendelim R\bibinitperiod},
+           given={Juan\bibnamedelima M.},
+           giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=c20da89a5619920628dae50a618cdac7}{%
+           family={Bonderson},
+           familyi={B\bibinitperiod},
+           given={Parsa},
+           giveni={P\bibinitperiod}}}%
+        {{hash=a4adfa4fce307d93f8891da5ee3ce5e2}{%
+           family={Chao},
+           familyi={C\bibinitperiod},
+           given={Rui},
+           giveni={R\bibinitperiod}}}%
+        {{hash=827af8f0d9b192977f63fe4f3eb30046}{%
+           family={Dam},
+           familyi={D\bibinitperiod},
+           given={Wim\bibnamedelima van},
+           giveni={W\bibinitperiod\bibinitdelim v\bibinitperiod}}}%
+        {{hash=2b6ced7ad9a68118cdd8e4199aabebae}{%
+           family={Hastings},
+           familyi={H\bibinitperiod},
+           given={Matthew\bibnamedelima B.},
+           giveni={M\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+        {{hash=333cc9071af15b7560c50aeccee31dab}{%
+           family={Mishmash},
+           familyi={M\bibinitperiod},
+           given={Ryan\bibnamedelima V.},
+           giveni={R\bibinitperiod\bibinitdelim V\bibinitperiod}}}%
+        {{hash=ec804caba34cc7a53a2044bd5a869937}{%
+           family={Paz},
+           familyi={P\bibinitperiod},
+           given={Andres},
+           giveni={A\bibinitperiod}}}%
+        {{hash=ee529448f2953ec05b5d68f4772bb7ff}{%
+           family={Silva},
+           familyi={S\bibinitperiod},
+           given={Marcus\bibnamedelimb P.\bibnamedelimi da},
+           giveni={M\bibinitperiod\bibinitdelim P\bibinitperiod\bibinitdelim d\bibinitperiod}}}%
+        {{hash=f10da4a2ad45730d928bcf047e06f0a8}{%
+           family={Sundaram},
+           familyi={S\bibinitperiod},
+           given={Aarthi},
+           giveni={A\bibinitperiod}}}%
+        {{hash=1e0b27cffef483b809894bbe98096b26}{%
+           family={Svore},
+           familyi={S\bibinitperiod},
+           given={Krysta\bibnamedelima M.},
+           giveni={K\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=59a13af7b02e5b36d2cc1286178bcf37}{%
+           family={Vaschillo},
+           familyi={V\bibinitperiod},
+           given={Alexander},
+           giveni={A\bibinitperiod}}}%
+        {{hash=25c97308f9f357694bb75718fe65cb11}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Zhenghan},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=286a9daf4a2bc9b5f98feb913cef0615}{%
+           family={Zanner},
+           familyi={Z\bibinitperiod},
+           given={Matt},
+           giveni={M\bibinitperiod}}}%
+        {{hash=429d1a1a1a8ef6b97515c0609d2255b2}{%
+           family={Cairncross},
+           familyi={C\bibinitperiod},
+           given={William\bibnamedelima B.},
+           giveni={W\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+        {{hash=836deb23d48133c14c4c5dea65288f48}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Cheng-An},
+           giveni={C\bibinithyphendelim A\bibinitperiod}}}%
+        {{hash=14e1191042fd1f4230426bbb7417496d}{%
+           family={Crow},
+           familyi={C\bibinitperiod},
+           given={Daniel},
+           giveni={D\bibinitperiod}}}%
+        {{hash=55b3a46d6b054e348cc44a1a885a3dcb}{%
+           family={Kim},
+           familyi={K\bibinitperiod},
+           given={Hyosub},
+           giveni={H\bibinitperiod}}}%
+        {{hash=117ed2803f0c2c2417f6e3a456d62718}{%
+           family={Kindem},
+           familyi={K\bibinitperiod},
+           given={Jonathan\bibnamedelima M.},
+           giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=cf2b17e323fbb2757ffd2299f1dd0c07}{%
+           family={King},
+           familyi={K\bibinitperiod},
+           given={Jonathan},
+           giveni={J\bibinitperiod}}}%
+        {{hash=dba8ce8d688df90b87b11a20a1016391}{%
+           family={McDonald},
+           familyi={M\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+        {{hash=90224a7e65afa4a65bd72ebe11f092ef}{%
+           family={Norcia},
+           familyi={N\bibinitperiod},
+           given={Matthew\bibnamedelima A.},
+           giveni={M\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=57510aee0aa840f2e557d5e66933f530}{%
+           family={Ryou},
+           familyi={R\bibinitperiod},
+           given={Albert},
+           giveni={A\bibinitperiod}}}%
+        {{hash=b21217c831fb86ec27d165b384a1cb66}{%
+           family={Stone},
+           familyi={S\bibinitperiod},
+           given={Mark},
+           giveni={M\bibinitperiod}}}%
+        {{hash=87664012601a94b432e6ce78f14c4f14}{%
+           family={Wadleigh},
+           familyi={W\bibinitperiod},
+           given={Laura},
+           giveni={L\bibinitperiod}}}%
+        {{hash=2701e86d02b9b32c2828814791d4258b}{%
+           family={Barnes},
+           familyi={B\bibinitperiod},
+           given={Katrina},
+           giveni={K\bibinitperiod}}}%
+        {{hash=af9c12420aa887c171167968f1b48596}{%
+           family={Battaglino},
+           familyi={B\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+        {{hash=93e168303f1b5d06a1e28c3493c8b7a8}{%
+           family={Bohdanowicz},
+           familyi={B\bibinitperiod},
+           given={Thomas\bibnamedelima C.},
+           giveni={T\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=68eee3a4227e3ca2464f6a2028640c67}{%
+           family={Booth},
+           familyi={B\bibinitperiod},
+           given={Graham},
+           giveni={G\bibinitperiod}}}%
+        {{hash=9cfdbb87832f22734d1601a08280c077}{%
+           family={Brown},
+           familyi={B\bibinitperiod},
+           given={Andrew},
+           giveni={A\bibinitperiod}}}%
+        {{hash=0de07e4a8920b3c206a9974bc3669b79}{%
+           family={Brown},
+           familyi={B\bibinitperiod},
+           given={Mark\bibnamedelima O.},
+           giveni={M\bibinitperiod\bibinitdelim O\bibinitperiod}}}%
+        {{hash=b590068a5b7d354ccab65bceb90169a0}{%
+           family={Cassella},
+           familyi={C\bibinitperiod},
+           given={Kayleigh},
+           giveni={K\bibinitperiod}}}%
+        {{hash=04ce74fa16a058571cd6cf0d51bb5804}{%
+           family={Coxe},
+           familyi={C\bibinitperiod},
+           given={Robin},
+           giveni={R\bibinitperiod}}}%
+        {{hash=74ef72b19702fadf946bc49fedb486c0}{%
+           family={Epstein},
+           familyi={E\bibinitperiod},
+           given={Jeffrey\bibnamedelima M.},
+           giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=992c475a045414e5beb3dbdd13efe956}{%
+           family={Feldkamp},
+           familyi={F\bibinitperiod},
+           given={Max},
+           giveni={M\bibinitperiod}}}%
+        {{hash=a301ab2b0676dd93530692e4a11ccc10}{%
+           family={Griger},
+           familyi={G\bibinitperiod},
+           given={Christopher},
+           giveni={C\bibinitperiod}}}%
+        {{hash=5eabd95e53e5fdb22fca917f7fe7d86b}{%
+           family={Halperin},
+           familyi={H\bibinitperiod},
+           given={Eli},
+           giveni={E\bibinitperiod}}}%
+        {{hash=12b320614c252d6a71857ee20465f1d7}{%
+           family={Heinz},
+           familyi={H\bibinitperiod},
+           given={Andre},
+           giveni={A\bibinitperiod}}}%
+        {{hash=72cc10e0ae4299d1d8197617acb1a5c4}{%
+           family={Hummel},
+           familyi={H\bibinitperiod},
+           given={Frederic},
+           giveni={F\bibinitperiod}}}%
+        {{hash=03fdb5e299df56b1b10f6cbf19925c59}{%
+           family={Jaffe},
+           familyi={J\bibinitperiod},
+           given={Matthew},
+           giveni={M\bibinitperiod}}}%
+        {{hash=d6e187326c4a07453e9ff33310364ed4}{%
+           family={Jones},
+           familyi={J\bibinitperiod},
+           given={Antonia\bibnamedelimb M.\bibnamedelimi W.},
+           giveni={A\bibinitperiod\bibinitdelim M\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+        {{hash=7865fc0c0df31a4fe06b35fa9482b4d7}{%
+           family={Kapit},
+           familyi={K\bibinitperiod},
+           given={Eliot},
+           giveni={E\bibinitperiod}}}%
+        {{hash=9b643c333dc6dbb08738bcfbbc3affc4}{%
+           family={Kotru},
+           familyi={K\bibinitperiod},
+           given={Krish},
+           giveni={K\bibinitperiod}}}%
+        {{hash=d993fa65f8cda4a2c31ad026d59a4098}{%
+           family={Lauigan},
+           familyi={L\bibinitperiod},
+           given={Joseph},
+           giveni={J\bibinitperiod}}}%
+        {{hash=dbe83fd8da75338203d4e8dd0e20be17}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Ming},
+           giveni={M\bibinitperiod}}}%
+        {{hash=4679d26dc879b21b6f3d670e6a0d44af}{%
+           family={Marjanovic},
+           familyi={M\bibinitperiod},
+           given={Jan},
+           giveni={J\bibinitperiod}}}%
+        {{hash=ea33808be92d9bbc68475ec1659c1dd6}{%
+           family={Megidish},
+           familyi={M\bibinitperiod},
+           given={Eli},
+           giveni={E\bibinitperiod}}}%
+        {{hash=74406fe8fd85a6e540611a8b571fb050}{%
+           family={Meredith},
+           familyi={M\bibinitperiod},
+           given={Matthew},
+           giveni={M\bibinitperiod}}}%
+        {{hash=ca546870000d0e4063943a7ec8cc5edb}{%
+           family={Morshead},
+           familyi={M\bibinitperiod},
+           given={Ryan},
+           giveni={R\bibinitperiod}}}%
+        {{hash=95f401387e664d344f38edb340e1dadc}{%
+           family={Muniz},
+           familyi={M\bibinitperiod},
+           given={Juan\bibnamedelima A.},
+           giveni={J\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=f7174d67b9c2ed598e32f4cb584778f8}{%
+           family={Narayanaswami},
+           familyi={N\bibinitperiod},
+           given={Sandeep},
+           giveni={S\bibinitperiod}}}%
+        {{hash=286704bc31c4a3c9d0116dc3c4500eeb}{%
+           family={Nishiguchi},
+           familyi={N\bibinitperiod},
+           given={Ciro},
+           giveni={C\bibinitperiod}}}%
+        {{hash=3d3b6cbf901e22671570000d8687bd92}{%
+           family={Paule},
+           familyi={P\bibinitperiod},
+           given={Timothy},
+           giveni={T\bibinitperiod}}}%
+        {{hash=3ceefd0ba516f7b9924c104809fc039b}{%
+           family={Pawlak},
+           familyi={P\bibinitperiod},
+           given={Kelly\bibnamedelima A.},
+           giveni={K\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=fe68a3d703383a6014ebff14f05a3d70}{%
+           family={Pudenz},
+           familyi={P\bibinitperiod},
+           given={Kristen\bibnamedelima L.},
+           giveni={K\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=497a411b76fa37745d9344960fa3cf5a}{%
+           family={Pérez},
+           familyi={P\bibinitperiod},
+           given={David\bibnamedelima Rodríguez},
+           giveni={D\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=5ced36a0eee38bc71bb770142f28b879}{%
+           family={Simon},
+           familyi={S\bibinitperiod},
+           given={Jon},
+           giveni={J\bibinitperiod}}}%
+        {{hash=e023b6c2af19f21d67234233fd71087d}{%
+           family={Smull},
+           familyi={S\bibinitperiod},
+           given={Aaron},
+           giveni={A\bibinitperiod}}}%
+        {{hash=3d4ac8560cab52967e8b3548a3995e1c}{%
+           family={Stack},
+           familyi={S\bibinitperiod},
+           given={Daniel},
+           giveni={D\bibinitperiod}}}%
+        {{hash=4761dba205438720e23c0e33c66f175d}{%
+           family={Urbanek},
+           familyi={U\bibinitperiod},
+           given={Miroslav},
+           giveni={M\bibinitperiod}}}%
+        {{hash=0b0bbf84136615e9fde668a21edaf742}{%
+           family={Veerdonk},
+           familyi={V\bibinitperiod},
+           given={René\bibnamedelimb J.\bibnamedelimi M.\bibnamedelimi van\bibnamedelima de},
+           giveni={R\bibinitperiod\bibinitdelim J\bibinitperiod\bibinitdelim M\bibinitperiod\bibinitdelim v\bibinitperiod\bibinitdelim d\bibinitperiod}}}%
+        {{hash=2457a6e39d5b599717fb16042cf1f466}{%
+           family={Vendeiro},
+           familyi={V\bibinitperiod},
+           given={Zachary},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=1aa3f4e11da506889f3ea265b612c8e0}{%
+           family={Weverka},
+           familyi={W\bibinitperiod},
+           given={Robert\bibnamedelima T.},
+           giveni={R\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
+        {{hash=73d886c76aff3237c0e7c964b2fef058}{%
+           family={Wilkason},
+           familyi={W\bibinitperiod},
+           given={Thomas},
+           giveni={T\bibinitperiod}}}%
+        {{hash=507595624cf0ef3774451d3066898056}{%
+           family={Wu},
+           familyi={W\bibinitperiod},
+           given={Tsung-Yao},
+           giveni={T\bibinithyphendelim Y\bibinitperiod}}}%
+        {{hash=575a5ee21fb18fa9d777a9a1a1c55273}{%
+           family={Xie},
+           familyi={X\bibinitperiod},
+           given={Xin},
+           giveni={X\bibinitperiod}}}%
+        {{hash=2366722f8122d8b737f3c70b54d2e6ef}{%
+           family={Zalys-Geller},
+           familyi={Z\bibinithyphendelim G\bibinitperiod},
+           given={Evan},
+           giveni={E\bibinitperiod}}}%
+        {{hash=743001cda7ffdd58069caefdfa81b447}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Xiaogang},
+           giveni={X\bibinitperiod}}}%
+        {{hash=3e11d43d47dd60ef075ca8c2190bbee4}{%
+           family={Bloom},
+           familyi={B\bibinitperiod},
+           given={Benjamin\bibnamedelima J.},
+           giveni={B\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {arXiv}%
+      }
+      \strng{namehash}{182787cf4867010f966180341ff7f397}
+      \strng{fullhash}{b796315fc2959803ced7c6738ad20c41}
+      \strng{fullhashraw}{b796315fc2959803ced7c6738ad20c41}
+      \strng{bibnamehash}{182787cf4867010f966180341ff7f397}
+      \strng{authorbibnamehash}{182787cf4867010f966180341ff7f397}
+      \strng{authornamehash}{182787cf4867010f966180341ff7f397}
+      \strng{authorfullhash}{b796315fc2959803ced7c6738ad20c41}
+      \strng{authorfullhashraw}{b796315fc2959803ced7c6738ad20c41}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Quantum computing experiments are transitioning from running on physical qubits to using encoded, logical qubits. Fault-tolerant computation can identify and correct errors, and has the potential to enable the dramatically reduced logical error rates required for valuable algorithms. However, it requires flexible control of high-fidelity operations performed on large numbers of qubits. We demonstrate fault-tolerant quantum computation on a quantum processor with 256 qubits, each an individual neutral Ytterbium atom. The operations are designed so that key error sources convert to atom loss, which can be detected by imaging. Full connectivity is enabled by atom movement. We demonstrate the entanglement of 24 logical qubits encoded into 48 atoms, at once catching errors and correcting for, on average 1.8, lost atoms. We also implement the Bernstein-Vazirani algorithm with up to 28 logical qubits encoded into 112 atoms, showing better-than-physical error rates. In both cases, "erasure conversion," changing errors into a form that can be detected independently from qubit state, improves circuit performance. These results begin to clear a path for achieving scientific quantum advantage with a programmable neutral atom quantum processor.}
+      \field{month}{6}
+      \field{note}{arXiv:2411.11822 [quant-ph]}
+      \field{title}{Fault-tolerant quantum computation with a neutral atom processor}
+      \field{urlday}{11}
+      \field{urlmonth}{10}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.48550/arXiv.2411.11822
+      \endverb
+      \verb{file}
+      \verb Preprint PDF:/Users/leigh/Zotero/storage/LDSDYPWA/Reichardt et al. - 2025 - Fault-tolerant quantum computation with a neutral atom processor.pdf:application/pdf;Snapshot:/Users/leigh/Zotero/storage/XBY5XTAM/2411.html:text/html
+      \endverb
+      \verb{urlraw}
+      \verb http://arxiv.org/abs/2411.11822
+      \endverb
+      \verb{url}
+      \verb http://arxiv.org/abs/2411.11822
+      \endverb
+      \keyw{Physics - Atomic Physics,Quantum Physics}
+    \endentry
+    \entry{gu_fault-tolerant_2025}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=95eb9019ea80c7804057641b2e62e5e2}{%
+           family={Gu},
+           familyi={G\bibinitperiod},
+           given={Shouzhen},
+           giveni={S\bibinitperiod}}}%
+        {{hash=e0582d5d32297c836d4f0dbe74a532b2}{%
+           family={Retzker},
+           familyi={R\bibinitperiod},
+           given={Alex},
+           giveni={A\bibinitperiod}}}%
+        {{hash=0fe1ec3b788b9fa1e44077bb69c896e5}{%
+           family={Kubica},
+           familyi={K\bibinitperiod},
+           given={Aleksander},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{e5b12a096a400c7371f49d29b32b833e}
+      \strng{fullhash}{967ef1db129f98cca345702063d8d98b}
+      \strng{fullhashraw}{967ef1db129f98cca345702063d8d98b}
+      \strng{bibnamehash}{967ef1db129f98cca345702063d8d98b}
+      \strng{authorbibnamehash}{967ef1db129f98cca345702063d8d98b}
+      \strng{authornamehash}{e5b12a096a400c7371f49d29b32b833e}
+      \strng{authorfullhash}{967ef1db129f98cca345702063d8d98b}
+      \strng{authorfullhashraw}{967ef1db129f98cca345702063d8d98b}
+      \field{extraname}{1}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The overhead of quantum error correction (QEC) poses a major bottleneck for realizing fault-tolerant computation. To reduce this overhead, we exploit the idea of erasure qubits, relying on an efficient conversion of the dominant noise into erasures at known locations. We start by introducing a formalism for QEC schemes with erasure qubits and express the corresponding decoding problem as a matching problem. Then, we propose and optimize QEC schemes based on erasure qubits and the recently-introduced Floquet codes. Our schemes are well-suited for superconducting circuits, being compatible with planar layouts. We numerically estimate the memory thresholds for the circuit noise model that includes spreading (via entangling operations) and imperfect detection of erasures. Our results demonstrate that, despite being slightly more complex, QEC schemes based on erasure qubits can significantly outperform standard approaches.}
+      \field{issn}{2643-1564}
+      \field{journaltitle}{Physical Review Research}
+      \field{month}{3}
+      \field{note}{arXiv:2312.14060 [quant-ph]}
+      \field{number}{1}
+      \field{title}{Fault-tolerant quantum architectures based on erasure qubits}
+      \field{urlday}{6}
+      \field{urlmonth}{11}
+      \field{urlyear}{2025}
+      \field{volume}{7}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \field{pages}{013249}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1103/PhysRevResearch.7.013249
+      \endverb
+      \verb{file}
+      \verb Full Text PDF:/Users/leigh/Zotero/storage/Q5IKTFX5/Gu et al. - 2025 - Fault-tolerant quantum architectures based on erasure qubits.pdf:application/pdf;Snapshot:/Users/leigh/Zotero/storage/LH8LM798/2312.html:text/html
+      \endverb
+      \verb{urlraw}
+      \verb http://arxiv.org/abs/2312.14060
+      \endverb
+      \verb{url}
+      \verb http://arxiv.org/abs/2312.14060
+      \endverb
+      \keyw{Quantum Physics}
+    \endentry
+    \entry{gu_optimizing_2024}{misc}{}{}
+      \name{author}{4}{}{%
+        {{hash=95eb9019ea80c7804057641b2e62e5e2}{%
+           family={Gu},
+           familyi={G\bibinitperiod},
+           given={Shouzhen},
+           giveni={S\bibinitperiod}}}%
+        {{hash=297a2c9058d21f5a10272df530c3fac3}{%
+           family={Vaknin},
+           familyi={V\bibinitperiod},
+           given={Yotam},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=e0582d5d32297c836d4f0dbe74a532b2}{%
+           family={Retzker},
+           familyi={R\bibinitperiod},
+           given={Alex},
+           giveni={A\bibinitperiod}}}%
+        {{hash=0fe1ec3b788b9fa1e44077bb69c896e5}{%
+           family={Kubica},
+           familyi={K\bibinitperiod},
+           given={Aleksander},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{e5b12a096a400c7371f49d29b32b833e}
+      \strng{fullhash}{119a1693f8854668b6df29406fec3436}
+      \strng{fullhashraw}{119a1693f8854668b6df29406fec3436}
+      \strng{bibnamehash}{119a1693f8854668b6df29406fec3436}
+      \strng{authorbibnamehash}{119a1693f8854668b6df29406fec3436}
+      \strng{authornamehash}{e5b12a096a400c7371f49d29b32b833e}
+      \strng{authorfullhash}{119a1693f8854668b6df29406fec3436}
+      \strng{authorfullhashraw}{119a1693f8854668b6df29406fec3436}
+      \field{extraname}{2}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Erasure qubits offer a promising avenue toward reducing the overhead of quantum error correction (QEC) protocols. However, they require additional operations, such as erasure checks, that may add extra noise and increase runtime of QEC protocols. To assess the benefits provided by erasure qubits, we focus on the performance of the surface code as a quantum memory. In particular, we analyze various erasure check schedules, find the correctable regions in the phase space of error parameters and probe the subthreshold scaling of the logical error rate. We then consider a realization of erasure qubits in the superconducting hardware architectures via dual-rail qubits. We use the standard transmon-based implementation of the surface code as the performance benchmark. Our results indicate that QEC protocols with erasure qubits can outperform the ones with state-of-the-art transmons, even in the absence of precise information about the locations of erasure errors.}
+      \field{month}{8}
+      \field{note}{arXiv:2408.00829 [quant-ph]}
+      \field{title}{Optimizing quantum error correction protocols with erasure qubits}
+      \field{urlday}{13}
+      \field{urlmonth}{11}
+      \field{urlyear}{2025}
+      \field{year}{2024}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.48550/arXiv.2408.00829
+      \endverb
+      \verb{file}
+      \verb PDF:/Users/leigh/Zotero/storage/2LG9X6II/Gu et al. - 2024 - Optimizing quantum error correction protocols with erasure qubits.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb http://arxiv.org/abs/2408.00829
+      \endverb
+      \verb{url}
+      \verb http://arxiv.org/abs/2408.00829
+      \endverb
+      \keyw{Quantum Physics}
+    \endentry
+    \entry{sahay_high-threshold_2023}{article}{}{}
+      \name{author}{5}{}{%
+        {{hash=630f0ef600785e22ff21b0920c149716}{%
+           family={Sahay},
+           familyi={S\bibinitperiod},
+           given={Kaavya},
+           giveni={K\bibinitperiod}}}%
+        {{hash=304fce6f452f6a1e2a7692c8e7af379d}{%
+           family={Jin},
+           familyi={J\bibinitperiod},
+           given={Junlan},
+           giveni={J\bibinitperiod}}}%
+        {{hash=f04756c94a8a37b453bfea99ae28a510}{%
+           family={Claes},
+           familyi={C\bibinitperiod},
+           given={Jahan},
+           giveni={J\bibinitperiod}}}%
+        {{hash=97308d8cbf01634c17c749057d74a8ad}{%
+           family={Thompson},
+           familyi={T\bibinitperiod},
+           given={Jeff\bibnamedelima D.},
+           giveni={J\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=7e87353998bc5444ec07ed2b21d2e233}{%
+           family={Puri},
+           familyi={P\bibinitperiod},
+           given={Shruti},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{00abdddce219d17013533bb2fd14a587}
+      \strng{fullhash}{d251027b95742a7131c4afcc2e6a190d}
+      \strng{fullhashraw}{d251027b95742a7131c4afcc2e6a190d}
+      \strng{bibnamehash}{d251027b95742a7131c4afcc2e6a190d}
+      \strng{authorbibnamehash}{d251027b95742a7131c4afcc2e6a190d}
+      \strng{authornamehash}{00abdddce219d17013533bb2fd14a587}
+      \strng{authorfullhash}{d251027b95742a7131c4afcc2e6a190d}
+      \strng{authorfullhashraw}{d251027b95742a7131c4afcc2e6a190d}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The requirements for fault-tolerant quantum error correction can be simplified by leveraging structure in the noise of the underlying hardware. In this work, we identify a new type of structured noise motivated by neutral-atom qubits, biased erasure errors, which arises when qubit errors are dominated by detectable leakage from only one of the computational states of the qubit. We study the performance of this model using gate-level simulations of the 𝑋⁢𝑍⁢𝑍⁢𝑋 surface code. Using the predicted erasure fraction and bias of metastable 171Yb qubits, we find a threshold of 8.2\% for two-qubit gate errors, which is 1.9 times higher than the threshold for unbiased erasures and 7.5 times higher than the threshold for depolarizing errors. Surprisingly, the improved threshold is achieved without bias-preserving controlled-not gates and, instead, results from the lower noise entropy in this model. We also introduce an 𝑋⁢𝑍⁢𝑍⁢𝑋 cluster state construction for measurement-based error correction, hybrid fusion, that is optimized for this noise model. By combining fusion operations and deterministic entangling gates, this construction preserves the intrinsic symmetry of the 𝑋⁢𝑍⁢𝑍⁢𝑋 code, leading to a higher threshold of 10.3\% and enabling the use of rectangular codes with fewer qubits. We discuss a potential physical implementation using a single plane of atoms and movable tweezers.}
+      \field{journaltitle}{Physical Review X}
+      \field{month}{10}
+      \field{note}{Publisher: American Physical Society}
+      \field{number}{4}
+      \field{title}{High-{Threshold} {Codes} for {Neutral}-{Atom} {Qubits} with {Biased} {Erasure} {Errors}}
+      \field{urlday}{1}
+      \field{urlmonth}{11}
+      \field{urlyear}{2025}
+      \field{volume}{13}
+      \field{year}{2023}
+      \field{urldateera}{ce}
+      \field{pages}{041013}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1103/PhysRevX.13.041013
+      \endverb
+      \verb{file}
+      \verb APS Snapshot:/Users/leigh/Zotero/storage/48U2L6IX/PhysRevX.13.html:text/html;Full Text PDF:/Users/leigh/Zotero/storage/WTM7GZHC/Sahay et al. - 2023 - High-Threshold Codes for Neutral-Atom Qubits with Biased Erasure Errors.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://link.aps.org/doi/10.1103/PhysRevX.13.041013
+      \endverb
+      \verb{url}
+      \verb https://link.aps.org/doi/10.1103/PhysRevX.13.041013
+      \endverb
+    \endentry
+    \entry{chadwick_erasure_2025}{misc}{}{}
+      \name{author}{5}{}{%
+        {{hash=c084c0e5d7d3c7eb6d43b12e4bf0b707}{%
+           family={Chadwick},
+           familyi={C\bibinitperiod},
+           given={Jason\bibnamedelima D.},
+           giveni={J\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=24b4173b48242fd125e58318638b9deb}{%
+           family={Teo},
+           familyi={T\bibinitperiod},
+           given={Mariesa\bibnamedelima H.},
+           giveni={M\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+        {{hash=91da375601c359d79d6e705092a7a997}{%
+           family={Viszlai},
+           familyi={V\bibinitperiod},
+           given={Joshua},
+           giveni={J\bibinitperiod}}}%
+        {{hash=5356000cf4ff00821f78a796344fde5c}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={Willers},
+           giveni={W\bibinitperiod}}}%
+        {{hash=3dc30ce8848da64646a981d48b5d2701}{%
+           family={Chong},
+           familyi={C\bibinitperiod},
+           given={Frederic\bibnamedelima T.},
+           giveni={F\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {arXiv}%
+      }
+      \strng{namehash}{96a63b41fe58f89e67eb11720bab9d9a}
+      \strng{fullhash}{5556d1b6467970b6b73639f436da4a49}
+      \strng{fullhashraw}{5556d1b6467970b6b73639f436da4a49}
+      \strng{bibnamehash}{5556d1b6467970b6b73639f436da4a49}
+      \strng{authorbibnamehash}{5556d1b6467970b6b73639f436da4a49}
+      \strng{authornamehash}{96a63b41fe58f89e67eb11720bab9d9a}
+      \strng{authorfullhash}{5556d1b6467970b6b73639f436da4a49}
+      \strng{authorfullhashraw}{5556d1b6467970b6b73639f436da4a49}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{Dual-rail erasure qubits can substantially improve the efficiency of quantum error correction, allowing lower error rates to be achieved with fewer qubits, but each erasure qubit requires \$3{\textbackslash}times\$ more transmons to implement compared to standard qubits. In this work, we introduce a hybrid-erasure architecture for surface code error correction where a carefully chosen subset of qubits is designated as erasure qubits while the rest remain standard. Through code-capacity analysis and circuit-level simulations, we show that a hybrid-erasure architecture can boost the performance of the surface code -- much like how a game of Minesweeper becomes easier once a few squares are revealed -- while using fewer resources than a full-erasure architecture. We study strategies for the allocation and placement of erasure qubits through analysis and simulations. We then use the hybrid-erasure architecture to explore the trade-offs between per-qubit cost and key logical performance metrics such as threshold and effective distance in surface code error correction. Our results show that the strategic introduction of dual-rail erasure qubits in a transmon architecture can enhance the logical performance of surface codes for a fixed transmon budget, particularly for near-term-relevant transmon counts and logical error rates.}
+      \field{month}{4}
+      \field{note}{arXiv:2505.00066 [quant-ph] version: 1}
+      \field{shorttitle}{Erasure {Minesweeper}}
+      \field{title}{Erasure {Minesweeper}: exploring hybrid-erasure surface code architectures for efficient quantum error correction}
+      \field{urlday}{17}
+      \field{urlmonth}{11}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.48550/arXiv.2505.00066
+      \endverb
+      \verb{file}
+      \verb Full Text PDF:/Users/leigh/Zotero/storage/67TGM2SM/Chadwick et al. - 2025 - Erasure Minesweeper exploring hybrid-erasure surface code architectures for efficient quantum error.pdf:application/pdf;Snapshot:/Users/leigh/Zotero/storage/LPZIU7HP/2505.html:text/html
+      \endverb
+      \verb{urlraw}
+      \verb http://arxiv.org/abs/2505.00066
+      \endverb
+      \verb{url}
+      \verb http://arxiv.org/abs/2505.00066
+      \endverb
+      \keyw{Quantum Physics}
+    \endentry
+    \entry{gidney_stim_2021}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=0101a428978c8ddc038880b7a77afd98}{%
+           family={Gidney},
+           familyi={G\bibinitperiod},
+           given={Craig},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{0101a428978c8ddc038880b7a77afd98}
+      \strng{fullhash}{0101a428978c8ddc038880b7a77afd98}
+      \strng{fullhashraw}{0101a428978c8ddc038880b7a77afd98}
+      \strng{bibnamehash}{0101a428978c8ddc038880b7a77afd98}
+      \strng{authorbibnamehash}{0101a428978c8ddc038880b7a77afd98}
+      \strng{authornamehash}{0101a428978c8ddc038880b7a77afd98}
+      \strng{authorfullhash}{0101a428978c8ddc038880b7a77afd98}
+      \strng{authorfullhashraw}{0101a428978c8ddc038880b7a77afd98}
+      \field{extraname}{1}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{A fast stabilizer circuit library.}
+      \field{month}{7}
+      \field{note}{Pages: 497 Publication Title: Quantum Volume: 5 original-date: 2021-02-19T15:55:47Z}
+      \field{shorttitle}{Stim}
+      \field{title}{Stim: a fast stabilizer circuit simulator}
+      \field{urlday}{19}
+      \field{urlmonth}{10}
+      \field{urlyear}{2025}
+      \field{year}{2021}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb PDF:/Users/leigh/Zotero/storage/KXC7IBPL/Gidney - 2021 - Stim a fast stabilizer circuit simulator.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.22331/q-2021-07-06-497
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.22331/q-2021-07-06-497
+      \endverb
+    \endentry
+    \entry{oscarhiggott_oscarhiggottpymatching_2025}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=c7d653f979e8fe2fde8f9a44e532c98e}{%
+           family={oscarhiggott},
+           familyi={o\bibinitperiod}}}%
+      }
+      \strng{namehash}{c7d653f979e8fe2fde8f9a44e532c98e}
+      \strng{fullhash}{c7d653f979e8fe2fde8f9a44e532c98e}
+      \strng{fullhashraw}{c7d653f979e8fe2fde8f9a44e532c98e}
+      \strng{bibnamehash}{c7d653f979e8fe2fde8f9a44e532c98e}
+      \strng{authorbibnamehash}{c7d653f979e8fe2fde8f9a44e532c98e}
+      \strng{authornamehash}{c7d653f979e8fe2fde8f9a44e532c98e}
+      \strng{authorfullhash}{c7d653f979e8fe2fde8f9a44e532c98e}
+      \strng{authorfullhashraw}{c7d653f979e8fe2fde8f9a44e532c98e}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{PyMatching: A Python/C++ library for decoding quantum error correcting codes with minimum-weight perfect matching.}
+      \field{month}{10}
+      \field{note}{original-date: 2019-11-08T11:05:08Z}
+      \field{title}{oscarhiggott/{PyMatching}}
+      \field{urlday}{19}
+      \field{urlmonth}{10}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://github.com/oscarhiggott/PyMatching
+      \endverb
+      \verb{url}
+      \verb https://github.com/oscarhiggott/PyMatching
+      \endverb
+      \keyw{minimum-weight-perfect-matching,quantum-error-correction,surface-code}
+    \endentry
+    \entry{higgott_sparse_2025}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=2db1ed6b0ea0e0cd8635024ff435326e}{%
+           family={Higgott},
+           familyi={H\bibinitperiod},
+           given={Oscar},
+           giveni={O\bibinitperiod}}}%
+        {{hash=0101a428978c8ddc038880b7a77afd98}{%
+           family={Gidney},
+           familyi={G\bibinitperiod},
+           given={Craig},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{c00b4d690796e12c08464e2fd64e8b2a}
+      \strng{fullhash}{c00b4d690796e12c08464e2fd64e8b2a}
+      \strng{fullhashraw}{c00b4d690796e12c08464e2fd64e8b2a}
+      \strng{bibnamehash}{c00b4d690796e12c08464e2fd64e8b2a}
+      \strng{authorbibnamehash}{c00b4d690796e12c08464e2fd64e8b2a}
+      \strng{authornamehash}{c00b4d690796e12c08464e2fd64e8b2a}
+      \strng{authorfullhash}{c00b4d690796e12c08464e2fd64e8b2a}
+      \strng{authorfullhashraw}{c00b4d690796e12c08464e2fd64e8b2a}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{In this work, we introduce a fast implementation of the minimum-weight perfect matching (MWPM) decoder, the most widely used decoder for several important families of quantum error correcting codes, including surface codes. Our algorithm, which we call sparse blossom, is a variant of the blossom algorithm which directly solves the decoding problem relevant to quantum error correction. Sparse blossom avoids the need for all-to-all Dijkstra searches, common amongst MWPM decoder implementations. For 0.1\% circuit-level depolarising noise, sparse blossom processes syndrome data in both \$X\$ and \$Z\$ bases of distance-17 surface code circuits in less than one microsecond per round of syndrome extraction on a single core, which matches the rate at which syndrome data is generated by superconducting quantum computers. Our implementation is open-source, and has been released in version 2 of the PyMatching library.}
+      \field{issn}{2521-327X}
+      \field{journaltitle}{Quantum}
+      \field{month}{1}
+      \field{note}{arXiv:2303.15933 [quant-ph]}
+      \field{shorttitle}{Sparse {Blossom}}
+      \field{title}{Sparse {Blossom}: correcting a million errors per core second with minimum-weight matching}
+      \field{urlday}{2}
+      \field{urlmonth}{12}
+      \field{urlyear}{2025}
+      \field{volume}{9}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \field{pages}{1600}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.22331/q-2025-01-20-1600
+      \endverb
+      \verb{file}
+      \verb Full Text PDF:/Users/leigh/Zotero/storage/SCRHLV9Y/Higgott and Gidney - 2025 - Sparse Blossom correcting a million errors per core second with minimum-weight matching.pdf:application/pdf;Snapshot:/Users/leigh/Zotero/storage/5P788PTM/2303.html:text/html
+      \endverb
+      \verb{urlraw}
+      \verb http://arxiv.org/abs/2303.15933
+      \endverb
+      \verb{url}
+      \verb http://arxiv.org/abs/2303.15933
+      \endverb
+      \keyw{Quantum Physics}
+    \endentry
+    \entry{wu_minimum-weight_2025}{misc}{}{}
+      \name{author}{5}{}{%
+        {{hash=5054d8715f6746af9ed28c566f168046}{%
+           family={Wu},
+           familyi={W\bibinitperiod},
+           given={Yue},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=495fc4a739bce89562bd1b0b6f1a8774}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Binghong},
+           giveni={B\bibinitperiod}}}%
+        {{hash=0000f53e6a49e78ac6faa45516523013}{%
+           family={Chang},
+           familyi={C\bibinitperiod},
+           given={Kathleen},
+           giveni={K\bibinitperiod}}}%
+        {{hash=7e87353998bc5444ec07ed2b21d2e233}{%
+           family={Puri},
+           familyi={P\bibinitperiod},
+           given={Shruti},
+           giveni={S\bibinitperiod}}}%
+        {{hash=b5819896c00d70ae8f060b38f6dc8506}{%
+           family={Zhong},
+           familyi={Z\bibinitperiod},
+           given={Lin},
+           giveni={L\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {arXiv}%
+      }
+      \strng{namehash}{77aa4285bb0660bf6222f13bc03c3431}
+      \strng{fullhash}{89f8a3d7945196647994b6a8008c9615}
+      \strng{fullhashraw}{89f8a3d7945196647994b6a8008c9615}
+      \strng{bibnamehash}{89f8a3d7945196647994b6a8008c9615}
+      \strng{authorbibnamehash}{89f8a3d7945196647994b6a8008c9615}
+      \strng{authornamehash}{77aa4285bb0660bf6222f13bc03c3431}
+      \strng{authorfullhash}{89f8a3d7945196647994b6a8008c9615}
+      \strng{authorfullhashraw}{89f8a3d7945196647994b6a8008c9615}
+      \field{extraname}{2}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Fast and accurate quantum error correction (QEC) decoding is crucial for scalable fault-tolerant quantum computation. Most-Likely-Error (MLE) decoding, while being near-optimal, is intractable on general quantum Low-Density Parity-Check (qLDPC) codes and typically relies on approximation and heuristics. We propose HyperBlossom, a unified framework that formulates MLE decoding as a Minimum-Weight Parity Factor (MWPF) problem and generalizes the blossom algorithm to hypergraphs via a similar primal-dual linear programming model with certifiable proximity bounds. HyperBlossom unifies all the existing graph-based decoders like (Hypergraph) Union-Find decoders and Minimum-Weight Perfect Matching (MWPM) decoder, thus bridging the gap between heuristic and certifying decoders. We implement HyperBlossom in software, namely Hyperion. Hyperion achieves a 4.8x lower logical error rate compared to the MWPM decoder on the distance-11 surface code and 1.6x lower logical error rate compared to a fine-tuned BPOSD decoder on the \$[[90, 8, 10]]\$ bivariate bicycle code under code-capacity noise. It also achieves an almost-linear average runtime scaling on both the surface code and the color code, with numerical results up to sufficiently large code distances of 99 and 31 for code-capacity noise and circuit-level noise, respectively.}
+      \field{month}{10}
+      \field{note}{arXiv:2508.04969 [quant-ph]}
+      \field{title}{Minimum-{Weight} {Parity} {Factor} {Decoder} for {Quantum} {Error} {Correction}}
+      \field{urlday}{18}
+      \field{urlmonth}{11}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.48550/arXiv.2508.04969
+      \endverb
+      \verb{file}
+      \verb Full Text PDF:/Users/leigh/Zotero/storage/MYJTMQV7/Wu et al. - 2025 - Minimum-Weight Parity Factor Decoder for Quantum Error Correction.pdf:application/pdf;Snapshot:/Users/leigh/Zotero/storage/JRCKSB4C/2508.html:text/html
+      \endverb
+      \verb{urlraw}
+      \verb http://arxiv.org/abs/2508.04969
+      \endverb
+      \verb{url}
+      \verb http://arxiv.org/abs/2508.04969
+      \endverb
+      \keyw{Computer Science - Data Structures and Algorithms,Quantum Physics}
+    \endentry
+    \entry{wu_yuewuomwpf_2025}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=5054d8715f6746af9ed28c566f168046}{%
+           family={Wu},
+           familyi={W\bibinitperiod},
+           given={Yue},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \strng{namehash}{5054d8715f6746af9ed28c566f168046}
+      \strng{fullhash}{5054d8715f6746af9ed28c566f168046}
+      \strng{fullhashraw}{5054d8715f6746af9ed28c566f168046}
+      \strng{bibnamehash}{5054d8715f6746af9ed28c566f168046}
+      \strng{authorbibnamehash}{5054d8715f6746af9ed28c566f168046}
+      \strng{authornamehash}{5054d8715f6746af9ed28c566f168046}
+      \strng{authorfullhash}{5054d8715f6746af9ed28c566f168046}
+      \strng{authorfullhashraw}{5054d8715f6746af9ed28c566f168046}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Hypergraph Minimum-Weight Parity Factor (MWPF) Algorithm for Decoding General Quantum LDPC Codes}
+      \field{month}{11}
+      \field{note}{original-date: 2022-11-06T19:34:20Z}
+      \field{title}{yuewuo/mwpf}
+      \field{urlday}{18}
+      \field{urlmonth}{11}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://github.com/yuewuo/mwpf
+      \endverb
+      \verb{url}
+      \verb https://github.com/yuewuo/mwpf
+      \endverb
+    \endentry
+    \entry{pesah_interactive_2023}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=d41b6b762ef9c65a48d94da625e21c0c}{%
+           family={Pesah},
+           familyi={P\bibinitperiod},
+           given={Arthur},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{d41b6b762ef9c65a48d94da625e21c0c}
+      \strng{fullhash}{d41b6b762ef9c65a48d94da625e21c0c}
+      \strng{fullhashraw}{d41b6b762ef9c65a48d94da625e21c0c}
+      \strng{bibnamehash}{d41b6b762ef9c65a48d94da625e21c0c}
+      \strng{authorbibnamehash}{d41b6b762ef9c65a48d94da625e21c0c}
+      \strng{authornamehash}{d41b6b762ef9c65a48d94da625e21c0c}
+      \strng{authorfullhash}{d41b6b762ef9c65a48d94da625e21c0c}
+      \strng{authorfullhashraw}{d41b6b762ef9c65a48d94da625e21c0c}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{An interactive introduction to the surface code}
+      \field{month}{5}
+      \field{title}{An interactive introduction to the surface code}
+      \field{urlday}{1}
+      \field{urlmonth}{12}
+      \field{urlyear}{2025}
+      \field{year}{2023}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://arthurpesah.me/blog/2023-05-13-surface-code/
+      \endverb
+      \verb{url}
+      \verb https://arthurpesah.me/blog/2023-05-13-surface-code/
+      \endverb
+    \endentry
+    \entry{suchara_leakage_2014}{misc}{}{}
+      \name{author}{3}{}{%
+        {{hash=d000a1b24e892d6c31367f83ed18564e}{%
+           family={Suchara},
+           familyi={S\bibinitperiod},
+           given={Martin},
+           giveni={M\bibinitperiod}}}%
+        {{hash=c04493cf8499c58c15078120b5a6737a}{%
+           family={Cross},
+           familyi={C\bibinitperiod},
+           given={Andrew\bibnamedelima W.},
+           giveni={A\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+        {{hash=13ffee31f58f6a53a6d6969d093862dc}{%
+           family={Gambetta},
+           familyi={G\bibinitperiod},
+           given={Jay\bibnamedelima M.},
+           giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {arXiv}%
+      }
+      \strng{namehash}{ca41904025df916cf7cca5932a100fe4}
+      \strng{fullhash}{08c295e197a806d6bbb5c9b9a3bb08ad}
+      \strng{fullhashraw}{08c295e197a806d6bbb5c9b9a3bb08ad}
+      \strng{bibnamehash}{08c295e197a806d6bbb5c9b9a3bb08ad}
+      \strng{authorbibnamehash}{08c295e197a806d6bbb5c9b9a3bb08ad}
+      \strng{authornamehash}{ca41904025df916cf7cca5932a100fe4}
+      \strng{authorfullhash}{08c295e197a806d6bbb5c9b9a3bb08ad}
+      \strng{authorfullhashraw}{08c295e197a806d6bbb5c9b9a3bb08ad}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Quantum codes excel at correcting local noise but fail to correct leakage faults that excite qubits to states outside the computational space. Aliferis and Terhal have shown that an accuracy threshold exists for leakage faults using gadgets called leakage reduction units (LRUs). However, these gadgets reduce the accuracy threshold and can increase overhead and experimental complexity, and these costs have not been thoroughly understood. Our work explores a variety of techniques for leakage-resilient, fault-tolerant error correction in the context of topological codes. Our contributions are threefold. First, we develop a leakage model that differs in critical details from earlier models. Second, we use Monte-Carlo simulations to survey several syndrome extraction circuits. Third, given the capability to perform three-outcome measurements, we present a dramatically improved syndrome processing algorithm. Our simulation results show that simple circuits with one extra CNOT per qubit and no additional ancillas reduce the accuracy threshold by less than a factor of 4 when leakage and depolarizing noise rates are comparable. This becomes a factor of 2 when the decoder uses 3-outcome measurements. Finally, when the physical error rate is less than 2 x 10{\textasciicircum}-4, placing LRUs after every gate may achieve the lowest logical error rates of all of the circuits we considered. We expect the closely related planar and rotated codes to exhibit the same accuracy thresholds and that the ideas may generalize naturally to other topological codes.}
+      \field{month}{10}
+      \field{note}{arXiv:1410.8562 [quant-ph]}
+      \field{title}{Leakage {Suppression} in the {Toric} {Code}}
+      \field{urlday}{22}
+      \field{urlmonth}{11}
+      \field{urlyear}{2025}
+      \field{year}{2014}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.48550/arXiv.1410.8562
+      \endverb
+      \verb{file}
+      \verb Preprint PDF:/Users/leigh/Zotero/storage/NSL3W2PK/Suchara et al. - 2014 - Leakage Suppression in the Toric Code.pdf:application/pdf;Snapshot:/Users/leigh/Zotero/storage/SMPGPDKK/1410.html:text/html
+      \endverb
+      \verb{urlraw}
+      \verb http://arxiv.org/abs/1410.8562
+      \endverb
+      \verb{url}
+      \verb http://arxiv.org/abs/1410.8562
+      \endverb
+      \keyw{Quantum Physics}
+    \endentry
+    \entry{wilen_correlated_2021}{article}{}{}
+      \name{author}{14}{}{%
+        {{hash=00ca780c14ca667f77da2f212aab1a5e}{%
+           family={Wilen},
+           familyi={W\bibinitperiod},
+           given={C.\bibnamedelimi D.},
+           giveni={C\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=327992f4a13098c34b4056ef0e22dd49}{%
+           family={Abdullah},
+           familyi={A\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+        {{hash=bdd91f67002940337e1d9946eadb615a}{%
+           family={Kurinsky},
+           familyi={K\bibinitperiod},
+           given={N.\bibnamedelimi A.},
+           giveni={N\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=709d9898e32a31dc6d0fc8e6581d1d6d}{%
+           family={Stanford},
+           familyi={S\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+        {{hash=ce06495dbe49c02ff8e3d2345d144bac}{%
+           family={Cardani},
+           familyi={C\bibinitperiod},
+           given={L.},
+           giveni={L\bibinitperiod}}}%
+        {{hash=98ac4082814bd99ad9c788be59a8de0f}{%
+           family={D’Imperio},
+           familyi={D\bibinitperiod},
+           given={G.},
+           giveni={G\bibinitperiod}}}%
+        {{hash=6c090373e97c68e657f05f2126d83e59}{%
+           family={Tomei},
+           familyi={T\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+        {{hash=5af0e441f02c8355d1bb494928d15421}{%
+           family={Faoro},
+           familyi={F\bibinitperiod},
+           given={L.},
+           giveni={L\bibinitperiod}}}%
+        {{hash=00195eea22b901aa4d4c8d691d6fb7d8}{%
+           family={Ioffe},
+           familyi={I\bibinitperiod},
+           given={L.\bibnamedelimi B.},
+           giveni={L\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+        {{hash=ea958cfc1a8e4d75c7a3be56ca14640f}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={C.\bibnamedelimi H.},
+           giveni={C\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+        {{hash=b6bb0a4335b0ac5559bbc437493610f5}{%
+           family={Opremcak},
+           familyi={O\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=58e41a4251673c84996e79d07179ed4f}{%
+           family={Christensen},
+           familyi={C\bibinitperiod},
+           given={B.\bibnamedelimi G.},
+           giveni={B\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+        {{hash=8a06d0b90cf59398cd24476268b6bfd0}{%
+           family={DuBois},
+           familyi={D\bibinitperiod},
+           given={J.\bibnamedelimi L.},
+           giveni={J\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=3bd2850aa6db5592ab9d8f129d06e35b}{%
+           family={McDermott},
+           familyi={M\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{6cd27bfbb880f707153f9c79117e890f}
+      \strng{fullhash}{83e13082e7e3d218ef553050277a98ca}
+      \strng{fullhashraw}{83e13082e7e3d218ef553050277a98ca}
+      \strng{bibnamehash}{6cd27bfbb880f707153f9c79117e890f}
+      \strng{authorbibnamehash}{6cd27bfbb880f707153f9c79117e890f}
+      \strng{authornamehash}{6cd27bfbb880f707153f9c79117e890f}
+      \strng{authorfullhash}{83e13082e7e3d218ef553050277a98ca}
+      \strng{authorfullhashraw}{83e13082e7e3d218ef553050277a98ca}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The central challenge in building a quantum computer is error correction. Unlike classical bits, which are susceptible to only one type of error, quantum bits (qubits) are susceptible to two types of error, corresponding to flips of the qubit state about the X and Z directions. Although the Heisenberg uncertainty principle precludes simultaneous monitoring of X- and Z-flips on a single qubit, it is possible to encode quantum information in large arrays of entangled qubits that enable accurate monitoring of all errors in the system, provided that the error rate is low1. Another crucial requirement is that errors cannot be correlated. Here we characterize a superconducting multiqubit circuit and find that charge noise in the chip is highly correlated on a length scale over 600 micrometres; moreover, discrete charge jumps are accompanied by a strong transient reduction of qubit energy relaxation time across the millimetre-scale chip. The resulting correlated errors are explained in terms of the charging event and phonon-mediated quasiparticle generation associated with absorption of γ-rays and cosmic-ray muons in the qubit substrate. Robust quantum error correction will require the development of mitigation strategies to protect multiqubit arrays from correlated errors due to particle impacts.}
+      \field{issn}{1476-4687}
+      \field{journaltitle}{Nature}
+      \field{month}{6}
+      \field{note}{Publisher: Nature Publishing Group}
+      \field{number}{7863}
+      \field{title}{Correlated charge noise and relaxation errors in superconducting qubits}
+      \field{urlday}{22}
+      \field{urlmonth}{11}
+      \field{urlyear}{2025}
+      \field{volume}{594}
+      \field{year}{2021}
+      \field{urldateera}{ce}
+      \field{pages}{369\bibrangedash 373}
+      \range{pages}{5}
+      \verb{doi}
+      \verb 10.1038/s41586-021-03557-5
+      \endverb
+      \verb{file}
+      \verb Full Text PDF:/Users/leigh/Zotero/storage/ATYBMWS4/Wilen et al. - 2021 - Correlated charge noise and relaxation errors in superconducting qubits.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://www.nature.com/articles/s41586-021-03557-5
+      \endverb
+      \verb{url}
+      \verb https://www.nature.com/articles/s41586-021-03557-5
+      \endverb
+      \keyw{Qubits,Quantum information}
+    \endentry
+    \entry{miao_overcoming_nodate}{misc}{}{}
+      \name{author}{2}{}{%
+        {{hash=a9010e7b8d7d6dd0316ae8331fbfd2a5}{%
+           family={Miao},
+           familyi={M\bibinitperiod},
+           given={Kevin},
+           giveni={K\bibinitperiod}}}%
+        {{hash=4177c755f1b9239cdea14abc7f724194}{%
+           family={McEwen},
+           familyi={M\bibinitperiod},
+           given={Matt},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{c912e89d4a70c9ce067aad73b7f17220}
+      \strng{fullhash}{c912e89d4a70c9ce067aad73b7f17220}
+      \strng{fullhashraw}{c912e89d4a70c9ce067aad73b7f17220}
+      \strng{bibnamehash}{c912e89d4a70c9ce067aad73b7f17220}
+      \strng{authorbibnamehash}{c912e89d4a70c9ce067aad73b7f17220}
+      \strng{authornamehash}{c912e89d4a70c9ce067aad73b7f17220}
+      \strng{authorfullhash}{c912e89d4a70c9ce067aad73b7f17220}
+      \strng{authorfullhashraw}{c912e89d4a70c9ce067aad73b7f17220}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Overcoming leakage on error-corrected quantum processors}
+      \verb{file}
+      \verb PDF:/Users/leigh/Zotero/storage/9YIANDIA/Sen - Overcoming leakage on error-corrected quantum processors.pdf:application/pdf
+      \endverb
+    \endentry
+    \entry{yang_coupler-assisted_2024}{article}{}{}
+      \name{author}{24}{}{%
+        {{hash=1853024d95dcc818bde46ca4a9aaf4a5}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={Xiaohan},
+           giveni={X\bibinitperiod}}}%
+        {{hash=3a20d2564ba7a4d436406cdf9a8173f1}{%
+           family={Chu},
+           familyi={C\bibinitperiod},
+           given={Ji},
+           giveni={J\bibinitperiod}}}%
+        {{hash=2b500767ce14e7bb05324b5656a00946}{%
+           family={Guo},
+           familyi={G\bibinitperiod},
+           given={Zechen},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=8170e8d1de3bafc43837d6aaae9ff167}{%
+           family={Huang},
+           familyi={H\bibinitperiod},
+           given={Wenhui},
+           giveni={W\bibinitperiod}}}%
+        {{hash=eb2b300439f3b214052e282711c969d7}{%
+           family={Liang},
+           familyi={L\bibinitperiod},
+           given={Yongqi},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=fc2e625c86e0ea59d96b80abf60ba66b}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Jiawei},
+           giveni={J\bibinitperiod}}}%
+        {{hash=d70e791a3ab8641f7aea5a4966ec0dc8}{%
+           family={Qiu},
+           familyi={Q\bibinitperiod},
+           given={Jiawei},
+           giveni={J\bibinitperiod}}}%
+        {{hash=3051265c5156a4480a2d9dbd19b57cb6}{%
+           family={Sun},
+           familyi={S\bibinitperiod},
+           given={Xuandong},
+           giveni={X\bibinitperiod}}}%
+        {{hash=d9ca1898fd54fc692e5f4b1d4d3d8fee}{%
+           family={Tao},
+           familyi={T\bibinitperiod},
+           given={Ziyu},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=0410cb94d4b4e2a1f4aeeff35360b028}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Jiawei},
+           giveni={J\bibinitperiod}}}%
+        {{hash=47d1dbebbb16108208ad21aa43a7d15f}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Jiajian},
+           giveni={J\bibinitperiod}}}%
+        {{hash=5f7fb6371181c36f939ca5cb837dd8da}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Libo},
+           giveni={L\bibinitperiod}}}%
+        {{hash=e9cbefb562416b37bbe6ba8d732cf083}{%
+           family={Zhou},
+           familyi={Z\bibinitperiod},
+           given={Yuxuan},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=79daff53a676cfcdfe8626ff5c294226}{%
+           family={Guo},
+           familyi={G\bibinitperiod},
+           given={Weijie},
+           giveni={W\bibinitperiod}}}%
+        {{hash=3ad244a23ddae120263c0fa186eea397}{%
+           family={Hu},
+           familyi={H\bibinitperiod},
+           given={Ling},
+           giveni={L\bibinitperiod}}}%
+        {{hash=a79c1397b4aef603d46166d4717d1871}{%
+           family={Jiang},
+           familyi={J\bibinitperiod},
+           given={Ji},
+           giveni={J\bibinitperiod}}}%
+        {{hash=621013bf54d3546375ad71f17f020b5b}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Yang},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=d5312be689f19056e24255280971890b}{%
+           family={Linpeng},
+           familyi={L\bibinitperiod},
+           given={Xiayu},
+           giveni={X\bibinitperiod}}}%
+        {{hash=53ea063dede618dc6aacd9bd6e00fc6f}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Tingyong},
+           giveni={T\bibinitperiod}}}%
+        {{hash=3c6794181b98e8b3070c6694153bc2f8}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Yuanzhen},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=076eccfab71858e3ab0cbf5b65c9194b}{%
+           family={Niu},
+           familyi={N\bibinitperiod},
+           given={Jingjing},
+           giveni={J\bibinitperiod}}}%
+        {{hash=34bf72bd7ebc345cbf0228777c850699}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Song},
+           giveni={S\bibinitperiod}}}%
+        {{hash=2493f3bd0c48b3faf8a64083435eb267}{%
+           family={Zhong},
+           familyi={Z\bibinitperiod},
+           given={Youpeng},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=0bb5089f06070d2c070cfc2db944fb3b}{%
+           family={Yu},
+           familyi={Y\bibinitperiod},
+           given={Dapeng},
+           giveni={D\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{57388dd042805aed0937cb0c40e0bec7}
+      \strng{fullhash}{d1193220791e339cc634efc159a4c254}
+      \strng{fullhashraw}{d1193220791e339cc634efc159a4c254}
+      \strng{bibnamehash}{57388dd042805aed0937cb0c40e0bec7}
+      \strng{authorbibnamehash}{57388dd042805aed0937cb0c40e0bec7}
+      \strng{authornamehash}{57388dd042805aed0937cb0c40e0bec7}
+      \strng{authorfullhash}{d1193220791e339cc634efc159a4c254}
+      \strng{authorfullhashraw}{d1193220791e339cc634efc159a4c254}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Superconducting qubits are a promising platform for building fault-tolerant quantum computers, with recent achievement showing the suppression of logical error with increasing code size. However, leakage into non-computational states, a common issue in practical quantum systems including superconducting circuits, introduces correlated errors that undermine QEC scalability. Here, we propose and demonstrate a leakage reduction scheme utilizing tunable couplers, a widely adopted ingredient in large-scale superconducting quantum processors. Leveraging the strong frequency tunability of the couplers and stray interaction between the couplers and readout resonators, we eliminate state leakage on the couplers, thus suppressing space-correlated errors caused by population propagation among the couplers. Assisted by the couplers, we further reduce leakage to higher qubit levels with high efficiency (98.1\%) and low error rate on the computational subspace (0.58\%), suppressing time-correlated errors during QEC cycles. The performance of our scheme demonstrates its potential as an indispensable building block for scalable QEC with superconducting qubits.}
+      \field{issn}{0031-9007, 1079-7114}
+      \field{journaltitle}{Physical Review Letters}
+      \field{month}{10}
+      \field{note}{arXiv:2403.16155 [quant-ph]}
+      \field{number}{17}
+      \field{title}{Coupler-{Assisted} {Leakage} {Reduction} for {Scalable} {Quantum} {Error} {Correction} with {Superconducting} {Qubits}}
+      \field{urlday}{25}
+      \field{urlmonth}{11}
+      \field{urlyear}{2025}
+      \field{volume}{133}
+      \field{year}{2024}
+      \field{urldateera}{ce}
+      \field{pages}{170601}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1103/PhysRevLett.133.170601
+      \endverb
+      \verb{file}
+      \verb PDF:/Users/leigh/Zotero/storage/UA3ZVBPG/Yang et al. - 2024 - Coupler-Assisted Leakage Reduction for Scalable Quantum Error Correction with Superconducting Qubits.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb http://arxiv.org/abs/2403.16155
+      \endverb
+      \verb{url}
+      \verb http://arxiv.org/abs/2403.16155
+      \endverb
+      \keyw{Quantum Physics}
+    \endentry
+    \entry{baranes_leveraging_2025}{misc}{}{}
+      \name{author}{8}{}{%
+        {{hash=a3b871e18036e3dea2451222f20f650e}{%
+           family={Baranes},
+           familyi={B\bibinitperiod},
+           given={Gefen},
+           giveni={G\bibinitperiod}}}%
+        {{hash=a0bf7b3b6136238db6a3f3fa33a00c3c}{%
+           family={Cain},
+           familyi={C\bibinitperiod},
+           given={Madelyn},
+           giveni={M\bibinitperiod}}}%
+        {{hash=5ec7578f2e3935707f5740f5c7de2142}{%
+           family={Ataides},
+           familyi={A\bibinitperiod},
+           given={J.\bibnamedelimi Pablo\bibnamedelima Bonilla},
+           giveni={J\bibinitperiod\bibinitdelim P\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+        {{hash=19f3e92397a12fdf21c4d824ebe1eb20}{%
+           family={Bluvstein},
+           familyi={B\bibinitperiod},
+           given={Dolev},
+           giveni={D\bibinitperiod}}}%
+        {{hash=0dc6dda6014db8bc8040373a66b3c4e4}{%
+           family={Sinclair},
+           familyi={S\bibinitperiod},
+           given={Josiah},
+           giveni={J\bibinitperiod}}}%
+        {{hash=7760fdf5da94329d189533bdd2fdf9f6}{%
+           family={Vuletic},
+           familyi={V\bibinitperiod},
+           given={Vladan},
+           giveni={V\bibinitperiod}}}%
+        {{hash=4aca0f18296c733c2902853a0b003b19}{%
+           family={Zhou},
+           familyi={Z\bibinitperiod},
+           given={Hengyun},
+           giveni={H\bibinitperiod}}}%
+        {{hash=8fd921a549ae6718702b6c8c84fef487}{%
+           family={Lukin},
+           familyi={L\bibinitperiod},
+           given={Mikhail\bibnamedelima D.},
+           giveni={M\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {arXiv}%
+      }
+      \strng{namehash}{57b96f2f9c265d6d21c43620ae83f155}
+      \strng{fullhash}{6083bed092fabb33a0ed1cda5111f641}
+      \strng{fullhashraw}{6083bed092fabb33a0ed1cda5111f641}
+      \strng{bibnamehash}{57b96f2f9c265d6d21c43620ae83f155}
+      \strng{authorbibnamehash}{57b96f2f9c265d6d21c43620ae83f155}
+      \strng{authornamehash}{57b96f2f9c265d6d21c43620ae83f155}
+      \strng{authorfullhash}{6083bed092fabb33a0ed1cda5111f641}
+      \strng{authorfullhashraw}{6083bed092fabb33a0ed1cda5111f641}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Errors associated with qubit loss constitute an important source of noise in many quantum hardware systems, particularly in neutral atom quantum computers. We develop a theoretical framework to handle these errors in logical algorithms, incorporating decoding techniques and circuit-level optimizations. Focusing on experimentally-motivated error models, we introduce a delayed-erasure decoder which leverages information from state-selective readout to accurately correct loss errors, even when their precise locations are unknown. Our decoding technique is compatible with a wide range of quantum error correction codes and general logical circuits. Using this decoder, we identify strategies for detecting and correcting atom loss based on the logical circuit structure. For deep circuits with a large number of gate layers prior to logical measurements, we explore methods to integrate loss detection into syndrome extraction with minimal overhead, identifying optimal strategies depending on the qubit loss fraction in the noise. In contrast, many algorithmic subroutines involve frequent gate teleportation, shortening the circuit depth before logical measurement and naturally replacing qubits without additional overhead. We simulate such a teleportation-based algorithm, involving a toy model for small-angle synthesis and find a significant improvement in logical error rates as the loss fraction increases, with loss handled solely through teleportation. These results provide a path forward for advancing large-scale fault tolerant quantum computation in systems with loss errors.}
+      \field{month}{2}
+      \field{note}{arXiv:2502.20558 [quant-ph] version: 1}
+      \field{title}{Leveraging {Atom} {Loss} {Errors} in {Fault} {Tolerant} {Quantum} {Algorithms}}
+      \field{urlday}{1}
+      \field{urlmonth}{11}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.48550/arXiv.2502.20558
+      \endverb
+      \verb{file}
+      \verb Full Text PDF:/Users/leigh/Zotero/storage/4IKPY8S2/Baranes et al. - 2025 - Leveraging Atom Loss Errors in Fault Tolerant Quantum Algorithms.pdf:application/pdf;Snapshot:/Users/leigh/Zotero/storage/B6K9F5NS/2502.html:text/html
+      \endverb
+      \verb{urlraw}
+      \verb http://arxiv.org/abs/2502.20558
+      \endverb
+      \verb{url}
+      \verb http://arxiv.org/abs/2502.20558
+      \endverb
+      \keyw{Physics - Atomic Physics,Quantum Physics}
+    \endentry
+    \entry{fowler_optimal_2013}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=963708fd18e82e5d31c988cc8f3f7758}{%
+           family={Fowler},
+           familyi={F\bibinitperiod},
+           given={Austin\bibnamedelima G.},
+           giveni={A\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {arXiv}%
+      }
+      \strng{namehash}{963708fd18e82e5d31c988cc8f3f7758}
+      \strng{fullhash}{963708fd18e82e5d31c988cc8f3f7758}
+      \strng{fullhashraw}{963708fd18e82e5d31c988cc8f3f7758}
+      \strng{bibnamehash}{963708fd18e82e5d31c988cc8f3f7758}
+      \strng{authorbibnamehash}{963708fd18e82e5d31c988cc8f3f7758}
+      \strng{authornamehash}{963708fd18e82e5d31c988cc8f3f7758}
+      \strng{authorfullhash}{963708fd18e82e5d31c988cc8f3f7758}
+      \strng{authorfullhashraw}{963708fd18e82e5d31c988cc8f3f7758}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The surface code is designed to suppress errors in quantum computing hardware and currently offers the most believable pathway to large-scale quantum computation. The surface code requires a 2-D array of nearest-neighbor coupled qubits that are capable of implementing a universal set of gates with error rates below approximately 1\%, requirements compatible with experimental reality. Consequently, a number of authors are attempting to squeeze additional performance out of the surface code. We describe an optimal complexity error suppression algorithm, parallelizable to O(1) given constant computing resources per unit area, and provide evidence that this algorithm exploits correlations in the error models of each gate in an asymptotically optimal manner.}
+      \field{month}{10}
+      \field{note}{arXiv:1310.0863 [quant-ph]}
+      \field{title}{Optimal complexity correction of correlated errors in the surface code}
+      \field{urlday}{30}
+      \field{urlmonth}{11}
+      \field{urlyear}{2025}
+      \field{year}{2013}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.48550/arXiv.1310.0863
+      \endverb
+      \verb{file}
+      \verb Full Text PDF:/Users/leigh/Zotero/storage/WVKYJ88C/Fowler - 2013 - Optimal complexity correction of correlated errors in the surface code.pdf:application/pdf;Snapshot:/Users/leigh/Zotero/storage/VSCZRUPQ/1310.html:text/html
+      \endverb
+      \verb{urlraw}
+      \verb http://arxiv.org/abs/1310.0863
+      \endverb
+      \verb{url}
+      \verb http://arxiv.org/abs/1310.0863
+      \endverb
+      \keyw{Quantum Physics}
+    \endentry
+    \entry{kobayashi_erasure-tolerance_2025}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=c35157a85fd61d136c65408e5d080a56}{%
+           family={Kobayashi},
+           familyi={K\bibinitperiod},
+           given={Fumiyoshi},
+           giveni={F\bibinitperiod}}}%
+        {{hash=91cb34750bff862d261e484b8f65d4f1}{%
+           family={Nagayama},
+           familyi={N\bibinitperiod},
+           given={Shota},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{3911e1ae0c72aebe1d8c53e1ee4a3d67}
+      \strng{fullhash}{3911e1ae0c72aebe1d8c53e1ee4a3d67}
+      \strng{fullhashraw}{3911e1ae0c72aebe1d8c53e1ee4a3d67}
+      \strng{bibnamehash}{3911e1ae0c72aebe1d8c53e1ee4a3d67}
+      \strng{authorbibnamehash}{3911e1ae0c72aebe1d8c53e1ee4a3d67}
+      \strng{authornamehash}{3911e1ae0c72aebe1d8c53e1ee4a3d67}
+      \strng{authorfullhash}{3911e1ae0c72aebe1d8c53e1ee4a3d67}
+      \strng{authorfullhashraw}{3911e1ae0c72aebe1d8c53e1ee4a3d67}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Neutral atom arrays manipulated with optical tweezers are promising candidates for fault-tolerant quantum computers due to their advantageous properties, such as scalability, long coherence times, and optical accessibility for communication. A significant challenge to overcome is the presence of non-Pauli errors, specifically erasure errors and leakage errors. Previous work has shown that leakage errors can be converted into erasure errors; however, these (converted) erasure errors continuously occur and accumulate over time. Prior proposals have involved transporting atoms directly from a reservoir area--where spare atoms are stored--to the computational area--where computation and error correction are performed--to correct atom loss. While coherent transport is promising, it may not address all challenges--particularly its effectiveness in dense arrays and alternative methods must help. In this study, we evaluate the effects of erasure errors on the surface code using circuit-based Monte Carlo simulations that incorporate depolarizing and accumulated erasure errors. We propose a new scheme to mitigate this problem: a k-shift erasure recovery scheme. Our scheme employs code deformation to repeatedly transfer the logical qubit from an imperfect array with accumulated erased qubits to a perfect array, thereby tolerating many accumulated erasures. Furthermore, our scheme corrects erasure errors in the atom arrays while the logical qubits are evacuated from the area being corrected; thus, manipulating optical tweezers for erasure correction does not disturb the qubits that constitute the logical data. Our scheme provides a practical pathway for neutral atom quantum computers to achieve feasible fault tolerance.}
+      \field{issn}{2689-1808}
+      \field{journaltitle}{IEEE Transactions on Quantum Engineering}
+      \field{note}{arXiv:2404.12656 [quant-ph]}
+      \field{title}{Erasure-tolerance scheme for the surface codes on neutral atom quantum computers}
+      \field{urlday}{26}
+      \field{urlmonth}{11}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \field{pages}{1\bibrangedash 13}
+      \range{pages}{13}
+      \verb{doi}
+      \verb 10.1109/TQE.2025.3627918
+      \endverb
+      \verb{file}
+      \verb Full Text PDF:/Users/leigh/Zotero/storage/QTFB7MMG/Kobayashi and Nagayama - 2025 - Erasure-tolerance scheme for the surface codes on neutral atom quantum computers.pdf:application/pdf;Snapshot:/Users/leigh/Zotero/storage/RRRJNMWV/2404.html:text/html
+      \endverb
+      \verb{urlraw}
+      \verb http://arxiv.org/abs/2404.12656
+      \endverb
+      \verb{url}
+      \verb http://arxiv.org/abs/2404.12656
+      \endverb
+      \keyw{Quantum Physics}
+    \endentry
+    \entry{gidney_answer_2023}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=0101a428978c8ddc038880b7a77afd98}{%
+           family={Gidney},
+           familyi={G\bibinitperiod},
+           given={Craig},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{0101a428978c8ddc038880b7a77afd98}
+      \strng{fullhash}{0101a428978c8ddc038880b7a77afd98}
+      \strng{fullhashraw}{0101a428978c8ddc038880b7a77afd98}
+      \strng{bibnamehash}{0101a428978c8ddc038880b7a77afd98}
+      \strng{authorbibnamehash}{0101a428978c8ddc038880b7a77afd98}
+      \strng{authornamehash}{0101a428978c8ddc038880b7a77afd98}
+      \strng{authorfullhash}{0101a428978c8ddc038880b7a77afd98}
+      \strng{authorfullhashraw}{0101a428978c8ddc038880b7a77afd98}
+      \field{extraname}{2}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{journaltitle}{Quantum Computing Stack Exchange}
+      \field{month}{2}
+      \field{shorttitle}{Answer to "max\_shots and max\_errors to reduce uncerainty in threshold curves with sinter / stim?}
+      \field{title}{Answer to "max\_shots and max\_errors to reduce uncerainty in threshold curves with sinter / stim?"}
+      \field{urlday}{2}
+      \field{urlmonth}{12}
+      \field{urlyear}{2025}
+      \field{year}{2023}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://quantumcomputing.stackexchange.com/a/30413
+      \endverb
+      \verb{url}
+      \verb https://quantumcomputing.stackexchange.com/a/30413
+      \endverb
+    \endentry
+    \entry{noauthor_tanner_2025}{misc}{}{}
+      \list{language}{1}{%
+        {en}%
+      }
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{abstract}{In coding theory, a Tanner graph is a bipartite graph that can be used to express constraints (typically equations) that specify an error correcting code. Tanner graphs play a central role in the design and decoding of low-density parity-check codes. They have also been applied to the construction of longer codes from smaller ones. Both encoders and decoders employ these graphs extensively.}
+      \field{journaltitle}{Wikipedia}
+      \field{month}{6}
+      \field{note}{Page Version ID: 1296985959}
+      \field{title}{Tanner graph}
+      \field{urlday}{2}
+      \field{urlmonth}{12}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb Snapshot:/Users/leigh/Zotero/storage/LQDQM9T7/index.html:text/html
+      \endverb
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/w/index.php?title=Tanner_graph&oldid=1296985959
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/w/index.php?title=Tanner_graph&oldid=1296985959
+      \endverb
+    \endentry
+    \entry{bluvstein_architectural_2025}{misc}{}{}
+      \name{author}{23}{}{%
+        {{hash=19f3e92397a12fdf21c4d824ebe1eb20}{%
+           family={Bluvstein},
+           familyi={B\bibinitperiod},
+           given={Dolev},
+           giveni={D\bibinitperiod}}}%
+        {{hash=6d5035822b257a5501e8e194f1d881e1}{%
+           family={Geim},
+           familyi={G\bibinitperiod},
+           given={Alexandra\bibnamedelima A.},
+           giveni={A\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=331c9116d0f5d6a5a43593ef1d1e8177}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Sophie\bibnamedelima H.},
+           giveni={S\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+        {{hash=1689d33e5a6c1c7ee608d780f77c992b}{%
+           family={Evered},
+           familyi={E\bibinitperiod},
+           given={Simon\bibnamedelima J.},
+           giveni={S\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=5ec7578f2e3935707f5740f5c7de2142}{%
+           family={Ataides},
+           familyi={A\bibinitperiod},
+           given={J.\bibnamedelimi Pablo\bibnamedelima Bonilla},
+           giveni={J\bibinitperiod\bibinitdelim P\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+        {{hash=a3b871e18036e3dea2451222f20f650e}{%
+           family={Baranes},
+           familyi={B\bibinitperiod},
+           given={Gefen},
+           giveni={G\bibinitperiod}}}%
+        {{hash=f8869f3413bacd3d9140420ca95369f8}{%
+           family={Gu},
+           familyi={G\bibinitperiod},
+           given={Andi},
+           giveni={A\bibinitperiod}}}%
+        {{hash=24608cc5da02bfb71c4553a546ca240a}{%
+           family={Manovitz},
+           familyi={M\bibinitperiod},
+           given={Tom},
+           giveni={T\bibinitperiod}}}%
+        {{hash=38dea7320e66a5cbd00699c397d16ded}{%
+           family={Xu},
+           familyi={X\bibinitperiod},
+           given={Muqing},
+           giveni={M\bibinitperiod}}}%
+        {{hash=0c9bc04c854755cbf21c4b8fdde71207}{%
+           family={Kalinowski},
+           familyi={K\bibinitperiod},
+           given={Marcin},
+           giveni={M\bibinitperiod}}}%
+        {{hash=33740445cfe541987582cec963e62886}{%
+           family={Majidy},
+           familyi={M\bibinitperiod},
+           given={Shayan},
+           giveni={S\bibinitperiod}}}%
+        {{hash=c8d08bfaa936d548712bac3a706d16d8}{%
+           family={Kokail},
+           familyi={K\bibinitperiod},
+           given={Christian},
+           giveni={C\bibinitperiod}}}%
+        {{hash=8e7dd632e9b20b7fc2aacbd626201986}{%
+           family={Maskara},
+           familyi={M\bibinitperiod},
+           given={Nishad},
+           giveni={N\bibinitperiod}}}%
+        {{hash=7ce7eb34b6d13345561d2a627edc7295}{%
+           family={Trapp},
+           familyi={T\bibinitperiod},
+           given={Elias\bibnamedelima C.},
+           giveni={E\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=2c1aeedc7bc600eee394146aa03c2f0c}{%
+           family={Stewart},
+           familyi={S\bibinitperiod},
+           given={Luke\bibnamedelima M.},
+           giveni={L\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=609d9f8ba2112a5f9b47a3b131f02452}{%
+           family={Hollerith},
+           familyi={H\bibinitperiod},
+           given={Simon},
+           giveni={S\bibinitperiod}}}%
+        {{hash=4aca0f18296c733c2902853a0b003b19}{%
+           family={Zhou},
+           familyi={Z\bibinitperiod},
+           given={Hengyun},
+           giveni={H\bibinitperiod}}}%
+        {{hash=d09cda4420ec958a2d8e850c73432c07}{%
+           family={Gullans},
+           familyi={G\bibinitperiod},
+           given={Michael\bibnamedelima J.},
+           giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=50a30c7798fdc92d08a3754a9103b1e0}{%
+           family={Yelin},
+           familyi={Y\bibinitperiod},
+           given={Susanne\bibnamedelima F.},
+           giveni={S\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+        {{hash=28a6aa289448ed258d404c6982cd2dd7}{%
+           family={Greiner},
+           familyi={G\bibinitperiod},
+           given={Markus},
+           giveni={M\bibinitperiod}}}%
+        {{hash=7760fdf5da94329d189533bdd2fdf9f6}{%
+           family={Vuletic},
+           familyi={V\bibinitperiod},
+           given={Vladan},
+           giveni={V\bibinitperiod}}}%
+        {{hash=a0bf7b3b6136238db6a3f3fa33a00c3c}{%
+           family={Cain},
+           familyi={C\bibinitperiod},
+           given={Madelyn},
+           giveni={M\bibinitperiod}}}%
+        {{hash=8fd921a549ae6718702b6c8c84fef487}{%
+           family={Lukin},
+           familyi={L\bibinitperiod},
+           given={Mikhail\bibnamedelima D.},
+           giveni={M\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {arXiv}%
+      }
+      \strng{namehash}{7524645f4fddaa8c04a2fb28bb0c8c51}
+      \strng{fullhash}{2121d49d2895c201c238fe34cc94fdaf}
+      \strng{fullhashraw}{2121d49d2895c201c238fe34cc94fdaf}
+      \strng{bibnamehash}{7524645f4fddaa8c04a2fb28bb0c8c51}
+      \strng{authorbibnamehash}{7524645f4fddaa8c04a2fb28bb0c8c51}
+      \strng{authornamehash}{7524645f4fddaa8c04a2fb28bb0c8c51}
+      \strng{authorfullhash}{2121d49d2895c201c238fe34cc94fdaf}
+      \strng{authorfullhashraw}{2121d49d2895c201c238fe34cc94fdaf}
+      \field{extraname}{2}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Quantum error correction (QEC) is believed to be essential for the realization of large-scale quantum computers. However, due to the complexity of operating on the encoded `logical' qubits, understanding the physical principles for building fault-tolerant quantum devices and combining them into efficient architectures is an outstanding scientific challenge. Here we utilize reconfigurable arrays of up to 448 neutral atoms to implement all key elements of a universal, fault-tolerant quantum processing architecture and experimentally explore their underlying working mechanisms. We first employ surface codes to study how repeated QEC suppresses errors, demonstrating 2.14(13)x below-threshold performance in a four-round characterization circuit by leveraging atom loss detection and machine learning decoding. We then investigate logical entanglement using transversal gates and lattice surgery, and extend it to universal logic through transversal teleportation with 3D [[15,1,3]] codes, enabling arbitrary-angle synthesis with logarithmic overhead. Finally, we develop mid-circuit qubit re-use, increasing experimental cycle rates by two orders of magnitude and enabling deep-circuit protocols with dozens of logical qubits and hundreds of logical teleportations with [[7,1,3]] and high-rate [[16,6,4]] codes while maintaining constant internal entropy. Our experiments reveal key principles for efficient architecture design, involving the interplay between quantum logic and entropy removal, judiciously using physical entanglement in logic gates and magic state generation, and leveraging teleportations for universality and physical qubit reset. These results establish foundations for scalable, universal error-corrected processing and its practical implementation with neutral atom systems.}
+      \field{month}{6}
+      \field{note}{arXiv:2506.20661 [quant-ph]}
+      \field{title}{Architectural mechanisms of a universal fault-tolerant quantum computer}
+      \field{urlday}{5}
+      \field{urlmonth}{11}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.48550/arXiv.2506.20661
+      \endverb
+      \verb{file}
+      \verb Full Text PDF:/Users/leigh/Zotero/storage/7ASZSCXI/Bluvstein et al. - 2025 - Architectural mechanisms of a universal fault-tolerant quantum computer.pdf:application/pdf;Snapshot:/Users/leigh/Zotero/storage/JJVWVXLU/2506.html:text/html
+      \endverb
+      \verb{urlraw}
+      \verb http://arxiv.org/abs/2506.20661
+      \endverb
+      \verb{url}
+      \verb http://arxiv.org/abs/2506.20661
+      \endverb
+      \keyw{Condensed Matter - Quantum Gases,Physics - Atomic Physics,Quantum Physics}
+    \endentry
+    \entry{gidney_answer_2023-1}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=0101a428978c8ddc038880b7a77afd98}{%
+           family={Gidney},
+           familyi={G\bibinitperiod},
+           given={Craig},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{0101a428978c8ddc038880b7a77afd98}
+      \strng{fullhash}{0101a428978c8ddc038880b7a77afd98}
+      \strng{fullhashraw}{0101a428978c8ddc038880b7a77afd98}
+      \strng{bibnamehash}{0101a428978c8ddc038880b7a77afd98}
+      \strng{authorbibnamehash}{0101a428978c8ddc038880b7a77afd98}
+      \strng{authornamehash}{0101a428978c8ddc038880b7a77afd98}
+      \strng{authorfullhash}{0101a428978c8ddc038880b7a77afd98}
+      \strng{authorfullhashraw}{0101a428978c8ddc038880b7a77afd98}
+      \field{extraname}{3}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{journaltitle}{Quantum Computing Stack Exchange}
+      \field{month}{5}
+      \field{shorttitle}{Answer to "{Can} you give an intuitive idea behind how the {Minimum} {Weight} {Perfect} {Matching} ({MWPM}) decoder work?}
+      \field{title}{Answer to "{Can} you give an intuitive idea behind how the {Minimum} {Weight} {Perfect} {Matching} ({MWPM}) decoder work?"}
+      \field{urlday}{2}
+      \field{urlmonth}{12}
+      \field{urlyear}{2025}
+      \field{year}{2023}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://quantumcomputing.stackexchange.com/a/32507
+      \endverb
+      \verb{url}
+      \verb https://quantumcomputing.stackexchange.com/a/32507
+      \endverb
+    \endentry
+    \entry{morgado_quantum_2021}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=5a0c7b611420ea08f8a2fa63abe671e9}{%
+           family={Morgado},
+           familyi={M\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+        {{hash=3b792d0f697bec0d49c9b05c7e9428e1}{%
+           family={Whitlock},
+           familyi={W\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{36d4dd7422a02cc43dcb7531af2e8c36}
+      \strng{fullhash}{36d4dd7422a02cc43dcb7531af2e8c36}
+      \strng{fullhashraw}{36d4dd7422a02cc43dcb7531af2e8c36}
+      \strng{bibnamehash}{36d4dd7422a02cc43dcb7531af2e8c36}
+      \strng{authorbibnamehash}{36d4dd7422a02cc43dcb7531af2e8c36}
+      \strng{authornamehash}{36d4dd7422a02cc43dcb7531af2e8c36}
+      \strng{authorfullhash}{36d4dd7422a02cc43dcb7531af2e8c36}
+      \strng{authorfullhashraw}{36d4dd7422a02cc43dcb7531af2e8c36}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Arrays of optically trapped atoms excited to Rydberg states have recently emerged as a competitive physical platform for quantum simulation and computing, where high-ﬁdelity state preparation and readout, quantum logic gates, and controlled quantum dynamics of more than 100 qubits have all been demonstrated. These systems are now approaching the point where reliable quantum computations with hundreds of qubits and realistically thousands of multiqubit gates with low error rates should be within reach for the ﬁrst time. In this article, the authors give an overview of the Rydberg quantum toolbox, emphasizing the high degree of ﬂexibility for encoding qubits, performing quantum operations, and engineering quantum many-body Hamiltonians. The authors then review the state-of-the-art concerning high-ﬁdelity quantum operations and logic gates as well as quantum simulations in many-body regimes. Finally, the authors discuss computing schemes that are particularly suited to the Rydberg platform and some of the remaining challenges on the road to general purpose quantum simulators and quantum computers.}
+      \field{issn}{2639-0213}
+      \field{journaltitle}{AVS Quantum Science}
+      \field{month}{6}
+      \field{number}{2}
+      \field{title}{Quantum simulation and computing with {Rydberg}-interacting qubits}
+      \field{urlday}{17}
+      \field{urlmonth}{10}
+      \field{urlyear}{2025}
+      \field{volume}{3}
+      \field{year}{2021}
+      \field{urldateera}{ce}
+      \field{pages}{023501}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1116/5.0036562
+      \endverb
+      \verb{file}
+      \verb PDF:/Users/leigh/Zotero/storage/XNFDFTC9/Morgado and Whitlock - 2021 - Quantum simulation and computing with Rydberg-interacting qubits.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://pubs.aip.org/aqs/article/3/2/023501/997323/Quantum-simulation-and-computing-with-Rydberg
+      \endverb
+      \verb{url}
+      \verb https://pubs.aip.org/aqs/article/3/2/023501/997323/Quantum-simulation-and-computing-with-Rydberg
+      \endverb
+    \endentry
+  \enddatalist
+  \missing{Jaksch_Fast_Quantum_gates_2000}
+  \missing{kubica_erasure_2022}
+\endrefsection
+\endinput
+

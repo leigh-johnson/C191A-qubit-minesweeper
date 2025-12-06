@@ -16,6 +16,7 @@ dependencies = [
     "tqdm (>=4.67.1,<5.0.0)",
     "ipywidgets (>=8.1.8,<9.0.0)",
     "mwpf[stim] @ https://github.com/leigh-johnson/mwpf/releases/download/mwpf-0.2.12%2Bdev1/mwpf-0.2.12+dev1.tar.gz",
+    "brokenaxes (>=0.6.2,<0.7.0)",
 ]
 
 
