@@ -441,7 +441,7 @@ All authors reviewed manuscript drafts and had an equal role in project brainsto
 \section{Appendix: A Fun Sidequest: Profiling a Memory Leak}\label{sec:memleak-sidequest}
 During our initial experiments with MWPF, we noted a memory leak during erasure-aware trials (see \autoref{fig:mwpf-memleak}). Using a combination of flamegraphs to analyze hot CPU/blocking GIL paths and a memory profiler to rank allocation requests by size/frequency, we realized \href{https://github.com/yuewuo/mwpf/blob/b8444428f999457208c4b0956f3f1c745a0ec2d5/src/python/mwpf/ref\_circuit.py}{ref\_circuit.py} and \href{https://github.com/yuewuo/mwpf/blob/b8444428f999457208c4b0956f3f1c745a0ec2d5/src/python/mwpf/heralded\_dem.py}{heralde\_dem.py} (quite reasonably) uses Python's functools.cached\_property decorator to cache computationally-expensive walks of the hypergraph model. The memory allocations are associated with a Python object instance and are freed automatically by a garbage collector when the Python object is destroyed. We noted RefCircuit instances holding memory allocations (via parent HeraldedDetectorErrorModel) even after the related sinter task had finished (but other tasks were still running).
 
-This is only a guess, as we were not able to patch and validate this particular hypotheses. Instead, we opted to side-step the issue by replacing some functools.cached\_property usage with functools.lru\_cache, which implements a last-recently used cache on per class definition (instead of per object-instance). As a result, we needed many more CPU cycles to complete our simulation but the memory footprint was contained to fit our availablae hardware (64 cores, 126GB DDR4 RAM, 112GB NVME-backed disk swap space).
+This is only a guess, as we were not able to patch and validate this particular hypotheses. Instead, we opted to side-step the issue by replacing some functools.cached\_property usage with functools.lru\_cache, which implements a last-recently used cache on per class definition (instead of per object-instance). As a result, we needed many more CPU cycles to complete our simulation but the memory footprint was contained to fit our available hardware (64 cores, 126GB DDR4 RAM, 112GB NVME-backed disk swap space).
 
 \begin{figure}[H]
     \centering
@@ -543,7 +543,7 @@ MWPF solves the minimum-weight parity-factor problem
     \pmod{2}
     \right\},
 \end{align}
-and maps $\hat{\mathbf{x}}$ to a Pauli correction on the data qubits. In the pure Pauli regime ($R_e = 0$), most columns of $H^{(\mathrm{hyp})}$ remain graphlike (Hamming weight $\leq 2$), so MWPF effectively reduces to a generalized matching decoder. When $R_e = 1$, heralded erasures produce additional hyperedges that connect multiple detectors and encode erasure constraints directly into the decoding problem.
+and maps $\hat{\mathbf{x}}$ to a Pauli correction on the data qubits. In the pure Pauli regime ($R_e = 0$), most columns of $H^{(\mathrm{hyp})}$ remain graph-like (Hamming weight $\leq 2$), so MWPF effectively reduces to a generalized matching decoder. When $R_e = 1$, heralded erasures produce additional hyperedges that connect multiple detectors and encode erasure constraints directly into the decoding problem.
 
 \subsection{Heralded-Erasure Reweighting for MWPM}
 \label{appendix:heralded-mwpm-details}
@@ -585,7 +585,7 @@ For each pair $(h,j)$ we define a weight shift
 \end{align}
 These $\Delta w_{h,j}$ values are precomputed and stored as a matrix $\Delta W$.
 
-\subsubsection*{Per-Shot Edge Reweighing}
+\subsubsection*{Per-Shot Edge Reweighting}
 
 Each noisy shot yields a bitstring $z\in\{0,1\}^m$ over all detectors. We extract
 \begin{align}
@@ -630,7 +630,7 @@ If left uncorrected, erasure errors pose a existential threat to encoded logical
     E_d & \propto \dfrac{p}{p_{thr}}^{(d+1)/2} & \quad \text{[Logical error rate]}
 \end{align}
 
-Therefore when $p << p_{thr}$, the logical error rate is supressed exponentially with code distance. The exponential supression factor $\Lambda$ is approximately the linear relation between $p_{thr}$ and $p$: \cite{acharya_quantum_2025}.
+Therefore, when $p << p_{thr}$, the logical error rate is suppressed exponentially with code distance. The exponential supression factor $\Lambda$ is approximately the linear relation between $p_{thr}$ and $p$: \cite{acharya_quantum_2025}.
 
 \begin{align}
     \Lambda & = \dfrac{E_d}{E_{d+1}} \approx  \dfrac{p_{thr}}{p} & \quad \text{[Supression factor]}
