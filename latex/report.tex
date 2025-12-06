@@ -392,8 +392,14 @@ We are also very grateful for Craig Gidney's wonderfully illustrative posts on S
 All contents of this report are freely available under the MIT license: \href{https://github.com/leigh-johnson/C191A-qubit-minesweeper}{https://github.com/leigh-johnson/C191A-qubit-minesweeper}
 
 \paragraphsc{Contributions}
+L.Z.\ led the project, developed the simulation pipeline, implemented all decoding
+experiments, performed data analysis, and produced the figures and manuscript.
+A.S.\ contributed to the project proposal, abstract, background section, bibliography,
+and prepared the appendix material on leakage, erasure tolerance, and architectural
+considerations.
+I.T.\ contributed initial background drafts, synthesized feedback from our mentors, and played an essential role in refining both the project scope and manuscript.
 
-TODO this is where we all brag about how proud we are of the sections we submitted.
+All authors reviewed manuscript drafts and had an equal role in project brainstorming.
 
 \newpage
 % cite all references
@@ -579,7 +585,7 @@ For each pair $(h,j)$ we define a weight shift
 \end{align}
 These $\Delta w_{h,j}$ values are precomputed and stored as a matrix $\Delta W$.
 
-\subsubsection*{Per-Shot Edge Reweighting}
+\subsubsection*{Per-Shot Edge Reweighing}
 
 Each noisy shot yields a bitstring $z\in\{0,1\}^m$ over all detectors. We extract
 \begin{align}
