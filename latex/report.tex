@@ -78,7 +78,7 @@ This exponential suppression underpins scalable, fault-tolerant architectures an
 \begin{figure}[h]
     \hspace{-2em}
     \makebox[\textwidth][c]{\includegraphics[width=\textwidth, height=0.4\textheight, keepaspectratio]{fig_dual_rail_erasure_checks}}%
-    \caption{\textbf{Erasure-check qubits in superconducting transmons.} Erasure checks supply extra information to the decoder. In a pure Pauli noise regime the decoder must infer error locations only from stabilizer defects, which can lead to incorrect logical corrections. When erasure checks fire, the decoder obtains direct fault-location information and chooses higher-likelihood correction paths. Adapted from \citeauthor{chadwick_erasure_2025} \cite{chadwick_erasure_2025}.}
+    \caption{\textbf{Erasure-check qubits in a surface code.} In a pure Pauli noise regime the decoder must infer error locations only from stabilizer defects, which can lead to incorrect logical errors. Erasure checks supply extra information to the decoder. Conditioned on the erasure error location, the decoder chooses a correction path with higher-likelihood of success (correlated to erasure locations). Adapted from \citeauthor{chadwick_erasure_2025}\cite{chadwick_erasure_2025}}
     \label{fig:surface-code-erasure-comparison}
 \end{figure}
 
