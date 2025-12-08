@@ -1,0 +1,35 @@
+\documentclass[11pt, notitlepage, letterpaper]{article}
+\usepackage{array} % conditions
+\usepackage{amsmath} % dfrac
+\usepackage{braket} % dirac notation
+\begin{document}
+\centering Depolarizing (Pauli) Error Channel
+\\ \noindent For some quantum state $\rho$ and
+\\ \noindent physical qubit with error probability $p$:
+\begin{align}E_{\text{pauli}}(\rho) & = (1-p)\rho + \dfrac{p}{3}(X\rho X + Y\rho Y + Z\rho Z)
+\end{align}
+
+
+\centering
+\noindent For some quantum state $\rho$ and
+\\ \noindent physical qubit with error probability $p$:
+\begin{align}E_{\text{pauli}}(\rho) & = (1-p)\rho + \dfrac{p}{3}(X\rho X + Y\rho Y + Z\rho Z)
+\end{align}
+
+An erasure occurs when a qubit no longer detectable by the measurement device, so the quantum state effectively ``lost'' or ``erased''. If we extend the mathematical representation of a qubit Hilbert space with some $\ket{e}$ that is orthogonal to the qubit state $\{\ket{0}, \ket{1}\}$, then we can define the erasure channel as:
+\begin{align}E_{\text{erase}}(\rho_j) & = (1-p)\rho_j + p\ket{e}\bra{e}
+\end{align}
+% Sample uniformly at random with probability:
+% \\ $1-p$ no error
+% \\ $p/3$ error in $\set{X, Y, Z}$
+
+
+\noindent qubit at location $j$ leaves the computational subspace \\ flagged as
+``erased'', we model with orthogonal state $\ket{e}$:
+\[
+    E_{\mathrm{erase}}(\rho_j) = (1-p)\rho_j + p\,\ket{e}\!\bra{e}.
+\]
+qubit $j$ reset to maximally mixed state:
+$\rho_j = \tfrac{1}{2}\,I$.
+
+\end{document}
