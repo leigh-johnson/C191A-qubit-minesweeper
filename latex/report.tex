@@ -197,7 +197,7 @@ We define the fault-tolerant threshold $p_{\mathrm{thr}}$ as the crossing point 
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=1\linewidth, height=0.66\textheight, keepaspectratio]{fig1_summary}
+    \includegraphics[width=1\linewidth, height=0.66\textheight, keepaspectratio]{pthr_best_summary.png}
     \caption{\textbf{Error thresholds in a rotated surface code.} We compare the scaling of logical error rate $P_L$ vs. physical error rate $p$ under two noise regimes: (1) pure Pauli noise ($R_e=0$, dotted lines, semitransparent) and (2) conversion to erasure-type errors ($R_e=1$, solid lines). We visually estimate the thresholds from the d=7,9 crossing: $p_{thr}=0.75\%$ (aqua) under the Pauli noise regime and $p_{thr}=3.00\%$ (magenta) when 100\% of errors are converted to erasure events. This shows that erasure information provides a significant () gain in correctability. Full experiment procedure in \nameref{sec:experiment2} and \nameref{sec:experiment3}.
     }
     \label{fig:best-threshold-comparison}
@@ -214,23 +214,23 @@ We define the fault-tolerant threshold $p_{\mathrm{thr}}$ as the crossing point 
     \centering
     \begin{subfigure}[b]{0.49\linewidth}
         \caption{}
-        \includegraphics[width=\textwidth, keepaspectratio]{fig1_pymatching_threshold.png}
+        \includegraphics[width=\textwidth, keepaspectratio]{pthr_experiment1.png}
         \label{fig:pymathing-pthresh}
     \end{subfigure}
     \begin{subfigure}[b]{0.49\linewidth}
         \caption{}
-        \includegraphics[width=\linewidth,keepaspectratio]{fig1_mwpf_threshold_erasure=0.png}
+        \includegraphics[width=\linewidth,keepaspectratio]{pthr_experiment2.png}
         \label{fig:mwpf-pthresh}
     \end{subfigure}
 
     \begin{subfigure}[b]{0.49\linewidth}
         \caption{}
-        \includegraphics[width=\textwidth, keepaspectratio]{fig1_mwpf_threshold_erasure=1.png}
+        \includegraphics[width=\textwidth, keepaspectratio]{pthr_experiment3.png}
         \label{fig:mwpf-pthresh-erase}
     \end{subfigure}
     \begin{subfigure}[b]{0.49\linewidth}
         \caption{}
-        \includegraphics[width=\linewidth,keepaspectratio]{fig1_pymatching_custom_erasure=1.png}
+        \includegraphics[width=\linewidth,keepaspectratio]{pthr_experiment4.png}
         \label{fig:pymatching-pthresh-erase}
     \end{subfigure}
     \caption{
@@ -263,7 +263,7 @@ We plot logical error rate $P_L$ vs.\ code distance $d$ for below-threshold samp
 \end{table}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\linewidth,height=0.41\textheight, keepaspectratio]{fig2_survival_code_distance.png}
+    \includegraphics[width=\linewidth,height=0.41\textheight, keepaspectratio]{dthr_survive_1T_rounds.png}
     \caption{Minimum code distance $d_{thr}$ required for one logical qubit survival over $10^{12}$ rounds. Results summarized in \autoref{tab:fault-tolerance}. See \autoref{fig:d-thresholds-matrix} for individual plots.}
     \label{fig:fault-tolerant-projection}
 \end{figure}
@@ -416,7 +416,7 @@ All authors reviewed manuscript drafts and had an equal role in project brainsto
 \newpage
 \appendix
 
-\subsection{Comparison of Fault Tolerant Code Distance }
+\section{Comparison of Fault Tolerant Code Distance }
 
 \begin{figure}[H]
     \centering
